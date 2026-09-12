@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loop Forge</title>
+<meta name="description" content="Notes, prompts and tools from making video with local and rented AI models. Companion pages for the Loop Forge YouTube channel.">
+<link rel="icon" href="assets/loopforge-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+  :root {
+    --ink:#07090c; --slate:#121a20; --slate-2:#1b2730;
+    --frost:#e8eff2; --frost-dim:#93a7b2; --line:#2a3a45;
+    --pink:#f06bb8; --violet:#b57cf0; --blue:#6f95f7; --cyan:#4fc9dd;
+    --tone:var(--violet);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--ink); color:var(--frost);
+    font-family:"Oswald",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:var(--tone); }
+
+  .bar {
+    position:sticky; top:0; z-index:20;
+    display:flex; align-items:center; gap:18px;
+    padding:14px 28px; background:rgba(7,9,12,.9); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar::after {
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+    background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue),var(--cyan));
+  }
+  .bar img { width:40px; height:40px; flex:none; }
+  .brand { display:flex; flex-direction:column; line-height:1.15; }
+  .brand b { font-family:"Archivo Black",system-ui,sans-serif; font-size:18px; letter-spacing:-.01em; }
+  .brand span { font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--frost-dim); }
+  .bar nav { margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; }
+  .bar nav a {
+    font-size:14px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--frost-dim); text-decoration:none; padding:7px 13px;
+    border:1px solid var(--line); border-radius:999px;
+  }
+  .bar nav a:hover { color:var(--frost); border-color:var(--frost-dim); }
+
+  .wrap { max-width:1100px; margin:0 auto; padding:0 28px 110px; }
+
+  .hero { padding:78px 0 46px; }
+  .hero h1 {
+    font-family:"Archivo Black",system-ui,sans-serif; font-weight:400;
+    font-size:clamp(40px,7vw,84px); line-height:1.02; letter-spacing:-.03em; margin:0 0 22px;
+  }
+  .hero p { max-width:62ch; color:var(--frost-dim); margin:0; font-size:19px; }
+
+  h2.sec {
+    font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--frost-dim);
+    font-weight:500; margin:52px 0 18px; padding-bottom:12px; border-bottom:1px solid var(--line);
+  }
+
+  .pages { display:grid; gap:18px; }
+  .page {
+    display:block; text-decoration:none; color:inherit;
+    border:1px solid var(--line); border-left:3px solid var(--tone); border-radius:14px;
+    background:var(--slate); padding:26px 28px;
+  }
+  .page:hover { border-color:var(--tone); background:var(--slate-2); }
+  .page h3 {
+    font-family:"Archivo Black",system-ui,sans-serif; font-weight:400;
+    font-size:27px; letter-spacing:-.02em; margin:0 0 8px; color:var(--frost);
+  }
+  .page p { margin:0; color:var(--frost-dim); max-width:66ch; }
+  .page .path {
+    display:inline-block; margin-top:14px;
+    font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--tone);
+  }
+  /* tones so each entry reads as its own thing as the list grows */
+  .t-pink   { --tone:var(--pink); }
+  .t-violet { --tone:var(--violet); }
+  .t-blue   { --tone:var(--blue); }
+  .t-cyan   { --tone:var(--cyan); }
+
+  .links { display:flex; flex-wrap:wrap; gap:12px; }
+  .lk {
+    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+    font-size:15px; letter-spacing:.03em; color:var(--frost);
+    background:var(--slate-2); border:1px solid var(--line); border-radius:10px;
+    padding:11px 18px;
+  }
+  .lk:hover { border-color:var(--tone); color:var(--tone); }
+  .lk span { font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--frost-dim); }
+  .lk:hover span { color:var(--tone); }
+
+  @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <img src="assets/loopforge-logo.png" alt="Loop Forge">
+  <div class="brand"><b>Loop Forge</b><span>loopforge.cc</span></div>
+  <nav>
+    <a href="https://www.youtube.com/@LoopForge0">YouTube</a>
+    <a href="https://github.com/loopforge0">GitHub</a>
+  </nav>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>Making video with<br>models you can run</h1>
+    <p>Companion pages for the Loop Forge channel. Prompts, workflows and notes from the
+       experiments, published in full so you can reproduce them rather than take my word for it.</p>
+  </section>
+
+  <h2 class="sec">Pages</h2>
+  <div class="pages">
+
+    <!-- ============================================================================
+         To add a page: copy one block, change the tone class, href, title, blurb and
+         path. The href is the repository name; GitHub serves every project Pages site
+         owned by this account under this domain automatically, so a new repo with
+         Pages turned on is reachable at loopforge.cc/<repo-name>/ with no extra setup.
+         ============================================================================= -->
+
+    <a class="page t-pink" href="/minimaxh3-shots-skills/">
+      <h3>MiniMax H3 camera shots</h3>
+      <p>Fourteen named camera shots composed out of H3's twelve documented camera
+         primitives, with the exact prompt behind each one, the character reference plates
+         and the ComfyUI workflow.</p>
+      <span class="path">loopforge.cc/minimaxh3-shots-skills</span>
+    </a>
+
+  </div>
+
+  <h2 class="sec">Code</h2>
+  <div class="links">
+    <a class="lk" href="https://github.com/loopforge0/ComfyUI-H3-Continuous">ComfyUI H3 Continuous <span>chained renders</span></a>
+    <a class="lk" href="https://github.com/loopforge0/minimaxh3-shots-skills">MiniMax H3 shot skills <span>prompts and skills</span></a>
+    <a class="lk" href="https://github.com/loopforge0/comfyui-wan-loop">ComfyUI Wan Loop <span>iterative nodes</span></a>
+  </div>
+</div>
+
+</body>
+</html>
