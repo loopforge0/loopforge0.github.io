@@ -1,0 +1,1922 @@
+{
+ "slug": "h3-first-date",
+ "title": "First Date, a short film with MiniMax H3",
+ "short": "A one minute short film",
+ "published": "2026-08-29",
+ "video": {
+  "id": "fQ8HZC_dTXs",
+  "title": "MiniMax H3 reference to video: a short film"
+ },
+ "models": [
+  "MiniMax H3"
+ ],
+ "summary": [
+  "A one minute short film made with ComfyUI's stock MiniMax H3 reference-to-video template, with two characters who stay the same person from shot to shot, in the same restaurant, with the same voice.",
+  "A character turnaround sheet, a 3D layout of the room and a sample of the voice all go in at once, and the prompt says which subject is in which picture. Here are all twenty one clip prompts and the prompts for the reference images."
+ ],
+ "facts": [
+  [
+   "Workflow",
+   "ComfyUI's stock MiniMax H3 reference-to-video template, untouched"
+  ],
+  [
+   "Clips",
+   "864×480, 24fps, 20 steps, on an RTX 3060 with 12GB"
+  ],
+  [
+   "Voice",
+   "Mia's voice reference is attached on every clip where she speaks"
+  ],
+  [
+   "Music",
+   "Turned off in the prompt on 20 of 21 clips and added in the edit instead"
+  ]
+ ],
+ "notice": "16 of the 21 clips were made before the way images are cited was fixed. Those pages show the prompt as generated and the revised version, one tab each.",
+ "groups": [
+  {
+   "id": "s1",
+   "title": "Arriving"
+  },
+  {
+   "id": "s2",
+   "title": "Dinner"
+  },
+  {
+   "id": "s3",
+   "title": "The walk home"
+  },
+  {
+   "id": "images",
+   "title": "Reference images",
+   "note": "Character sheets and locations, the <Picture N> inputs to the clips."
+  }
+ ],
+ "refs": [
+  {
+   "id": "3dview-bistro",
+   "label": "Bistro",
+   "note": "Location: a 3D architectural view of the bistro",
+   "image": {
+    "src": "img/h3-first-date/ref-3dview-bistro.jpg",
+    "thumb": "img/h3-first-date/ref-3dview-bistro-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  },
+  {
+   "id": "couplesittingdining-multi-view",
+   "label": "The table",
+   "note": "Location: multi-view of the table for two",
+   "image": {
+    "src": "img/h3-first-date/ref-couplesittingdining-multi-view.jpg",
+    "thumb": "img/h3-first-date/ref-couplesittingdining-multi-view-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  },
+  {
+   "id": "couple-table-single",
+   "label": "One table",
+   "note": "Location: the single-table variant",
+   "image": {
+    "src": "img/h3-first-date/ref-couple-table-single.jpg",
+    "thumb": "img/h3-first-date/ref-couple-table-single-t.jpg",
+    "w": 1370,
+    "h": 762
+   }
+  },
+  {
+   "id": "street",
+   "label": "Street",
+   "note": "Location: the residential street",
+   "image": {
+    "src": "img/h3-first-date/ref-street.jpg",
+    "thumb": "img/h3-first-date/ref-street-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  },
+  {
+   "id": "mia-default",
+   "label": "Mia",
+   "note": "Character turnaround sheet",
+   "image": {
+    "src": "img/h3-first-date/ref-mia-default.jpg",
+    "thumb": "img/h3-first-date/ref-mia-default-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  },
+  {
+   "id": "mia-coat",
+   "label": "Mia in her coat",
+   "note": "Character sheet, edited from Mia's default sheet",
+   "image": {
+    "src": "img/h3-first-date/ref-mia-coat.jpg",
+    "thumb": "img/h3-first-date/ref-mia-coat-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  },
+  {
+   "id": "theo-default",
+   "label": "Theo",
+   "note": "Character turnaround sheet",
+   "image": {
+    "src": "img/h3-first-date/ref-theo-default.jpg",
+    "thumb": "img/h3-first-date/ref-theo-default-t.jpg",
+    "w": 2752,
+    "h": 1536
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "The clips, the discarded takes and the DaVinci Resolve project, on Gumroad",
+   "url": "https://loopforge0.gumroad.com/l/firstdate"
+  },
+  {
+   "label": "The stock MiniMax H3 template in ComfyUI",
+   "url": "https://docs.comfy.org/tutorials/video/minimax/minimax-h3"
+  },
+  {
+   "label": "MiniMax's official prompt guide for reference mode",
+   "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "string-lights-over-the-bistro-doorway-glowing",
+   "title": "String lights over the bistro doorway glowing on against the dusk sky",
+   "group": "s1",
+   "still": {
+    "src": "img/h3-first-date/string-lights-over-the-bistro-doorway-glowing.jpg",
+    "thumb": "img/h3-first-date/string-lights-over-the-bistro-doorway-glowing-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Establishing"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "3dview-bistro",
+     "subject": "<Subject 1>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Entrance of a small bistro at dusk, string lights, chalkboard sign, sidewalk approach — Wide 3D architectural view of the bistro exterior: doorway with string lights, chalkboard sign, and the sidewalk approach, all visible together\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single WS shot — String lights over the bistro doorway glowing on against the dusk sky.\n\nretention_analysis:\n<Picture 1>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. WS · eye-level · static shot. Symmetrical frame on the doorway; string lights as the brightest element against a darkening sky. String lights over the bistro doorway glowing on against the dusk sky. Lighting: Warm string-light glow against cool dusk ambient light.\n\noverall_soundscape:\nQuiet dusk street ambience: distant traffic murmur, occasional passerby footsteps. Faint electrical buzz as the string lights flicker on.\n\nnon_diegetic_music:\nWarm solo acoustic guitar, slow tempo, just beginning, sparse plucked notes",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is the entrance of a small bistro at dusk in <Picture 1>, preserving the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single WS shot — String lights over the bistro doorway glowing on against the dusk sky.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous WS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Symmetrical frame on the doorway; string lights as the brightest element against a darkening sky. String lights over the bistro doorway glowing on against the dusk sky. Lighting: Warm string-light glow against cool dusk ambient light.\n\noverall_soundscape:\nQuiet dusk street ambience: distant traffic murmur, occasional passerby footsteps. Faint electrical buzz as the string lights flicker on.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "chalkboard-sign-by-the-door-evening-specials",
+   "title": "Chalkboard sign by the door, evening specials chalked on it",
+   "group": "s1",
+   "still": {
+    "src": "img/h3-first-date/chalkboard-sign-by-the-door-evening-specials.jpg",
+    "thumb": "img/h3-first-date/chalkboard-sign-by-the-door-evening-specials-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Establishing"
+    ],
+    [
+     "Length",
+     "4.46s (asked for 4s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "3dview-bistro",
+     "subject": "<Subject 1>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Entrance of a small bistro at dusk, string lights, chalkboard sign, sidewalk approach — Wide 3D architectural view of the bistro exterior: doorway with string lights, chalkboard sign, and the sidewalk approach, all visible together\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single INS shot — Chalkboard sign by the door, evening specials chalked on it.\n\nretention_analysis:\n<Picture 1>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. INS · eye-level · static shot. Close, static; confirms the specific place before either character appears. Chalkboard sign by the door, evening specials chalked on it. Lighting: Warm string-light spill from off-frame.\n\noverall_soundscape:\nQuiet dusk street ambience, continuous from s1_01. Faint clink of cutlery and dishware from inside.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is the entrance of a small bistro at dusk in <Picture 1>, preserving the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single INS shot — Chalkboard sign by the door, evening specials chalked on it.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous INS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Close, static; confirms the specific place before either character appears. Chalkboard sign by the door, evening specials chalked on it. Lighting: Warm string-light spill from off-frame.\n\noverall_soundscape:\nQuiet dusk street ambience, continuous from s1_01. Faint clink of cutlery and dishware from inside.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "ecu-on-mias-eyes-glancing-nervously-toward",
+   "title": "ECU on Mia's eyes, glancing nervously toward the bistro",
+   "group": "s1",
+   "still": {
+    "src": "img/h3-first-date/ecu-on-mias-eyes-glancing-nervously-toward.jpg",
+    "thumb": "img/h3-first-date/ecu-on-mias-eyes-glancing-nervously-toward-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Character intro"
+    ],
+    [
+     "Length",
+     "3.04s (asked for 3s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "3dview-bistro",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Entrance of a small bistro at dusk, string lights, chalkboard sign, sidewalk approach — Wide 3D architectural view of the bistro exterior: doorway with string lights, chalkboard sign, and the sidewalk approach, all visible together\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Picture 1> — ECU on Mia's eyes, glancing nervously toward the bistro — a detail-first introduction that withholds the rest of her before the reveal in the next shot.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. ECU · eye-level · static shot. Tight on her eyes only, everything else soft/out of frame; see scene-construction.md's Character Introduction Techniques. ECU on Mia's eyes, glancing nervously toward the bistro — a detail-first introduction that withholds the rest of her before the reveal in the next shot. <Picture 1> (Mia): eyes glancing toward the bistro, nervous, anticipatory. Lighting: Warm string-light glow beginning to catch her face. Detail-first introduction for Mia; s1_04 is the reveal that pays this off. Deliberately not given to Theo (s1_05), so only Mia's entrance carries this weight.\n\noverall_soundscape:\nQuiet street ambience. Mia's soft, slightly unsteady breath.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is the entrance of a small bistro at dusk in <Picture 2>, preserving the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Subject 1> — ECU on Mia's eyes, glancing nervously toward the bistro — a detail-first introduction that withholds the rest of her before the reveal in the next shot.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous ECU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tight on her eyes only, everything else soft/out of frame; see scene-construction.md's Character Introduction Techniques. ECU on Mia's eyes, glancing nervously toward the bistro — a detail-first introduction that withholds the rest of her before the reveal in the next shot. <Subject 1> (Mia): eyes glancing toward the bistro, nervous, anticipatory. Lighting: Warm string-light glow beginning to catch her face. Detail-first introduction for Mia; s1_04 is the reveal that pays this off. Deliberately not given to Theo (s1_05), so only Mia's entrance carries this weight.\n\noverall_soundscape:\nQuiet street ambience. Mia's soft, slightly unsteady breath.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "reveal-mia-walks-up-the-sidewalk-toward",
+   "title": "Reveal: Mia walks up the sidewalk toward the entrance, glancing at her…",
+   "group": "s1",
+   "still": {
+    "src": "img/h3-first-date/reveal-mia-walks-up-the-sidewalk-toward.jpg",
+    "thumb": "img/h3-first-date/reveal-mia-walks-up-the-sidewalk-toward-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Character intro"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "3dview-bistro",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Entrance of a small bistro at dusk, string lights, chalkboard sign, sidewalk approach — Wide 3D architectural view of the bistro exterior: doorway with string lights, chalkboard sign, and the sidewalk approach, all visible together\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MS shot of <Picture 1> — Reveal: Mia walks up the sidewalk toward the entrance, glancing at her phone, a little nervous.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. MS · eye-level · track shot. Tracking alongside Mia; headroom/lookspace held in her direction of travel. First full view of her, paying off s1_03's detail shot. Reveal: Mia walks up the sidewalk toward the entrance, glancing at her phone, a little nervous. <Picture 1> (Mia): walking, glancing at phone, nervous, anticipatory. Lighting: Warm string-light glow brightening as she nears the door. Screen direction: moving frame-left to frame-right, toward the entrance. Establishes the direction Mia arrives from for the master in s1_06.\n\noverall_soundscape:\nStreet ambience, her footsteps on the sidewalk. Footsteps. A car passing far in the distance.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is the entrance of a small bistro at dusk in <Picture 2>, preserving the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MS shot of <Subject 1> — Reveal: Mia walks up the sidewalk toward the entrance, glancing at her phone, a little nervous.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MS · eye-level · track shot. No cuts, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tracking alongside Mia; headroom/lookspace held in her direction of travel. First full view of her, paying off s1_03's detail shot. Reveal: Mia walks up the sidewalk toward the entrance, glancing at her phone, a little nervous. <Subject 1> (Mia): walking, glancing at phone, nervous, anticipatory. Lighting: Warm string-light glow brightening as she nears the door. Screen direction: moving frame-left to frame-right, toward the entrance. Establishes the direction Mia arrives from for the master in s1_05.\n\noverall_soundscape:\nStreet ambience, her footsteps on the sidewalk. Footsteps. A car passing far in the distance.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-reaches-their-table",
+   "title": "Mia reaches their table",
+   "group": "s1",
+   "still": {
+    "src": "img/h3-first-date/mia-reaches-their-table.jpg",
+    "thumb": "img/h3-first-date/mia-reaches-their-table-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Speech",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Master"
+    ],
+    [
+     "Length",
+     "8.00s (asked for 8s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Mia, Theo"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> (S1) is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> (S2) is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the cozy, warmly lit restaurant interior in <Picture 3>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MWS shot of <Subject 1>, <Subject 2> — Mia reaches their table; Theo, already seated, looks up and his face lights up, and he stands to greet her. They exchange a slightly awkward hello, both smiling, and stay on their feet.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MWS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Static two-shot on their table: Theo seated screen-right, the empty chair screen-left. Mia enters frame from screen-left and comes to the table; the framing holds so her arrival, Theo rising, and the greeting all play in one unbroken take. The table is not yet served: a clean empty plate at each of the two places, and a single glass of red wine at Theo's place, screen-right. Mia reaches their table; Theo, already seated, looks up and his face lights up, and he stands to greet her. They exchange a slightly awkward hello, both smiling, and stay on their feet. <Subject 1> (Mia): walking up to the table from screen-left, then standing beside it facing Theo, warm, relieved smile. <Subject 2> (Theo): seated at first, then rising to his feet to greet her, standing for the rest of the shot, delighted, eyes lighting up. Lighting: Warm, low interior light on the table, consistent with the dinner scene that follows. Screen direction: Mia enters from frame-left; Theo is seated frame-right. Eyeline: Theo looks up toward Mia, screen-left; she looks down to him, then level once he stands. Theo begins the clip seated and rises once, early, then stays standing; both are on their feet at the end. Mia is never seated at any point in this clip — she arrives on foot and remains standing. The location reference shows a meal already in progress, but this clip is set BEFORE the food arrives: no served food, no dishes or bowls of food, and nothing being eaten anywhere on the table or in frame. Take only the room and the table from that reference, not the meal or the seating. Establishes Mia screen-left / Theo screen-right for scene_02. <Subject 1> (S1) says (a little breathless, apologetic), <d>[English] Hi. Sorry, I think I'm a little late.</d> <Subject 2> (S2) says (warm, slightly flustered, talking over himself), <d>[English] No. No, you're right on time.</d>\n\noverall_soundscape:\nWarm restaurant interior ambience: low conversation from other tables, faint cutlery and glassware. The soft scrape of Theo's chair as he stands.\n\nnon_diegetic_music:\nN/A",
+     "note": "Checked against the prompt embedded in the rendered clip: identical."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "a-slow-lateral-tracking-pan-through-another",
+   "title": "A slow lateral tracking pan through another part of the dining room,…",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/a-slow-lateral-tracking-pan-through-another.jpg",
+    "thumb": "img/h3-first-date/a-slow-lateral-tracking-pan-through-another-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Establishing"
+    ],
+    [
+     "Length",
+     "5.17s (asked for 5s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "3dview-bistro",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "couple-table-single",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the interior dining room of the bistro in <Picture 1>, preserving the exposed red-brick walls, dark wood plank floors, tufted brown leather banquettes and booths, small wooden tables each with a shaded table lamp, the long wooden bar with bottles and glassware behind it, the warm wall sconces, the framed pictures, and the patterned red rugs. <Picture 1> is an architectural cutaway model of that room, supplied only for its layout, furniture and lighting: render this shot as real photography taken from inside the room at standing eye level — never as a model, miniature, dollhouse, floor plan or cutaway, never from above, with all four walls intact and none of its numbers or labels visible anywhere.\n<Subject 2> is ONE single couple — one woman with dark wavy shoulder-length hair in a green wrap dress and one man with short dark hair in a blue denim jacket over a white crew-neck shirt — seated across from each other at ONE table in <Picture 2>, preserving their hair, wardrobe and seating. <Picture 2> shows that one table exactly once: this pair exists only once in the entire room and must appear at exactly one table in this shot, never copied, mirrored, echoed or repeated at any second table. In this clip they are seen only far away in the deep background, small in frame and softly out of focus.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MWS shot of <Subject 1>, <Subject 2> — a slow lateral tracking pan through another part of the dining room, following a waiter carrying plated dishes toward the one distant table where <Subject 2> sit.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain the exposed red-brick walls, dark wood floors, tufted leather banquettes and booths, the lamp-lit wooden tables, the bar with its bottles, and the warm sconce lighting; sets this clip's framing.\n<Subject 2> (appears in the far background throughout): fully_preserved - retain her dark wavy shoulder-length hair and green wrap dress and his short dark hair, blue denim jacket and white crew-neck shirt; they stay seated across from each other at one single table in the deep background, at the same small scale, occupying exactly one table for the whole clip, and are never reached or approached closely.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MWS · eye-level · lateral tracking pan shot. CRITICAL — people count: the room contains exactly one woman in a green dress and exactly one man in a blue denim jacket, and they are <Subject 2>, sitting together at one single table. No second green dress, no second denim jacket, no second version of either of them, and no second couple resembling them anywhere in the frame at any moment. Every other diner in the room is a visibly different person wearing clearly different clothes in other colours. No cuts, identity swapping, wardrobe or costume changes, cloned, mirrored or duplicated people, or readable text of any kind — no table numbers, labels, captions or signage anywhere in frame. The camera glides smoothly and steadily sideways at standing eye level through a part of the dining room away from the couple, following a waiter from a three-quarter rear angle as he carries two plated dishes. The waiter is a background character and a different person from either person in <Picture 2>: a slim young man with short dark hair, a white shirt with the sleeves rolled up and a long dark apron, seen from behind and in profile, his face never turned fully to camera. He walks at an unhurried pace between the lamp-lit tables and leather banquettes, past a few other diners quietly eating and talking, easing around a chair once; the camera stays with him the whole time. Deep in the background, small in frame and softly out of focus, <Subject 2> sit across from each other at their one lamp-lit table, talking to each other — that single table is the direction the waiter is heading, and it holds only drinks and place settings so far. The clip ends while the waiter is still several tables short of them: he never arrives, never sets the plates down, and the couple remain distant, unresolved, and at that one table only. Nobody speaks on camera and no face is held in close-up. Lighting: low warm interior lighting — table lamps and wall sconces as practical sources, warm pools of light against the darker brick. Pure atmosphere beat; no dialogue.\n\noverall_soundscape:\nCozy restaurant interior ambience only: a low indistinct murmur of other diners, soft clink of cutlery and glassware, the faint rattle of plates the waiter is carrying, footsteps on the wood floor. No intelligible words, no foreground conversation, and no one speaking on camera.\n\nnon_diegetic_music:\nN/A",
+     "note": "Checked against the prompt embedded in the rendered clip: identical."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "wide-two-shot-at-the-table-mia",
+   "title": "Wide two-shot at the table: Mia mid-story, animated",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/wide-two-shot-at-the-table-mia.jpg",
+    "thumb": "img/h3-first-date/wide-two-shot-at-the-table-mia-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Speech",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Master"
+    ],
+    [
+     "Length",
+     "7.29s (asked for 7s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Mia, Theo"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> (S1) is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> (S2) is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the cozy, warmly lit restaurant interior in <Picture 3>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MS shot of <Subject 1>, <Subject 2> — Wide two-shot at the table: Mia mid-story, animated; Theo listening, delighted, breaking into laughter the moment she lands the punchline.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\nStyle: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tighter two-shot: same eye-level angle and the same blocking (Mia screen-left, Theo screen-right), but framed closer — cut roughly at the waist so both faces read clearly at low resolution. The near edge of the table stays in the bottom of frame; do not include the whole room. Establishes blocking for the scene. Wide two-shot at the table: Mia mid-story, animated; Theo listening, delighted, breaking into laughter the moment she lands the punchline. <Subject 1> (Mia): seated, leaning in slightly, gesturing lightly as she tells the story, then laughing at her own punchline, animated, telling the story, laughing. <Subject 2> (Theo): seated, leaning in, listening with a building grin, then throwing his head back slightly as he laughs, listening, then laughing. Lighting: Warm ambient restaurant lighting, soft and even. The reaction must be immediate and overlapping: no gap between Mia's last word and Theo's first, and both are laughing together for the rest of the clip. A pause before his line makes it read as sarcasm rather than delight.\n[Shot 1, 00:00.600-00:04.000] <Subject 1> (S1) says (animated, mid-story, already starting to laugh on the last few words), <d>[English] So he tries to parallel park in front of the whole restaurant.</d> Theo leans in watching her, his grin building through the line as he sees where the story is going.\n[Shot 1, 00:04.000-00:05.300] <Subject 2> (S2) says (laughing as he says it, delighted, blurted out), <d>[English] Oh my god.</d> Theo reacts the instant she lands the line — his first word comes immediately after her last, with no pause or silent beat between them, and he is already laughing as he speaks, not deadpan. Mia is laughing at the same time, over him, and neither waits for the other to finish.\n\noverall_soundscape:\nCozy restaurant interior ambience: soft murmur of other diners, gentle clink of cutlery and glasses. A soft clink as Mia sets down her glass. Their overlapping laughter, hers continuing under his.\n\nnon_diegetic_music:\nN/A",
+     "note": "Checked against the prompt embedded in the rendered clip: identical."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "over-theos-shoulder-toward-mia-talking-animatedly",
+   "title": "Over Theo's shoulder toward Mia, talking animatedly",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/over-theos-shoulder-toward-mia-talking-animatedly.jpg",
+    "thumb": "img/h3-first-date/over-theos-shoulder-toward-mia-talking-animatedly-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Coverage"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Mia"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> (S1) = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single OTS shot of <Picture 1> — Over Theo's shoulder toward Mia, talking animatedly.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. OTS · eye-level · static shot. Shot/reverse-shot coverage; eyeline matched against s2_03. Over Theo's shoulder toward Mia, talking animatedly. <Picture 1> (Mia): seated, gesturing lightly, animated, talking. Lighting: Warm ambient restaurant lighting, consistent with s2_01. Eyeline: toward Theo, screen-right. <Picture 1> (S1) says (laughing at herself, animated), <d>[English] ...and that's the whole embarrassing story.</d>\n\noverall_soundscape:\nRestaurant ambience, continuous from s2_01.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> (S1) is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is the cozy, warmly lit restaurant interior in <Picture 2>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single OTS shot of <Subject 1> — Over Theo's shoulder toward Mia, talking animatedly.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous OTS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Shot/reverse-shot coverage; eyeline matched against s2_03. Over Theo's shoulder toward Mia, talking animatedly. <Subject 1> (Mia): seated, gesturing lightly, animated, talking. Lighting: Warm ambient restaurant lighting, consistent with s2_01. Eyeline: toward Theo, screen-right. <Subject 1> (S1) says (laughing at herself, animated), <d>[English] ...and that's the whole embarrassing story.</d>\n\noverall_soundscape:\nRestaurant ambience, continuous from s2_01.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "over-mias-shoulder-toward-theo-listening-smiling",
+   "title": "Over Mia's shoulder toward Theo, listening, smiling",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/over-mias-shoulder-toward-theo-listening-smiling.jpg",
+    "thumb": "img/h3-first-date/over-mias-shoulder-toward-theo-listening-smiling-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Coverage"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Theo"
+    ],
+    [
+     "Cut out",
+     "cutaway"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "theo-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> (S2) = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 2> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single OTS shot of <Picture 1> — Over Mia's shoulder toward Theo, listening, smiling.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. OTS · eye-level · static shot. Reverse of s2_02. Over Mia's shoulder toward Theo, listening, smiling. <Picture 1> (Theo): seated, attentive, listening, smiling. Lighting: Warm ambient restaurant lighting, consistent with s2_01. Eyeline: toward Mia, screen-left. <Picture 1> (S2) says (grinning, delighted), <scenetrans> <d>[English] No way — you didn't.</d>\n\noverall_soundscape:\nRestaurant ambience, continuous.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> (S2) is Theo, a mid-20s man in <Picture 1>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 2> is the cozy, warmly lit restaurant interior in <Picture 2>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single OTS shot of <Subject 1> — Over Mia's shoulder toward Theo, listening, smiling.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous OTS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Reverse of s2_02. Over Mia's shoulder toward Theo, listening, smiling. <Subject 1> (Theo): seated, attentive, listening, smiling. Lighting: Warm ambient restaurant lighting, consistent with s2_01. Eyeline: toward Mia, screen-left. <Subject 1> (S2) says (grinning, delighted), <scenetrans> <d>[English] No way — you didn't.</d>\n\noverall_soundscape:\nRestaurant ambience, continuous.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "a-cutaway-detail-on-the-table-setting",
+   "title": "A cutaway detail on the table setting between them",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/a-cutaway-detail-on-the-table-setting.jpg",
+    "thumb": "img/h3-first-date/a-cutaway-detail-on-the-table-setting-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Cutaway"
+    ],
+    [
+     "Length",
+     "3.04s (asked for 3s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 1>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot — A cutaway detail on the table setting between them — wine glasses and place settings on the warm wood — a quiet breathing-room beat between the conversation coverage.\n\nretention_analysis:\n<Picture 1>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. ECU · eye-level · static shot. This is a cutaway/insert on the TABLE SURFACE ITSELF — wine glasses, cutlery, place settings, the wood grain — not a shot of either character's face or hands, and not a different table or a wide restaurant shot; it's the same table from the reference photo, cropped tight. Tight, static, brief. A cutaway detail on the table setting between them — wine glasses and place settings on the warm wood — a quiet breathing-room beat between the conversation coverage. Lighting: Warm ambient restaurant lighting, consistent with the scene. Reason: emphasis/breathing room — underlines the quiet of the moment, not a continuity bridge. Characters may be softly out of focus at the edge of frame but are not the subject of this shot.\n\noverall_soundscape:\nRestaurant ambience, softened under the close framing. The faint clink of a glass settling on the table.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is the cozy, warmly lit restaurant interior in <Picture 1>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot — A cutaway detail on the table setting between them — wine glasses and place settings on the warm wood — a quiet breathing-room beat between the conversation coverage.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous ECU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. This is a cutaway/insert on the TABLE SURFACE ITSELF — wine glasses, cutlery, place settings, the wood grain — not a shot of either character's face or hands, and not a different table or a wide restaurant shot; it's the same table from the reference photo, cropped tight. Tight, static, brief. A cutaway detail on the table setting between them — wine glasses and place settings on the warm wood — a quiet breathing-room beat between the conversation coverage. Lighting: Warm ambient restaurant lighting, consistent with the scene. Reason: emphasis/breathing room — underlines the quiet of the moment, not a continuity bridge. Characters may be softly out of focus at the edge of frame but are not the subject of this shot.\n\noverall_soundscape:\nRestaurant ambience, softened under the close framing. The faint clink of a glass settling on the table.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mias-hand-resting-on-the-table-near",
+   "title": "Mia's hand resting on the table near Theo's, not quite touching",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/mias-hand-resting-on-the-table-near.jpg",
+    "thumb": "img/h3-first-date/mias-hand-resting-on-the-table-near-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Insert"
+    ],
+    [
+     "Length",
+     "4.46s (asked for 4s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Picture 1>, <Picture 2> — Mia's hand resting on the table near Theo's, not quite touching.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. ECU · high · static shot. Tabletop-level close-up on both hands, small negative space between them. Mia's hand resting on the table near Theo's, not quite touching. <Picture 1> (Mia): hand resting on the table, not touching Theo's, fingers relaxed. <Picture 2> (Theo): hand resting on the table, not touching Mia's, fingers relaxed. Lighting: Warm ambient restaurant lighting, consistent with the scene.\n\noverall_soundscape:\nRestaurant ambience, distant and hushed under the close framing.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the cozy, warmly lit restaurant interior in <Picture 3>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Subject 1>, <Subject 2> — Mia's hand resting on the table near Theo's, not quite touching.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous ECU · high · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tabletop-level close-up on both hands, small negative space between them. Mia's hand resting on the table near Theo's, not quite touching. <Subject 1> (Mia): hand resting on the table, not touching Theo's, fingers relaxed. <Subject 2> (Theo): hand resting on the table, not touching Mia's, fingers relaxed. Lighting: Warm ambient restaurant lighting, consistent with the scene.\n\noverall_soundscape:\nRestaurant ambience, distant and hushed under the close framing.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "theo-decides-glancing-down-at-their-hands",
+   "title": "Theo decides, glancing down at their hands before he acts",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/theo-decides-glancing-down-at-their-hands.jpg",
+    "thumb": "img/h3-first-date/theo-decides-glancing-down-at-their-hands-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Coverage"
+    ],
+    [
+     "Length",
+     "3.04s (asked for 3s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "theo-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 2> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MCU shot of <Picture 1> — Theo decides, glancing down at their hands before he acts.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. MCU · eye-level · static shot. Held on Theo's face as he makes the small, decisive choice; hands are off-frame — this shot is about the decision, not the gesture itself. Theo decides, glancing down at their hands before he acts. <Picture 1> (Theo): glancing down, then resolving to reach, earnest. Lighting: Warm ambient restaurant lighting, consistent with the scene.\n\noverall_soundscape:\nRestaurant ambience, hushed. A quiet exhale.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Theo, a mid-20s man in <Picture 1>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 2> is the cozy, warmly lit restaurant interior in <Picture 2>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single MCU shot of <Subject 1> — Theo decides, glancing down at their hands before he acts.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MCU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Held on Theo's face as he makes the small, decisive choice; hands are off-frame — this shot is about the decision, not the gesture itself. Theo decides, glancing down at their hands before he acts. <Subject 1> (Theo): glancing down, then resolving to reach, earnest. Lighting: Warm ambient restaurant lighting, consistent with the scene.\n\noverall_soundscape:\nRestaurant ambience, hushed. A quiet exhale.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "theos-hand-closes-over-mias-on-the",
+   "title": "Theo's hand closes over Mia's on the table, fingers loosely interlacing",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/theos-hand-closes-over-mias-on-the.jpg",
+    "thumb": "img/h3-first-date/theos-hand-closes-over-mias-on-the-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Insert"
+    ],
+    [
+     "Length",
+     "3.04s (asked for 3s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Picture 1>, <Picture 2> — Theo's hand closes over Mia's on the table, fingers loosely interlacing.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. ECU · high · static shot. Same tabletop-level ECU framing as s2_05 — the two shots read as one continuous detail, only the hand position changes. Theo's hand closes over Mia's on the table, fingers loosely interlacing. <Picture 1> (Mia): hand now covered by Theo's. <Picture 2> (Theo): hand closing over Mia's, fingers loosely interlacing. Lighting: Warm ambient restaurant lighting, consistent with the scene. Blocking must match s2_05's clip exactly — same relative positions. Same hand positions and table framing as s2_05 — only the contact state changes.\n\noverall_soundscape:\nRestaurant ambience, hushed. The soft sound of skin against skin as their hands meet.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the cozy, warmly lit restaurant interior in <Picture 3>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single ECU shot of <Subject 1>, <Subject 2> — Theo's hand closes over Mia's on the table, fingers loosely interlacing.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous ECU · high · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Same tabletop-level ECU framing as s2_05 — the two shots read as one continuous detail, only the hand position changes. Theo's hand closes over Mia's on the table, fingers loosely interlacing. <Subject 1> (Mia): hand now covered by Theo's. <Subject 2> (Theo): hand closing over Mia's, fingers loosely interlacing. Lighting: Warm ambient restaurant lighting, consistent with the scene. Blocking must match s2_05's clip exactly — same relative positions. Same hand positions and table framing as s2_05 — only the contact state changes.\n\noverall_soundscape:\nRestaurant ambience, hushed. The soft sound of skin against skin as their hands meet.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-looks-down-at-their-joined-hands",
+   "title": "Mia looks down at their joined hands, then up at Theo, with a soft smile",
+   "group": "s2",
+   "still": {
+    "src": "img/h3-first-date/mia-looks-down-at-their-joined-hands.jpg",
+    "thumb": "img/h3-first-date/mia-looks-down-at-their-joined-hands-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Reaction"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Mia"
+    ],
+    [
+     "Cut out",
+     "match-cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-default",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "couplesittingdining-multi-view",
+     "subject": "<Subject 2>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> (S1) = Mia, Mid-20s woman, dark wavy hair, green wrap dress\n<Picture 2> = Cozy, warmly lit interior, single round table for two, warm wood tones — Mia and Theo already seated together at the round table for two, in conversation — Mia screen-left, Theo screen-right, warm wood tones. No candle on the table\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single CU shot of <Picture 1> — Mia looks down at their joined hands, then up at Theo, with a soft smile.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. CU · eye-level · static shot. Held close on Mia's face; the eyeline shift (down, then up) is the whole beat. Mia looks down at their joined hands, then up at Theo, with a soft smile. <Picture 1> (Mia): seated, looking down then up, soft smile, tender. Lighting: Warm ambient restaurant lighting, consistent with the scene. Eyeline: down to hands, then up toward Theo, screen-right. <Picture 1> (S1) says (barely audible, smiling), <d>[English] Okay.</d>\n\noverall_soundscape:\nRestaurant ambience, warm and settled.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> (S1) is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash.\n<Subject 2> is the cozy, warmly lit restaurant interior in <Picture 2>, preserving the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table.\n\nsummary:\nWarm, intimate pacing. Golden soft light, gentle camera moves, close eyeline-driven framing. [reference generation] Generate a single CU shot of <Subject 1> — Mia looks down at their joined hands, then up at Theo, with a soft smile.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a green wrap dress with a tied waist sash; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous CU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Held close on Mia's face; the eyeline shift (down, then up) is the whole beat. Mia looks down at their joined hands, then up at Theo, with a soft smile. <Subject 1> (Mia): seated, looking down then up, soft smile, tender. Lighting: Warm ambient restaurant lighting, consistent with the scene. Eyeline: down to hands, then up toward Theo, screen-right. <Subject 1> (S1) says (barely audible, smiling), <d>[English] Okay.</d>\n\noverall_soundscape:\nRestaurant ambience, warm and settled.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "a-quiet-residential-street-at-night-streetlights",
+   "title": "A quiet residential street at night, streetlights, damp pavement…",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/a-quiet-residential-street-at-night-streetlights.jpg",
+    "thumb": "img/h3-first-date/a-quiet-residential-street-at-night-streetlights-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Establishing"
+    ],
+    [
+     "Length",
+     "5.17s (asked for 5s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "street",
+     "subject": "<Subject 1>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Quiet residential street after dinner, streetlights, damp reflective pavement — Wide 3D architectural view of the residential street: the sidewalk run and a streetlight partway down the block\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot — A quiet residential street at night, streetlights, damp pavement reflecting light.\n\nretention_analysis:\n<Picture 1>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. WS · eye-level · pan shot. Slow pan down the street; no characters yet. A quiet residential street at night, streetlights, damp pavement reflecting light. Lighting: Cool streetlight pools against dark surroundings.\n\noverall_soundscape:\nQuiet night street ambience: distant city hum, an occasional car passing far off.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is the quiet residential street after dinner in <Picture 1>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot — A quiet residential street at night, streetlights, damp pavement reflecting light.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous WS · eye-level · pan shot. No cuts, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Slow pan down the street; no characters yet. A quiet residential street at night, streetlights, damp pavement reflecting light. Lighting: Cool streetlight pools against dark surroundings.\n\noverall_soundscape:\nQuiet night street ambience: distant city hum, an occasional car passing far off.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-and-theo-walk-side-by-side",
+   "title": "Mia and Theo walk side by side, hands now intertwined, continuing the…",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/mia-and-theo-walk-side-by-side.jpg",
+    "thumb": "img/h3-first-date/mia-and-theo-walk-side-by-side-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Montage"
+    ],
+    [
+     "Length",
+     "6.58s (asked for 6s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress; Adds a light coat over the green wrap dress for the night walk\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Quiet residential street after dinner, streetlights, damp reflective pavement — Wide 3D architectural view of the residential street: the sidewalk run and a streetlight partway down the block\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot of <Picture 1>, <Picture 2> — Mia and Theo walk side by side, hands now intertwined, continuing the connection from the dinner scene.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. WS · eye-level · track shot. Side-profile tracking shot; Mia on camera-left, Theo on camera-right, joined hands visible between them. Mia and Theo walk side by side, hands now intertwined, continuing the connection from the dinner scene. <Picture 1> (Mia): walking, hand in Theo's, content. <Picture 2> (Theo): walking, hand in Mia's, content. Lighting: Moving through alternating pools of warm streetlight and cooler shadow. Establishes Mia camera-left / Theo camera-right for s3_04 to match.\n\noverall_soundscape:\nQuiet night street ambience, continuous. Their footsteps in unison on the pavement.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot of <Subject 1>, <Subject 2> — Mia and Theo walk side by side, hands now intertwined, continuing the connection from the dinner scene.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous WS · eye-level · track shot. No cuts, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Side-profile tracking shot; Mia on camera-left, Theo on camera-right, joined hands visible between them. Mia and Theo walk side by side, hands now intertwined, continuing the connection from the dinner scene. <Subject 1> (Mia): walking, hand in Theo's, content. <Subject 2> (Theo): walking, hand in Mia's, content. Lighting: Moving through alternating pools of warm streetlight and cooler shadow. Establishes Mia camera-left / Theo camera-right for s3_04 to match.\n\noverall_soundscape:\nQuiet night street ambience, continuous. Their footsteps in unison on the pavement.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [
+    "Mia's coat reference is attached here. In the video this is where the difference between citing an image inside a subject definition and giving it a standalone entry shows up."
+   ],
+   "links": []
+  },
+  {
+   "slug": "the-two-laughing-together-about-something-still",
+   "title": "The two laughing together about something, still walking",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/the-two-laughing-together-about-something-still.jpg",
+    "thumb": "img/h3-first-date/the-two-laughing-together-about-something-still-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Montage"
+    ],
+    [
+     "Length",
+     "5.17s (asked for 5s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress; Adds a light coat over the green wrap dress for the night walk\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Quiet residential street after dinner, streetlights, damp reflective pavement — Wide 3D architectural view of the residential street: the sidewalk run and a streetlight partway down the block\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single MS shot of <Picture 1>, <Picture 2> — The two laughing together about something, still walking.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. MS · eye-level · track shot. Closer tracking two-shot; casual, unposed feel. The two laughing together about something, still walking. <Picture 1> (Mia): walking, laughing, laughing. <Picture 1> (Mia) wardrobe: Adds a light coat over the green wrap dress for the night walk. <Picture 2> (Theo): walking, laughing, laughing. Lighting: Consistent alternating streetlight pools.\n\noverall_soundscape:\nQuiet night street ambience, continuous. Soft shared laughter.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single MS shot of <Subject 1>, <Subject 2> — The two laughing together about something, still walking.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous MS · eye-level · track shot. No cuts, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Closer tracking two-shot; casual, unposed feel. The two laughing together about something, still walking. <Subject 1> (Mia): walking, laughing, laughing. <Subject 2> (Theo): walking, laughing, laughing. Lighting: Consistent alternating streetlight pools.\n\noverall_soundscape:\nQuiet night street ambience, continuous. Soft shared laughter.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "they-pause-under-a-streetlight-and-turn",
+   "title": "They pause under a streetlight and turn to face each other",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/they-pause-under-a-streetlight-and-turn.jpg",
+    "thumb": "img/h3-first-date/they-pause-under-a-streetlight-and-turn-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Master"
+    ],
+    [
+     "Length",
+     "7.29s (asked for 7s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot of <Subject 1>, <Subject 2> — They pause under a streetlight and turn to face each other.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous WS · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Static wide; the streetlight's pool of light centers the frame around them. They pause under a streetlight and turn to face each other. <Subject 1> (Mia): stopping, turning to face Theo, soft, tender. <Subject 2> (Theo): stopping, turning to face Mia, soft, tender. Lighting: Warm pool of streetlight against the cool, dark street. Blocking must match s3_02's clip exactly — same relative positions. Relative positions (Mia camera-left, Theo camera-right) must carry over from the walking shots.\n\noverall_soundscape:\nQuiet night street ambience, hushed as they stop. Their footsteps stopping.\n\nnon_diegetic_music:\nN/A",
+     "note": "Checked against the prompt embedded in the rendered clip: identical."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "close-on-their-faces-foreheads-nearly-touching",
+   "title": "Close on their faces, foreheads nearly touching, a quiet tender beat",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/close-on-their-faces-foreheads-nearly-touching.jpg",
+    "thumb": "img/h3-first-date/close-on-their-faces-foreheads-nearly-touching-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Reaction"
+    ],
+    [
+     "Length",
+     "5.17s (asked for 5s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single CU shot of <Subject 1>, <Subject 2> — Close on their faces, foreheads nearly touching, a quiet tender beat.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous CU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tight two-shot close-up, framed close from the very first frame — do not open on a wide or establishing view and do not pull back at any point; held, no movement, no camera drift. Close on their faces, foreheads nearly touching, a quiet tender beat. <Subject 1> (Mia): close, foreheads nearly touching, hands still loosely joined at their sides, tender. <Subject 2> (Theo): close, foreheads nearly touching, hands still loosely joined at their sides, tender. Lighting: Warm streetlight glow, soft falloff. Blocking must match s3_04's clip exactly — same relative positions.\n\noverall_soundscape:\nNear silence: the faintest wash of distant city hum.\n\nnon_diegetic_music:\nN/A",
+     "note": "Checked against the prompt embedded in the rendered clip: identical."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "ecu-on-their-joined-hands-at-their",
+   "title": "ECU on their joined hands at their sides, fingers interlaced the same…",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/ecu-on-their-joined-hands-at-their.jpg",
+    "thumb": "img/h3-first-date/ecu-on-their-joined-hands-at-their-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Insert"
+    ],
+    [
+     "Length",
+     "3.04s (asked for 3s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "cut"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress; Adds a light coat over the green wrap dress for the night walk\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Quiet residential street after dinner, streetlights, damp reflective pavement — Wide 3D architectural view of the residential street: the sidewalk run and a streetlight partway down the block\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single ECU shot of <Picture 1>, <Picture 2> — ECU on their joined hands at their sides, fingers interlaced the same way as at dinner — a detail withheld before the final wide reveal.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. ECU · eye-level · static shot. Tight on just the hands; everything else out of frame. Mirrors the detail-first technique used for Mia's introduction in scene_01, now applied to the couple as a unit at the story's close — see scene-construction.md's Character Introduction Techniques (the same principle generalizes to any reveal beat, not only introductions). ECU on their joined hands at their sides, fingers interlaced the same way as at dinner — a detail withheld before the final wide reveal. <Picture 1> (Mia): hand joined with Theo's, fingers interlaced, held at her side. <Picture 2> (Theo): hand joined with Mia's, fingers interlaced, held at his side. Lighting: Warm streetlight glow, soft falloff. Withholds the full embrace for one beat before s3_07's wide reveal.\n\noverall_soundscape:\nNear silence.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single ECU shot of <Subject 1>, <Subject 2> — ECU on their joined hands at their sides, fingers interlaced the same way as at dinner — a detail withheld before the final wide reveal.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous ECU · eye-level · static shot. No cuts, camera movement of any kind, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Tight on just the hands; everything else out of frame. Mirrors the detail-first technique used for Mia's introduction in scene_01, now applied to the couple as a unit at the story's close — see scene-construction.md's Character Introduction Techniques (the same principle generalizes to any reveal beat, not only introductions). ECU on their joined hands at their sides, fingers interlaced the same way as at dinner — a detail withheld before the final wide reveal. <Subject 1> (Mia): hand joined with Theo's, fingers interlaced, held at her side. <Subject 2> (Theo): hand joined with Mia's, fingers interlaced, held at his side. Lighting: Warm streetlight glow, soft falloff. Withholds the full embrace for one beat before s3_07's wide reveal.\n\noverall_soundscape:\nNear silence.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "wide-pull-out-the-couple-standing-together",
+   "title": "Wide pull-out: the couple standing together under the streetlight as…",
+   "group": "s3",
+   "still": {
+    "src": "img/h3-first-date/wide-pull-out-the-couple-standing-together.jpg",
+    "thumb": "img/h3-first-date/wide-pull-out-the-couple-standing-together-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 501,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Character consistency",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "Shot purpose",
+     "Establishing"
+    ],
+    [
+     "Length",
+     "7.29s (asked for 7s)"
+    ],
+    [
+     "Resolution",
+     "864×480, 24fps"
+    ],
+    [
+     "Steps",
+     "20, stock reference-to-video template"
+    ],
+    [
+     "Speaks",
+     "Nobody"
+    ],
+    [
+     "Cut out",
+     "hold"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-coat",
+     "subject": "<Subject 1>"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "theo-default",
+     "subject": "<Subject 2>"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "street",
+     "subject": "<Subject 3>"
+    }
+   ],
+   "variants": [
+    {
+     "label": "As generated",
+     "text": "subject_definitions:\n<Picture 1> = Mia, Mid-20s woman, dark wavy hair, green wrap dress; Adds a light coat over the green wrap dress for the night walk\n<Picture 2> = Theo, Mid-20s man, short dark hair, denim jacket over a white shirt\n<Picture 3> = Quiet residential street after dinner, streetlights, damp reflective pavement — Wide 3D architectural view of the residential street: the sidewalk run and a streetlight partway down the block\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot of <Picture 1>, <Picture 2> — Wide pull-out: the couple standing together under the streetlight as the quiet street continues around them — the reveal that pays off s3_06's detail.\n\nretention_analysis:\n<Picture 1>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 2>: identity, proportions, current wardrobe/state, and rendering style retained exactly as shown in the reference.\n<Picture 3>: architecture and layout retained exactly; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. WS · eye-level · dolly-out shot. Slow pull-out, lingering hold at the end; closing image of the story. Wide pull-out: the couple standing together under the streetlight as the quiet street continues around them — the reveal that pays off s3_06's detail. <Picture 1> (Mia): standing together with Theo, content. <Picture 1> (Mia) wardrobe: Adds a light coat over the green wrap dress for the night walk. <Picture 2> (Theo): standing together with Mia, content. Lighting: Warm streetlight pool surrounded by cool night street. Blocking must match s3_06's clip exactly — same relative positions. Closing hold; final image of the story.\n\noverall_soundscape:\nThe quiet street around them, distant city hum.\n\nnon_diegetic_music:\nN/A",
+     "note": "Pulled out of the rendered clip. This is the prompt that made the shot in the film."
+    },
+    {
+     "label": "Revised",
+     "text": "subject_definitions:\n<Subject 1> is Mia, a mid-20s woman in <Picture 1>, preserving her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress.\n<Subject 2> is Theo, a mid-20s man in <Picture 2>, preserving his face, short dark hair, a blue denim jacket, and a white crew-neck shirt.\n<Subject 3> is the quiet residential street after dinner in <Picture 3>, preserving the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb.\n\nsummary:\nSlow, soft, contemplative pacing. Warm diffused light, static or slow camera moves, generous negative space. [reference generation] Generate a single WS shot of <Subject 1>, <Subject 2> — Wide pull-out: the couple standing together under the streetlight as the quiet street continues around them — the reveal that pays off s3_06's detail.\n\nretention_analysis:\n<Subject 1> (appears throughout): fully_preserved - retain her face, dark wavy shoulder-length hair, and a cream belted trench coat worn open over a green wrap dress; same proportions and the same wardrobe in every frame of the clip.\n<Subject 2> (appears throughout): fully_preserved - retain his face, short dark hair, a blue denim jacket, and a white crew-neck shirt; same proportions and the same wardrobe in every frame of the clip.\n<Subject 3> (appears throughout): fully_preserved - retain the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb; sets this clip's framing.\n\ndetailed_description:\n[Shot 1] Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. One continuous WS · eye-level · dolly-out shot. No cuts, identity swapping, wardrobe or costume changes, duplicate or extra people, or readable text. Slow pull-out, lingering hold at the end; closing image of the story. Wide pull-out: the couple standing together under the streetlight as the quiet street continues around them — the reveal that pays off s3_06's detail. <Subject 1> (Mia): standing together with Theo, content. <Subject 2> (Theo): standing together with Mia, content. Lighting: Warm streetlight pool surrounded by cool night street. Blocking must match s3_06's clip exactly — same relative positions. Closing hold; final image of the story.\n\noverall_soundscape:\nThe quiet street around them, distant city hum.\n\nnon_diegetic_music:\nN/A",
+     "note": "Corrected after the clip was made, with each image cited inside its subject definition. Start from this one."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-reference-image",
+   "title": "Mia, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-mia-default.jpg",
+    "thumb": "img/h3-first-date/ref-mia-default-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Character sheet"
+    ],
+    [
+     "Method",
+     "text-to-image"
+    ],
+    [
+     "Used in",
+     "7 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. Mid-20s woman, dark wavy hair, green wrap dress. Character reference sheet / turnaround: 3-quarter view, front view, overhead view, plus a close facial portrait, plus an expression map: nervous, anticipatory, warm, relieved smile, animated, talking, soft smile, tender. Framings needed across the sheet: full-body, bust, face, hands, detail. Every panel the same outfit, proportions, identity, and rendering style stated above. Neutral grey background, flat even lighting across all panels, no shadows or accessories obscuring the face."
+    }
+   ],
+   "notes": [
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  },
+  {
+   "slug": "mia-in-her-coat-reference-image",
+   "title": "Mia in her coat, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-mia-coat.jpg",
+    "thumb": "img/h3-first-date/ref-mia-coat-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Character sheet"
+    ],
+    [
+     "Method",
+     "image-edit"
+    ],
+    [
+     "Used in",
+     "6 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting — unchanged from the input reference. Using char_mia_default as the input reference image, edit ONLY the following: Adds a light coat over the green wrap dress for the night walk. Preserve the exact face, proportions, identity, and rendering style shown in the reference — do not regenerate the character from text, apply only this change. Keep the same turnaround layout: side/3-quarter view, front view, 3-quarter view, overhead view, plus a close facial portrait, plus an expression map: content, laughing, tender. Neutral grey background, flat even lighting across all panels."
+    }
+   ],
+   "notes": [
+    "Made by editing Mia's default character sheet, which is how the coat variant keeps the same face.",
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  },
+  {
+   "slug": "theo-reference-image",
+   "title": "Theo, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-theo-default.jpg",
+    "thumb": "img/h3-first-date/ref-theo-default-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Character sheet"
+    ],
+    [
+     "Method",
+     "text-to-image"
+    ],
+    [
+     "Used in",
+     "11 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. Mid-20s man, short dark hair, denim jacket over a white shirt. Character reference sheet / turnaround: front view, 3-quarter view, overhead view, side/3-quarter view, plus a close facial portrait, plus an expression map: anxious, waiting, warm smile, listening, smiling, earnest, content, laughing, tender. Framings needed across the sheet: full-body, bust, face, hands. Every panel the same outfit, proportions, identity, and rendering style stated above. Neutral grey background, flat even lighting across all panels, no shadows or accessories obscuring the face."
+    }
+   ],
+   "notes": [
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  },
+  {
+   "slug": "bistro-reference-image",
+   "title": "Bistro, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-3dview-bistro.jpg",
+    "thumb": "img/h3-first-date/ref-3dview-bistro-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Location area"
+    ],
+    [
+     "Method",
+     "text-to-image"
+    ],
+    [
+     "Used in",
+     "4 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. Entrance of a small bistro at dusk, string lights, chalkboard sign, sidewalk approach. the doorway framed by warm string lights, the chalkboard sign on the pavement, the sidewalk approach in front of it, and the dusk sky above. Lighting: warm string-light glow against dusk sky. Reference photograph, architecture and fixed details clearly visible."
+    }
+   ],
+   "notes": [
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  },
+  {
+   "slug": "the-table-reference-image",
+   "title": "The table, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-couplesittingdining-multi-view.jpg",
+    "thumb": "img/h3-first-date/ref-couplesittingdining-multi-view-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Location area"
+    ],
+    [
+     "Method",
+     "text-to-image"
+    ],
+    [
+     "Used in",
+     "9 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. Cozy, warmly lit interior, single round table for two, warm wood tones. the warm wood tones, the single round table for two with a chair on either side, the surrounding tables and low warm interior lighting, and no candle on the table. Lighting: warm ambient restaurant lighting, soft and even, no single visible flame source. Reference photograph, architecture and fixed details clearly visible."
+    }
+   ],
+   "notes": [
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  },
+  {
+   "slug": "street-reference-image",
+   "title": "Street, reference image",
+   "group": "images",
+   "still": {
+    "src": "img/h3-first-date/ref-street.jpg",
+    "thumb": "img/h3-first-date/ref-street-t.jpg",
+    "w": 2752,
+    "h": 1536
+   },
+   "time": 146,
+   "models": [
+    "Online image model"
+   ],
+   "techniques": [
+    "Reference images"
+   ],
+   "facts": [
+    [
+     "Type",
+     "Location area"
+    ],
+    [
+     "Method",
+     "text-to-image"
+    ],
+    [
+     "Used in",
+     "7 clips"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Style: Photorealistic digital cinematography — rendered as if captured on a real camera, with natural real-world materials, textures, and lighting (skin, fabric, wood, glass, etc., all rendered with real photographic texture). Not illustrated, not animated, not a cartoon, not CGI-rendered, not a painting. Quiet residential street after dinner, streetlights, damp reflective pavement. the row of brownstone townhouses with lit windows and stoops, the sidewalk running along them, the cast-iron streetlight partway down the block, the damp asphalt reflecting the light, and the cars parked at the kerb. Lighting: cool ambient night light with warm streetlight pools. Reference photograph, architecture and fixed details clearly visible."
+    }
+   ],
+   "notes": [
+    "Made with an online service, not locally. Flux Kontext and Qwen Edit will both do this part on your own machine."
+   ],
+   "links": []
+  }
+ ]
+}

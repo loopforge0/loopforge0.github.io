@@ -1,0 +1,110 @@
+{
+ "h3-camera-shots": [
+  {
+   "id": "camera-moves",
+   "question": "How do you get real camera moves out of MiniMax H3?",
+   "findings": [
+    "H3 documents twelve camera motions and no named shots, so a dolly zoom or a crash zoom has to be written as a sentence built out of those twelve. Fourteen named shots work that way. Bullet time could not be done.",
+    "Settings decide whether the move happens at all. A 4-step turbo render suppresses camera motion almost entirely, whatever the prompt says; use 20 steps and at least 124 frames.",
+    "Lens and camera names do almost nothing. On the same seed, an 8mm lens rendered framing identical to a 50mm. Adding a background reference plate roughly halves the camera move."
+   ],
+   "links": [
+    {
+     "label": "Agent skills that write these for your own scene",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills"
+    }
+   ]
+  }
+ ],
+ "h3-chained-renders": [
+  {
+   "id": "long-takes",
+   "question": "How do you make a MiniMax H3 video longer than 15 seconds?",
+   "findings": [
+    "H3 renders top out at about fifteen seconds. Chain them instead: each render opens on an exact replay of the last 39 frames of the one before, so the join is the same frames rather than similar ones.",
+    "Hand references in per render, and a new character or a new stretch of street can arrive partway through a take. The longest take here runs 61 seconds across seven renders.",
+    "Faces drift over six renders. A latent handover and a VAE handover were both tried, and neither moved the number."
+   ],
+   "links": [
+    {
+     "label": "ComfyUI-H3-Continuous, the nodes",
+     "url": "https://github.com/loopforge0/ComfyUI-H3-Continuous"
+    },
+    {
+     "label": "How the handoff works, with measurements",
+     "url": "https://github.com/loopforge0/ComfyUI-H3-Continuous/blob/main/docs/how-it-works.md"
+    }
+   ]
+  }
+ ],
+ "h3-first-date": [
+  {
+   "id": "consistent-characters",
+   "question": "How do you keep a character the same person from shot to shot?",
+   "findings": [
+    "Use H3's reference to video mode. It takes reference images, video and audio in one generation, so a character turnaround sheet, a 3D layout of the room and a voice sample go in together, and the prompt says which subject is in which picture.",
+    "Cite each image inside the definition of the subject it shows. A standalone <Picture N> entry acts as a shot anchor, and the one clip written that way lost the character's coat.",
+    "<Picture N> is numbered by the order images are wired into the node, not by anything in the prompt. H3 also keeps no voice between clips, so attach the same short voice reference to every clip where that character speaks."
+   ],
+   "links": []
+  }
+ ],
+ "h3-vs-ltx-2-5": [
+  {
+   "id": "speech-and-singing",
+   "question": "How do you get speech and singing from a video model?",
+   "findings": [
+    "MiniMax H3 and LTX 2.5 both generate audio in the same pass as the picture. Write the spoken line into the prompt and the model produces the speech along with the lip movement, from one still image.",
+    "Turn the model's own music off in the prompt and score in the edit. Separately generated music will not line up across cuts or joins.",
+    "Size each render to the words it has to carry. Runtime with nothing scripted in it is where the model invents speech-shaped filler, and on speech the two models fail differently: one hallucinates dialogue nobody asked for, the other returns silence."
+   ],
+   "links": [
+    {
+     "label": "Speaking, group: both models' prompts",
+     "prompt": "speaking-group"
+    },
+    {
+     "label": "Singing, individual: both models' prompts",
+     "prompt": "singing-individual"
+    },
+    {
+     "label": "Singing across three chained renders",
+     "collection": "h3-chained-renders",
+     "prompt": "stage-1"
+    }
+   ]
+  },
+  {
+   "id": "h3-vs-ltx",
+   "question": "Which is better, MiniMax H3 or LTX 2.5?",
+   "findings": [
+    "Across nine rounds from the same still images on one RTX 3060, MiniMax H3 won five and LTX 2.5 won three, with a bonus round on turn-taking speech outside the count.",
+    "LTX is much faster. A five second clip took about 5½ minutes on LTX's default workflow, against about 38 minutes for H3 at 20 steps and about 13 minutes with H3's 6-step Turbo LoRA.",
+    "LTX is more forgiving with prompts but tends to skip parts of them. H3 took more attempts to get the audio right, and generally did better with the video and with songs."
+   ],
+   "links": []
+  }
+ ],
+ "h3-turbo-lora": [
+  {
+   "id": "low-vram",
+   "question": "Can you run MiniMax H3 on a 12GB GPU?",
+   "findings": [
+    "Yes. Everything local on this site ran on an RTX 3060 with 12GB of VRAM, including speech, singing and a one minute short film.",
+    "The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word.",
+    "Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768."
+   ],
+   "links": [
+    {
+     "label": "The six-step speech prompt",
+     "collection": "h3-turbo-lora",
+     "prompt": "six-steps-speech"
+    },
+    {
+     "label": "The Turbo LoRA workflow, on Civitai",
+     "url": "https://civitai.com/api/download/models/3232626?fileId=3115029"
+    }
+   ]
+  }
+ ]
+}

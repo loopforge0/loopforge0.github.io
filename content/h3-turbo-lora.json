@@ -1,0 +1,119 @@
+{
+ "slug": "h3-turbo-lora",
+ "title": "MiniMax H3 with the Turbo LoRA",
+ "short": "Six steps, with speech",
+ "published": "2026-08-15",
+ "video": {
+  "id": "97OYZMksJsQ",
+  "title": "MiniMax H3 + Turbo LoRA: image to video with sound on low VRAM"
+ },
+ "models": [
+  "MiniMax H3"
+ ],
+ "summary": [
+  "The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image."
+ ],
+ "facts": [
+  [
+   "Base model",
+   "minimax_h3_fl2va_pruned_int8_convrot"
+  ],
+  [
+   "Text encoder",
+   "qwen3vl_32b_minimax_h3_nvfp4_awq"
+  ],
+  [
+   "Turbo LoRA",
+   "minimax_h3_turbo_v4_step600_ema"
+  ],
+  [
+   "Sampling",
+   "6 steps, simple scheduler"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "example",
+   "title": "The example"
+  }
+ ],
+ "refs": [
+  {
+   "id": "start",
+   "label": "Start image",
+   "note": "The still the clip was generated from",
+   "image": {
+    "src": "img/h3-turbo-lora/start.jpg",
+    "thumb": "img/h3-turbo-lora/start-t.jpg",
+    "w": 832,
+    "h": 1216
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "The workflow, on Civitai",
+   "url": "https://civitai.com/api/download/models/3232626?fileId=3115029"
+  },
+  {
+   "label": "ComfyUI",
+   "url": "https://github.com/comfyanonymous/ComfyUI"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "six-steps-speech",
+   "title": "Speaking to camera at six steps",
+   "group": "example",
+   "still": {
+    "src": "img/h3-turbo-lora/six-steps-speech.jpg",
+    "thumb": "img/h3-turbo-lora/six-steps-speech-t.jpg",
+    "w": 608,
+    "h": 864
+   },
+   "time": 108,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Image to video",
+    "Speech",
+    "Turbo LoRA"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "608×864, 24fps"
+    ],
+    [
+     "Steps",
+     "6, Turbo LoRA"
+    ],
+    [
+     "Seed",
+     "953478908379578"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The woman looks at the camera and speaks warmly, her expression softening into a small smile. Her hair and clothing drift in a cold breeze; the aurora shimmers and shifts slowly overhead. Camera holds steady with a subtle push-in.\n\nAudio: she says clearly, \"Six steps. That's all it took to make this.\" Underneath, a low arctic wind and the distant creak of the ship's rigging. No music."
+    }
+   ],
+   "notes": [
+    "Whisper transcribes the generated audio back as exactly the line in the prompt. Nothing was dubbed on afterwards."
+   ],
+   "links": []
+  }
+ ]
+}

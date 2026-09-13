@@ -1,0 +1,2101 @@
+{
+ "slug": "h3-chained-renders",
+ "title": "MiniMax H3 long takes from chained renders",
+ "short": "Twenty seven chained renders",
+ "published": "2026-09-05",
+ "video": {
+  "id": "kj6tNy6NXH4",
+  "title": "MiniMax H3 in ComfyUI: long videos from chained renders"
+ },
+ "models": [
+  "MiniMax H3"
+ ],
+ "summary": [
+  "MiniMax H3 renders top out at about fifteen seconds. To get past that, every render opens on an exact replay of the last 39 frames of the render before it, so the join is the same frames rather than similar frames. Character, street and voice all stay put across it.",
+  "References are handed in per render, so a new character or a new block of street can arrive halfway through a take. Twenty seven prompts across five takes, one per render, copied from what was sent."
+ ],
+ "facts": [
+  [
+   "Workflow",
+   "ComfyUI-H3-Continuous, chaining MiniMaxH3AddGuide"
+  ],
+  [
+   "Handoff",
+   "39 frames plus audio from the end of each render"
+  ],
+  [
+   "Tags",
+   "<Picture N> is positional: it comes from the order images are wired in, not from the prompt"
+  ],
+  [
+   "Music",
+   "non_diegetic_music is N/A in all twenty seven; score goes on over the finished cut"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "market-street-3060",
+   "title": "Market Street walk, RTX 3060",
+   "note": "One continuous front-tracking walk down Market Street in San Francisco, seven renders long."
+  },
+  {
+   "id": "market-street-5090",
+   "title": "Market Street walk, RTX 5090",
+   "note": "The same seven shots on a rented RTX 5090, reworked for the longer shot that card could hold. It adds two instructions the local set does not carry: one holding the camera steady, one keeping her expression neutral between the scripted beats."
+  },
+  {
+   "id": "mia",
+   "title": "Mia talking to camera",
+   "note": "Talking to camera, unbroken, across four renders."
+  },
+  {
+   "id": "kate",
+   "title": "Kate, six renders of speech",
+   "note": "Six renders of continuous speech. This is the take where the face drifts. Each segment is sized to the words it has to carry, because runtime with nothing scripted in it is where the model invents speech-shaped filler."
+  },
+  {
+   "id": "stage",
+   "title": "Kate singing on a stage",
+   "note": "Singing on a stage, three renders."
+  }
+ ],
+ "refs": [
+  {
+   "id": "market-street-block-1",
+   "label": "Block 1",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-1.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-1-t.jpg",
+    "w": 1024,
+    "h": 702
+   }
+  },
+  {
+   "id": "market-street-amber",
+   "label": "Amber",
+   "note": "Character plate",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-amber.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-amber-t.jpg",
+    "w": 569,
+    "h": 832
+   }
+  },
+  {
+   "id": "market-street-block-2",
+   "label": "Block 2",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-2.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-2-t.jpg",
+    "w": 918,
+    "h": 783
+   }
+  },
+  {
+   "id": "market-street-sofia",
+   "label": "Sofia",
+   "note": "Character plate",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-sofia.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-sofia-t.jpg",
+    "w": 480,
+    "h": 832
+   }
+  },
+  {
+   "id": "market-street-block-3",
+   "label": "Block 3",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-3.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-3-t.jpg",
+    "w": 968,
+    "h": 757
+   }
+  },
+  {
+   "id": "market-street-block-4",
+   "label": "Block 4",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-4.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-4-t.jpg",
+    "w": 1024,
+    "h": 695
+   }
+  },
+  {
+   "id": "market-street-allie",
+   "label": "Allie",
+   "note": "Character plate",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-allie.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-allie-t.jpg",
+    "w": 554,
+    "h": 832
+   }
+  },
+  {
+   "id": "market-street-block-5",
+   "label": "Block 5",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-5.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-5-t.jpg",
+    "w": 1024,
+    "h": 677
+   }
+  },
+  {
+   "id": "market-street-block-6",
+   "label": "Block 6",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-6.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-6-t.jpg",
+    "w": 1024,
+    "h": 700
+   }
+  },
+  {
+   "id": "market-street-dany",
+   "label": "Dany",
+   "note": "Character plate",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-dany.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-dany-t.jpg",
+    "w": 670,
+    "h": 1024
+   }
+  },
+  {
+   "id": "market-street-block-7",
+   "label": "Block 7",
+   "note": "Aerial photograph of that block",
+   "image": {
+    "src": "img/h3-chained-renders/ref-market-street-block-7.jpg",
+    "thumb": "img/h3-chained-renders/ref-market-street-block-7-t.jpg",
+    "w": 1024,
+    "h": 627
+   }
+  },
+  {
+   "id": "mia-influencer-mia",
+   "label": "Mia",
+   "note": "Three-panel character sheet",
+   "image": {
+    "src": "img/h3-chained-renders/ref-mia-influencer-mia.jpg",
+    "thumb": "img/h3-chained-renders/ref-mia-influencer-mia-t.jpg",
+    "w": 1024,
+    "h": 572
+   }
+  },
+  {
+   "id": "kate-rant-kate",
+   "label": "Kate",
+   "note": "Character plate",
+   "image": {
+    "src": "img/h3-chained-renders/ref-kate-rant-kate.jpg",
+    "thumb": "img/h3-chained-renders/ref-kate-rant-kate-t.jpg",
+    "w": 576,
+    "h": 1024
+   }
+  },
+  {
+   "id": "stage-song-kate",
+   "label": "Kate",
+   "note": "The singer",
+   "image": {
+    "src": "img/h3-chained-renders/ref-stage-song-kate.jpg",
+    "thumb": "img/h3-chained-renders/ref-stage-song-kate-t.jpg",
+    "w": 765,
+    "h": 1024
+   }
+  },
+  {
+   "id": "stage-song-stage",
+   "label": "Stage",
+   "note": "The stage",
+   "image": {
+    "src": "img/h3-chained-renders/ref-stage-song-stage.jpg",
+    "thumb": "img/h3-chained-renders/ref-stage-song-stage-t.jpg",
+    "w": 1024,
+    "h": 579
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "ComfyUI-H3-Continuous, the nodes and the chain workflow",
+   "url": "https://github.com/loopforge0/ComfyUI-H3-Continuous"
+  },
+  {
+   "label": "How the handoff works, and how every number was measured",
+   "url": "https://github.com/loopforge0/ComfyUI-H3-Continuous/blob/main/docs/how-it-works.md"
+  },
+  {
+   "label": "The five model files, from Comfy-Org",
+   "url": "https://huggingface.co/Comfy-Org/MiniMax-H3"
+  },
+  {
+   "label": "MiniMax's official prompt writing guide",
+   "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "market-street-3060-1",
+   "title": "Establishing the walk, shot 1",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-1.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-1-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "First render, nothing handed in"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334536121"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-1"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a broad straight avenue cutting diagonally between dense financial-district towers, sheer dark glass curtain-wall high-rises along the left side, a slim pale stone tower and a brick-and-terracotta building with an octagonal corner turret and a green copper cupola on the right, wide brick-red paved sidewalks, white-striped crosswalks at the intersection and a small sunken octagonal planter set into the brick paving. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation] The target video is the opening segment of one continuous front-tracking walk: <Subject 1> walks north-east along the Market Street block defined by <Subject 2> in a single unbroken eight-second take, the camera retreating ahead of her at exactly her walking pace as she comes off a crosswalk, looks up at the towers and settles into her stride.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the street width and direction, the dark glass towers, the slim pale stone tower, the turreted brick building with its green copper cupola, the brick-red paving, the crosswalk stripes and the sunken octagonal planter are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera sits in front of <Subject 1> and faces back toward her, executing one continuous tracking shot backwards at exactly her walking speed, so her size and her position in the frame stay constant for the whole eight seconds; she is centred and framed from mid-thigh up, and there is no cut at any point. <Subject 1>, the young woman with long thick copper-orange curls, pale freckled skin, a cream crew-neck t-shirt, the long dark iron cross pendant, a wide tan leather belt with a small tan pouch on her right hip and blue denim jeans, walks directly toward the lens along the brick-red paving of <Subject 2>. She has just stepped off a white-striped crosswalk, and over the first two seconds her stride settles from the slightly quicker crossing pace into an even, unhurried walk, her arms swinging loosely and her rope bracelets shifting on her wrists. The low late-afternoon sun sits behind her and slightly to her left, far up the avenue, so it rims her curls and shoulders in warm orange light and throws her long shadow forward past the camera; the lens faces into that light and carries a soft, gentle flare across the upper frame, while her face stays readable in cool bounced light from the pale stone tower opposite. Behind her the avenue of <Subject 2> recedes in a deep perspective of dark glass curtain-wall towers, and the brick-and-terracotta building with its octagonal turret and green copper cupola stands to her right, its upper floors catching the last direct sun. Around the four-second mark her hair blows across her face in a gust off the street and she lifts her right hand to sweep it back behind her ear, tilting her chin up to look past the camera at the tops of the buildings. Her copper curls bounce with each step. Other pedestrians in coats and work clothes cross the frame in soft focus at the edges, walking the other way; a city bus and slow traffic move behind her in the roadway, and the small sunken octagonal planter passes at the right edge of frame. In the last second she lowers her gaze back to the lens, the corner of her mouth lifting slightly, and keeps walking at the same steady pace with her left foot forward, the shot ending mid-stride with nothing changed in the framing.\n\noverall_soundscape:\nSteady open-air city ambience fills the whole segment: distant traffic on the avenue, a bus pulling away, the layered murmur of passing pedestrians and a faint wind moving between the towers. Her footsteps fall in an even, unhurried rhythm on the brick paving throughout, with the light rustle of denim and fabric close to the microphone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "She comes off a crosswalk and settles into stride"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-2",
+   "title": "High-five on the move, shot 2",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-2.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-2-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334546094"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-2"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-sofia"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a long straight run of the avenue with embedded steel streetcar rails and overhead trolley wires down its centre, a sheer dark glass tower filling the whole left side, a narrow grey stone building with a rounded corner and a taller cream-coloured tower behind it on the right, a low classical stone building with a columned portico at the far corner, young street trees in square planters along the brick-red sidewalks and white-striped crosswalks at the intersection. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long dark-brown wavy hair, warm olive-tan skin, dark eyes and a wide open smile, wearing a white lace-trimmed cropped camisole with small buttons down the front and high-waisted khaki trousers.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> moves along the Market Street block defined by <Subject 2>, where <Subject 3> jogs in from the right, trades a line with her and high-fives her before peeling away, leaving <Subject 1> walking on alone.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the streetcar rails and overhead wires, the sheer dark glass tower on the left, the grey stone building with its rounded corner, the cream tower behind it, the columned stone building at the corner, the young street trees in square planters and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her long dark-brown wavy hair, olive-tan skin, dark eyes, open smile, white lace-trimmed cropped camisole and high-waisted khaki trousers are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up for the whole eight seconds with no cut. The camera holds its distance exactly for the entire segment and never pushes in, pulls out or zooms, so her height in the frame at the end is identical to her height in the frame at the start. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, continues walking directly toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening. She is now on the brick-red sidewalk of <Subject 2>, with the steel streetcar rails and overhead trolley wires running down the avenue behind her, the sheer dark glass tower rising the full height of frame on the left and the grey stone building with the rounded corner passing on the right. The low sun stays behind her up the avenue, rimming her curls in warm orange and laying her long shadow toward the camera. Just after the two-second mark, <Subject 3>, the young woman with long dark-brown wavy hair, olive-tan skin and a white lace-trimmed cropped camisole with high-waisted khaki trousers, comes jogging into frame from the right, cutting past a square tree planter to fall in alongside her. <Subject 1> (S1) registers her arrival with a flicker of recognition, then lets her face settle, her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, and calls in a bright, clear young female voice, <d>[English] Sofia!</d> <Subject 3> (S2), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, answers immediately in a warm, delighted young female voice with an easy conversational pace, <d>[English] Up high, come on!</d> Only once her line is finished does <Subject 3> break into a grin and swing her right arm up above her head. Around the four-and-a-half-second mark <Subject 1> swings her right hand up to meet it and the two palms clap together high above their heads, both women still walking forward without breaking step. <Subject 3> laughs, spins once on her heel to the right and drops back out of frame past the right edge, leaving <Subject 1> alone in the centre again. She shakes her hand out, still smiling, drops her arm to her side and settles back into the same even stride. In the final second she is walking straight at the lens exactly as before, the framing unchanged, the shot ending mid-stride.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic on the avenue, the low rumble and warning bell of a streetcar on the rails, wind between the towers and the murmur of passing pedestrians. Two sets of footsteps join for several seconds when the second woman arrives, a sharp palm clap sounds as their hands meet, and her laugh trails off to the right before a single set of even footsteps continues alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "High-five on the move, then her friend peels away"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-3",
+   "title": "Streetcar and pigeons, shot 3",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-3.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-3-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334556067"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-3"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: the avenue widening beside a sunken plaza, a tall dark bronze-glass slab tower standing on the right with a low circular glass pavilion and a fanned metal canopy at its base, mature broad-leaved trees lining the brick-red sidewalks, steel streetcar rails running down the roadway, wide white-striped crosswalks meeting at the intersection and pale mid-rise buildings receding up the street. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> passes the sunken plaza and bronze-glass tower of <Subject 2> alone, an antique streetcar crossing behind her and pigeons lifting off the paving as she goes.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the widened avenue, the sunken plaza, the dark bronze-glass slab tower, the low circular glass pavilion with its fanned metal canopy, the mature street trees, the streetcar rails and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up for the whole eight seconds with no cut. The camera holds its distance exactly for the entire segment and never pushes in, pulls out or zooms, so her height in the frame at the end is identical to her height in the frame at the start. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening, alone in the centre of frame. The avenue of <Subject 2> opens out behind her: the sunken plaza drops away on her right beyond a low railing, the tall dark bronze-glass slab tower rises the full height of the frame on that side with the low circular glass pavilion and its fanned metal canopy at its foot, and mature broad-leaved street trees pass through the upper corners of the frame, their leaves throwing moving dapples of shadow across her face and shoulders as she walks under them. The low sun stays behind her far up the avenue, rimming her copper curls in warm orange, flaring softly into the lens and pushing her long shadow forward past the camera. Around the two-second mark an antique streetcar in dark green and cream livery rolls across the background from left to right along the steel rails behind her, its bell ringing twice; she turns her head to follow it for about a second, her curls swinging, then looks back to the lens. Near the five-second mark her steps disturb a cluster of pigeons on the brick paving to her left and they clatter up into the air past her shoulder; she flinches very slightly, laughs to herself and keeps walking without breaking stride. She hooks her right thumb briefly under the wide tan belt beside the pouch, adjusts it, and lets the hand drop. Pedestrians pass in soft focus along both edges of the frame, walking the other way. In the final second nothing has changed in the framing: she is centred, mid-stride, walking straight into the lens at the same steady pace.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic along the avenue, wind moving through the street trees and the murmur of pedestrians passing on both sides. A streetcar rumbles across the background on steel rails and rings its bell twice, a burst of wingbeats and pigeon calls rises close to the camera near the middle of the segment, and her even footsteps on the brick paving continue unbroken throughout.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "An F-line streetcar crosses behind; pigeons scatter"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-4",
+   "title": "Selfie without stopping, shot 4",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-4.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-4-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334566040"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-4"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-allie"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a dark red-brown triangular flatiron tower with a rounded white crown standing on the right side of the intersection, flanked by a pale grey stone tower and sheer dark glass high-rises, leafy street trees filling a landscaped median, brick-red paved sidewalks and several wide white-striped crosswalks meeting at the junction. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long wavy ash-blonde hair, fair freckled skin, blue eyes and round thin gold-rimmed glasses, wearing a plain white spaghetti-strap slip dress and small stud earrings.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> passes the triangular flatiron tower of <Subject 2>, where <Subject 3> steps in beside her, takes a phone selfie of the two of them without either of them stopping, and then drops away to the left.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the dark red-brown triangular flatiron tower with its rounded white crown, the pale grey stone tower, the dark glass high-rises, the leafy landscaped median, the brick-red paving and the wide striped crosswalks are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her long wavy ash-blonde hair, fair freckled skin, blue eyes, round thin gold-rimmed glasses and plain white spaghetti-strap slip dress are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up for the whole eight seconds with no cut. The camera holds its distance exactly for the entire segment and never pushes in, pulls out or zooms, so her height in the frame at the end is identical to her height in the frame at the start. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening. Behind her the junction of <Subject 2> opens up, the dark red-brown triangular flatiron tower with its rounded white crown standing tall over her right shoulder, the pale grey stone tower and dark glass high-rises stacked behind it, and the leafy landscaped median running away up the avenue. The low sun holds behind her, rimming her curls in warm orange and flaring gently into the lens. At about the two-and-a-half-second mark <Subject 3>, the young woman with long wavy ash-blonde hair, round thin gold-rimmed glasses and a plain white slip dress, pushes off from a tree in the median on the left and steps into frame beside her, matching her pace shoulder to shoulder. <Subject 1> (S1), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, says in a bright, clear young female voice, <d>[English] Allie!</d> Only as the line ends does her face break into a delighted grin. <Subject 3> (S2), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, replies in a soft, slightly breathy young female voice with a quick warm cadence, <d>[English] One quick one, keep walking!</d> Both women keep striding forward without slowing. Around the six-second mark, with both lines finished, they tilt their heads together, <Subject 1>'s copper curls falling against <Subject 3>'s ash-blonde hair, both smiling up into the raised phone; the phone screen brightens for an instant as the picture is taken. Only once she has finished speaking does <Subject 3> lift a dark phone up and forward at arm's length toward the camera side. <Subject 3> pulls the phone back down, glances at the screen, laughs and gives a small wave without looking up, then peels off toward the left and out of frame. <Subject 1> is left centred and alone again, still walking, tucking a strand of hair back behind her ear. In the final second the framing is unchanged and she walks straight into the lens, mid-stride, at the same steady pace.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic crossing the junction, wind in the median trees and the murmur of pedestrians. A second set of lighter footsteps joins hers for several seconds, a short synthetic camera-shutter click sounds from the phone near the middle of the segment, followed by a brief laugh that fades off to the left, leaving her even footsteps on the brick paving continuing alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "A selfie taken without either of them stopping"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-5",
+   "title": "Under the street trees, shot 5",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-5.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-5-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334576013"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-5"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a tall white tower with deep vertical fluting standing on the right, an ornate pale beaux-arts building with an arcaded upper storey and a small domed clock turret on the left, steel streetcar rails converging in the roadway, a low pavilion with an octagonal roof at the corner, and street trees and planters lining the brick-red sidewalks between wide white-striped crosswalks. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> passes alone beneath the street trees of <Subject 2>, between the fluted white tower and the ornate beaux-arts building, squinting into the low sun as dappled light crosses her face.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the fluted white tower, the ornate beaux-arts building with its arcaded upper storey and domed clock turret, the converging streetcar rails, the octagonal-roofed corner pavilion, the street trees in planters and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up for the whole eight seconds with no cut. The camera holds its distance exactly for the entire segment and never pushes in, pulls out or zooms, so her height in the frame at the end is identical to her height in the frame at the start. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening, alone in the centre of frame. She moves along the brick-red sidewalk of <Subject 2> under a run of street trees set in square planters, and their canopies break the low sunlight into a moving pattern of bright patches and shadow that sweeps rhythmically across her face, her cream t-shirt and her copper curls with every step. The tall white tower with its deep vertical fluting rises the full height of frame on her left, its ribs catching hard orange light down one edge, and the ornate pale beaux-arts building with its arcaded upper storey and small domed clock turret stands on her right; behind her the steel streetcar rails converge and run away up the avenue, and the low octagonal-roofed pavilion sits at the corner. The sun stays low and directly behind her, so a strong warm rim traces her shoulders and the outline of her hair, and a soft flare washes the upper corner of the lens. Around the three-second mark she comes out of the tree shade into an open stretch of direct sun, narrows her eyes against it and lifts her left hand briefly to shade her brow, then lowers it again. Near the five-second mark she reaches down with her right hand, presses the flap of the small tan leather pouch flat against her hip and lets her arm swing back into rhythm; the rope bracelets slide on her wrist. Her expression is calm and unhurried, her gaze moving between the lens and the buildings passing at the edges. A cyclist crosses the far background from right to left, and pedestrians pass in soft focus at the frame edges. In the final second the framing is unchanged and she walks straight into the lens, mid-stride, at the same steady pace.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: steady traffic along the avenue, wind moving through the street-tree canopies overhead and the murmur of passing pedestrians. A bicycle freewheel ticks past in the background, a distant streetcar bell sounds once far up the street, and her even footsteps on the brick paving continue unbroken throughout with the light rustle of denim close to the microphone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "Dappled light under street trees; she squints into the sun"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-6",
+   "title": "Dancing alongside, shot 6",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-6.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-6-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334585986"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-6"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-dany"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a long stepped concrete-and-glass hotel with a sharply sloping terraced facade filling the right side of the street, a large pale stone civic building with a green glass pyramid skylight on its roof filling the left, steel streetcar rails and overhead trolley wires running down the centre of the roadway, wide white-striped crosswalks, and the first tall palm trees standing along a widening brick-red sidewalk. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with very long straight platinum-white hair braided back from the temples, fair skin and bright blue eyes, wearing a navy long coat worn open over a black corset-style bodice, a black skirt, dark tights and a small red heart pendant on a fine silver chain.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> passes the stepped hotel and first palms of <Subject 2>, where <Subject 3> pushes off a lamppost, falls into step facing her, leads her through a brief three-beat dance and a spin, then drops back and lets her walk on.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the stepped concrete-and-glass hotel with its sloping terraced facade, the pale stone civic building with its green glass pyramid skylight, the streetcar rails and overhead wires, the tall palms and the widening brick-red sidewalk are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her very long straight platinum-white hair braided back from the temples, bright blue eyes, navy long coat worn open, black corset-style bodice, black skirt, dark tights and small red heart pendant are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up for the whole eight seconds with no cut. The camera holds its distance exactly for the entire segment and never pushes in, pulls out or zooms, so her height in the frame at the end is identical to her height in the frame at the start. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening. The street of <Subject 2> runs away behind her, the long stepped concrete-and-glass hotel with its sharply sloping terraced facade filling the right side of frame, the pale stone civic building with its green glass pyramid skylight on the left, the streetcar rails and overhead trolley wires threading down the centre, and the first tall palm trees standing along the widening brick-red sidewalk, their fronds moving in the wind. The low sun stays behind her, rimming her curls and shoulders in warm orange and flaring softly into the lens. At about the two-second mark <Subject 3>, the young woman with very long straight platinum-white hair braided back from the temples, a navy long coat worn open over a black corset-style bodice, a black skirt and dark tights, pushes off a cast-iron lamppost on the right and swings into frame in front of her, turning to walk backwards so the two women face each other while both keep moving toward the camera. <Subject 1> (S1), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, says in a bright, clear young female voice, <d>[English] Dany!</d> Only as the line ends does her surprise break into a laugh. <Subject 3> (S2), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, answers in a low, smooth young female voice with a teasing, unhurried delivery, <d>[English] Three steps, that is all I need.</d> Only after both lines are finished does she start clapping out a beat with her hands. From about the five-second mark the two of them fall into a quick three-beat step together, a side-together-side shuffle in time with the clap, coats and curls swinging; on the third beat <Subject 3> lifts her right hand and spins <Subject 1> once under her arm, the copper curls fanning out and the iron cross pendant swinging wide. <Subject 1> comes out of the spin laughing and back on stride, facing the lens again. <Subject 3> drops back a pace, gives a small flourishing bow without stopping, and slides out of frame to the right. <Subject 1> is centred and alone once more, catching her breath, smoothing her hair down with both hands. In the final second the framing is unchanged and she walks straight into the lens, mid-stride, at the same steady pace.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic on the avenue, wind moving through the palm fronds overhead and the murmur of pedestrians. A second set of harder heel-steps joins hers, three sharp hand claps mark the dance beat near the middle of the segment, the two women scuff and turn on the brick paving through the spin, and both laugh before a single set of even footsteps continues alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "A friend falls into step, dances alongside, then drops back"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-3060-7",
+   "title": "Everyone meets her, shot 7",
+   "group": "market-street-3060",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-3060-7.jpg",
+    "thumb": "img/h3-chained-renders/market-street-3060-7-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334595959"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-7"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-sofia"
+    },
+    {
+     "tag": "<Picture 4>",
+     "ref": "market-street-allie"
+    },
+    {
+     "tag": "<Picture 5>",
+     "ref": "market-street-dany"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the waterfront end of Market Street in San Francisco photographed from directly overhead in <Picture 1>: the avenue opening into a broad plaza paved in wide alternating bands of grey and pale stone, double rows of tall palm trees lining the last block and the plaza edges, a long pale arcaded ferry terminal standing across the waterfront boulevard at the foot of the street with a tall square clock tower rising from its centre, topped by a colonnaded belfry, four clock faces and a slender metal spire, large capital lettering reading \"SAN FRANCISCO\" mounted along the terminal facade beside the tower, and the open bay water beyond. Only the street layout, plaza paving, palm rows, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long dark-brown wavy hair, warm olive-tan skin, dark eyes and a wide open smile, wearing a white lace-trimmed cropped camisole with small buttons down the front and high-waisted khaki trousers.\n<Subject 4> is the young woman in <Picture 4>, in her mid-twenties, with long wavy ash-blonde hair, fair freckled skin, blue eyes and round thin gold-rimmed glasses, wearing a plain white spaghetti-strap slip dress and small stud earrings.\n<Subject 5> is the young woman in <Picture 5>, in her mid-twenties, with very long straight platinum-white hair braided back from the temples, fair skin and bright blue eyes, wearing a navy long coat worn open over a black corset-style bodice, a black skirt, dark tights and a small red heart pendant on a fine silver chain.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and closes the continuous walk: <Subject 1> reaches the palm-lined waterfront plaza of <Subject 2>, where <Subject 3>, <Subject 4> and <Subject 5> are waiting and fall in around her, and the camera arcs around the group in the final seconds to reveal the ferry terminal and its clock tower ahead of them.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the striped grey and pale stone plaza paving, the double rows of tall palms, the long arcaded ferry terminal, its square clock tower with colonnaded belfry, clock faces and metal spire, the \"SAN FRANCISCO\" lettering on the facade and the bay beyond are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her long dark-brown wavy hair, olive-tan skin, dark eyes, open smile, white lace-trimmed cropped camisole and high-waisted khaki trousers are retained.\n<Subject 4> (appears in [Shot 1]): fully_preserved - her long wavy ash-blonde hair, fair freckled skin, blue eyes, round thin gold-rimmed glasses and plain white spaghetti-strap slip dress are retained.\n<Subject 5> (appears in [Shot 1]): fully_preserved - her very long straight platinum-white hair braided back from the temples, bright blue eyes, navy long coat worn open, black corset-style bodice, black skirt, dark tights and small red heart pendant are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no subtitles and no added graphics; the only text in frame is the existing lettering on the ferry terminal facade.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join: the camera is already in front of <Subject 1>, facing back toward her and travelling backwards at exactly her walking speed, holding her centred and framed from mid-thigh up, and there is no cut anywhere in the eight seconds. Until the arc begins the camera holds its distance exactly and never pushes in, pulls out or zooms, so her height in the frame does not change. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset before moving into the actions below. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening. The street has opened into the broad plaza of <Subject 2>, its wide alternating bands of grey and pale stone paving running beneath her feet and double rows of tall palms standing along both sides, fronds moving in the wind off the water; the towers of the avenue fall away behind her and the light turns cleaner and brighter as the buildings stop crowding the street. Waiting on the paving ahead of her, at the left and right edges of frame, are <Subject 3>, the young woman with long dark-brown wavy hair and a white lace-trimmed cropped camisole with high-waisted khaki trousers, <Subject 4>, the young woman with ash-blonde waves, round gold-rimmed glasses and a white slip dress, and <Subject 5>, the young woman with very long platinum-white braided hair and a navy long coat over black. At about the two-and-a-half-second mark all three push off and converge on her, and <Subject 1> (S1), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, calls in a bright, clear young female voice, <d>[English] You all made it!</d> Only as the line ends does she break into a wide grin. <Subject 3> (S2), her face turned square to the lens in clear three-quarter view with her mouth fully visible, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, and her hands staying down at her sides while she speaks, answers in a warm, bright young female voice with a quick delivery, <d>[English] We had a bet on you!</d> The three of them fall into step around her without anyone stopping, <Subject 3> on her right, <Subject 4> on her left, <Subject 5> slipping in beside <Subject 4>; arms link and shoulders bump as the four walk forward abreast toward the lens. From about the five-and-a-half-second mark, with both lines finished, the camera stops retreating and instead arcs to the left around the group with large amplitude at slow speed, swinging from in front of them round to their side and then behind their shoulders, so the plaza ahead of them comes into view: the long pale arcaded ferry terminal across the waterfront boulevard, the tall square clock tower rising from its centre with its colonnaded belfry and slender spire lit warm orange by the low sun, the large capital lettering reading \"SAN FRANCISCO\" along the facade, and the bay glittering beyond. The shot ends holding on the four women from behind, walking away together across the striped paving toward the clock tower, their long shadows stretching ahead of them.\n\noverall_soundscape:\nThe street ambience carries straight on from the preceding segment and opens out into wider waterfront sound: traffic thinning on the boulevard, wind moving strongly through the palm fronds, gulls calling overhead and the distant low horn of a ferry out on the bay. Three more sets of footsteps join hers on the stone paving, with overlapping laughter and the rustle of a coat as the group links arms, settling into four sets of footsteps walking away together.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "All three meet her; the camera arcs to reveal the clock tower"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-1",
+   "title": "Establishing the walk, shot 1",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-1.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-1-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "First render, nothing handed in"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334536121"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-1"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a broad straight avenue cutting diagonally between dense financial-district towers, sheer dark glass curtain-wall high-rises along the left side, a slim pale stone tower and a brick-and-terracotta building with an octagonal corner turret and a green copper cupola on the right, wide brick-red paved sidewalks, white-striped crosswalks at the intersection and a small sunken octagonal planter set into the brick paving. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation] The target video opens the continuous front-tracking walk: <Subject 1> walks north-east along the Market Street block of <Subject 2> in a single unbroken fifteen-second take, coming off a crosswalk, settling into her stride, checking her phone and putting it away as the camera retreats ahead of her at her own pace.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the dark glass towers, the slim pale stone tower, the turreted brick building with its green copper cupola, the brick-red paving, the crosswalk stripes and the sunken octagonal planter are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera sits in front of <Subject 1> and faces back toward her in one continuous fifteen-second take, matching her speed exactly so her size and position in the frame stay constant; she is centred and framed from mid-thigh up, and there is no cut at any point. The camera holds its distance and never pushes in, pulls out or zooms. When she slows or stops, the camera slows and stops with her, holding the same gap, and picks up again at the moment she does. <Subject 1>, the young woman with long thick copper-orange curls, pale freckled skin, a cream crew-neck t-shirt, the long dark iron cross pendant, a wide tan leather belt with a small tan pouch on her right hip and blue denim jeans, walks directly toward the lens along the brick-red paving of <Subject 2>. She has just stepped off a white-striped crosswalk, and over the first three seconds her stride settles from the quicker crossing pace into an even, unhurried walk, arms swinging loosely, rope bracelets shifting on her wrists. Between the scripted beats her face is relaxed and unselfconscious, the ordinary expression of someone walking a route she knows well: lips closed, jaw loose, eyes moving over the buildings, the traffic and the pavement ahead, narrowing now and then against the low sun. She does not smile at the lens and does not perform for the camera. Any change of expression is a brief, specific reaction to something in the scene and settles back to that neutral walking face within a second or two. The low late-afternoon sun sits behind her and slightly to her left, far up the avenue, rimming her curls and shoulders in warm orange and throwing her long shadow forward past the camera; the lens faces into that light with a soft gentle flare across the upper frame while her face stays readable in cool bounced light from the pale stone tower opposite. Behind her the avenue recedes in a deep perspective of dark glass curtain-wall towers, and the brick-and-terracotta building with its octagonal turret and green copper cupola stands to her right, its upper floors catching the last direct sun. Around the five-second mark a gust off the street blows her hair across her face; she lifts her right hand and sweeps it back behind her ear, tilting her chin up briefly to take in the tops of the buildings before her gaze drops level again. A city bus pulls away behind her and she tracks it for a moment without turning her head. Near the nine-second mark she reaches into the small tan belt pouch, draws out a plain dark phone with no visible brand mark, glances at the screen for two seconds with her brow faintly drawn, then slides it back into the pouch and presses the flap flat without breaking stride. Other pedestrians in coats and work clothes cross the frame in soft focus at the edges, walking the other way, and the sunken octagonal planter passes at the right edge. Through the final two seconds she is centred, mid-stride, walking at the same steady pace with that neutral, unhurried expression.\n\noverall_soundscape:\nSteady open-air city ambience fills the whole segment: distant traffic on the avenue, a bus pulling away, the layered murmur of passing pedestrians and a faint wind moving between the towers. Her footsteps fall in an even, unhurried rhythm on the brick paving throughout, with the light rustle of denim and the small click of the belt-pouch flap close to the microphone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "She comes off a crosswalk and settles into stride"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-2",
+   "title": "High-five on the move, shot 2",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-2.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-2-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334546094"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-2"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-sofia"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a long straight run of the avenue with embedded steel streetcar rails and overhead trolley wires down its centre, a sheer dark glass tower filling the whole left side, a narrow grey stone building with a rounded corner and a taller cream-coloured tower behind it on the right, a low classical stone building with a columned portico at the far corner, young street trees in square planters and white-striped crosswalks. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long dark-brown wavy hair, warm olive-tan skin, dark eyes and a wide open smile, wearing a white lace-trimmed cropped camisole with small buttons down the front and high-waisted khaki trousers.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and carries the walk on along the block of <Subject 2>, where <Subject 3> jogs up from behind, both women stop to greet each other and high-five, and <Subject 1> then resumes walking alone.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the streetcar rails and overhead wires, the sheer dark glass tower, the grey stone building with its rounded corner, the cream tower behind it, the columned stone building, the young street trees and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera sits in front of <Subject 1> and faces back toward her in one continuous fifteen-second take, matching her speed exactly so her size and position in the frame stay constant; she is centred and framed from mid-thigh up, and there is no cut at any point. The camera holds its distance and never pushes in, pulls out or zooms. When she slows or stops, the camera slows and stops with her, holding the same gap, and picks up again at the moment she does. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, continues walking toward the lens on the same foot and at the same unhurried cadence she carries out of the replayed opening, now on the brick-red sidewalk of <Subject 2>, with the steel streetcar rails and overhead trolley wires running down the avenue behind her, the sheer dark glass tower rising the full height of frame on the left and the grey stone building with the rounded corner passing on the right. Between the scripted beats her face is relaxed and unselfconscious, the ordinary expression of someone walking a route she knows well: lips closed, jaw loose, eyes moving over the buildings, the traffic and the pavement ahead, narrowing now and then against the low sun. She does not smile at the lens and does not perform for the camera. Any change of expression is a brief, specific reaction to something in the scene and settles back to that neutral walking face within a second or two. The low sun stays behind her up the avenue, rimming her curls in warm orange and laying her long shadow toward the camera. At about the four-second mark a voice calls her name from behind and off-screen and she turns her head to look back over her right shoulder; <Subject 3>, the young woman with long dark-brown wavy hair, olive-tan skin and a white lace-trimmed cropped camisole with high-waisted khaki trousers, comes jogging up the sidewalk after her. <Subject 1> slows over the next second and comes to a full stop, turning to face her, and the camera slows and stops with her at the same distance. <Subject 3> arrives slightly out of breath. <Subject 1> (S1), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 3> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, says in a mid-pitched, clear young female voice with a faint warm rasp low in it, an unhurried and evenly measured delivery, and a neutral American accent, <d>[English] Sofia!</d> Only as the line ends does her face break into a wide grin. <Subject 3> (S2), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 1> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, answers in a bright, high-pitched young female voice with a quick tumbling delivery that runs words together at the ends of phrases, and a light Spanish accent, <d>[English] Up high, come on!</d> and only then swings her right arm up above her head. Around the nine-second mark <Subject 1> brings her right hand up to meet it and their palms clap together above their heads, both women laughing, and <Subject 3> catches her briefly by the shoulder. At about the eleven-second mark <Subject 3> steps back, waves once and turns away down a side street. <Subject 1> watches her go for a beat, then turns forward, steps off and rebuilds her walking pace over the following second, the camera picking up with her. Through the final two seconds she is centred and alone, mid-stride at the original steady pace, her expression settled back to neutral.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic on the avenue, the low rumble and warning bell of a streetcar on the rails, wind between the towers and the murmur of passing pedestrians. A second set of running footsteps closes from behind and slows, both sets of footsteps stop together for the greeting, a sharp palm clap sounds as their hands meet, and after the two women part a single set of even footsteps builds back up and continues alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "High-five on the move, then her friend peels away"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-3",
+   "title": "Streetcar and pigeons, shot 3",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-3.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-3-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334556067"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-3"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: the avenue widening beside a sunken plaza, a tall dark bronze-glass slab tower on the right with a low circular glass pavilion and a fanned metal canopy at its base, mature broad-leaved trees lining the brick-red sidewalks, steel streetcar rails in the roadway and wide white-striped crosswalks meeting at the intersection. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and continues the walk alone past the sunken plaza of <Subject 2>, an antique streetcar crossing behind <Subject 1> and pigeons lifting off the paving as she goes.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the widened avenue, the sunken plaza, the dark bronze-glass slab tower, the low circular glass pavilion with its fanned metal canopy, the mature street trees, the streetcar rails and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera sits in front of <Subject 1> and faces back toward her in one continuous fifteen-second take, matching her speed exactly so her size and position in the frame stay constant; she is centred and framed from mid-thigh up, and there is no cut at any point. The camera holds its distance and never pushes in, pulls out or zooms. When she slows or stops, the camera slows and stops with her, holding the same gap, and picks up again at the moment she does. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens at the same unhurried cadence she carries out of the replayed opening, alone in the centre of frame. Between the scripted beats her face is relaxed and unselfconscious, the ordinary expression of someone walking a route she knows well: lips closed, jaw loose, eyes moving over the buildings, the traffic and the pavement ahead, narrowing now and then against the low sun. She does not smile at the lens and does not perform for the camera. Any change of expression is a brief, specific reaction to something in the scene and settles back to that neutral walking face within a second or two. The avenue of <Subject 2> opens out behind her: the sunken plaza drops away on her right beyond a low railing, the tall dark bronze-glass slab tower rises the full height of frame on that side with the low circular glass pavilion and its fanned metal canopy at its foot, and mature broad-leaved street trees pass through the upper corners, throwing moving dapples of shadow across her face and shoulders. The low sun stays behind her far up the avenue, rimming her copper curls, flaring softly into the lens and pushing her long shadow forward past the camera. At about the four-second mark an antique streetcar in dark green and cream livery rolls across the background from left to right along the steel rails behind her, its bell ringing twice; she turns her head to follow it for two full seconds, watching it pass with mild interest, then faces forward again and her expression settles. Near the eight-second mark her approach disturbs a cluster of pigeons feeding on the brick paving to her left; they clatter up into the air past her shoulder and she checks her stride for half a step, shoulders flinching, then walks on. Around the eleven-second mark she passes a folding sandwich board on the sidewalk and steps around it without looking down, hooking her right thumb under the wide tan belt beside the pouch and letting the hand drop back into rhythm. Pedestrians pass in soft focus along both edges of the frame, walking the other way. Through the final two seconds she is centred, mid-stride, walking straight into the lens at the same steady pace with a neutral, self-contained expression.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic along the avenue, wind moving through the street trees and the murmur of pedestrians passing on both sides. A streetcar rumbles across the background on steel rails and rings its bell twice, a burst of wingbeats and pigeon calls rises close to the camera, and her even footsteps on the brick paving continue unbroken throughout.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "An F-line streetcar crosses behind; pigeons scatter"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-4",
+   "title": "Selfie without stopping, shot 4",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-4.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-4-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334566040"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-4"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-allie"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a dark red-brown triangular flatiron tower with a rounded white crown on the right side of the intersection, flanked by a pale grey stone tower and sheer dark glass high-rises, leafy street trees filling a landscaped median, brick-red paved sidewalks and several wide white-striped crosswalks meeting at the junction. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long wavy ash-blonde hair, fair freckled skin, blue eyes and round thin gold-rimmed glasses, wearing a plain white spaghetti-strap slip dress and small stud earrings.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and continues the walk past the flatiron tower of <Subject 2>, where <Subject 3> falls in beside <Subject 1>, the two slow to a stop for a phone selfie, and <Subject 1> then walks on alone.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the dark red-brown triangular flatiron tower with its rounded white crown, the pale grey stone tower, the dark glass high-rises, the leafy landscaped median, the brick-red paving and the wide striped crosswalks are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera sits in front of <Subject 1> and faces back toward her in one continuous ten-second take, matching her speed exactly so her size and position in the frame stay constant; she is centred and framed from mid-thigh up, and there is no cut at any point. The camera holds its distance and never pushes in, pulls out or zooms. When she slows or stops, the camera slows and stops with her, holding the same gap, and picks up again at the moment she does. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens at the same unhurried cadence she carries out of the replayed opening. Between the scripted beats her face is relaxed and unselfconscious, the ordinary expression of someone walking a route she knows well: lips closed, jaw loose, eyes moving over the buildings, the traffic and the pavement ahead, narrowing now and then against the low sun. She does not smile at the lens and does not perform for the camera. Any change of expression is a brief, specific reaction to something in the scene and settles back to that neutral walking face within a second or two. Behind her the junction of <Subject 2> opens up, the dark red-brown triangular flatiron tower with its rounded white crown standing tall over her right shoulder, the pale grey stone tower and dark glass high-rises stacked behind it, and the leafy landscaped median running away up the avenue. The low sun holds behind her, rimming her curls in warm orange and flaring gently into the lens. At about the two-and-a-half-second mark <Subject 3>, the young woman with long wavy ash-blonde hair, round thin gold-rimmed glasses and a plain white slip dress, steps out from beside a tree in the median on the left and into her path with both hands raised in mock surprise. <Subject 1> slows sharply and stops, the camera stopping with her at the same distance. <Subject 1> (S1), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 3> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, says in a mid-pitched, clear young female voice with a faint warm rasp low in it, an unhurried and evenly measured delivery, and a neutral American accent, <d>[English] Allie!</d> Only as the line ends does her face break into a delighted grin. <Subject 3> (S2), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 1> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, her hands still down at her sides, replies in a low, soft, noticeably breathy young female voice with an unhurried delivery and a slight rising lilt at the end of each phrase, <d>[English] One quick one, then I will let you go.</d> Only after the line does she lift a plain dark phone up and forward at arm's length toward the camera side. At about the five-and-a-half-second mark the two of them lean their heads together, <Subject 1>'s copper curls falling against <Subject 3>'s ash-blonde hair, both smiling up into the raised phone; the screen brightens for an instant as the picture is taken. <Subject 3> lowers the phone, tips it toward <Subject 1> so they can both look at the result, and the two laugh briefly. At about the seven-and-a-half-second mark <Subject 3> pockets the phone, squeezes <Subject 1>'s arm and turns away to the left. <Subject 1> steps off and rebuilds her pace over the following second, the camera picking up with her. Through the final two seconds she is centred and alone, mid-stride at the original steady pace, expression settled back to neutral.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic crossing the junction, wind in the median trees and the murmur of pedestrians. A second set of lighter footsteps joins hers and both slow to a halt, a short synthetic camera-shutter click sounds from the phone, two overlapping laughs follow, and after they part a single set of even footsteps builds back up and continues alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "A selfie taken without either of them stopping"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-5",
+   "title": "Under the street trees, shot 5",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-5.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-5-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334576013"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-5"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a tall white tower with deep vertical fluting on the right, an ornate pale beaux-arts building with an arcaded upper storey and a small domed clock turret on the left, steel streetcar rails converging in the roadway, a low pavilion with an octagonal roof at the corner, and street trees and planters lining the brick-red sidewalks. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and continues the walk alone beneath the street trees of <Subject 2>, <Subject 1> squinting into the low sun and pausing at a crossing before walking on.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the fluted white tower, the ornate beaux-arts building with its arcaded upper storey and domed clock turret, the converging streetcar rails, the octagonal-roofed corner pavilion, the street trees in planters and the brick-red paving are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera sits in front of <Subject 1> and faces back toward her in one continuous ten-second take, matching her speed exactly so her size and position in the frame stay constant; she is centred and framed from mid-thigh up, and there is no cut at any point. The camera holds its distance and never pushes in, pulls out or zooms. When she slows or stops, the camera slows and stops with her, holding the same gap, and picks up again at the moment she does. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on toward the lens at the same unhurried cadence she carries out of the replayed opening, alone in the centre of frame. Between the scripted beats her face is relaxed and unselfconscious, the ordinary expression of someone walking a route she knows well: lips closed, jaw loose, eyes moving over the buildings, the traffic and the pavement ahead, narrowing now and then against the low sun. She does not smile at the lens and does not perform for the camera. Any change of expression is a brief, specific reaction to something in the scene and settles back to that neutral walking face within a second or two. She moves along the brick-red sidewalk of <Subject 2> under a run of street trees set in square planters, their canopies breaking the low sunlight into a moving pattern of bright patches and shadow that sweeps rhythmically across her face, her cream t-shirt and her copper curls with every step. The tall white tower with its deep vertical fluting rises the full height of frame on her left, its ribs catching hard orange light down one edge, and the ornate pale beaux-arts building with its arcaded upper storey and small domed clock turret stands on her right; behind her the steel streetcar rails converge and run away up the avenue, and the low octagonal-roofed pavilion sits at the corner. The sun stays low and directly behind her, tracing a strong warm rim along her shoulders and the outline of her hair, with a soft flare in the upper corner of the lens. At about the three-second mark the low sun clears the edge of a building far behind her and catches her full in the face; she narrows her eyes hard against it and lifts her left hand to shade her brow for two seconds before lowering it again. The trees, planters and buildings around her only ever drift past through her own forward walking; the location never changes, and at no point does the scene cut, jump or relocate to different surroundings. Near the five-second mark she reaches the kerb at a crossing, slows to a halt and glances left along the roadway, waiting; the camera stops with her. A car passes. At about the seven-second mark she steps down off the kerb and walks on, rebuilding her pace, and reaches down with her right hand to press the flap of the small tan leather pouch flat against her hip, the rope bracelets sliding on her wrist. A cyclist crosses the far background from right to left. Through the final two seconds she is centred, mid-stride at the steady pace, her expression calm and unhurried.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: steady traffic along the avenue, wind moving through the street-tree canopies overhead and the murmur of passing pedestrians. Her footsteps slow and stop at the kerb, a single car passes close by, a bicycle freewheel ticks past in the background, and her even footsteps resume on the brick paving and continue to the end.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "Dappled light under street trees; she squints into the sun"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-6",
+   "title": "Dancing alongside, shot 6",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-6.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-6-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8613402297755119"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-6"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-dany"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: a long stepped concrete-and-glass hotel with a sharply sloping terraced facade filling the right side of the street, a large pale stone civic building with a green glass pyramid skylight on its roof filling the left, steel streetcar rails and overhead trolley wires down the centre, and the first tall palm trees along a widening brick-red sidewalk. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with very long straight platinum-white hair braided back from the temples, fair skin and bright blue eyes, wearing a navy long coat worn open over a black corset-style bodice, a black skirt, dark tights and a small red heart pendant on a fine silver chain.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and the camera arcs once around <Subject 1> to turn from the crossing behind her to the stepped hotel and first palms of <Subject 2> ahead, where <Subject 3> steps into her path, the two stop for a brief three-beat dance and a turn, and <Subject 1> then walks on.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the stepped concrete-and-glass hotel with its sloping terraced facade, the pale stone civic building with its green glass pyramid skylight, the streetcar rails and overhead wires, the tall palms and the widening brick-red sidewalk are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height, and the block is brought into frame by a single arc around <Subject 1> rather than being present from the first frame.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera begins in front of <Subject 1> and faces back toward her, holding a tracking shot that moves with her at her exact walking pace, keeping her centred and holding her at exactly the size and distance in frame that the replayed opening frames leave her at - neither closer nor wider than they leave her, and the camera never corrects that size - with the crossing, the signals, the street trees and the tower blocks of the intersection she is leaving filling the frame behind her exactly as they stand in the replayed opening frames. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on at the same unhurried cadence she carries out of the replayed opening, her face relaxed and unselfconscious, lips closed and jaw loose, eyes moving over the street ahead. She does not smile at the lens and does not perform for the camera. For the first full second after the replayed opening the camera stays exactly where those frames leave it, at the same distance, height and angle, travelling with her and changing nothing about the framing. From about the two-and-a-half-second mark the camera begins a single continuous arc shot to the left around her, with large amplitude at a steady moderate speed, swinging over the next one and a half seconds from directly in front of her, round past her shoulder, to a position beside and slightly ahead of her so that it comes to face along the street the way she is walking. She keeps walking at her steady pace all the way through the swing and is never lost from frame; it is one unbroken orbit around her. Because the camera turns rather than travels, this is a change of viewpoint on one continuous stretch of street and not a move to a different place: the crossing and signals behind her slide out of frame to one side as the camera comes round, and the next stretch of the same street swings into frame on the other - the long stepped concrete-and-glass hotel with its sharply sloping terraced facade filling the right side, the large pale stone civic building with its green glass pyramid skylight on the left, the steel streetcar rails and overhead trolley wires threading down the centre, and the first tall palm trees standing along the widening brick-red sidewalk with their fronds moving in the wind. By about the four-second mark the orbit completes and the camera settles into a steady tracking shot moving with her, and from that point the stepped hotel, the civic building with its green pyramid skylight and the palms stay in frame through to the final frame, changing only in perspective as she walks. The low sun stays behind her, rimming her curls and shoulders in warm orange and flaring softly into the lens. At about the four-and-a-quarter-second mark <Subject 3>, the young woman with very long straight platinum-white hair braided back from the temples, a navy long coat worn open over a black corset-style bodice, a black skirt and dark tights, pushes off a cast-iron lamppost on the right and steps directly into her path. <Subject 1> pulls up and stops, and the camera stops with her and holds a static shot on the pair. At about the four-and-three-quarter-second mark <Subject 1> (S1), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 3> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, says in a mid-pitched, clear young female voice with a faint warm rasp low in it, an unhurried and evenly measured delivery, and a neutral American accent, <d>[English] Dany!</d> Only as the line ends does her surprise break into a laugh. At about the five-and-three-quarter-second mark <Subject 3> (S2), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 1> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, her hands still at her sides, answers in a deep, smoky contralto with a slow deliberate delivery, long drawn vowels and a crisp British accent, <d>[English] Three steps. That is all I need.</d> Only after the line does she start clapping out a slow beat with her hands. From about the seven-and-three-quarter-second mark the two of them fall into a quick three-beat step together on the spot, a side-together-side shuffle in time with the clap, coat and curls swinging; on the third beat <Subject 3> lifts her right hand and turns <Subject 1> once underneath it, the copper curls fanning out and the iron cross pendant swinging wide. <Subject 1> comes out of the turn laughing and steadies herself. At about the nine-second mark <Subject 3> gives a small flourishing bow, steps aside and lets her past. <Subject 1> walks on, rebuilding her pace, smoothing her hair down with both hands, and the camera picks up with her, holding her centred and alone at the original steady cadence through the final frames.\n\noverall_soundscape:\nThe open-air street ambience carries straight on from the preceding segment without interruption: traffic on the avenue, wind moving strongly through the palm fronds overhead and the murmur of pedestrians. A second set of harder heel-steps arrives and both sets stop, three slow hand claps mark the beat, the two women scuff and turn on the brick paving through the shuffle and the turn, both laugh, and afterwards a single set of even footsteps builds back up and continues alone.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "A friend falls into step, dances alongside, then drops back"
+   ],
+   "links": []
+  },
+  {
+   "slug": "market-street-5090-7",
+   "title": "Everyone meets her, shot 7",
+   "group": "market-street-5090",
+   "still": {
+    "src": "img/h3-chained-renders/market-street-5090-7.jpg",
+    "thumb": "img/h3-chained-renders/market-street-5090-7-t.jpg",
+    "w": 1376,
+    "h": 768
+   },
+   "time": 173,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Camera movement"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1376×768"
+    ],
+    [
+     "Length",
+     "243 frames, 10.12s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "1078725334595959"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "market-street-block-7"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "market-street-amber"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "market-street-sofia"
+    },
+    {
+     "tag": "<Picture 4>",
+     "ref": "market-street-allie"
+    },
+    {
+     "tag": "<Picture 5>",
+     "ref": "market-street-dany"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 2>, in her early twenties, with long thick copper-orange curly hair falling well past her shoulders, pale freckled skin, blue-grey eyes and a slim build, wearing a plain cream short-sleeved crew-neck t-shirt, a long dark iron cross pendant on a thin dark chain, blue denim jeans, a wide tan leather belt with a brass buckle, a small tan leather belt pouch on her right hip, dark braided rope bracelets on both wrists and thin silver rings. Only her face, hair, body and clothing are taken from <Picture 2>; the snow, cliffs, green aurora and wooden sailing ship behind her in that image are not part of the target video.\n<Subject 2> is the block of Market Street in San Francisco photographed from directly overhead in <Picture 1>: the avenue opening into a broad plaza paved in wide alternating bands of grey and pale stone, double rows of tall palm trees lining the last block, a long pale arcaded ferry terminal standing across the waterfront boulevard at the foot of the street with a tall square clock tower rising from its centre topped by a colonnaded belfry, four clock faces and a slender metal spire, large capital lettering reading \"SAN FRANCISCO\" mounted along the terminal facade, and the open bay water beyond. Only the street layout, building shapes, materials and colours are used; the overhead aerial viewpoint and map-like flattening of <Picture 1> are not retained, and the target video is filmed at street level.\n<Subject 3> is the young woman in <Picture 3>, in her mid-twenties, with long dark-brown wavy hair, warm olive-tan skin, dark eyes and a wide open smile, wearing a white lace-trimmed cropped camisole with small buttons down the front and high-waisted khaki trousers.\n<Subject 4> is the young woman in <Picture 4>, in her mid-twenties, with long wavy ash-blonde hair, fair freckled skin, blue eyes and round thin gold-rimmed glasses, wearing a plain white spaghetti-strap slip dress and small stud earrings.\n<Subject 5> is the young woman in <Picture 5>, in her mid-twenties, with very long straight platinum-white hair braided back from the temples, fair skin and bright blue eyes, wearing a navy long coat worn open over a black corset-style bodice, a black skirt, dark tights and a small red heart pendant on a fine silver chain.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing moments of the preceding segment and closes the walk: the camera arcs once around <Subject 1> to turn from the avenue behind her to the palm-lined waterfront plaza of <Subject 2> ahead, where she stops to meet <Subject 3>, <Subject 4> and <Subject 5> below the ferry terminal and its clock tower.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, blue-grey eyes, long copper-orange curls, cream t-shirt, iron cross pendant, tan leather belt and belt pouch, denim jeans, braided rope bracelets and silver rings are retained exactly.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the striped grey and pale stone plaza paving, the double rows of tall palms, the long arcaded ferry terminal, its square clock tower with colonnaded belfry, clock faces and metal spire, the \"SAN FRANCISCO\" lettering and the bay beyond are retained; the overhead aerial viewpoint is replaced by a street-level camera at chest height, and the plaza is brought into frame by a single arc around <Subject 1> rather than being present from the first frame.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n<Subject 4> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n<Subject 5> (appears in [Shot 1]): fully_preserved - her appearance and clothing as defined are retained.\n\ndetailed_description:\nThe target video is photorealistic live-action in a naturalistic documentary-cinematic style, filmed on a stabilised gimbal with a 35mm-equivalent lens held at chest height, in clear late-afternoon San Francisco light, with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through with no join. She holds the exact body pose, head angle, gaze direction and facial expression carried in by the replayed opening frames, continuing them without any reset. The camera begins in front of <Subject 1> and faces back toward her, holding a tracking shot that moves with her at her exact walking pace, keeping her centred and holding her at exactly the size and distance in frame that the replayed opening frames leave her at - neither closer nor wider than they leave her, and the camera never corrects that size - with the dense towers, streetcar rails and crowded facades of the avenue she has just walked down filling the frame behind her exactly as they stand in the replayed opening frames. <Subject 1>, the young woman with long copper-orange curls, the cream crew-neck t-shirt, the iron cross pendant, the tan leather belt with its small pouch and blue denim jeans, walks on at the same unhurried cadence she carries out of the replayed opening, her face relaxed and unselfconscious, lips closed and jaw loose, eyes moving over the street ahead. She does not smile at the lens and does not perform for the camera. For the first full second after the replayed opening the camera stays exactly where those frames leave it, at the same distance, height and angle, travelling with her and changing nothing about the framing. From about the two-and-a-half-second mark the camera begins a single continuous arc shot to the left around her, with large amplitude at a steady moderate speed, swinging over the next two seconds from directly in front of her, round past her shoulder, to a position beside and slightly behind her so that it comes to face the same way she is walking. She keeps walking at her steady pace all the way through the swing and is never lost from frame; it is one unbroken orbit around her. Because the camera turns rather than travels, this is a change of viewpoint on one continuous stretch of street and not a move to a different place: the dense towers of the avenue behind her slide out of frame to one side as the camera comes round, and the open end of that same street swings into frame on the other - the broad plaza of <Subject 2> with its wide alternating bands of grey and pale stone paving, the double rows of tall palms along both sides with their fronds moving in the wind off the water, and beyond them the long pale arcaded ferry terminal with its tall square clock tower, colonnaded belfry, four clock faces and slender metal spire lit warm orange by the low sun, the large capital lettering reading \"SAN FRANCISCO\" along its facade, and the open bay glittering behind. The light turns cleaner and brighter across the swing as the buildings stop crowding the street. By about the four-and-a-half-second mark the orbit completes and the camera settles into a steady tracking shot moving with her, and from that point the plaza, the palms and the terminal with its clock tower stay in frame through to the final frame, changing only in perspective as the group moves. Waiting on the paving ahead of her, spread across the frame, are <Subject 3>, the young woman with long dark-brown wavy hair and a white lace-trimmed cropped camisole with high-waisted khaki trousers, <Subject 4>, the young woman with ash-blonde waves, round gold-rimmed glasses and a white slip dress, and <Subject 5>, the young woman with very long platinum-white braided hair and a navy long coat over black. At about the five-second mark <Subject 1> sees them, her whole face lifting, and she comes to a stop in front of them; the camera stops with her and holds a static shot on the group. The three close in around her. At about the five-and-a-half-second mark <Subject 1> (S1), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on the three friends in front of her throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, says in a mid-pitched, clear young female voice with a faint warm rasp low in it, an unhurried and evenly measured delivery, and a neutral American accent, <d>[English] You all made it!</d> Only as the line ends does she break into a wide grin. At about the seven-and-a-quarter-second mark <Subject 3> (S2), her body and face angled about forty-five degrees toward the lens so her mouth stays clearly visible in three-quarter profile, but her eyes and attention held on <Subject 1> throughout the line and never on the camera, her delight showing plainly in her eyes, raised brows and lifted cheeks rather than in her mouth, which stays free to work so her jaw and lips open and close distinctly on each syllable instead of settling into a fixed open smile or a laugh, answers in a bright, high-pitched young female voice with a quick tumbling delivery that runs words together at the ends of phrases, and a light Spanish accent, <d>[English] We had a bet on you!</d> At about the eight-and-three-quarter-second mark the four of them fold into a loose group embrace, laughing, <Subject 4> pushing her glasses back up and <Subject 5> catching <Subject 1> by the elbow. The shot ends holding on the four of them together on the striped paving, the palms and the lit clock tower standing beyond them and their long shadows stretching away across the stone.\n\noverall_soundscape:\nThe street ambience carries straight on from the preceding segment without interruption and opens out into wider waterfront sound across the camera's swing: traffic thinning on the boulevard, wind moving strongly through the palm fronds, gulls calling overhead and the distant low horn of a ferry out on the bay. Three more sets of footsteps converge and all four stop together, with overlapping laughter and the rustle of a coat through the embrace, before four sets of footsteps set off and walk away together across the stone paving.\n\nnon_diegetic_music:\nN/A\n"
+    }
+   ],
+   "notes": [
+    "All three meet her; the camera arcs to reveal the clock tower"
+   ],
+   "links": []
+  },
+  {
+   "slug": "mia-1",
+   "title": "Mia talking to camera, render 1 of 4",
+   "group": "mia",
+   "still": {
+    "src": "img/h3-chained-renders/mia-1.jpg",
+    "thumb": "img/h3-chained-renders/mia-1-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 272,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "First render, nothing handed in"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "4422180"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-influencer-mia"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman shown in the three-panel character sheet in <Picture 1>, in her mid-twenties, with long wavy mid-brown hair falling well past her shoulders, fair lightly freckled skin, hazel-green eyes, dark natural brows and a slim build, wearing a plain oatmeal-coloured linen short-sleeved shift dress with a round neckline. Only her face, hair, skin and dress are taken from <Picture 1>; the three separate figures side by side, the plain pale studio backdrop, the full-length framing and the barefoot standing poses in that image are not part of the target video, which is a tight vertical closeup filmed in a bedroom.\n\nsummary:\n[reference generation] <Subject 1> talks straight to a phone camera in a tight vertical closeup, opening a review of a film she watched the night before, and reaches off-frame at the end to bring a lipstick up into shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, hazel-green eyes, long wavy mid-brown hair and oatmeal linen dress are retained exactly; the three-panel character-sheet layout, the plain pale studio backdrop and the full-body standing framing of <Picture 1> are not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a bright modern bedroom, in soft even daylight from a window behind the camera, with a shallow depth of field so the pale wall, the corner of a bed and a shelf of plants behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. She looks straight down the lens throughout and talks continuously and animatedly at a quick natural conversational pace, her expressions changing constantly -- brows lifting, eyes widening, a wince, a grin, a shrug -- while her jaw and lips open and close distinctly on every syllable, never settling into a fixed open smile or a laugh that would freeze her mouth. Each movement of her hands falls in the gap after a line rather than underneath it, so her mouth is never competing with a gesture. <Subject 1>, the young woman with long wavy mid-brown hair and the oatmeal linen dress, begins already mid-thought, leaning in slightly toward the lens with her brows raised, and says in a bright, quick, conversational young female voice, <d>[English] Okay, I finally watched it. The one everybody has been posting about.</d> She pulls a face, tips her head, and carries straight on, <d>[English] And I have thoughts. So many thoughts.</d> She rolls her eyes upward in mock exhaustion, then grins. In the last two seconds she reaches down out of the bottom of frame with her right hand and brings a slim gold lipstick tube up into shot beside her chin, holding it up to the lens as she keeps talking, <d>[English] Also, we are doing this while I get ready.</d> The shot ends with the lipstick held up beside her face and her mouth still moving.\n\noverall_soundscape:\nClose indoor room tone with a little natural reverb from bare walls, her voice loud and close on the phone microphone, the faint rustle of her hand moving near the mic, and very distant muffled traffic outside the window.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-2",
+   "title": "Mia talking to camera, render 2 of 4",
+   "group": "mia",
+   "still": {
+    "src": "img/h3-chained-renders/mia-2.jpg",
+    "thumb": "img/h3-chained-renders/mia-2-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 272,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "4432153"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-influencer-mia"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman shown in the three-panel character sheet in <Picture 1>, in her mid-twenties, with long wavy mid-brown hair falling well past her shoulders, fair lightly freckled skin, hazel-green eyes, dark natural brows and a slim build, wearing a plain oatmeal-coloured linen short-sleeved shift dress with a round neckline. Only her face, hair, skin and dress are taken from <Picture 1>; the three separate figures side by side, the plain pale studio backdrop, the full-length framing and the barefoot standing poses in that image are not part of the target video, which is a tight vertical closeup filmed in a bedroom.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1>, already holding the lipstick up beside her face, uncaps it and applies it between lines while she keeps talking about the film.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, hazel-green eyes, long wavy mid-brown hair and oatmeal linen dress are retained exactly; the three-panel character-sheet layout, the plain pale studio backdrop and the full-body standing framing of <Picture 1> are not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a bright modern bedroom, in soft even daylight from a window behind the camera, with a shallow depth of field so the pale wall, the corner of a bed and a shelf of plants behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening, and continues the sentence she is already speaking without any reset or pause. She looks straight down the lens throughout and talks continuously and animatedly at a quick natural conversational pace, her expressions changing constantly -- brows lifting, eyes widening, a wince, a grin, a shrug -- while her jaw and lips open and close distinctly on every syllable, never settling into a fixed open smile or a laugh that would freeze her mouth. Each movement of her hands falls in the gap after a line rather than underneath it, so her mouth is never competing with a gesture. Carrying on from the lipstick already held up beside her chin, she pulls the cap off with her left hand just after the two-second mark and says, <d>[English] The first forty minutes? Genuinely incredible.</d> She twists the base up, brings it to her lips and sweeps it across her lower lip in two quick strokes, her eyes still on the lens, then drops her hand away and carries on, <d>[English] And then it just forgets what it was doing.</d> She presses her lips together to even the colour, makes a flat unimpressed face straight down the lens, then lifts her brows and adds, <d>[English] Like, completely forgets.</d> She caps the lipstick with a small click and lets that hand come to rest low in frame, the tube still held, her mouth still moving as the shot ends.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, a small plastic click as the cap comes off and again as it goes back on, and very distant muffled traffic outside the window.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-3",
+   "title": "Mia talking to camera, render 3 of 4",
+   "group": "mia",
+   "still": {
+    "src": "img/h3-chained-renders/mia-3.jpg",
+    "thumb": "img/h3-chained-renders/mia-3-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 272,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "4442126"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-influencer-mia"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman shown in the three-panel character sheet in <Picture 1>, in her mid-twenties, with long wavy mid-brown hair falling well past her shoulders, fair lightly freckled skin, hazel-green eyes, dark natural brows and a slim build, wearing a plain oatmeal-coloured linen short-sleeved shift dress with a round neckline. Only her face, hair, skin and dress are taken from <Picture 1>; the three separate figures side by side, the plain pale studio backdrop, the full-length framing and the barefoot standing poses in that image are not part of the target video, which is a tight vertical closeup filmed in a bedroom.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1> sets the lipstick down out of frame, picks up a pair of dark sunglasses and puts them on while still talking.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, hazel-green eyes, long wavy mid-brown hair and oatmeal linen dress are retained exactly; the three-panel character-sheet layout, the plain pale studio backdrop and the full-body standing framing of <Picture 1> are not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a bright modern bedroom, in soft even daylight from a window behind the camera, with a shallow depth of field so the pale wall, the corner of a bed and a shelf of plants behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening, and continues the sentence she is already speaking without any reset or pause. She looks straight down the lens throughout and talks continuously and animatedly at a quick natural conversational pace, her expressions changing constantly -- brows lifting, eyes widening, a wince, a grin, a shrug -- while her jaw and lips open and close distinctly on every syllable, never settling into a fixed open smile or a laugh that would freeze her mouth. Each movement of her hands falls in the gap after a line rather than underneath it, so her mouth is never competing with a gesture. Still holding the capped lipstick low in frame, she carries on, <d>[English] But that soundtrack. I have had it on repeat all week.</d> She drops the lipstick down out of the bottom of frame just after the two-second mark and immediately brings a pair of dark tortoiseshell sunglasses up with the same hand, holding them briefly to the lens, and says, <d>[English] Unrelated, but these arrived this morning.</d> Around the five-second mark she opens the arms with both hands and slides them onto her face in one smooth movement, pushing them up her nose with one finger, then tips her chin down and looks over the top of them at the lens with her brows raised and adds, <d>[English] I am obsessed, obviously.</d> The shot ends with the sunglasses on her face and her mouth still moving.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, a soft click as the sunglasses arms unfold, and very distant muffled traffic outside the window.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mia-4",
+   "title": "Mia talking to camera, render 4 of 4",
+   "group": "mia",
+   "still": {
+    "src": "img/h3-chained-renders/mia-4.jpg",
+    "thumb": "img/h3-chained-renders/mia-4-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 272,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "4452099"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mia-influencer-mia"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman shown in the three-panel character sheet in <Picture 1>, in her mid-twenties, with long wavy mid-brown hair falling well past her shoulders, fair lightly freckled skin, hazel-green eyes, dark natural brows and a slim build, wearing a plain oatmeal-coloured linen short-sleeved shift dress with a round neckline. Only her face, hair, skin and dress are taken from <Picture 1>; the three separate figures side by side, the plain pale studio backdrop, the full-length framing and the barefoot standing poses in that image are not part of the target video, which is a tight vertical closeup filmed in a bedroom.\n\nsummary:\n[reference generation + keyframe completion] The target video opens on an exact replay of the closing 1.6 seconds of the preceding segment of the same unbroken take and carries straight on from it as <Subject 1>, now wearing the sunglasses, delivers her verdict on the film and pushes the sunglasses up onto her head at the end.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, freckles, hazel-green eyes, long wavy mid-brown hair and oatmeal linen dress are retained exactly; the three-panel character-sheet layout, the plain pale studio backdrop and the full-body standing framing of <Picture 1> are not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a bright modern bedroom, in soft even daylight from a window behind the camera, with a shallow depth of field so the pale wall, the corner of a bed and a shelf of plants behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening, and continues the sentence she is already speaking without any reset or pause. She looks straight down the lens throughout and talks continuously and animatedly at a quick natural conversational pace, her expressions changing constantly -- brows lifting, eyes widening, a wince, a grin, a shrug -- while her jaw and lips open and close distinctly on every syllable, never settling into a fixed open smile or a laugh that would freeze her mouth. Each movement of her hands falls in the gap after a line rather than underneath it, so her mouth is never competing with a gesture. Still wearing the dark tortoiseshell sunglasses carried in from the replayed opening, she carries on, <d>[English] So, final verdict.</d> She holds up one finger beside her face, then drops the hand and continues, <d>[English] Go for the first half. Stay for the music.</d> She tips her head from side to side, weighing it, then says, <d>[English] Seven out of ten. Tell me I am wrong.</d> Around the six-second mark she pushes the sunglasses up off her face and onto the top of her head with one hand, blinks twice as her bare eyes come back to the lens, and finishes with a small shrug and a grin, her mouth still moving as the shot ends.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, a light scrape of the sunglasses arms through her hair as she pushes them up, and very distant muffled traffic outside the window.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-1",
+   "title": "Kate, six renders of speech, render 1 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-1.jpg",
+    "thumb": "img/h3-chained-renders/kate-1-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "158 frames, 6.58s"
+    ],
+    [
+     "Handoff",
+     "First render, nothing handed in"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8824375"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nA young woman films herself in closeup on her phone and launches straight into an irritated rant about reality dating shows.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. She is already mid-thought as the shot opens, leaning slightly in toward the lens, and goes straight into the rant without any preamble, <d>[English] So I'm going to rant a little here, but I'm just soooo tired of these so-called reality shows</d>. She stretches the word 'soooo' out with her eyes closing and her head tipping back for a moment, and on the words 'so-called reality shows' her mouth pulls to one side in distaste. With the line finished she lets out a short audible breath through her nose, closes her mouth and holds a flat weary look straight down the lens as the shot ends.\n\noverall_soundscape:\nClose indoor room tone in a soft furnished room, her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-2",
+   "title": "Kate, six renders of speech, render 2 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-2.jpg",
+    "thumb": "img/h3-chained-renders/kate-2-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8834348"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nThe same unbroken closeup continues: she carries the rant on to the contestants and the games they play.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening and continues out of it without any reset or restart. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. Coming straight out of the held breath, she picks the rant back up just after the one-and-three-quarter-second mark, <d>[English] where people are trying to find true love. And all these social games you have to play,</d>. On the words 'true love' she lifts both hands beside her face and bends her index and middle fingers into sarcastic air quotes, and she keeps them raised through the rest of the line. She ends the shot with her mouth closed, her eyebrows high and both hands still held up in the air quotes beside her face.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-3",
+   "title": "Kate, six renders of speech, render 3 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-3.jpg",
+    "thumb": "img/h3-chained-renders/kate-3-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "209 frames, 8.71s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8844321"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nThe same unbroken closeup continues: she compares the show's games to her manager's work offsites.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening and continues out of it without any reset or restart. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. Still holding the air quotes up beside her face from the replayed opening, she drops both hands just after the one-and-three-quarter-second mark and carries on, faster and more irritated, <d>[English] my manager plays the same games during her offsite every 3 months, but I don't see her getting married</d>. In the small break after the word 'months' she taps the air once with one flat hand as if ticking the point off. She ends the shot with her mouth closed, one eyebrow raised and her head tilted slightly to one side.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-4",
+   "title": "Kate, six renders of speech, render 4 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-4.jpg",
+    "thumb": "img/h3-chained-renders/kate-4-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "158 frames, 6.58s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8854294"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nThe same unbroken closeup continues: she finishes the comparison and turns it into an incredulous question.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening and continues out of it without any reset or restart. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. Carrying straight on out of the head tilt, she finishes the thought just after the one-and-three-quarter-second mark, <d>[English] and running off with her co-workers. What do you even put on your resume?</d>. She lifts both hands palms-up into a wide baffled shrug in the beat after the question and holds them there, her eyebrows pushed right up and her mouth closed, as the shot ends.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-5",
+   "title": "Kate, six renders of speech, render 5 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-5.jpg",
+    "thumb": "img/h3-chained-renders/kate-5-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "175 frames, 7.29s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8864267"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nThe same unbroken closeup continues: she answers her own question by listing absurd resume lines.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening and continues out of it without any reset or restart. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. Still holding the palms-up shrug from the replayed opening, she drops her hands just after the one-and-three-quarter-second mark and answers her own question in a flat deadpan, <d>[English] left 3 people at the altar and was a runner-up bride? And... was it a requirement</d>. On the words 'left 3 people' she counts three fingers up on one hand, then lets the hand fall. The line stops mid-thought: she ends the shot with her mouth closed, her brows drawn together and her eyes flicking upward as if the next complaint is arriving.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "kate-6",
+   "title": "Kate, six renders of speech, render 6 of 6",
+   "group": "kate",
+   "still": {
+    "src": "img/h3-chained-renders/kate-6.jpg",
+    "thumb": "img/h3-chained-renders/kate-6-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 408,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "209 frames, 8.71s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "8874240"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-rant-kate"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still portrait pose in that image are not retained, because she is talking rapidly and animatedly throughout the target video.\n\nsummary:\nThe same unbroken closeup continues: she lands the final complaint about the contestants' wardrobes and stops.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n\ndetailed_description:\nThe target video is photorealistic live-action shot vertically for social media, filmed on a phone front camera held at arm's length just above eye level in a warm book-lined room, in soft daylight from a window to her left, with a shallow depth of field so the wooden bookshelves behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is handheld at arm's length and holds the same tight head-and-shoulders closeup for the whole segment with no cut, the top of her head near the top of frame and the bottom of frame at her collarbones, drifting only very slightly the way a hand-held phone does and never zooming, cutting or changing its distance. The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, hand position and facial expression carried in by the replayed opening and continues out of it without any reset or restart. She looks straight down the lens and talks fast, at a quick ranting pace, with mounting exasperation, in a bright, expressive young female voice, her jaw and lips opening and closing distinctly on every syllable so every word is clearly formed, never settling into a fixed open smile or a laugh that would freeze her mouth. Her eyebrows, eyes and the set of her mouth carry the irritation, and each hand movement lands in the gap between phrases rather than underneath a line. She speaks exactly the words given below and no others: she does not ad-lib, does not repeat herself and does not add any further dialogue to fill out the shot. Coming straight out of the upward eye flick, she completes the sentence without pausing just after the one-and-three-quarter-second mark, delivering it fast and flat in one breath, <d>[English] that all your clothes should fit in a shoe box that you had to skip getting any jeans and shirts?</d>. On the words 'shoe box' she sketches a small box in the air with both hands held close together. With the line finished she pushes both hands up into her hair and rakes them back through it in one quick exasperated movement, then drops them, closes her mouth and holds a long flat stare straight down the lens as the shot ends.\n\noverall_soundscape:\nThe close indoor room tone carries straight on from the preceding segment without interruption: her voice loud and close on the phone microphone, with faint clothing rustle as she gestures and no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "stage-1",
+   "title": "Kate singing on a stage, render 1 of 3",
+   "group": "stage",
+   "still": {
+    "src": "img/h3-chained-renders/stage-1.jpg",
+    "thumb": "img/h3-chained-renders/stage-1-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 493,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Singing"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "First render, nothing handed in"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "22318"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "stage-song-kate"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "stage-song-stage"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater and dark slim jeans. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still seated portrait pose in that image are not retained, because she is singing and dancing throughout the target video.\n<Subject 2> is the theatre stage in <Picture 2>: a full-width deep red velvet curtain hanging in heavy vertical folds across the back, a glossy honey-coloured wooden floor, a single warm amber followspot throwing a visible cone of light straight down onto centre stage and a dappled gobo pattern across the boards around it, a chrome vocal microphone on a black straight stand at centre, a drum kit on a low riser upstage behind the microphone, a two-tier keyboard rig and stool stage-left, a black monitor wedge and a small warm practical lamp stage-right, and an electric guitar on a stand at the far stage-right edge. Only the layout, shapes, materials, colours and lighting of that image are used. No musicians are present, and the drum kit, keyboards and guitar are never touched or played.\n\nsummary:\n[reference generation] <Subject 1> stands alone in the followspot at the centre microphone of the empty stage <Subject 2>, sings the opening line of an unaccompanied song, then steps back off the microphone and opens into the first move of a slow dance.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the red velvet curtain, honey wooden floor, amber followspot and gobo dapple, centre microphone stand, drum riser, keyboard rig, monitor wedge and guitar stand are retained in the same layout; the empty framing of <Picture 2> is not retained, because <Subject 1> is performing in the light.\n\ndetailed_description:\nThe target video is photorealistic live-action concert footage shot vertically, filmed on a single locked-off camera at chest height about four metres back from centre stage, lit only by the warm amber followspot against the deep red curtain with the rest of the stage falling away into shadow, with a shallow depth of field so the drum kit and the curtain behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The camera is locked off and holds the same full-length wide shot for the whole segment with no cut, her whole body inside the cone of light with headroom above her and the dappled stage floor visible below her feet, never panning, zooming, cutting or changing its distance. She sings unaccompanied in a clear, warm young female voice at a relaxed mid-tempo, her jaw and lips opening and closing distinctly on every syllable so every word of the lyric is clearly formed, and she never settles into a fixed open smile or a laugh that would freeze her mouth. While she is singing her body stays quiet and she moves only her head, shoulders and one hand; every full dance move lands in the gap between sung lines rather than underneath one. She sings exactly the words given below and no others: she does not ad-lib, does not repeat herself, does not hum and does not add any further vocal to fill out the shot. The shot opens on her already standing at the chrome microphone at centre stage inside the cone of amber light, feet together, her right hand resting lightly on the top of the black stand and her left hand at her side, looking straight down the lens. She draws a breath and sings the opening line, her body still and only her shoulders lifting with the phrase, <d>[English] I have been waiting on the light to find me.</d> She closes her mouth on the last word. Only then does she move: she lets go of the microphone stand, takes one unhurried step back and to her right along the boards, and begins a slow half-turn away from the lens with both arms drifting up and out to shoulder height, her hair swinging out behind her. The segment ends mid-turn, her body angled away, arms still raised, her mouth closed and singing nothing.\n\noverall_soundscape:\nA large empty theatre's room tone with a long natural reverb tail off the wooden stage and the back wall, her unaccompanied voice carrying out into that space, with the soft scuff and tap of her shoes on the boards and the faint rustle of her sweater as she moves. No instruments are played, there is no audience and there is no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "stage-2",
+   "title": "Kate singing on a stage, render 2 of 3",
+   "group": "stage",
+   "still": {
+    "src": "img/h3-chained-renders/stage-2.jpg",
+    "thumb": "img/h3-chained-renders/stage-2-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 493,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Singing"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "32291"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "stage-song-kate"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "stage-song-stage"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater and dark slim jeans. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still seated portrait pose in that image are not retained, because she is singing and dancing throughout the target video.\n<Subject 2> is the theatre stage in <Picture 2>: a full-width deep red velvet curtain hanging in heavy vertical folds across the back, a glossy honey-coloured wooden floor, a single warm amber followspot throwing a visible cone of light straight down onto centre stage and a dappled gobo pattern across the boards around it, a chrome vocal microphone on a black straight stand at centre, a drum kit on a low riser upstage behind the microphone, a two-tier keyboard rig and stool stage-left, a black monitor wedge and a small warm practical lamp stage-right, and an electric guitar on a stand at the far stage-right edge. Only the layout, shapes, materials, colours and lighting of that image are used. No musicians are present, and the drum kit, keyboards and guitar are never touched or played.\n\nsummary:\n[reference generation] <Subject 1> comes out of the turn she is already in, sings the second line of the unaccompanied song, then travels across the followspot on the empty stage <Subject 2> in a short step sequence.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the red velvet curtain, honey wooden floor, amber followspot and gobo dapple, centre microphone stand, drum riser, keyboard rig, monitor wedge and guitar stand are retained in the same layout; the empty framing of <Picture 2> is not retained, because <Subject 1> is performing in the light.\n\ndetailed_description:\nThe target video is photorealistic live-action concert footage shot vertically, filmed on a single locked-off camera at chest height about four metres back from centre stage, lit only by the warm amber followspot against the deep red curtain with the rest of the stage falling away into shadow, with a shallow depth of field so the drum kit and the curtain behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, arm position and facial expression carried in by the replayed opening and continues out of it without any reset or restart, and no new action begins before the 1.7-second mark. The camera is locked off and holds the same full-length wide shot for the whole segment with no cut, her whole body inside the cone of light with headroom above her and the dappled stage floor visible below her feet, never panning, zooming, cutting or changing its distance. She sings unaccompanied in a clear, warm young female voice at a relaxed mid-tempo, her jaw and lips opening and closing distinctly on every syllable so every word of the lyric is clearly formed, and she never settles into a fixed open smile or a laugh that would freeze her mouth. While she is singing her body stays quiet and she moves only her head, shoulders and one hand; every full dance move lands in the gap between sung lines rather than underneath one. She sings exactly the words given below and no others: she does not ad-lib, does not repeat herself, does not hum and does not add any further vocal to fill out the shot. She completes the slow half-turn she is already in, bringing her face back round to the lens and letting both raised arms fall softly to her sides as she comes square again, a little to the right of the microphone stand. Settled and facing front, she sings the second line, her body quiet and only her chin lifting into it, <d>[English] and here it is, warm on my hands tonight.</d> She closes her mouth, and on the silence she turns her palms up in front of her and dances: two smooth travelling steps to her left back across the cone of light, a low sweep of both arms out and down that follows the step, and a quick clean pivot on the ball of her left foot that brings her round to face the lens again. The segment ends just out of the pivot, her weight settling onto her right foot, arms low and open, her mouth closed and singing nothing.\n\noverall_soundscape:\nThe large empty theatre's room tone carries straight on from the preceding segment without interruption: the same long natural reverb tail off the wooden stage and the back wall, her unaccompanied voice carrying out into that space, with the soft scuff and tap of her shoes on the boards and the faint rustle of her sweater as she moves. No instruments are played, there is no audience and there is no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "stage-3",
+   "title": "Kate singing on a stage, render 3 of 3",
+   "group": "stage",
+   "still": {
+    "src": "img/h3-chained-renders/stage-3.jpg",
+    "thumb": "img/h3-chained-renders/stage-3-t.jpg",
+    "w": 480,
+    "h": 864
+   },
+   "time": 493,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Long takes",
+    "Reference to video",
+    "Singing"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "480×864"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Handoff",
+     "Opens on the last 39 frames of the render before it"
+    ],
+    [
+     "Steps",
+     "20"
+    ],
+    [
+     "Seed",
+     "42264"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "stage-song-kate"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "stage-song-stage"
+    },
+    {
+     "tag": "No tag",
+     "text": "MiniMaxH3AddGuide: the last 39 frames of the previous render, plus its audio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, in her early twenties, with shoulder-length wavy mid-brown hair worn loose with soft lilac-purple tones running through the mid-lengths and ends, fair clear skin, blue-grey eyes, dark natural brows and a slim build, wearing a chunky oatmeal-and-brown waffle-knit crew-neck sweater and dark slim jeans. Only her face, hair, colouring and sweater are taken from <Picture 1>; the calm closed-mouth half-smile and the still seated portrait pose in that image are not retained, because she is singing and dancing throughout the target video.\n<Subject 2> is the theatre stage in <Picture 2>: a full-width deep red velvet curtain hanging in heavy vertical folds across the back, a glossy honey-coloured wooden floor, a single warm amber followspot throwing a visible cone of light straight down onto centre stage and a dappled gobo pattern across the boards around it, a chrome vocal microphone on a black straight stand at centre, a drum kit on a low riser upstage behind the microphone, a two-tier keyboard rig and stool stage-left, a black monitor wedge and a small warm practical lamp stage-right, and an electric guitar on a stand at the far stage-right edge. Only the layout, shapes, materials, colours and lighting of that image are used. No musicians are present, and the drum kit, keyboards and guitar are never touched or played.\n\nsummary:\n[reference generation] <Subject 1> settles out of the pivot, sings the closing line of the unaccompanied song, and finishes on a full turn that comes down into stillness in the followspot on the empty stage <Subject 2>.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, blue-grey eyes, shoulder-length wavy mid-brown hair with its lilac-purple tones and her chunky oatmeal waffle-knit sweater are retained exactly; the calm still portrait pose of <Picture 1> is not retained.\n<Subject 2> (appears in [Shot 1]): partially_preserved - the red velvet curtain, honey wooden floor, amber followspot and gobo dapple, centre microphone stand, drum riser, keyboard rig, monitor wedge and guitar stand are retained in the same layout; the empty framing of <Picture 2> is not retained, because <Subject 1> is performing in the light.\n\ndetailed_description:\nThe target video is photorealistic live-action concert footage shot vertically, filmed on a single locked-off camera at chest height about four metres back from centre stage, lit only by the warm amber followspot against the deep red curtain with the rest of the stage falling away into shadow, with a shallow depth of field so the drum kit and the curtain behind her are softly blurred, and with no on-screen text and no subtitles anywhere.\n[Shot 1] The segment opens on an exact replay of the closing moments of the preceding take and carries that motion straight through, so the join is invisible. She holds the exact body pose, head angle, gaze direction, arm position and facial expression carried in by the replayed opening and continues out of it without any reset or restart, and no new action begins before the 1.7-second mark. The camera is locked off and holds the same full-length wide shot for the whole segment with no cut, her whole body inside the cone of light with headroom above her and the dappled stage floor visible below her feet, never panning, zooming, cutting or changing its distance. She sings unaccompanied in a clear, warm young female voice at a relaxed mid-tempo, her jaw and lips opening and closing distinctly on every syllable so every word of the lyric is clearly formed, and she never settles into a fixed open smile or a laugh that would freeze her mouth. While she is singing her body stays quiet and she moves only her head, shoulders and one hand; every full dance move lands in the gap between sung lines rather than underneath one. She sings exactly the words given below and no others: she does not ad-lib, does not repeat herself, does not hum and does not add any further vocal to fill out the shot. Her weight finishes settling out of the pivot and she comes to a balanced stand facing the lens, arms low and open, back at the centre of the cone of amber light. She lifts her head and sings the closing line, her body still and both hands opening a little wider at her waist, <d>[English] so let it burn, I am not going home.</d> She closes her mouth on the last word. Into the silence she dances the finish: a single full turn on the spot, rising onto the balls of her feet as she comes round with both arms sweeping up overhead, her hair lifting and falling with the turn. She comes down out of it facing the lens, arms lowering slowly to her sides, and holds there completely still with her chest rising once, her mouth closed and singing nothing, the amber followspot steady on her and the red curtain unmoving behind her. The segment ends on that held stillness.\n\noverall_soundscape:\nThe large empty theatre's room tone carries straight on from the preceding segment without interruption: the same long natural reverb tail off the wooden stage and the back wall, her unaccompanied voice carrying out into that space, with the soft scuff and tap of her shoes on the boards and the faint rustle of her sweater as she moves. No instruments are played, there is no audience and there is no other sound.\n\nnon_diegetic_music:\nN/A"
+    }
+   ],
+   "notes": [],
+   "links": []
+  }
+ ]
+}

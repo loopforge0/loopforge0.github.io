@@ -1,0 +1,68 @@
+# Loop Forge
+
+> Prompts, ComfyUI workflows and findings from hands-on projects with AI models you can run yourself, published exactly as they ran, with the failures left in.
+
+Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someone with no background in film making. Video so far, and every project gets a page here with the prompts, workflows and settings it used. The house rules: every clip plays uncut, every prompt is published exactly as it was sent to the model, and the parts that did not work stay in.
+
+## Projects
+
+### [MiniMax H3 camera shots](https://loopforge.cc/projects/h3-camera-shots/)
+
+Published 13 September 2026. 14 prompts. MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do. Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here.
+
+**How do you get real camera moves out of MiniMax H3?**
+
+- H3 documents twelve camera motions and no named shots, so a dolly zoom or a crash zoom has to be written as a sentence built out of those twelve. Fourteen named shots work that way. Bullet time could not be done.
+- Settings decide whether the move happens at all. A 4-step turbo render suppresses camera motion almost entirely, whatever the prompt says; use 20 steps and at least 124 frames.
+- Lens and camera names do almost nothing. On the same seed, an 8mm lens rendered framing identical to a 50mm. Adding a background reference plate roughly halves the camera move.
+
+### [MiniMax H3 long takes from chained renders](https://loopforge.cc/projects/h3-chained-renders/)
+
+Published 5 September 2026. 27 prompts. MiniMax H3 renders top out at about fifteen seconds. To get past that, every render opens on an exact replay of the last 39 frames of the render before it, so the join is the same frames rather than similar frames. Character, street and voice all stay put across it. References are handed in per render, so a new character or a new block of street can arrive halfway through a take. Twenty seven prompts across five takes, one per render, copied from what was sent.
+
+**How do you make a MiniMax H3 video longer than 15 seconds?**
+
+- H3 renders top out at about fifteen seconds. Chain them instead: each render opens on an exact replay of the last 39 frames of the one before, so the join is the same frames rather than similar ones.
+- Hand references in per render, and a new character or a new stretch of street can arrive partway through a take. The longest take here runs 61 seconds across seven renders.
+- Faces drift over six renders. A latent handover and a VAE handover were both tried, and neither moved the number.
+
+### [First Date, a short film with MiniMax H3](https://loopforge.cc/projects/h3-first-date/)
+
+Published 29 August 2026. 27 prompts. A one minute short film made with ComfyUI's stock MiniMax H3 reference-to-video template, with two characters who stay the same person from shot to shot, in the same restaurant, with the same voice. A character turnaround sheet, a 3D layout of the room and a sample of the voice all go in at once, and the prompt says which subject is in which picture. Here are all twenty one clip prompts and the prompts for the reference images.
+
+**How do you keep a character the same person from shot to shot?**
+
+- Use H3's reference to video mode. It takes reference images, video and audio in one generation, so a character turnaround sheet, a 3D layout of the room and a voice sample go in together, and the prompt says which subject is in which picture.
+- Cite each image inside the definition of the subject it shows. A standalone <Picture N> entry acts as a shot anchor, and the one clip written that way lost the character's coat.
+- <Picture N> is numbered by the order images are wired into the node, not by anything in the prompt. H3 also keeps no voice between clips, so attach the same short voice reference to every clip where that character speaks.
+
+### [MiniMax H3 vs LTX 2.5](https://loopforge.cc/projects/h3-vs-ltx-2-5/)
+
+Published 21 August 2026. 10 prompts. MiniMax H3 and LTX 2.5 are both open-weight image to video models, and both generate their own speech and audio in the same pass. They ran head to head on one desktop, nine rounds each, with a winner called on every one. Each round has the prompt each model was given, taken from the metadata ComfyUI saved into the clip, plus a frame from both results. Final tally: MiniMax H3 five, LTX 2.5 three, plus a bonus round on turn-based speech outside the count.
+
+**How do you get speech and singing from a video model?**
+
+- MiniMax H3 and LTX 2.5 both generate audio in the same pass as the picture. Write the spoken line into the prompt and the model produces the speech along with the lip movement, from one still image.
+- Turn the model's own music off in the prompt and score in the edit. Separately generated music will not line up across cuts or joins.
+- Size each render to the words it has to carry. Runtime with nothing scripted in it is where the model invents speech-shaped filler, and on speech the two models fail differently: one hallucinates dialogue nobody asked for, the other returns silence.
+
+**Which is better, MiniMax H3 or LTX 2.5?**
+
+- Across nine rounds from the same still images on one RTX 3060, MiniMax H3 won five and LTX 2.5 won three, with a bonus round on turn-taking speech outside the count.
+- LTX is much faster. A five second clip took about 5½ minutes on LTX's default workflow, against about 38 minutes for H3 at 20 steps and about 13 minutes with H3's 6-step Turbo LoRA.
+- LTX is more forgiving with prompts but tends to skip parts of them. H3 took more attempts to get the audio right, and generally did better with the video and with songs.
+
+### [MiniMax H3 with the Turbo LoRA](https://loopforge.cc/projects/h3-turbo-lora/)
+
+Published 15 August 2026. 1 prompts. The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.
+
+**Can you run MiniMax H3 on a 12GB GPU?**
+
+- Yes. Everything local on this site ran on an RTX 3060 with 12GB of VRAM, including speech, singing and a one minute short film.
+- The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word.
+- Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768.
+
+## Optional
+
+- [YouTube channel](https://www.youtube.com/@LoopForge0)
+- [GitHub](https://github.com/loopforge0)
