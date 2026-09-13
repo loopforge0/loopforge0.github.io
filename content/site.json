@@ -1,0 +1,42 @@
+{
+ "banner": {
+  "video": "banner/reel.mp4",
+  "poster": "banner/reel-poster.jpg",
+  "w": 1280,
+  "h": 720,
+  "credit": "Every frame here was generated. See the projects they came from",
+  "credit_url": "/projects/"
+ },
+ "headline": "Open models, tested in the open",
+ "lede": "Prompts, ComfyUI workflows and findings from hands-on projects with AI models you can run yourself, published exactly as they ran, with the failures left in.",
+ "featured": [
+  "h3-chained-renders",
+  "h3-first-date",
+  "h3-vs-ltx-2-5"
+ ],
+ "about": [
+  "Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someone with no background in film making. Video so far, and every project gets a page here with the prompts, workflows and settings it used.",
+  "The house rules: every clip plays uncut, every prompt is published exactly as it was sent to the model, and the parts that did not work stay in."
+ ],
+ "rig": [
+  [
+   "Local",
+   "RTX 3060 with 12GB of VRAM, i5-13400F, 32GB of RAM"
+  ],
+  [
+   "Rented",
+   "RTX 5090 on RunPod, for higher resolution runs of the same prompts"
+  ],
+  [
+   "Software",
+   "ComfyUI, with stock templates unless a page says otherwise"
+  ]
+ ],
+ "affiliate": {
+  "runpod": {
+   "url": "https://runpod.io?ref=5qkyhesp",
+   "label": "Rent the same kind of GPU on RunPod",
+   "disclosure": "Affiliate link: Loop Forge gets credit if you sign up through it, at no extra cost to you."
+  }
+ }
+}

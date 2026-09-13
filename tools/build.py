@@ -1,0 +1,665 @@
+"""Build loopforge.cc from content/.
+
+    python tools/build.py
+
+content/site.json      the banner, featured videos and about text for the home page
+content/findings.json  hand-written findings, keyed by video
+content/<video>.json   one file per video, written by tools/import_sources.py
+
+Writes index.html, projects/**, 404.html, sitemap.xml, robots.txt, llms.txt and
+assets/search-index.json at the repository root, which is what GitHub Pages serves. Everything it writes
+is generated; edit content/ or this file instead. Standard library only.
+"""
+import html
+import json
+import re
+import shutil
+import urllib.error
+import urllib.request
+from collections import Counter
+from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+CONTENT = ROOT / "content"
+SITE = "https://loopforge.cc"
+YOUTUBE = "https://www.youtube.com/@LoopForge0"
+GITHUB = "https://github.com/loopforge0"
+BEACON = '{"token": "1315e25973424cb396840b167fdcc1da"}'
+FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800"
+         "&family=Courier+Prime:wght@400;700&display=swap")
+VERSION = "10"   # bump when site.css or site.js change, so browsers fetch the new files
+
+REPOS = [
+    ("ComfyUI-H3-Continuous", "Chain MiniMax H3 renders into one unbroken take"),
+    ("minimaxh3-shots-skills", "Agent skills that write H3 camera shot prompts for your own scene"),
+    ("comfyui-wan-loop", "Iterative ComfyUI nodes for longer Wan videos"),
+]
+
+e = html.escape
+
+
+def load():
+    """Videos newest first, the site settings, and findings keyed by video slug."""
+    special = {"site", "findings"}
+    cols = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(CONTENT.glob("*.json")) if p.stem not in special]
+    cols.sort(key=lambda c: c["published"], reverse=True)
+    site = json.loads((CONTENT / "site.json").read_text(encoding="utf-8"))
+    findings = json.loads((CONTENT / "findings.json").read_text(encoding="utf-8"))
+    return cols, site, findings
+
+
+# ---------------------------------------------------------------------------- small helpers
+
+def asset(path):
+    return f"/assets/{path}"
+
+
+def project_url(col):
+    return f"/projects/{col['slug']}/"
+
+
+def prompt_url(col, p):
+    return f"/projects/{col['slug']}/{p['slug']}/"
+
+
+def mmss(seconds):
+    return f"{seconds // 60}:{seconds % 60:02d}"
+
+
+def plural(n, word):
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+def long_date(iso):
+    d = date.fromisoformat(iso)
+    return f"{d.day} {d:%B %Y}"
+
+
+def out(path, text):
+    dest = ROOT / path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(text, encoding="utf-8", newline="\n")
+
+
+def json_ld(data):
+    text = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{text}</script>\n'
+
+
+def img(image, alt, thumb=True, eager=False, cls=""):
+    src = asset(image["thumb"] if thumb else image["src"])
+    load = "eager" if eager else "lazy"
+    cls_attr = f' class="{cls}"' if cls else ""
+    return (f'<img{cls_attr} src="{src}" alt="{e(alt)}" width="{image["w"]}" height="{image["h"]}" '
+            f'loading="{load}" decoding="async">')
+
+
+def is_portrait(image):
+    return image["h"] > image["w"]
+
+
+def facts_html(rows, cls="facts"):
+    return f'<dl class="{cls}">' + "".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in rows) + "</dl>"
+
+
+def inline_tags(text):
+    """Escape a sentence and colour any <Picture N> in it the way prompts are coloured."""
+    return re.sub(r"&lt;Picture (\d+|N)&gt;",
+                  lambda m: f'<span class="tagdot c{m.group(1) if m.group(1).isdigit() else 1}">&lt;Picture {m.group(1)}&gt;</span>',
+                  e(text, quote=False))
+
+
+def watch_url(video, t=None):
+    return f"https://www.youtube.com/watch?v={video['id']}" + (f"&t={t}s" if t else "")
+
+
+def video_thumb(video):
+    """The video's YouTube thumbnail, saved into assets once so pages load nothing from Google."""
+    rel = f"img/video/{video['id']}.jpg"
+    dest = ROOT / "assets" / rel
+    if not dest.exists():
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        for size in ("maxresdefault", "hqdefault"):
+            try:
+                with urllib.request.urlopen(f"https://i.ytimg.com/vi/{video['id']}/{size}.jpg", timeout=20) as r:
+                    dest.write_bytes(r.read())
+                break
+            except urllib.error.HTTPError:
+                continue
+    return asset(rel)
+
+
+# ---------------------------------------------------------------------------- layout
+
+SUN = ('<svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" '
+       'fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2'
+       'M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg>')
+MOON = ('<svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" '
+        'd="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg>')
+
+# Runs before first paint so a saved theme never flashes the other one.
+THEME_BOOT = ("<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')"
+              "document.documentElement.dataset.theme=t}catch(e){}</script>")
+
+
+def page(*, path, title, description, body, image=None, current=None, extra_head="", main_class=""):
+    url = SITE + path
+    og_image = SITE + asset(image) if image else SITE + "/assets/loopforge-logo.png"
+    nav = [("/projects/", "Projects"), (YOUTUBE, "YouTube"), (GITHUB, "GitHub")]
+    nav_html = "".join(
+        f'<a href="{href}"{" aria-current=\"page\"" if current == label else ""}>{label}</a>' for href, label in nav)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{THEME_BOOT}
+<title>{e(title)}</title>
+<meta name="description" content="{e(description)}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loop Forge">
+<meta property="og:title" content="{e(title)}">
+<meta property="og:description" content="{e(description)}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{og_image}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/loopforge-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="{FONTS}">
+<link rel="stylesheet" href="/assets/site.css?v={VERSION}">
+{extra_head}</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/loopforge-logo.png" alt="" width="38" height="38">Loop Forge</a>
+    <nav aria-label="Site">{nav_html}</nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme">{MOON}{SUN}</button>
+  </div>
+</header>
+<main id="main"{f' class="{main_class}"' if main_class else ""}>
+{body}
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>Loop Forge. Prompts, ComfyUI workflows and findings from projects with AI models you can run.</span>
+    <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="{YOUTUBE}">YouTube</a><a href="{GITHUB}">GitHub</a></nav>
+  </div>
+</footer>
+<script src="/assets/site.js?v={VERSION}" defer></script>
+<!-- Cloudflare Web Analytics: cookieless, stores nothing on the visitor's device and does not fingerprint,
+     so no consent banner is required. The same token goes on every page under loopforge.cc. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{BEACON}'></script>
+</body>
+</html>
+"""
+
+
+# ---------------------------------------------------------------------------- prompt rendering
+
+TOKEN = re.compile(
+    r"(?P<d><d>.*?</d>)"
+    r"|(?P<pic><Picture (?P<pn>\d+)>)"
+    r"|(?P<sub><Subject (?P<sn>\d+)>)"
+    r"|(?P<other><(?:Video|Audio) \d+>)"
+    r"|(?P<shot>\[Shot \d+\])"
+    r"|(?m:^(?P<k>[a-z_]+:|Audio:|Timeline:))",
+    re.S,
+)
+
+
+def render_prompt(text, highlights=()):
+    """Wrap structure in spans without adding or removing a single character, so textContent is the prompt."""
+    tokens = []
+    for m in TOKEN.finditer(text):
+        if m.group("d"):
+            tokens.append((m.start(), m.end(), "d", ""))
+        elif m.group("pic"):
+            n = int(m.group("pn"))
+            tokens.append((m.start(), m.end(), f"t pic c{min(n, 5)}", f"P{n}"))
+        elif m.group("sub"):
+            tokens.append((m.start(), m.end(), "t sub", f'S{m.group("sn")}'))
+        elif m.group("other"):
+            tokens.append((m.start(), m.end(), "t", m.group("other")))
+        elif m.group("shot"):
+            tokens.append((m.start(), m.end(), "shot", ""))
+        elif m.group("k"):
+            tokens.append((m.start(), m.end(), "k", ""))
+    marks = [(h["start"], h["end"], h["kind"]) for h in highlights]
+    cuts = sorted({0, len(text), *[t[0] for t in tokens], *[t[1] for t in tokens],
+                   *[m[0] for m in marks], *[m[1] for m in marks]})
+
+    def covering(items, a):
+        return next((it for it in items if it[0] <= a < it[1]), None)
+
+    parts, open_mark = [], None
+    for a, b in zip(cuts, cuts[1:]):
+        mark = covering(marks, a)
+        if mark != open_mark:
+            if open_mark:
+                parts.append("</span>")
+            if mark:
+                parts.append(f'<span class="h-{mark[2]}">')
+            open_mark = mark
+        piece = e(text[a:b], quote=False)
+        tok = covering(tokens, a)
+        if tok:
+            tag = f' data-tag="{e(tok[3])}"' if tok[3] else ""
+            parts.append(f'<span class="{tok[2]}"{tag}>{piece}</span>')
+        else:
+            parts.append(piece)
+    if open_mark:
+        parts.append("</span>")
+    return "".join(parts)
+
+
+# ---------------------------------------------------------------------------- shared pieces
+
+def frame_card(col, p):
+    code = f'<span class="code">{e(p["code"])}</span>' if p.get("code") else ""
+    return (f'<a class="frame" href="{prompt_url(col, p)}"><div class="img">{img(p["still"], "")}{code}</div>'
+            f"<h3>{e(p['title'])}</h3></a>")
+
+
+def uses_runpod(col, p=None):
+    facts = p["facts"] if p else col["facts"] + [f for q in col["prompts"] for f in q["facts"]]
+    return any("RunPod" in v for _, v in facts)
+
+
+def affiliate_note(site, cls="affiliate"):
+    a = site["affiliate"]["runpod"]
+    return (f'<p class="{cls}"><a href="{e(a["url"])}" rel="sponsored noopener" target="_blank">{e(a["label"])}</a>'
+            f'<small>{e(a["disclosure"])}</small></p>')
+
+
+def project_card(col, eager=False):
+    load = "eager" if eager else "lazy"
+    return (f'<a class="video-card" href="{project_url(col)}">'
+            f'<div class="thumb"><img src="{video_thumb(col["video"])}" alt="" width="1280" height="720" loading="{load}" decoding="async"></div>'
+            f'<p class="when">{long_date(col["published"])}</p>'
+            f"<h3>{e(col['title'])}</h3><p>{e(col['summary'][0])}</p>"
+            f'<p class="count">{plural(len(col["prompts"]), "prompt")}, {e(" and ".join(col["models"]))}</p></a>')
+
+
+def search_box(placeholder, cls=""):
+    return f"""<form class="finder {cls}" role="search" data-finder>
+      <label class="visually-hidden" for="finder-q">Search projects and prompts</label>
+      <input id="finder-q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="{e(placeholder)}"
+        aria-controls="finder-results" aria-expanded="false" aria-autocomplete="list">
+      <div id="finder-results" class="finder-results" hidden></div>
+    </form>"""
+
+
+# ---------------------------------------------------------------------------- pages
+
+def rig_html(site):
+    rows = []
+    for k, v in site["rig"]:
+        extra = affiliate_note(site, "affiliate inline") if k == "Rented" else ""
+        rows.append(f"<dt>{e(k)}</dt><dd>{e(v)}{extra}</dd>")
+    return '<dl class="facts">' + "".join(rows) + "</dl>"
+
+
+def build_home(cols, site):
+    by_slug = {c["slug"]: c for c in cols}
+    latest = cols[0]
+    featured = [by_slug[s] for s in site["featured"] if s in by_slug and s != latest["slug"]]
+    total = sum(len(c["prompts"]) for c in cols)
+    b = site["banner"]
+    repos = "".join(f'<a href="{GITHUB}/{name}"><b>{e(name)}</b><span>{e(desc)}</span></a>' for name, desc in REPOS)
+    about = "".join(f"<p>{e(a)}</p>" for a in site["about"])
+
+    body = f"""
+<section class="banner">
+  <video class="banner-media" muted loop playsinline preload="metadata" poster="{asset(b["poster"])}"
+    width="{b["w"]}" height="{b["h"]}" aria-hidden="true" data-reel>
+    <source src="{asset(b["video"])}" type="video/mp4">
+  </video>
+  <div class="wrap banner-body">
+    <h1 class="display">{e(site["headline"])}</h1>
+    <p class="lede">{e(site["lede"])}</p>
+    {search_box("Search projects and prompts")}
+  </div>
+  <a class="banner-credit" href="{e(b["credit_url"])}">{e(b["credit"])}</a>
+</section>
+<div class="wrap">
+  <section class="block latest">
+    <a class="latest-thumb" href="{project_url(latest)}"><img src="{video_thumb(latest["video"])}" alt="" width="1280" height="720"></a>
+    <div>
+      <h2 class="section-label">Latest project</h2>
+      <p class="when">{long_date(latest["published"])}</p>
+      <h3 class="latest-title"><a href="{project_url(latest)}">{e(latest["title"])}</a></h3>
+      <p class="lede">{e(latest["summary"][0])}</p>
+      <p class="count">{plural(len(latest["prompts"]), "prompt")}, with reference images, settings and links</p>
+      <div class="hero-actions">
+        <a class="button" href="{project_url(latest)}">Open the project</a>
+        <a class="button quiet" href="{watch_url(latest["video"])}">Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="block-head">
+      <h2 class="section">Featured</h2>
+      <a href="/projects/">All {len(cols)} projects</a>
+    </div>
+    <div class="video-grid">{"".join(project_card(c) for c in featured)}</div>
+  </section>
+  <section class="block about" id="about">
+    <div>
+      <h2 class="section">About Loop Forge</h2>
+      {about}
+    </div>
+    {rig_html(site)}
+  </section>
+  <section class="block">
+    <h2 class="section">Code</h2>
+    <div class="repos">{repos}</div>
+  </section>
+</div>"""
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Loop Forge", "url": f"{SITE}/",
+         "logo": f"{SITE}/assets/loopforge-logo.png", "sameAs": [YOUTUBE, GITHUB]},
+        {"@type": "WebSite", "@id": f"{SITE}/#site", "name": "Loop Forge", "url": f"{SITE}/",
+         "publisher": {"@id": f"{SITE}/#org"}},
+    ]}
+    out("index.html", page(
+        path="/", title="Loop Forge: prompts, ComfyUI workflows and findings for AI models you can run",
+        description=f"{site['lede']} {len(cols)} projects and {total} prompts, each with the settings, reference "
+                    "images and results behind it.",
+        body=body, image=b["poster"], extra_head=json_ld(ld)))
+
+
+def build_projects_index(cols):
+    total = sum(len(c["prompts"]) for c in cols)
+    body = f"""
+<div class="wrap">
+  <div class="crumbs"><a href="/">Loop Forge</a></div>
+  <header class="col-head single">
+    <div>
+      <h1 class="display page-title">Projects</h1>
+      <p class="lede">Every Loop Forge project has a page here with its findings, every prompt it used, the reference
+        images, settings, links and the YouTube video that goes with it. {len(cols)} so far, newest first.</p>
+    </div>
+  </header>
+  <div class="video-grid">{"".join(project_card(c, eager=i < 3) for i, c in enumerate(cols))}</div>
+  <div style="height:88px"></div>
+</div>"""
+    out("projects/index.html", page(
+        path="/projects/", title="Projects | Loop Forge",
+        description=f"{len(cols)} Loop Forge projects with open AI models, each with its findings and {total} prompts "
+                    "published exactly as they ran.",
+        body=body, current="Projects"))
+
+
+def finding_link(link, col):
+    if "url" in link:
+        return link["url"]
+    return f"/projects/{link.get('collection', col['slug'])}/" + (f"{link['prompt']}/" if "prompt" in link else "")
+
+
+def build_project(col, findings, site):
+    groups = []
+    for g in col["groups"]:
+        items = [p for p in col["prompts"] if p["group"] == g["id"]]
+        if not items:
+            continue
+        portrait = sum(is_portrait(p["still"]) for p in items) > len(items) / 2
+        note = f'<p class="muted">{e(g["note"])}</p>' if g.get("note") else ""
+        heading = f'<header><h3 class="group-title">{e(g["title"])}</h3>{note}</header>' if len(col["groups"]) > 1 else ""
+        groups.append(f'<section class="group">{heading}'
+                      f'<div class="sheet{" portrait" if portrait else ""}">'
+                      + "".join(frame_card(col, p) for p in items) + "</div></section>")
+
+    found = ""
+    if findings:
+        blocks = []
+        for f in findings:
+            paras = "".join(f"<p>{inline_tags(x)}</p>" for x in f["findings"])
+            links = "".join(f'<li><a href="{e(finding_link(l, col))}">{e(l["label"])}</a></li>' for l in f["links"])
+            blocks.append(f'<article class="topic" id="{f["id"]}"><h3 class="question">{e(f["question"])}</h3>'
+                          f'<div class="topic-a">{paras}{f"<ul class=topic-links>{links}</ul>" if links else ""}</div></article>')
+        found = f'<section class="block"><h2 class="section">What we found</h2><div class="topics">{"".join(blocks)}</div></section>'
+
+    refs = "".join(
+        f'<figure class="ref"><a href="{asset(r["image"]["src"])}">{img(r["image"], r["label"] + ", " + r["note"])}</a>'
+        f'<figcaption>{e(r["label"])}<span>{e(r["note"])}</span></figcaption></figure>' for r in col["refs"])
+    materials = [{"label": f"Watch “{col['video']['title']}” on YouTube", "url": watch_url(col["video"])}] + col["links"]
+    links = "".join(f'<li><a href="{e(l["url"])}">{e(l["label"])}</a></li>' for l in materials)
+    if uses_runpod(col):
+        links += f"<li>{affiliate_note(site)}</li>"
+    notice = f'<p class="notice">{e(col["notice"])}</p>' if col.get("notice") else ""
+    summary = "".join(f"<p>{e(s)}</p>" for s in col["summary"])
+    video = col["video"]
+    body = f"""
+<div class="wrap">
+  <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a></div>
+  <header class="col-head">
+    <div>
+      <p class="when">{long_date(col["published"])}</p>
+      <h1 class="display page-title">{e(col["title"])}</h1>
+      <div class="summary">{summary}</div>
+      {notice}
+      {facts_html(col["facts"])}
+    </div>
+    <div>
+      <a class="yt" href="{watch_url(video)}" target="_blank" rel="noopener">
+        <img src="{video_thumb(video)}" alt="" width="1280" height="720"><span class="play">Watch on YouTube</span></a>
+      <p class="yt-caption">{e(video["title"])}. Opens on YouTube in a new tab.</p>
+    </div>
+  </header>
+  {found}
+  <section class="block" id="prompts">
+    <h2 class="section">{plural(len(col["prompts"]), "prompt")}</h2>
+    {"".join(groups)}
+  </section>
+  <section class="block">
+    <h2 class="section">Reference images</h2>
+    <div class="refs">{refs}</div>
+  </section>
+  <section class="block">
+    <h2 class="section">Materials and links</h2>
+    <ul class="links">{links}</ul>
+  </section>
+</div>"""
+    graph = [{"@type": "VideoObject", "name": video["title"], "description": " ".join(col["summary"]),
+              "uploadDate": col["published"], "thumbnailUrl": SITE + video_thumb(video), "url": watch_url(video),
+              "embedUrl": f"https://www.youtube.com/embed/{video['id']}",
+              "publisher": {"@type": "Organization", "name": "Loop Forge", "url": f"{SITE}/"}}]
+    if findings:
+        graph.append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": f["question"],
+             "acceptedAnswer": {"@type": "Answer", "text": " ".join(f["findings"])}} for f in findings]})
+    out(f"projects/{col['slug']}/index.html", page(
+        path=project_url(col), title=f"{col['title']}: findings and every prompt | Loop Forge",
+        description=col["summary"][0][:300], body=body, image=col["prompts"][0]["still"]["src"], current="Projects",
+        extra_head=json_ld({"@context": "https://schema.org", "@graph": graph})))
+
+
+def prompt_description(p):
+    revised = len(p["variants"]) == 2 and p["variants"][1]["label"] == "Revised"
+    text = p["variants"][1 if revised else 0]["text"]
+    m = re.search(r"summary:\n(.+)", text)
+    gist = re.sub(r"\s+", " ", (m.group(1) if m else text).replace("[reference generation]", "").strip())
+    full = f"The exact {' and '.join(p['models'])} prompt for {p['title'][0].lower() + p['title'][1:]}. {gist}"
+    return full if len(full) <= 300 else full[:297].rsplit(" ", 1)[0] + "…"
+
+
+def build_prompt(col, p, prev, nxt, site):
+    refs_by_id = {r["id"]: r for r in col["refs"]}
+    wiring = []
+    for w in p["refs"]:
+        tag = w["tag"]
+        m = re.match(r"<Picture (\d+)>", tag)
+        cls = f"tagdot c{min(int(m.group(1)), 5)}" if m else "tagdot"
+        if "ref" in w:
+            r = refs_by_id[w["ref"]]
+            subject = f", as {e(w['subject'])}" if w.get("subject") else ""
+            label = "" if r["label"] == tag else f"<br>{e(r['label'])}"
+            wiring.append(f'<li><a href="{asset(r["image"]["src"])}">{img(r["image"], r["label"])}</a>'
+                          f'<div><span class="{cls}">{e(tag)}</span>{subject}{label}'
+                          f'<small>{e(r["note"])}</small></div></li>')
+        else:
+            wiring.append(f'<li><span class="blank"></span><div><span class="{cls}">{e(tag)}</span>'
+                          f'<small>{e(w["text"])}</small></div></li>')
+    wiring_html = (f'<div><h2 class="aside-title">What was wired in</h2>'
+                   f'<ul class="wiring">{"".join(wiring)}</ul></div>') if wiring else ""
+
+    watch = (f'<a class="watch" href="{watch_url(col["video"], p.get("time"))}">'
+             f'Watch it in the video at {mmss(p["time"])}</a>') if p.get("time") else ""
+
+    if p.get("outputs"):
+        winner = (p.get("verdict") or {}).get("winner")
+        figs = "".join(
+            f'<figure>{img(o["image"], "Frame from the " + o["label"] + " result", thumb=False, eager=True)}'
+            f'<figcaption>{e(o["label"])}'
+            f'{"<span class=won> won this test</span>" if winner and o["label"].startswith(winner) else ""}'
+            f"</figcaption></figure>" for o in p["outputs"])
+        visual = f'<div class="outputs">{figs}</div>'
+    else:
+        portrait = " portrait" if is_portrait(p["still"]) else ""
+        visual = (f'<figure class="still{portrait}">'
+                  f'{img(p["still"], "Frame from the " + p["title"] + " clip", thumb=False, eager=True)}</figure>')
+
+    multi = len(p["variants"]) > 1
+    tabs, panels = [], []
+    for i, v in enumerate(p["variants"]):
+        pid = f"v{i}"
+        if multi:
+            tabs.append(f'<button type="button" role="tab" id="tab-{pid}" aria-controls="{pid}" '
+                        f'aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}">{e(v["label"])}</button>')
+        note = f'<p class="variant-note">{e(v["note"])}</p>' if v.get("note") else ""
+        legend = ""
+        if v.get("highlights"):
+            legend = '<p class="legend">' + "".join(
+                f'<span class="l-{h["kind"]}">{e(h["label"])}</span>' for h in v["highlights"]) + "</p>"
+        role = f' role="tabpanel" aria-labelledby="tab-{pid}"' if multi else ""
+        panels.append(f'<div id="{pid}"{role}{" hidden" if i else ""}>{note}{legend}'
+                      f'<pre class="script" tabindex="0">{render_prompt(v["text"], v.get("highlights", []))}</pre></div>')
+    tab_html = f'<div class="tabs" role="tablist" aria-label="Prompt versions">{"".join(tabs)}</div>' if multi else ""
+
+    verdict = ""
+    if p.get("verdict"):
+        head = f"{e(p['verdict']['winner'])} wins" if p["verdict"]["winner"] else "No winner in the base test"
+        verdict = (f'<section class="plain"><div class="verdict"><b>{head}</b>'
+                   f'<p>{e(p["verdict"]["text"])}</p></div></section>')
+    notes = "".join(f"<p>{e(n)}</p>" for n in p["notes"])
+    links = "".join(f'<p><a href="{e(l["url"])}">{e(l["label"])}</a></p>' for l in p["links"])
+    notes_html = (f'<section class="plain"><div class="notes"><h2 class="aside-title">Notes</h2>{notes}{links}</div></section>'
+                  if notes or links else "")
+
+    def pager_link(q, cls, label):
+        if not q:
+            return "<span></span>"
+        return f'<a class="{cls}" href="{prompt_url(col, q)}"><span>{label}</span><b>{e(q["title"])}</b></a>'
+
+    origin = f'<a href="{project_url(col)}">{e(col["title"])}</a>'
+    code = f'<p class="code-line">{e(p["code"])}, from {origin}</p>' if p.get("code") else f'<p class="code-line">From {origin}</p>'
+    body = f"""
+<div class="wrap">
+  <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a> / <a href="{project_url(col)}">{e(col["title"])}</a></div>
+  <header class="p-head">
+    <h1 class="display page-title">{e(p["title"])}</h1>
+    {code}
+    <div>{visual}</div>
+    <div class="aside">
+      {watch}
+      {facts_html(p["facts"])}
+      {affiliate_note(site) if uses_runpod(col, p) else ""}
+      {wiring_html}
+    </div>
+  </header>
+  {verdict}
+  <section class="script-wrap" data-tabs>
+    <div class="script-bar">
+      <h2 class="section">{"The prompts" if multi else "The prompt"}</h2>
+      {tab_html}
+      <button type="button" class="button" data-copy>Copy prompt</button>
+    </div>
+    {"".join(panels)}
+  </section>
+  {notes_html}
+  <nav class="pager" aria-label="More from this video">{pager_link(prev, "prev", "Previous")}{pager_link(nxt, "next", "Next")}</nav>
+</div>"""
+    out(f"projects/{col['slug']}/{p['slug']}/index.html", page(
+        path=prompt_url(col, p), title=f"{p['title']}: {' and '.join(p['models'])} prompt | Loop Forge",
+        description=prompt_description(p), body=body, image=p["still"]["src"], current="Projects"))
+
+
+def build_404():
+    body = f"""
+<div class="wrap">
+  <section class="hero">
+    <h1 class="display">Nothing at this address.</h1>
+    <p class="lede">The page may have moved when the site was reorganised. Try searching for it.</p>
+    {search_box("Search projects and prompts")}
+    <div class="hero-actions"><a class="button quiet" href="/projects/">All projects</a><a class="button quiet" href="/">Home</a></div>
+  </section>
+</div>"""
+    out("404.html", page(path="/404.html", title="Page not found | Loop Forge",
+                         description="This page does not exist.", body=body))
+
+
+# ---------------------------------------------------------------------------- machine-readable files
+
+def build_search_index(cols, findings):
+    """Documents for the Orama search on the home page. Kept small: prompts contribute their summary, not all of it."""
+    docs = []
+    for c in cols:
+        body = " ".join(c["summary"] + [f["question"] + " " + " ".join(f["findings"]) for f in findings.get(c["slug"], [])])
+        docs.append({"id": c["slug"], "kind": "Project", "title": c["title"], "body": body,
+                     "tags": " ".join(c["models"]), "video": c["short"], "url": project_url(c),
+                     "thumb": video_thumb(c["video"])})
+        for p in c["prompts"]:
+            text = p["variants"][-1]["text"]
+            m = re.search(r"summary:\n(.+)", text)
+            gist = (m.group(1) if m else text)[:500]
+            docs.append({"id": f"{c['slug']}/{p['slug']}", "kind": "Prompt", "title": p["title"],
+                         "body": " ".join([gist, *p["notes"]]),
+                         "tags": " ".join(p["models"] + p["techniques"]), "video": c["short"],
+                         "url": prompt_url(c, p), "thumb": asset(p["still"]["thumb"])})
+    out("assets/search-index.json", json.dumps(docs, ensure_ascii=False, separators=(",", ":")))
+
+
+def build_sitemap(cols):
+    urls = ["/", "/projects/"] + [project_url(c) for c in cols] + \
+           [prompt_url(c, p) for c in cols for p in c["prompts"]]
+    out("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{SITE}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+    out("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+
+
+def build_llms_txt(cols, site, findings):
+    """A plain-text map of the site for AI tools, following the llms.txt convention."""
+    lines = ["# Loop Forge", "", f"> {site['lede']}", "", " ".join(site["about"]), "", "## Projects", ""]
+    for c in cols:
+        lines += [f"### [{c['title']}]({SITE}{project_url(c)})", "",
+                  f"Published {long_date(c['published'])}. {len(c['prompts'])} prompts. {' '.join(c['summary'])}", ""]
+        for f in findings.get(c["slug"], []):
+            lines += [f"**{f['question']}**", ""] + [f"- {x}" for x in f["findings"]] + [""]
+    lines += ["## Optional", "", f"- [YouTube channel]({YOUTUBE})", f"- [GitHub]({GITHUB})", ""]
+    out("llms.txt", "\n".join(lines))
+
+
+def main():
+    cols, site, findings = load()
+    for generated in ("projects", "videos", "prompts"):   # the last two are earlier layouts
+        shutil.rmtree(ROOT / generated, ignore_errors=True)
+    build_home(cols, site)
+    build_projects_index(cols)
+    for col in cols:
+        build_project(col, findings.get(col["slug"], []), site)
+        ps = col["prompts"]
+        for i, p in enumerate(ps):
+            build_prompt(col, p, ps[i - 1] if i else None, ps[i + 1] if i + 1 < len(ps) else None, site)
+    build_404()
+    build_search_index(cols, findings)
+    build_sitemap(cols)
+    build_llms_txt(cols, site, findings)
+    print(f"built {len(cols)} project pages and {sum(len(c['prompts']) for c in cols)} prompt pages")
+
+
+if __name__ == "__main__":
+    main()

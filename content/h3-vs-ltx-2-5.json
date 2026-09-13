@@ -1,0 +1,1042 @@
+{
+ "slug": "h3-vs-ltx-2-5",
+ "title": "MiniMax H3 vs LTX 2.5",
+ "short": "Nine rounds, head to head",
+ "published": "2026-08-21",
+ "video": {
+  "id": "Cww3c0TQESc",
+  "title": "MiniMax H3 vs LTX 2.5 in ComfyUI"
+ },
+ "models": [
+  "MiniMax H3",
+  "LTX 2.5"
+ ],
+ "summary": [
+  "MiniMax H3 and LTX 2.5 are both open-weight image to video models, and both generate their own speech and audio in the same pass. They ran head to head on one desktop, nine rounds each, with a winner called on every one.",
+  "Each round has the prompt each model was given, taken from the metadata ComfyUI saved into the clip, plus a frame from both results. Final tally: MiniMax H3 five, LTX 2.5 three, plus a bonus round on turn-based speech outside the count."
+ ],
+ "facts": [
+  [
+   "MiniMax H3",
+   "6 steps with the Turbo LoRA, simple scheduler"
+  ],
+  [
+   "LTX 2.5",
+   "The stock two-stage image to video template"
+  ],
+  [
+   "Clips",
+   "Five seconds from a single still, 24fps, audio straight out of the model"
+  ],
+  [
+   "Ran on",
+   "RTX 3060 with 12GB, i5-13400F, 32GB RAM, ComfyUI 0.33.0"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "rounds",
+   "title": "Rounds"
+  }
+ ],
+ "refs": [
+  {
+   "id": "start-t0",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-t0.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-t0-t.jpg",
+    "w": 1368,
+    "h": 2000
+   }
+  },
+  {
+   "id": "start-01",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-01.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-01-t.jpg",
+    "w": 1200,
+    "h": 1800
+   }
+  },
+  {
+   "id": "start-02",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-02.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-02-t.jpg",
+    "w": 1800,
+    "h": 1012
+   }
+  },
+  {
+   "id": "start-03",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-03.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-03-t.jpg",
+    "w": 1800,
+    "h": 1012
+   }
+  },
+  {
+   "id": "start-04",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-04.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-04-t.jpg",
+    "w": 1800,
+    "h": 1012
+   }
+  },
+  {
+   "id": "start-05",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-05.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-05-t.jpg",
+    "w": 1800,
+    "h": 1012
+   }
+  },
+  {
+   "id": "start-06",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-06.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-06-t.jpg",
+    "w": 1800,
+    "h": 1012
+   }
+  },
+  {
+   "id": "start-07",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-07.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-07-t.jpg",
+    "w": 1200,
+    "h": 1800
+   }
+  },
+  {
+   "id": "start-08",
+   "label": "Start image",
+   "note": "The one still image both models were given",
+   "image": {
+    "src": "img/h3-vs-ltx-2-5/start-08.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/start-08-t.jpg",
+    "w": 1800,
+    "h": 1800
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "MiniMax H3 6 step workflow with the Turbo LoRA, on Civitai",
+   "url": "https://civitai.com/api/download/models/3232626?fileId=3115029"
+  },
+  {
+   "label": "MiniMax H3 stock template",
+   "url": "https://docs.comfy.org/tutorials/video/minimax/minimax-h3"
+  },
+  {
+   "label": "LTX 2.5 stock template",
+   "url": "https://docs.comfy.org/tutorials/video/ltx/ltx-2-5"
+  },
+  {
+   "label": "LTX's official prompting guide",
+   "url": "https://docs.ltx.io/open-source-model/usage-guides/prompting-guide"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "base-test-one-image-four-workflows",
+   "title": "Base test: one image, four workflows",
+   "code": "Base test",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-0-minimax-h3-20-steps.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-0-minimax-h3-20-steps-t.jpg",
+    "w": 704,
+    "h": 1024
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3, 20 steps",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-0-minimax-h3-20-steps.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-0-minimax-h3-20-steps-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    },
+    {
+     "label": "MiniMax H3, 6 steps with Turbo LoRA",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-0-minimax-h3-6-steps-with-turbo-lora.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-0-minimax-h3-6-steps-with-turbo-lora-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    },
+    {
+     "label": "LTX 2.5, default",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-0-ltx-2-5-default.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-0-ltx-2-5-default-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    },
+    {
+     "label": "LTX 2.5, 6 steps",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-0-ltx-2-5-6-steps.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-0-ltx-2-5-6-steps-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    }
+   ],
+   "time": 43,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Speech"
+   ],
+   "facts": [
+    [
+     "MiniMax H3, 20 steps",
+     "20 steps, seed 396928981028692, 704×1024"
+    ],
+    [
+     "MiniMax H3, 6 steps with Turbo LoRA",
+     "6 steps, Turbo LoRA, seed 207904312771680, 704×1024"
+    ],
+    [
+     "LTX 2.5, default",
+     "Stock two-stage workflow, seed 1476454299806, 704×1024"
+    ],
+    [
+     "LTX 2.5, 6 steps",
+     "Stock two-stage workflow, seed 598973466061197, 704×1024"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-t0"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3, 20 steps",
+     "text": "The woman smiles and speaks.\n\nAudio: The woman says \"I hope you all have a wonderful day.\"\nNo Music"
+    },
+    {
+     "label": "MiniMax H3, 6 steps with Turbo LoRA",
+     "text": "Close on the woman in the gold-rimmed glasses. She looks straight into the lens, her expression warming into a smile as she finishes, then holds the look. The camera holds steady with a very subtle push-in.\n\nAudio: she says clearly, \"I hope you all have a wonderful day!.\" Underneath, quiet indoor room tone and faint traffic outside. No music."
+    },
+    {
+     "label": "LTX 2.5",
+     "text": "The woman smiles and says \"I hope you all have a wonderful day\". \nNo background music or sound. "
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "text": "The default MiniMax workflow takes nearly four times as long as the six step version. There is some quality drop, but it is a good trade for the speed. LTX's default and reduced-step versions differ in quality too, with not much difference in generation time."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "individual-motion-only",
+   "title": "Individual, motion only",
+   "code": "Test 1",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-1-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-1-minimax-h3-t.jpg",
+    "w": 704,
+    "h": 1056
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-1-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-1-minimax-h3-t.jpg",
+      "w": 704,
+      "h": 1056
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-1-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-1-ltx-2-5-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    }
+   ],
+   "time": 209,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 207904312771680, 704×1056"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 1476454299806, 704×1024"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-01"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "the woman is turning her head a little further toward the lens, her hair is lifting and settling in the wind and she is shifting her weight and going still, as wind moving across the rooftop and faint traffic far below continues underneath. The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5",
+     "text": "The woman is turning her head a little further toward the lens, her hair is lifting and settling in the wind and she is shifting her weight and going still, as wind moving across the rooftop and faint traffic far below continues underneath. The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "LTX 2.5",
+    "text": "LTX had better prompt adherence here, with no stray audio. With MiniMax the woman turned fully and there was not much wind."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "couple",
+   "title": "Couple",
+   "code": "Test 2",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-2-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-2-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-2-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-2-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-2-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-2-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 247,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 263933277445610, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 1476454299806, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-02"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "The man is finishing his gesture and lowering his hand, the woman is nodding and glancing off to the side and both are settling back against the bench, as dry leaves moving on the ground and birds at a distance continues underneath. The camera is holding still.\nNo audio or talk. Only background sounds of the wind and leaves rustling."
+    },
+    {
+     "label": "LTX 2.5",
+     "text": "the man is finishing his gesture and lowering his hand, the woman is nodding and glancing off to the side and both are settling back against the bench, as dry leaves moving on the ground and birds at a distance continues underneath. The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "LTX 2.5",
+    "text": "MiniMax kept the camera still and had the right background sound, but it also added speech nobody asked for, and missed the glance and settling back against the bench. LTX zoomed in and had no background sound, but no hallucinated speech either."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "bonus-the-couple-taking-turns-to-speak",
+   "title": "Bonus: the couple, taking turns to speak",
+   "code": "Bonus round",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-2a-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-2a-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-2a-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-2a-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-2a-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-2a-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 292,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Speech",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 522216661341512, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 459172182317563, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-02"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "The man is looking at the woman and talking. She listens and then responds back. Then both of them look away from each other.\n\nAudio: He says clearly, \"and that's why I had to leave.\" She replies \"Oh, I understand now\""
+    },
+    {
+     "label": "LTX 2.5",
+     "text": "The man finishes explaining saying \"..and that's why I had to leave\". The woman then says \"Oh I understand now\". Then they both look away from each other."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "Both models read the mood very differently and both got the order of the lines right. MiniMax has the edge because both of them look away from each other at the end; in LTX they keep looking at each other."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "landscape-no-people",
+   "title": "Landscape, no people",
+   "code": "Test 3",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-3-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-3-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-3-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-3-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-3-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-3-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 335,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 1059970286348, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 1476454299806, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-03"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Both models",
+     "text": "the water is running down over the dark rock, mist is drifting slowly through the pines and the surface of the pool below is rippling, as running water close by and wind in the pines continues underneath. The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "MiniMax had some odd patterns in the water but was decent overall, and the ambient sound made sense. LTX replaced the ambience with music nobody asked for, and the water flow was too smooth in places."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "animals",
+   "title": "Animals",
+   "code": "Test 4",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-4-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-4-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-4-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-4-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-4-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-4-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 382,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 263933277445610, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 106080811298435, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-04"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Both models",
+     "text": "The dog is turning its head toward the lens, it is shaking the water out of its coat and it is stepping forward through the shallows, as water moving around its legs, a single bark and reeds in the wind continues underneath. The camera holds static."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "MiniMax followed the prompt better: the dog shakes off the water and barks, though it barks more than once and the shake is slightly off. LTX missed the shake, and its single bark has no matching action."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "vehicles",
+   "title": "Vehicles",
+   "code": "Test 5",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-5-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-5-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-5-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-5-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-5-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-5-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 426,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 263933277445610, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 679938861593831, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-05"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Both models",
+     "text": "The truck is pulling away along the highway, dust is rising behind the rear wheels and it is drawing away toward the horizon, as a low engine note, tyres running on tarmac and desert wind continues underneath. The camera is tracking the truck from the side, matching its speed."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "LTX 2.5",
+    "text": "MiniMax changed lanes, which is odd for a truck already moving, and a man appeared in the driver's seat. LTX animated it as a pull-away from standstill instead of continued motion, but was more consistent."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "speaking-group",
+   "title": "Speaking, group",
+   "code": "Test 6",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-6-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-6-minimax-h3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-6-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-6-minimax-h3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-6-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-6-ltx-2-5-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "time": 472,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Speech",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 263933277445610, 1152×640"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 391779319635709, 1152×640"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-06"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Both models",
+     "text": "The woman in the centre is beginning to speak while the other two listen, the man on the left is glancing across at her and she is finishing and looking back to the lens, as quiet room tone continues underneath. The woman in the centre says \"Please consider leaving a like and subscribing to this channel.\" The camera is static."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "MiniMax felt more natural: the two listeners turn to the speaker just as she starts, then nod and smile. In LTX both turn before she has started talking, with artifacts around her mouth on \"subscribing\"."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "singing-individual",
+   "title": "Singing, individual",
+   "code": "Test 7",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-7-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-7-minimax-h3-t.jpg",
+    "w": 704,
+    "h": 1056
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-7-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-7-minimax-h3-t.jpg",
+      "w": 704,
+      "h": 1056
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-7-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-7-ltx-2-5-t.jpg",
+      "w": 704,
+      "h": 1024
+     }
+    }
+   ],
+   "time": 521,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Singing"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 928035973645474, 704×1056"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 391779319635709, 704×1024"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-07"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "she is leaning in to the microphone and beginning to sing, she is holding the note with her eyes closing and she is easing back from the microphone, as the room's own reverb continues underneath. She sings \"Rock a bye baby, on the tree top, When the wind blows the cradle will rock.\" The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5",
+     "text": "she is leaning in to the microphone and beginning to sing, she is holding the note with her eyes closing and she is easing back from the microphone, as the room's own reverb continues underneath. She sings \"Rock a bye baby, on the tree top, When the wind blows the cradle will rock\" The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "A personal call. MiniMax chose a lovely tune and good expressions. LTX followed most of the prompt but did not keep the camera still, and its choice of tune was weaker."
+   },
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "singing-group",
+   "title": "Singing, group",
+   "code": "Test 8",
+   "group": "rounds",
+   "still": {
+    "src": "img/h3-vs-ltx-2-5/round-8-minimax-h3.jpg",
+    "thumb": "img/h3-vs-ltx-2-5/round-8-minimax-h3-t.jpg",
+    "w": 768,
+    "h": 768
+   },
+   "outputs": [
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-8-minimax-h3.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-8-minimax-h3-t.jpg",
+      "w": 768,
+      "h": 768
+     }
+    },
+    {
+     "label": "LTX 2.5",
+     "image": {
+      "src": "img/h3-vs-ltx-2-5/round-8-ltx-2-5.jpg",
+      "thumb": "img/h3-vs-ltx-2-5/round-8-ltx-2-5-t.jpg",
+      "w": 832,
+      "h": 832
+     }
+    }
+   ],
+   "time": 567,
+   "models": [
+    "MiniMax H3",
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "Model comparison",
+    "Singing",
+    "Multiple characters"
+   ],
+   "facts": [
+    [
+     "MiniMax H3",
+     "6 steps, Turbo LoRA, seed 318949497730636, 768×768"
+    ],
+    [
+     "LTX 2.5",
+     "Stock two-stage workflow, seed 688961497044548, 832×832"
+    ],
+    [
+     "Length",
+     "5 seconds at 24fps"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "start-08"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Both models",
+     "text": "all four are leaning toward the microphone and beginning to sing together, they are holding the note in unison and they are easing back and going quiet, as the room's own reverb continues underneath. All four singers together sing \"O my Love is like a red, red rose That’s newly sprung in June; O my Love is like the melody That’s sweetly played in tune..\" The camera is holding still."
+    },
+    {
+     "label": "LTX 2.5 negative",
+     "text": "pc game, console game, video game, cartoon, childish, ugly",
+     "note": "The stock negative prompt from the LTX template, left as it was."
+    }
+   ],
+   "verdict": {
+    "winner": "MiniMax H3",
+    "text": "Five seconds is too short for the whole verse. MiniMax got through the first line; LTX sang only the first three words."
+   },
+   "notes": [],
+   "links": []
+  }
+ ]
+}

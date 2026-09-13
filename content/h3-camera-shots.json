@@ -1,0 +1,1175 @@
+{
+ "slug": "h3-camera-shots",
+ "title": "MiniMax H3 camera shots",
+ "short": "Fourteen named camera shots",
+ "published": "2026-09-13",
+ "video": {
+  "id": "GCdKh_KaQVs",
+  "title": "MiniMax H3: 14 Camera Techniques"
+ },
+ "models": [
+  "MiniMax H3"
+ ],
+ "summary": [
+  "MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do.",
+  "Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here."
+ ],
+ "facts": [
+  [
+   "Workflow",
+   "MiniMaxH3ReferenceToVideo, ref_image_size max, no background plate"
+  ],
+  [
+   "Resolution",
+   "1344×768 on a rented RTX 5090, except the snorricam at 864×480 on an RTX 3060"
+  ],
+  [
+   "Sampling",
+   "20 steps, res_multistep / simple, turbo LoRA off, seed 552013742"
+  ],
+  [
+   "Prompt format",
+   "The six-section reference format from MiniMax's official guide"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "zoom",
+   "title": "Zooms"
+  },
+  {
+   "id": "specialty",
+   "title": "Specialty shots"
+  },
+  {
+   "id": "pan and roll",
+   "title": "Pans and rolls"
+  },
+  {
+   "id": "tracking",
+   "title": "Tracking shots"
+  }
+ ],
+ "refs": [
+  {
+   "id": "amber-main",
+   "label": "Amber",
+   "image": {
+    "src": "img/h3-camera-shots/ref-amber-main.jpg",
+    "thumb": "img/h3-camera-shots/ref-amber-main-t.jpg",
+    "w": 569,
+    "h": 832
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "kate",
+   "label": "Kate",
+   "image": {
+    "src": "img/h3-camera-shots/ref-kate.jpg",
+    "thumb": "img/h3-camera-shots/ref-kate-t.jpg",
+    "w": 1792,
+    "h": 2400
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "sofia",
+   "label": "Sofia",
+   "image": {
+    "src": "img/h3-camera-shots/ref-sofia.jpg",
+    "thumb": "img/h3-camera-shots/ref-sofia-t.jpg",
+    "w": 480,
+    "h": 832
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "allie",
+   "label": "Allie",
+   "image": {
+    "src": "img/h3-camera-shots/ref-allie.jpg",
+    "thumb": "img/h3-camera-shots/ref-allie-t.jpg",
+    "w": 554,
+    "h": 832
+   },
+   "note": "Character reference plate"
+  }
+ ],
+ "links": [
+  {
+   "label": "The original shots gallery",
+   "url": "/minimaxh3-shots-skills/"
+  },
+  {
+   "label": "Repository with agent skills that write these for your own scene",
+   "url": "https://github.com/loopforge0/minimaxh3-shots-skills"
+  },
+  {
+   "label": "ComfyUI workflow (json)",
+   "url": "/minimaxh3-shots-skills/assets/workflow/h3_dollyzoom_test_v6flip.json"
+  },
+  {
+   "label": "MiniMax's official prompt writing guide",
+   "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "crash-zoom-in",
+   "title": "Crash zoom in",
+   "group": "zoom",
+   "still": {
+    "src": "img/h3-camera-shots/crash-zoom-in.jpg",
+    "thumb": "img/h3-camera-shots/crash-zoom-in-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 42,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a snow-covered arctic coastline, as the camera holds a locked-off wide shot and then performs a single violent crash zoom in to a tight close-up.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke Varotal 18-100mm zoom lens, locked off on a tripod, cold blue-green arctic lighting with the aurora glowing softly overhead, a slightly desaturated palette.\n[Shot 1] The shot opens wide, with <Subject 1> standing small and full-figure on the snowy rocky shore, with dark rocky cliffs, patches of green aurora borealis in the sky, still water, and an old wooden sailing ship with tall masts anchored behind her. The camera is locked off and completely motionless, and the framing does not change at all for the first two seconds. At the two-second mark the camera performs a Zoom In with large amplitude at fast speed: a single violent crash zoom that travels the whole distance from the wide shot to a tight close-up of <Subject 1>'s face in about 200 milliseconds, in one continuous snap, with no easing at either end and nothing gradual about it. The instant the zoom lands the camera is locked off again in the tight close-up and the framing does not change for the remainder of the shot. <Subject 1> stands completely still with a blank, neutral expression for the whole of the opening wide shot. Her reaction begins only after the zoom has landed: her eyes widen and focus, her brow lifts and tightens, her lips part slightly, and she settles into a held, wide-eyed stillness for the rest of the shot.\n\noverall_soundscape: A faint cold wind and distant creaking from the ship's rigging hold steady and completely unchanged through the opening two seconds. At the two-second mark a single hard impact lands in one frame as the zoom arrives, and the ambience cuts instantly from open and distant to tight, close and intimate, holding there to the end. Nothing builds gradually at any point.\n\nnon_diegetic_music: Silence through the opening. One sharp percussive stab on the single frame the zoom lands, then silence again.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 904,
+       "end": 989
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1350,
+       "end": 1930
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "This prompt states a 2 second hold and a 200ms snap. H3 picks its own window. It is kept exactly as it ran."
+   ],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crash-zoom-in.md"
+    }
+   ]
+  },
+  {
+   "slug": "yoyo-zoom",
+   "title": "Yo-yo zoom",
+   "group": "zoom",
+   "still": {
+    "src": "img/h3-camera-shots/yoyo-zoom.jpg",
+    "thumb": "img/h3-camera-shots/yoyo-zoom-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 80,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long dark brown wavy hair, warm olive skin and a bright open smile, wearing a white lace-trimmed cropped camisole and high-waisted beige trousers. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a sunlit city rooftop terrace at golden hour, in a tight close-up, as the camera performs a yoyo zoom.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke Varotal 18-100mm zoom lens, locked off on a tripod, warm golden-hour sunlight with strong lens flare, a rich saturated palette.\n[Shot 1] A tight close-up fills the frame with <Subject 1>'s face. She is standing in place on the warm rooftop deck, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with low sun flaring between distant towers, potted plants and strings of lights behind her. The camera begins in a tight close-up on <Subject 1>'s face, then zooms out, starting slowly and accelerating harder and harder as it goes until the whole view smears into motion blur and she has fallen away into the far distance, a tiny figure on the rooftop. The camera holds there for about a second, then zooms back in with large amplitude at fast speed, snapping across the entire distance in a single instant to land tight on her face again exactly as it began. <Subject 1> holds her ground throughout, breathing, blinking and letting her hair move in the rooftop breeze, her expression shifting from an easy smile into startled bewilderment as the world tears away from her and slams back.\n\noverall_soundscape: Rooftop ambience close and intimate, stretching thin and far away as she recedes, then slamming close and present again in a single instant.\n\nnon_diegetic_music: A tone that bends downward and stretches as everything races away from her, then snaps back up to pitch in one beat.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 745,
+       "end": 830
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1242,
+       "end": 1709
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/yoyo-zoom.md"
+    }
+   ]
+  },
+  {
+   "slug": "dolly-zoom",
+   "title": "Dolly zoom",
+   "group": "specialty",
+   "still": {
+    "src": "img/h3-camera-shots/dolly-zoom.jpg",
+    "thumb": "img/h3-camera-shots/dolly-zoom-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 125,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still centre stage on a concert stage with tall deep-red velvet curtains, a single warm spotlight beam falling from high above, a chrome microphone on a tall stand, a drum kit on a riser behind, stacked keyboards to the left, monitor wedges, and a polished wooden stage floor reflecting the warm light, in a waist-up medium close-up, as the camera performs a dolly zoom.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke S4 lens at 50mm, warm amber stage lighting with a hard spotlight from above and deep shadow beyond it, rich saturated reds.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing completely still centre stage, lit by the overhead spotlight, with the microphone stand just in front of her and the red curtains, drum kit and keyboards behind her. The camera pushes in while simultaneously zooming out on the Cooke S4 lens, so that <Subject 1>'s size and position in frame stay exactly constant throughout, while the red curtains, the drum kit, the keyboards and the microphone stand behind her recede, shrink, and spread apart into much greater depth as the lens's focal length changes. As the shot plays out, <Subject 1>'s expression shifts from blank and neutral into dawning realization and slight shock: her eyes widen and focus more intensely, her brow lifts and tightens, her lips part slightly, and her breathing grows visibly shallower and faster, the change building through the middle of the shot and settling into a held, wide-eyed stillness by the end.\n\noverall_soundscape: The quiet room tone of a large empty auditorium continues throughout, with faint distant creaks and <Subject 1>'s breathing growing faster and shallower as the shot progresses.\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 1120,
+       "end": 1170
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1509,
+       "end": 1848
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "This prompt names a Cooke S4, which is a prime, on a shot that has to zoom. It was thought to matter and turned out not to."
+   ],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/dolly-zoom.md"
+    }
+   ]
+  },
+  {
+   "slug": "snorricam",
+   "title": "Snorricam",
+   "group": "specialty",
+   "still": {
+    "src": "img/h3-camera-shots/snorricam.jpg",
+    "thumb": "img/h3-camera-shots/snorricam-t.jpg",
+    "w": 864,
+    "h": 480
+   },
+   "time": 171,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "864×480"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "allie"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long light brown wavy hair, fair freckled skin, round gold-rimmed glasses, wearing a simple white slip dress with thin straps. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> running through a crowded indoor house party from room to room, in a head-and-shoulders close-up from just below her eyeline, as the camera performs a snorricam shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa Mini with a 14mm wide prime, the camera fixed rigidly to her torso so it moves exactly with her body, harsh mixed party lighting with warm tungsten sconces and coloured LED wash spilling from open doorways sweeping hard across her face as she passes each one, a rich saturated palette with deep shadow.\n[Shot 1] A head-and-shoulders close-up of <Subject 1>, framed from just below her eyeline a short distance in front of her and angled gently upward at her face, shows her whole head and both bare shoulders with a clear margin of open space above her hair, so that the top of her head never reaches the top of the frame, as she is running hard down a narrow, packed indoor corridor at a house party and banking round its corners into the rooms off it, her hair flying and the thin straps of her dress shifting with every stride, with people crushed shoulder to shoulder along both walls with drinks, shouting over the music, open doorways spilling coloured light ahead of her, a low ceiling strung with warm bulbs close overhead, and each room she banks into more congested than the last. <Subject 1> runs hard down the corridor and banks hard round each corner and through each doorway into the next crowded room, carried forward at the same speed from the first frame to the last, never breaking stride. Her shoulders and chest stay frozen in the frame throughout: they hold exactly the same place at exactly the same size in every single frame, never drifting a pixel, and her head is the only part of her that moves inside that frozen frame. Everything else is thrown onto the world. Tracking with her at fast speed and shaking strongly with large amplitude, the whole party - the ceiling lights, the door frames, the packed bodies pressed in on both sides - heaves and drops in exact time with her stride, and each time she banks into a turn the entire room whips sideways across the frame in one fast pan, the walls and the crowd sweeping past the lens fast enough to smear into streaks before the next room opens up ahead of her. <Subject 1> is already wide-eyed and frightened in the very first frame, her brows pulled up and together and her eyes stretched wide, and the fear only tightens as she runs: her stare fixes harder, her brows draw in further, and her breathing grows faster and more ragged through her nose. Her lips stay pressed together the whole way, the breath forced out through her nose. Her head rocks with the impact of every stride while her shoulders stay locked in place, and both arms swing freely and loosely at her sides in rhythm with her run, her hands open and relaxed.\n\noverall_soundscape: Her footfalls and breathing stay close, loud and constant, right up against the microphone, her breath tightening into a fast ragged hiss through her nose as the shot goes on, while the party swings and lurches around her with every stride, the music and shouting swelling hard as she banks into each new room and sweeping away behind her.\n\nnon_diegetic_music: A relentless two-note pulse locked exactly to her stride, one hit per footfall, never speeding up or slowing down, with a high thin dissonance creeping in above it and tightening as the shot goes on.",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 771,
+       "end": 893
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 2101,
+       "end": 2831
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/snorricam.md"
+    }
+   ]
+  },
+  {
+   "slug": "rack-focus",
+   "title": "Rack focus",
+   "group": "specialty",
+   "still": {
+    "src": "img/h3-camera-shots/rack-focus.jpg",
+    "thumb": "img/h3-camera-shots/rack-focus-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 210,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "allie"
+    },
+    {
+     "tag": "<Picture 3>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long dark brown wavy hair, warm olive skin and a bright open smile, wearing a white lace-trimmed cropped camisole and high-waisted beige trousers. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n<Subject 2> is the second young woman in <Picture 2>: long light brown wavy hair, fair freckled skin, round gold-rimmed glasses, wearing a simple white slip dress with thin straps. Her exact facial structure, features and proportions stay identical to <Picture 2> in every frame.\n<Subject 3> is the third young woman in <Picture 3>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 3> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> in the foreground with <Subject 2> and <Subject 3> talking together far behind her in a sunlit city rooftop terrace at golden hour, in a medium-wide shot, as the camera performs a rack focus.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n<Subject 2> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 2> in every frame with zero drift.\n<Subject 3> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 3> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke S4 75mm prime wide open, locked off, focus pulled with a follow focus, warm golden-hour sunlight with strong lens flare, a rich saturated palette.\n[Shot 1] A medium-wide shot holds two distinct depth planes at once: <Subject 1> close to camera and the rooftop opening out well behind her. She is standing in place on the warm rooftop deck, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with low sun flaring between distant towers, potted plants and strings of lights behind her. The camera holds a static shot. <Subject 1> stands close to camera in sharp focus while <Subject 2> and <Subject 3> stand talking together far behind her, soft and unfocused. <Subject 1> slowly turns her head to look back at them, and the focus racks from her face to the two women - she falls into soft blur exactly as they resolve sharply. <Subject 1>'s idle curiosity sharpens into recognition as she turns, while <Subject 2> and <Subject 3> stay absorbed in their own conversation, laughing quietly together.\n\noverall_soundscape: The two women's quiet conversation and laughter sits distant and indistinct behind the rooftop ambience, then lifts forward and becomes clearly audible as the focus reaches them.\n\nnon_diegetic_music: A faint sustained pad that shifts harmony once, at the moment the focus changes.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 1813,
+       "end": 1917
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 2404,
+       "end": 2745
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/rack-focus.md"
+    }
+   ]
+  },
+  {
+   "slug": "split-screen",
+   "title": "Split screen",
+   "group": "specialty",
+   "still": {
+    "src": "img/h3-camera-shots/split-screen.jpg",
+    "thumb": "img/h3-camera-shots/split-screen-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 245,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> seated at a desk in a dim room at night, in a three-panel split screen, as the camera performs a three-panel split screen.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa Mini with a 35mm prime, locked off, cool monitor light on her face against a warm dim room, a muted contemporary palette.\n[Shot 1] The frame is divided into three equal vertical panels side by side, separated by thin black gutters. The left panel holds <Subject 1>, seated at a cluttered desk typing on a keyboard, a bright monitor in front of her, a mug and scattered papers beside it, a dark room and a rain-streaked window behind her. Every panel is locked off and completely static; nothing pans, zooms or moves at any point. The three panels open one after another at even intervals, two full seconds apart. The left panel plays from the very first frame, showing her from her left side in profile as she types, while the centre and right panels are solid black. The centre panel stays black for two whole seconds and comes on two seconds into the shot, showing the same moment from the front, framed over the back of the monitor with the screen glow on her face. The right panel stays solid black for two whole seconds longer than the centre one and comes on four seconds into the shot, showing her from behind in full, her back and the bright monitor in view. For the last four seconds all three panels play together in perfect sync, the same continuous typing at the same instant from three different angles. <Subject 1> types steadily and continuously throughout, her hands staying on the keyboard, pausing once to read the screen before carrying on.\n\noverall_soundscape: Steady keyboard clatter, close and continuous, over the low hum of a quiet room, with a chair creaking once.\n\nnon_diegetic_music: A tight rhythmic pulse locked to the typing, a new layer entering each time another panel opens.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 863,
+       "end": 919
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1016,
+       "end": 2201
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "This prompt states absolute reveal times (2s, 4s). H3 ignored them: it opened the last panel at 2.46s in two different runs. It is kept exactly as it ran."
+   ],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/split-screen.md"
+    }
+   ]
+  },
+  {
+   "slug": "whip-pan",
+   "title": "Whip pan",
+   "group": "pan and roll",
+   "still": {
+    "src": "img/h3-camera-shots/whip-pan.jpg",
+    "thumb": "img/h3-camera-shots/whip-pan-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 287,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    },
+    {
+     "tag": "<Picture 2>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n<Subject 2> is the second young woman in <Picture 2>: shoulder-length dark brown wavy hair, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 2> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> and <Subject 2> standing apart on a snow-covered arctic coastline, in waist-up medium close-ups, as the camera performs a whip pan.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n<Subject 2> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 2> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa Mini with a Zeiss Ultra Prime 35mm, on a fluid-head tripod, cold blue-green arctic lighting with the aurora glowing softly overhead, a slightly desaturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing completely still on the snowy rocky shore, with dark rocky cliffs, patches of green aurora borealis in the sky, still water, and an old wooden sailing ship with tall masts anchored behind her. The camera starts framed on <Subject 1>, then whip pans right away from her and lands on <Subject 2> standing further along the shore, the cliffs and snow between them smearing into streaked horizontal motion blur through the middle of the move, the frame settling and resolving sharply on <Subject 2>'s face. <Subject 1>'s expression is caught mid-realization in the instant before the camera leaves her, and <Subject 2> is already turning to look back as the frame settles on her - the shot ends held on <Subject 2>, not on <Subject 1>.\n\noverall_soundscape: A faint cold wind continues throughout, with distant creaking from the ship's rigging, and <Subject 1>'s breathing growing faster and shallower as the shot progresses.\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 1294,
+       "end": 1374
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1738,
+       "end": 2047
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/whip-pan.md"
+    }
+   ]
+  },
+  {
+   "slug": "dutch-angle",
+   "title": "Dutch angle",
+   "group": "pan and roll",
+   "still": {
+    "src": "img/h3-camera-shots/dutch-angle.jpg",
+    "thumb": "img/h3-camera-shots/dutch-angle-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 324,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a snow-covered pine forest at dusk, in a waist-up medium close-up, as the camera performs a dutch angle shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke S4 35mm prime, on a tripod with the head canted over, cold blue dusk light filtering down through the pines, a muted desaturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing completely still on the snow between the trees, with tall dark conifers receding into blue mist, snow lying heavy on the branches behind her. The camera rolls counterclockwise into a canted dutch angle and holds there, the horizon tilted, <Subject 1> off-axis. As the shot plays out, <Subject 1>'s expression shifts from blank and neutral into dawning realization and slight shock: her eyes widen and focus more intensely, her brow lifts and tightens, her lips part slightly, and her breathing grows visibly shallower and faster, the change building through the middle of the shot and settling into a held, wide-eyed stillness by the end.\n\noverall_soundscape: Deep forest hush, snow settling from branches, a distant crack of timber, and <Subject 1>'s breathing growing faster and shallower as the shot progresses.\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 723,
+       "end": 810
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1102,
+       "end": 1220
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/dutch-angle.md"
+    }
+   ]
+  },
+  {
+   "slug": "super-dolly-in",
+   "title": "Super dolly in",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/super-dolly-in.jpg",
+    "thumb": "img/h3-camera-shots/super-dolly-in-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 361,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a snow-covered pine forest at dusk, in an extreme wide shot, as the camera performs a super dolly in.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke S4 35mm prime, on a dolly running on track, cold blue dusk light filtering down through the pines, a muted desaturated palette.\n[Shot 1] An extreme wide shot looks straight down a forest track, the trunks of two near pines rising close at the left and right edges of frame, and places <Subject 1> small and distant at the far end of it, standing in place on the snow between the trees, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with tall dark conifers receding into blue mist, snow lying heavy on the branches behind her. The camera pushes in with large amplitude at fast speed, charging the entire length of the track toward her: the two near pines sweep outward past the edges of frame and out of shot as the camera passes them, further trunks rush by on both sides and the snow streams underneath, and the move ends in a tight close-up with her face filling the frame. <Subject 1>'s expression hardens into defiance as the camera closes on her - jaw setting, chin lifting, her gaze steady and level by the end.\n\noverall_soundscape: Deep forest hush and snow settling from branches, building into a rushing wall of air with snow and needles streaming past, then dropping away to close, still quiet on her face.\n\nnon_diegetic_music: A low sustained bass tone climbing steadily in pitch and volume through the whole shot, cut off dead on the final frame.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 715,
+       "end": 792
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1353,
+       "end": 1702
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/super-dolly-in.md"
+    }
+   ]
+  },
+  {
+   "slug": "eyes-in",
+   "title": "Eyes in",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/eyes-in.jpg",
+    "thumb": "img/h3-camera-shots/eyes-in-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 390,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a snow-covered arctic coastline, in a waist-up medium close-up, as the camera performs a slow push in to the eyes.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa with a Cooke S4 75mm prime, on a slider for a slow push, cold blue-green arctic lighting with the aurora glowing softly overhead, a slightly desaturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing in place on the snowy rocky shore, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with dark rocky cliffs, patches of green aurora borealis in the sky, still water, and an old wooden sailing ship with tall masts anchored behind her. The camera pushes in with large amplitude at slow speed toward <Subject 1>'s face and keeps going past it until her right eye fills the entire frame edge to edge, the iris and pupil filling the view. <Subject 1>'s expression tightens slowly into dread as the camera closes - pupils contracting, a single blink, then held wide and unmoving.\n\noverall_soundscape: Cold wind and distant surf receding steadily into muffled quiet, until nothing is left but one slow heartbeat as the eye fills the frame.\n\nnon_diegetic_music: A high sustained string that tightens and narrows as the shot closes in, thinning to a single thread.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 873,
+       "end": 950
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1429,
+       "end": 1628
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/eyes-in.md"
+    }
+   ]
+  },
+  {
+   "slug": "aerial-pullback",
+   "title": "Aerial pullback",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/aerial-pullback.jpg",
+    "thumb": "img/h3-camera-shots/aerial-pullback-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 418,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a snow-covered pine forest at dusk, in a waist-up medium close-up, as the camera performs an aerial pullback.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on a RED V-Raptor with a 14mm wide prime, flown on a drone, cold blue dusk light filtering down through the pines, a muted desaturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing in place on the snow between the trees, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with tall dark conifers receding into blue mist, snow lying heavy on the branches behind her. The camera pulls out with large amplitude at fast speed while pedestalling up, rising and retreating until <Subject 1> is a small lone figure far below and the whole forest opens out around her. <Subject 1> stands alone and unmoving as she recedes, head tipping slowly back to take in the scale of the place as it opens around her.\n\noverall_soundscape: Deep forest hush, snow settling from branches, a distant crack of timber, and <Subject 1>'s breathing stays audible throughout.\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 723,
+       "end": 786
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1193,
+       "end": 1387
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/aerial-pullback.md"
+    }
+   ]
+  },
+  {
+   "slug": "handheld",
+   "title": "Handheld",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/handheld.jpg",
+    "thumb": "img/h3-camera-shots/handheld-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 447,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a snow-covered arctic coastline, in a waist-up medium close-up, as the camera performs a handheld shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa Mini with a Canon K-35 35mm, handheld and running with her, cold blue-green arctic lighting with the aurora glowing softly overhead, a slightly desaturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> running on the snowy rocky shore, hair flying and clothing snapping with the movement, with dark rocky cliffs, patches of green aurora borealis in the sky, still water, and an old wooden sailing ship with tall masts anchored behind her. The camera shakes strongly at fast speed while performing a tracking shot alongside <Subject 1> as she runs, the frame lurching and correcting with every stride. <Subject 1> runs with urgent purpose, lips pressed closed and jaw set, glancing back once over her shoulder without breaking stride.\n\noverall_soundscape: A faint cold wind continues throughout, with distant creaking from the ship's rigging, and <Subject 1>'s breathing stays audible throughout.\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 862,
+       "end": 942
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1341,
+       "end": 1502
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/handheld.md"
+    }
+   ]
+  },
+  {
+   "slug": "orbit-360",
+   "title": "360 orbit",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/orbit-360.jpg",
+    "thumb": "img/h3-camera-shots/orbit-360-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 482,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long dark brown wavy hair, warm olive skin and a bright open smile, wearing a white lace-trimmed cropped camisole and high-waisted beige trousers. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a sunlit city rooftop terrace at golden hour, in a waist-up medium close-up, as the camera performs a 360 orbit.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on an ARRI Alexa Mini with a Zeiss Ultra Prime 35mm, on a gimbal circling her, warm golden-hour sunlight with strong lens flare, a rich saturated palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> standing in place on the warm rooftop deck, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with low sun flaring between distant towers, potted plants and strings of lights behind her. The camera performs an arc shot around <Subject 1> with large amplitude at fast speed, sweeping a complete circle around her and coming back to the front. <Subject 1> stays where she is through the sweep, turning her head slightly to keep the camera in view, a slow private smile spreading, hair lifting in the rooftop breeze as though she is the only calm thing in a turning world.\n\noverall_soundscape: City traffic far below turning steadily around her, one continuous sweep of wind, strings of lights ticking past in turn.\n\nnon_diegetic_music: A circling arpeggio that completes exactly one full turn and lands back on the note it started on.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 755,
+       "end": 837
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1230,
+       "end": 1384
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/orbit-360.md"
+    }
+   ]
+  },
+  {
+   "slug": "crane-rise",
+   "title": "Crane rise",
+   "group": "tracking",
+   "still": {
+    "src": "img/h3-camera-shots/crane-rise.jpg",
+    "thumb": "img/h3-camera-shots/crane-rise-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 510,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "552013742"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "allie"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long light brown wavy hair, fair freckled skin, round gold-rimmed glasses, wearing a simple white slip dress with thin straps. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a sunlit summer meadow, in a waist-up medium close-up, as the camera performs a crane shot over the head.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot on a RED V-Raptor with a 35mm prime, flown on a drone tracking alongside her, warm soft afternoon sunlight, a bright natural palette.\n[Shot 1] A waist-up medium close-up frames <Subject 1> running steadily through the tall grass, hair flying and clothing snapping with the movement, with dry grass and wildflowers moving in the breeze, a soft distant treeline behind her. The camera starts low at <Subject 1>'s feet as she runs, then performs a tracking shot with large amplitude at fast speed, pedestalling up and tilting down to follow her from high overhead while she stays centred and sharp in frame. <Subject 1> runs at a steady rhythm with her lips closed and her jaw relaxed, chin level and hair flying, her expression easing out of hard concentration into open delight as the camera lifts away from her.\n\noverall_soundscape: Her footfalls and the hiss of grass close by at the start, thinning out into open air, high wind and distant birdsong.\n\nnon_diegetic_music: A single held note that opens outward into a wide major chord across the shot.\n",
+     "highlights": [
+      {
+       "kind": "gear",
+       "label": "Camera and lens",
+       "start": 728,
+       "end": 809
+      },
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1105,
+       "end": 1337
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "This prompt says \"flown on a drone\" in the style line. Naming equipment there is something the shot recipes now advise against."
+   ],
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crane-rise.md"
+    }
+   ]
+  }
+ ]
+}

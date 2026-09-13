@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>MiniMax H3 with the Turbo LoRA: findings and every prompt | Loop Forge</title>
+<meta name="description" content="The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.">
+<link rel="canonical" href="https://loopforge.cc/projects/h3-turbo-lora/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loop Forge">
+<meta property="og:title" content="MiniMax H3 with the Turbo LoRA: findings and every prompt | Loop Forge">
+<meta property="og:description" content="The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.">
+<meta property="og:url" content="https://loopforge.cc/projects/h3-turbo-lora/">
+<meta property="og:image" content="https://loopforge.cc/assets/img/h3-turbo-lora/six-steps-speech.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/loopforge-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v=10">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "VideoObject", "name": "MiniMax H3 + Turbo LoRA: image to video with sound on low VRAM", "description": "The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.", "uploadDate": "2026-08-15", "thumbnailUrl": "https://loopforge.cc/assets/img/video/97OYZMksJsQ.jpg", "url": "https://www.youtube.com/watch?v=97OYZMksJsQ", "embedUrl": "https://www.youtube.com/embed/97OYZMksJsQ", "publisher": {"@type": "Organization", "name": "Loop Forge", "url": "https://loopforge.cc/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you run MiniMax H3 on a 12GB GPU?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Everything local on this site ran on an RTX 3060 with 12GB of VRAM, including speech, singing and a one minute short film. The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word. Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/loopforge-logo.png" alt="" width="38" height="38">Loop Forge</a>
+    <nav aria-label="Site"><a href="/projects/" aria-current="page">Projects</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme"><svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg><svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></button>
+  </div>
+</header>
+<main id="main">
+
+<div class="wrap">
+  <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a></div>
+  <header class="col-head">
+    <div>
+      <p class="when">15 August 2026</p>
+      <h1 class="display page-title">MiniMax H3 with the Turbo LoRA</h1>
+      <div class="summary"><p>The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.</p></div>
+      
+      <dl class="facts"><dt>Base model</dt><dd>minimax_h3_fl2va_pruned_int8_convrot</dd><dt>Text encoder</dt><dd>qwen3vl_32b_minimax_h3_nvfp4_awq</dd><dt>Turbo LoRA</dt><dd>minimax_h3_turbo_v4_step600_ema</dd><dt>Sampling</dt><dd>6 steps, simple scheduler</dd></dl>
+    </div>
+    <div>
+      <a class="yt" href="https://www.youtube.com/watch?v=97OYZMksJsQ" target="_blank" rel="noopener">
+        <img src="/assets/img/video/97OYZMksJsQ.jpg" alt="" width="1280" height="720"><span class="play">Watch on YouTube</span></a>
+      <p class="yt-caption">MiniMax H3 + Turbo LoRA: image to video with sound on low VRAM. Opens on YouTube in a new tab.</p>
+    </div>
+  </header>
+  <section class="block"><h2 class="section">What we found</h2><div class="topics"><article class="topic" id="low-vram"><h3 class="question">Can you run MiniMax H3 on a 12GB GPU?</h3><div class="topic-a"><p>Yes. Everything local on this site ran on an RTX 3060 with 12GB of VRAM, including speech, singing and a one minute short film.</p><p>The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word.</p><p>Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768.</p><ul class=topic-links><li><a href="/projects/h3-turbo-lora/six-steps-speech/">The six-step speech prompt</a></li><li><a href="https://civitai.com/api/download/models/3232626?fileId=3115029">The Turbo LoRA workflow, on Civitai</a></li></ul></div></article></div></section>
+  <section class="block" id="prompts">
+    <h2 class="section">1 prompt</h2>
+    <section class="group"><div class="sheet portrait"><a class="frame" href="/projects/h3-turbo-lora/six-steps-speech/"><div class="img"><img src="/assets/img/h3-turbo-lora/six-steps-speech-t.jpg" alt="" width="608" height="864" loading="lazy" decoding="async"></div><h3>Speaking to camera at six steps</h3></a></div></section>
+  </section>
+  <section class="block">
+    <h2 class="section">Reference images</h2>
+    <div class="refs"><figure class="ref"><a href="/assets/img/h3-turbo-lora/start.jpg"><img src="/assets/img/h3-turbo-lora/start-t.jpg" alt="Start image, The still the clip was generated from" width="832" height="1216" loading="lazy" decoding="async"></a><figcaption>Start image<span>The still the clip was generated from</span></figcaption></figure></div>
+  </section>
+  <section class="block">
+    <h2 class="section">Materials and links</h2>
+    <ul class="links"><li><a href="https://www.youtube.com/watch?v=97OYZMksJsQ">Watch “MiniMax H3 + Turbo LoRA: image to video with sound on low VRAM” on YouTube</a></li><li><a href="https://civitai.com/api/download/models/3232626?fileId=3115029">The workflow, on Civitai</a></li><li><a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a></li></ul>
+  </section>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>Loop Forge. Prompts, ComfyUI workflows and findings from projects with AI models you can run.</span>
+    <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+  </div>
+</footer>
+<script src="/assets/site.js?v=10" defer></script>
+<!-- Cloudflare Web Analytics: cookieless, stores nothing on the visitor's device and does not fingerprint,
+     so no consent banner is required. The same token goes on every page under loopforge.cc. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1315e25973424cb396840b167fdcc1da"}'></script>
+</body>
+</html>
