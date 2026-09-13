@@ -73,16 +73,6 @@
      "prompt": "stage-1"
     }
    ]
-  },
-  {
-   "id": "h3-vs-ltx",
-   "question": "Which is better, MiniMax H3 or LTX 2.5?",
-   "findings": [
-    "Across nine rounds from the same still images on one RTX 3060, MiniMax H3 won five and LTX 2.5 won three, with a bonus round on turn-taking speech outside the count.",
-    "LTX is much faster. A five second clip took about 5½ minutes on LTX's default workflow, against about 38 minutes for H3 at 20 steps and about 13 minutes with H3's 6-step Turbo LoRA.",
-    "LTX is more forgiving with prompts but tends to skip parts of them. H3 took more attempts to get the audio right, and generally did better with the video and with songs."
-   ],
-   "links": []
   }
  ],
  "h3-turbo-lora": [
