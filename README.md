@@ -33,3 +33,21 @@ The href is just the repository name. Nothing else needs to change.
 Apex `loopforge.cc` → four A records and four AAAA records at the GitHub Pages addresses.
 `www.loopforge.cc` → CNAME to `loopforge0.github.io`. The `CNAME` file in this repo must keep
 matching the domain set in the repository's Pages settings, or GitHub unsets the domain.
+
+## Analytics
+
+[Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) — free, cookieless,
+sets nothing on the visitor's device and does not fingerprint, so **no cookie consent banner is
+required** under the EU/UK ePrivacy Directive. (GA4 would require one; that is why it is not used.)
+
+The beacon `<script>` sits just above `</body>`. The **same site token** is used across every repo
+served under this domain, so `loopforge.cc/` and `loopforge.cc/<repo-name>/` report into one
+dashboard rather than showing up as separate properties.
+
+**When adding a page (see above), also paste the beacon block into that repo's HTML**, or its
+traffic will be invisible — which matters, since the linked-from-a-video pages are usually the
+busiest ones.
+
+The token is generated at Cloudflare dashboard → Analytics & Logs → Web Analytics → Add a site
+(`loopforge.cc`). It is a public site identifier, not a secret — it ships in the page source by
+design. No DNS change and no Cloudflare proxying needed; the JS beacon works on GitHub Pages as-is.
