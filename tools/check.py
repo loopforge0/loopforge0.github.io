@@ -65,8 +65,6 @@ def main():
             u = urlparse(ref)
             if u.scheme or u.netloc or not u.path.startswith("/"):
                 continue
-            if u.path.startswith("/minimaxh3-shots-skills/"):
-                continue   # served by that repository's own Pages site
             target = ROOT / u.path.lstrip("/")
             if u.path.endswith("/"):
                 target = target / "index.html"

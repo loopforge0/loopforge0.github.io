@@ -196,11 +196,10 @@ def import_shots():
         "groups": [{"id": g, "title": t} for g, t in SHOT_GROUP_TITLES.items()],
         "refs": list(refs.values()),
         "links": [
-            {"label": "The original shots gallery", "url": "/minimaxh3-shots-skills/"},
             {"label": "Repository with agent skills that write these for your own scene",
              "url": "https://github.com/loopforge0/minimaxh3-shots-skills"},
             {"label": "ComfyUI workflow (json)",
-             "url": "/minimaxh3-shots-skills/assets/workflow/h3_dollyzoom_test_v6flip.json"},
+             "url": "/assets/workflows/h3-camera-shots.json"},
             {"label": "MiniMax's official prompt writing guide",
              "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"},
         ],
