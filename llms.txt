@@ -46,12 +46,6 @@ Published 21 August 2026. 10 prompts. MiniMax H3 and LTX 2.5 are both open-weigh
 - Turn the model's own music off in the prompt and score in the edit. Separately generated music will not line up across cuts or joins.
 - Size each render to the words it has to carry. Runtime with nothing scripted in it is where the model invents speech-shaped filler, and on speech the two models fail differently: one hallucinates dialogue nobody asked for, the other returns silence.
 
-**Which is better, MiniMax H3 or LTX 2.5?**
-
-- Across nine rounds from the same still images on one RTX 3060, MiniMax H3 won five and LTX 2.5 won three, with a bonus round on turn-taking speech outside the count.
-- LTX is much faster. A five second clip took about 5½ minutes on LTX's default workflow, against about 38 minutes for H3 at 20 steps and about 13 minutes with H3's 6-step Turbo LoRA.
-- LTX is more forgiving with prompts but tends to skip parts of them. H3 took more attempts to get the audio right, and generally did better with the video and with songs.
-
 ### [MiniMax H3 with the Turbo LoRA](https://loopforge.cc/projects/h3-turbo-lora/)
 
 Published 15 August 2026. 1 prompts. The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.
