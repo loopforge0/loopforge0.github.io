@@ -1,0 +1,183 @@
+{
+  "1000": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "04.png"
+    }
+  },
+  "1001": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "09.png"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "6": {
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "audio_vae": [
+        "4",
+        0
+      ],
+      "prompt": "subject_definitions:\n<Subject 1> is the woman in <Picture 1>, with olive skin, dark brown eyes, strong straight eyebrows, an oval face, and very dark brown hair pulled back from her face. Her facial structure and proportions remain recognizable while her cream linen top is replaced by a fitted burgundy dance top and a knee-length black skirt.\n<Subject 2> is the woman in <Picture 2>, with warm tan skin, brown eyes, softly arched brows, an oval face, and curly mid-brown hair worn loose to her shoulders. Her facial structure and proportions remain recognizable while her navy top is replaced by a fitted teal dance top and dark tailored trousers.\n\nsummary:\n[reference generation] The target video shows <Subject 1> and <Subject 2> dancing a fast swing routine together in a plain rehearsal studio, filmed from a locked-off tripod in one continuous five-second shot. The camera never moves, so all motion in frame comes from the dancers, giving a pure fast-subject-motion and motion-blur stress test.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): partially_preserved - her olive complexion, dark brown eyes, strong straight brows, oval face and very dark pulled-back hair are retained, while her wardrobe changes to burgundy dance clothing.\n<Subject 2> (appears in [Shot 1]): partially_preserved - her warm tan complexion, brown eyes, oval face and loose curly mid-brown hair are retained, while her wardrobe changes to teal dance clothing.\n\ndetailed_description:\nThe target video is photographic live action with even, bright, neutral studio lighting, realistic skin and fabric texture, natural motion blur on fast-moving limbs, and no cel shading, no film grain overlay and no texture noise. The full duration is one continuous shot with no cut, transition, zoom, slow motion, time ramp or freeze frame.\n[Shot 1] The camera is locked off on a tripod in a fixed wide framing and does not pan, tilt, zoom, track, shake or move in any way for the entire shot; the floor line, the plain pale grey rear wall, the skirting board and the frame edges stay in exactly the same screen position from the first frame to the last. The room is a plain dance rehearsal studio with a smooth mid-tone wooden floor, a plain pale grey rear wall, and no furniture, no mirrors, no windows and no signage. <Subject 1> in burgundy and <Subject 2> in teal face each other in the centre of the frame, both fully in shot from head to foot, and dance a rapid swing routine at roughly two steps per second throughout. They perform quick triple-step footwork, a fast joined-hand turn where <Subject 2> spins a full rotation under <Subject 1>'s raised arm, a sharp rock-step apart, and a second faster spin, with their hair, skirt hem and sleeves swinging visibly with each movement and trailing natural motion blur on the fastest limbs. Their feet leave and meet the floor rapidly and their shadows move across the wooden boards. Both faces pass through frontal and three-quarter views as they turn, remaining readable whenever they face camera. <Subject 1> keeps her very dark pulled-back hair and strong brows and <Subject 2> keeps her loose curly mid-brown hair, matching <Picture 1> and <Picture 2> respectively. The wooden floorboard seams and the straight horizontal skirting line behind them remain geometrically fixed and sharp throughout, giving a static reference against the fast subject motion. Lighting is broad, even and shadowless overhead studio light with no lens flare and no specular blowout. The final frame still shows both dancers in the centre of the same fixed framing, mid-step and still moving.\n\noverall_soundscape:\nRapid shoe taps and slides on a wooden floor, fabric rustle, and quiet room tone remain clean and understated.\n\nnon_diegetic_music:\nA brisk upbeat swing rhythm with brushed drums and an upright bass plays steadily with no vocals and no crescendo.",
+      "width": 1024,
+      "height": 576,
+      "length": 124,
+      "ref_image_size": "max",
+      "ref_images.ref_image_0": [
+        "1000",
+        0
+      ],
+      "ref_images.ref_image_1": [
+        "1001",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 707042
+    }
+  },
+  "8": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "res_multistep"
+    }
+  },
+  "9": {
+    "class_type": "BasicScheduler",
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "scheduler": "simple",
+      "steps": 20,
+      "denoise": 1.0
+    }
+  },
+  "10": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "7",
+        0
+      ],
+      "guider": [
+        "10",
+        0
+      ],
+      "sampler": [
+        "8",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        1
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ],
+      "audio": [
+        "13",
+        0
+      ],
+      "fps": 24.0
+    }
+  },
+  "15": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "14",
+        0
+      ],
+      "filename_prefix": "h3-upscaling-candidates/S07-dance-0p6mp",
+      "format": "auto"
+    }
+  }
+}

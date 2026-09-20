@@ -1,0 +1,103 @@
+{
+  "1": {
+    "class_type": "VHS_LoadVideoPath",
+    "inputs": {
+      "video": "E:\\repos\\h3-upscaling\\inputs\\frozen\\S04.mp4",
+      "force_rate": 0,
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1
+    }
+  },
+  "2": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "fps": 24.0
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EncodeVideoComponents",
+    "inputs": {
+      "video": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "width": 1024,
+      "height": 576,
+      "max_frames": 0,
+      "upscale_method": "lanczos",
+      "keep_proportion": "stretch"
+    }
+  },
+  "5": {
+    "class_type": "MinimaxH3LatentUpscaler3D",
+    "inputs": {
+      "latent": [
+        "4",
+        0
+      ],
+      "model_name": "minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "mode": "target dimensions",
+      "mode.width": 2048,
+      "mode.height": 1152,
+      "align": 32,
+      "enable_temporal_chunking": true,
+      "force_unload": true,
+      "device": "cuda",
+      "precision": "fp16"
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ],
+      "frame_rate": 24.0,
+      "loop_count": 0,
+      "filename_prefix": "h3-upscaling-matrix/M06-S04-native",
+      "format": "video/ffv1-mkv",
+      "pingpong": false,
+      "save_output": true,
+      "level": 3,
+      "coder": 1,
+      "context": 1,
+      "gop_size": 1,
+      "slices": 16,
+      "slicecrc": 1,
+      "pix_fmt": "yuv444p",
+      "save_metadata": true,
+      "trim_to_audio": false
+    }
+  }
+}

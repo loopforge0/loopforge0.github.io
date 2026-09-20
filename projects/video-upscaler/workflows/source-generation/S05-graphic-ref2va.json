@@ -1,0 +1,116 @@
+{
+  "1000": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "14.png"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "6": {
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "inputs": {
+      "clip": ["2", 0],
+      "vae": ["3", 0],
+      "audio_vae": ["4", 0],
+      "prompt": "subject_definitions:\n<Subject 1> is the young East Asian woman in <Picture 1>, with warm light skin, brown eyes, a softly oval face, and straight dark-brown shoulder-length hair. Her facial structure and proportions remain recognizable while her neutral sweater is replaced by a simple cel-shaded teal transit jacket.\n\nsummary:\n[reference generation] The target video shows <Subject 1> walking through a stylized cel-shaded science-fiction metro platform beneath a large rigid sign reading LOOP 47 while the camera trucks slowly right in one continuous five-second shot. Stable typography, contour lines, geometric panels, and repeated platform markings provide the hard-edge stress test.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): partially_preserved - her facial identity, brown eyes, softly oval face, and straight shoulder-length dark hair are retained, while her wardrobe and rendering style change to a flat-colored cel-shaded transit design.\n\ndetailed_description:\nThe target video uses clean two-dimensional cel shading with flat teal, cream, orange, and charcoal color fields, uniform black contour lines, no photographic depth-of-field blur, no film grain, and no texture noise. The full duration is one continuous shot with no cut, transition, zoom, slow motion, time ramp, or freeze frame.\n[Shot 1] A medium-wide view establishes a futuristic metro platform built from rigid rectangular wall panels, straight black seams, evenly spaced vertical columns, parallel ceiling rails, and a repeating orange safety stripe along the platform edge. A large cream rectangular station sign remains fixed in the upper third of the frame for the entire shot. The sign contains exactly one centered line of bold charcoal sans-serif capital letters and numerals reading LOOP 47. The visible text must remain precisely LOOP 47 from the first frame through the last frame, with the same seven characters, spacing, baseline, stroke weight, rectangular sign border, and orientation; no extra letters, symbols, substitutions, distortion, shimmer, or rewriting appear. <Subject 1> enters already visible at frame left and walks at a measured pace toward frame right beneath the sign. Her warm light complexion, brown eyes, softly oval facial structure, and straight dark-brown shoulder-length hair match <Picture 1>, translated into the same flat cel-shaded style. She wears a simple teal transit jacket with an orange shoulder patch, charcoal trousers, and clean black shoes. Her face remains readable in three-quarter view, her hair swings slightly as she walks, and she glances upward at the sign once around 00:02.000 before looking forward again. The camera trucks slowly right on a perfectly level path, matching part of her movement while retaining visible parallax among the foreground safety stripe, the woman, the columns, and the rear wall. A small white service robot with a round black display rolls left behind her at constant speed, its circular wheels and two thin antenna lines staying geometrically intact. Platform-edge chevrons, thin door outlines, small circles, and repeated diagonal hazard marks remain sharp and stable as they cross the frame. Lighting is broad and shadowless except for one simple hard-edged shadow beneath each subject. The final frame still shows the complete LOOP 47 sign in the upper third, with <Subject 1> near frame center and the robot farther left, all contour lines unbroken.\n\noverall_soundscape:\nSoft electric ventilation, measured shoe taps, a quiet rolling-motor hum from the robot, and one distant train chime remain clean and understated.\n\nnon_diegetic_music:\nA minimal steady three-note analog-synth pattern plays quietly with no vocals and no crescendo.",
+      "width": 1024,
+      "height": 576,
+      "length": 124,
+      "ref_image_size": "max",
+      "ref_images.ref_image_0": ["1000", 0]
+    }
+  },
+  "7": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 920604
+    }
+  },
+  "8": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "res_multistep"
+    }
+  },
+  "9": {
+    "class_type": "BasicScheduler",
+    "inputs": {
+      "model": ["5", 0],
+      "scheduler": "simple",
+      "steps": 20,
+      "denoise": 1.0
+    }
+  },
+  "10": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": ["5", 0],
+      "conditioning": ["6", 0]
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": ["7", 0],
+      "guider": ["10", 0],
+      "sampler": ["8", 0],
+      "sigmas": ["9", 0],
+      "latent_image": ["6", 1]
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["3", 0]
+    }
+  },
+  "13": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "14": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": ["12", 0],
+      "audio": ["13", 0],
+      "fps": 24.0
+    }
+  },
+  "15": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": ["14", 0],
+      "filename_prefix": "h3-upscaling-candidates/S04-particles-0p6mp",
+      "format": "auto"
+    }
+  }
+}

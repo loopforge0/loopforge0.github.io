@@ -56,6 +56,30 @@ Published 15 August 2026. 1 prompts. The Turbo LoRA setup for MiniMax H3: six st
 - The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word.
 - Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768.
 
+### [Video upscaling methods compared](https://loopforge.cc/projects/video-upscaler/)
+
+Published 20 September 2026. Eleven upscalers on the same five clips, every output at exactly 2x. The test clips are AI-generated (MiniMax H3), so results here describe how these methods behave on synthetic footage rather than camera footage. Ten of the eleven methods are general-purpose; the MiniMax H3 latent upscaler is the exception and only works on H3 output.
+
+**SeedVR2's default chunking on a 12 GB card**
+
+- SeedVR2 processes a clip in temporal chunks. On a 12 GB card its auto mode resolves to frames_per_chunk=1 - one latent frame, about four pixel frames - and temporal_overlap resolves to zero, so the crossfade between chunks never engages. Setting chunking_mode=manual, frames_per_chunk=21, temporal_overlap=2 changes that without changing the model, the card or anything else.
+- The table measures a mod-4 periodicity metric: mean absolute inter-frame luma difference grouped by frame index modulo 4, which is the pixel-frame period of one latent frame at the VAE's 4:1 temporal compression. Lower is less periodic. Going from 4 frames to 21 moves every clip; going from 21 to the whole clip moves them by 0.6-2.9 points and is flat on one.
+
+**The SeedVR2 7B int8 checkpoint outputs black frames**
+
+- seedvr2_7b_int8_convrot.safetensors produced an entirely black result on this stack - every sampled frame at YMIN=YAVG=YMAX=16. Resolution, frame count, fps and codec checks all passed it; only the file size looked wrong, at 8.95 MB against 140-182 MB for the same geometry elsewhere.
+- Isolated on one pod with one ComfyUI commit and one VAE: the 3B int8 checkpoint produced real content at both chunk sizes tested, and the 7B int8 checkpoint was black at both. seedvr2_7b_fp16 works, and ran faster - 129.8 s against the 3B int8's 214.1 s on the same clip, because the int8 path falls back to emulated kernels on this CUDA build.
+
+**At 4x**
+
+- The Dance clip upscaled 4x in a single SeedVR2 7B fp16 pass: 4096x2304, 124 frames, mod-4 spread 5.4% against a 7.6% Lanczos floor for that clip, with VRAM forcing the chunk down from 121 to 33. One pass rather than two chained 2x passes, since chaining would treat the first pass's output as ground truth for the second.
+
+**Comparing the two paid services fairly**
+
+- Topaz Starlight and Flux 3.0 both take a target resolution rather than a scale factor, so neither landed on exactly 2x: Topaz at 2.86x or 3.75x, Flux at 1.88x or 2.50x. The player shows both resampled to the 2x comparison size; the as-delivered versions are in Extras.
+- That resampling is not neutral. Topaz is downscaled on every clip, which is a supersampling advantage over methods that rendered natively at 2x. Flux is upscaled on two clips, because at 1.88x it returned fewer pixels than the comparison size.
+- Neither can be reproduced from this page: there is no workflow to publish, no checkpoint to pin, and any denoise or sharpening they apply cannot be switched off. The vendor can also change the model behind the same product name, so this is a snapshot of one date.
+
 ## Optional
 
 - [YouTube channel](https://www.youtube.com/@LoopForge0)
