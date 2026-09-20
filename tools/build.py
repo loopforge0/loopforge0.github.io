@@ -380,8 +380,16 @@ def rig_html(site):
 def build_home(cols, site):
     by_slug = {c["slug"]: c for c in cols}
     latest = timeline(cols)[0]
+    # Featured is a curated list in site.json and is the ONLY other place a project appears
+    # on the home page. A project that is neither latest nor featured is not here at all, so
+    # when something new takes the latest slot the outgoing one has to be added to featured
+    # or it drops off the page silently. That is what happened to h3-camera-shots.
     featured = [by_slug[s] for s in site["featured"]
                 if s in by_slug and project_url(by_slug[s]) != latest["url"]]
+    missing = [c["slug"] for c in cols
+               if project_url(c) != latest["url"] and c["slug"] not in site["featured"]]
+    if missing:
+        print(f"  ! not on the home page: {', '.join(missing)} (add to featured in site.json)")
     total = sum(len(c["prompts"]) for c in cols)
     b = site["banner"]
     repos = "".join(f'<a href="{GITHUB}/{name}"><b>{e(name)}</b><span>{e(desc)}</span></a>' for name, desc in REPOS)
