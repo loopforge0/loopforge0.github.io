@@ -1,0 +1,116 @@
+{
+  "1000": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "h3-upscaling-character-09.png"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "6": {
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "inputs": {
+      "clip": ["2", 0],
+      "vae": ["3", 0],
+      "audio_vae": ["4", 0],
+      "prompt": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>, with warm tan skin, brown eyes, an oval face, and medium-brown curly hair tied in a high ponytail. Her facial structure and proportions remain recognizable while her plain navy top is replaced by a bright yellow hooded raincoat.\n\nsummary:\n[reference generation] The target video shows <Subject 1> walking past a neon noodle shop at night during heavy rain while the camera tracks beside her in one continuous five-second shot. Rain, gutter water, steam, and colored reflections provide several simultaneous moving textures.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): partially_preserved - her facial identity, brown eyes, warm tan complexion, oval face, and high curly ponytail are retained, while her wardrobe changes to a bright yellow hooded raincoat appropriate to the rainy street.\n\ndetailed_description:\nThe target video uses photorealistic live-action imagery with crisp wet-night contrast, practical neon illumination, and readable natural skin tones. The full duration is one continuous shot with no cut, transition, slow motion, time ramp, or freeze frame.\n[Shot 1] A stabilized medium side-tracking shot frames <Subject 1> from mid-thigh upward as she walks steadily from left to right along a narrow city sidewalk at night. She wears a saturated yellow hooded raincoat with the hood down, leaving her medium-brown curly ponytail and face fully visible. Her warm tan complexion, brown eyes, oval facial structure, and natural proportions match <Picture 1>. She looks ahead with a calm, focused expression, blinks naturally once, and briefly turns her face three-quarters toward the glowing storefront before looking forward again. Her stride remains even and her arms swing naturally; the camera moves parallel at the same speed, keeping her face at a consistent size without pushing in or zooming. A small neon noodle shop fills the background with a rigid rectangular doorway and red and cyan tubes, while dark brick, metal awnings, and window frames provide fine straight edges. Heavy rain falls diagonally across the entire frame in many separately readable streaks. Water beads and runs over the raincoat, thin streams pour from the awning, and fast ripples spread through shallow puddles beside the curb. A gutter current carries small leaves in the opposite direction of her walk. At 00:01.500, a thick white plume of steam rolls from a sidewalk vent behind her, curls across the red neon, then thins as she passes. At 00:03.000, a car outside the frame casts a cool blue sweep across the wet pavement without changing the woman's skin tone. Red and cyan reflections stretch and break in the puddles with every raindrop, but the storefront lighting itself remains steady with no flicker. The final second holds her readable profile against the steam while rain, runoff, droplets, and reflections all continue moving independently until the last frame.\n\noverall_soundscape:\nDense rainfall on pavement and the raincoat, continuous gutter water, soft footsteps through shallow puddles, a brief hiss of steam, and distant muted traffic remain synchronized to the single shot.\n\nnon_diegetic_music:\nA restrained low electronic pulse at a steady tempo sits quietly beneath the rain without a dramatic swell.",
+      "width": 1024,
+      "height": 576,
+      "length": 124,
+      "ref_image_size": "max",
+      "ref_images.ref_image_0": ["1000", 0]
+    }
+  },
+  "7": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 920604
+    }
+  },
+  "8": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "res_multistep"
+    }
+  },
+  "9": {
+    "class_type": "BasicScheduler",
+    "inputs": {
+      "model": ["5", 0],
+      "scheduler": "simple",
+      "steps": 20,
+      "denoise": 1.0
+    }
+  },
+  "10": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": ["5", 0],
+      "conditioning": ["6", 0]
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": ["7", 0],
+      "guider": ["10", 0],
+      "sampler": ["8", 0],
+      "sigmas": ["9", 0],
+      "latent_image": ["6", 1]
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["3", 0]
+    }
+  },
+  "13": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "14": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": ["12", 0],
+      "audio": ["13", 0],
+      "fps": 24.0
+    }
+  },
+  "15": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": ["14", 0],
+      "filename_prefix": "h3-upscaling-candidates/S04-particles-0p6mp",
+      "format": "auto"
+    }
+  }
+}

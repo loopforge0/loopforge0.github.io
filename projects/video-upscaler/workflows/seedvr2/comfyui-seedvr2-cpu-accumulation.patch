@@ -1,0 +1,9 @@
+diff --git a/comfy/ldm/seedvr/vae.py b/comfy/ldm/seedvr/vae.py
+--- a/comfy/ldm/seedvr/vae.py
++++ b/comfy/ldm/seedvr/vae.py
+@@
+-    storage_device = vae_model.device
++    # Keep the full tiled accumulator on ComfyUI's intermediate device.  A
++    # multi-frame 2x decode can be several GiB even though each VAE tile fits
++    # comfortably on the GPU.
++    storage_device = comfy.model_management.intermediate_device()

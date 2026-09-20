@@ -1,0 +1,173 @@
+{
+  "1000": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "10.png"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "6": {
+    "class_type": "MiniMaxH3ReferenceToVideo",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "audio_vae": [
+        "4",
+        0
+      ],
+      "prompt": "subject_definitions:\n<Subject 1> is the woman in <Picture 1>, with fair freckled skin, grey-green eyes, a straight nose, a softly oval face, and straight light auburn hair falling just past her shoulders with a centre-left part. Her facial structure and proportions remain recognizable while her burgundy knit sweater is replaced by a charcoal wool coat over a cream scarf.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing on a city pavement in front of a large photographic billboard while the camera dollies slowly left in one continuous five-second shot. The billboard carries two fixed lines of type at different sizes, giving a photographic hard-edge text legibility test at both large and small scale.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): partially_preserved - her facial identity, fair freckled complexion, grey-green eyes, softly oval face, and straight light auburn shoulder-length hair are retained, while her wardrobe changes to a charcoal wool coat and cream scarf for an outdoor winter street setting.\n\ndetailed_description:\nThe target video is photographic live action with natural overcast daylight, shallow but not extreme depth of field, fine realistic skin and fabric texture, and no cel shading, no illustration, no film grain overlay, and no texture noise. The full duration is one continuous shot with no cut, transition, zoom, slow motion, time ramp, or freeze frame.\n[Shot 1] A medium-wide view establishes a clean urban pavement in front of a large flat rectangular billboard mounted low on a brick building wall, its face parallel to the camera and filling the upper two thirds of the frame. The billboard has a matte cream background inside a thin dark grey rectangular border. It carries exactly two centered lines of crisp dark charcoal sans-serif type. The upper line is large bold capitals and numerals reading NORTH 41. The lower line, set clearly smaller at roughly one third the height of the upper line, is regular-weight capitals reading OPEN DAILY. The visible text must remain precisely NORTH 41 above OPEN DAILY from the first frame through the last frame, with the same characters, spacing, baselines, relative sizes, stroke weights, rectangular border, and orientation; no extra letters, symbols, substitutions, distortion, shimmer, or rewriting appear. Both lines stay fully inside the frame and never pass behind the subject. <Subject 1> stands at frame right in the lower third, turned slightly toward camera in three-quarter view, breathing naturally and blinking, her hair shifting slightly in a light breeze. Her fair freckled complexion, grey-green eyes, straight nose, softly oval facial structure, and straight light auburn shoulder-length hair match <Picture 1>. She wears a charcoal wool coat with a visible twill weave over a cream knitted scarf. She glances once toward the billboard around 00:02.000 and then returns her gaze toward camera. The camera dollies slowly and steadily left on a perfectly level path, holding the billboard face parallel to the sensor and retaining visible parallax between the foreground kerb, the woman, the billboard, and the brick wall behind. Fine brick mortar lines, a thin dark drainpipe at frame left, and the straight edges of the billboard border remain sharp and geometrically stable as they cross the frame. Lighting is broad, soft and shadowless overcast daylight with no lens flare and no specular blowout. The final frame still shows the complete two-line billboard filling the upper two thirds, with <Subject 1> at frame right.\n\noverall_soundscape:\nQuiet city ambience with distant traffic, a light breeze, and occasional faint footsteps remain clean and understated.\n\nnon_diegetic_music:\nNo non-diegetic music plays at any point.",
+      "width": 1024,
+      "height": 576,
+      "length": 124,
+      "ref_image_size": "max",
+      "ref_images.ref_image_0": [
+        "1000",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 606041
+    }
+  },
+  "8": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "res_multistep"
+    }
+  },
+  "9": {
+    "class_type": "BasicScheduler",
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "scheduler": "simple",
+      "steps": 20,
+      "denoise": 1.0
+    }
+  },
+  "10": {
+    "class_type": "BasicGuider",
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "7",
+        0
+      ],
+      "guider": [
+        "10",
+        0
+      ],
+      "sampler": [
+        "8",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        1
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "CreateVideo",
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ],
+      "audio": [
+        "13",
+        0
+      ],
+      "fps": 24.0
+    }
+  },
+  "15": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "14",
+        0
+      ],
+      "filename_prefix": "h3-upscaling-candidates/S06-billboard-0p6mp",
+      "format": "auto"
+    }
+  }
+}
