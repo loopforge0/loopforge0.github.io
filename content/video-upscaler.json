@@ -2105,6 +2105,72 @@
       ]
     },
     {
+      "method": "M02c",
+      "name": "SeedVR2 3B int8, 21 frames",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "dir": "workflows/seedvr2-tuned",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/seedvr2-tuned/S01-api.json",
+          "sha256": "74b984d0666f5f1c5a8d6184f8222d5aed7ecf1b613c0bd184b81a7c52b42d44"
+        },
+        {
+          "source": "S02",
+          "path": "workflows/seedvr2-tuned/S02-api.json",
+          "sha256": "92fd72c6a0eb4e12a562536669998a5a8339749b084ebaa5d6fea1c7f7a452bc"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/seedvr2-tuned/S03-api.json",
+          "sha256": "90e28ab87279cd7b06e9f83badc8676f84d632fa4f2cf77977c123a04eead8c7"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/seedvr2-tuned/S04-api.json",
+          "sha256": "2cd656aa475bd67897031d6595d52e922f8ba13d915b2b9348959b8bc4296b30"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/seedvr2-tuned/S05-api.json",
+          "sha256": "c6107de928f9739e7b8e4e5153a54a3fa9785114c1cc401d18af931b03cc0c98"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/seedvr2-tuned/S07-api.json",
+          "sha256": "4957bce5f495aab838abbb839283d9af8d6bf6dd5659b90cbda9e630b798e329"
+        }
+      ],
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "vae": "ema_vae_fp16.safetensors",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": 21
+      },
+      "required_patch": "workflows/seedvr2/comfyui-seedvr2-cpu-accumulation.patch",
+      "patch_note": "ComfyUI 8a33128f must carry this patch or the tiled VAE decode OOMs on a 12 GB card. It moves only the decode accumulator to the CPU intermediate device; tile compute stays on the GPU and no pixel operation changes.",
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ]
+    },
+    {
       "method": "M02r",
       "name": "SeedVR2 3B int8, 121 frames",
       "tier": "80 GB VRAM GPU",
