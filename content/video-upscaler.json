@@ -1,0 +1,2451 @@
+{
+  "slug": "video-upscaler",
+  "title": "Video upscaling methods compared",
+  "lede": "Eleven upscalers on the same five clips, every output at exactly 2x.",
+  "scope": "The test clips are AI-generated (MiniMax H3), so results here describe how these methods behave on synthetic footage rather than camera footage. Ten of the eleven methods are general-purpose; the MiniMax H3 latent upscaler is the exception and only works on H3 output.",
+  "media_base": "https://media.loopforge.cc/upscaler-shootout",
+  "repo": null,
+  "generated_from": {
+    "runs": 65,
+    "successful_cells": 52,
+    "matrix": "9 open methods x 5 sources"
+  },
+  "tiers": [
+    {
+      "id": "t0",
+      "label": "No GPU",
+      "colour": "#c9d148",
+      "vram": "CPU only"
+    },
+    {
+      "id": "t1",
+      "label": "Any NVIDIA RTX card",
+      "colour": "#4fd6a8",
+      "vram": "1.0 GB measured"
+    },
+    {
+      "id": "t2",
+      "label": "6-8 GB VRAM GPU",
+      "colour": "#45c0e0",
+      "vram": "7.4 GB measured"
+    },
+    {
+      "id": "t3",
+      "label": "12 GB VRAM GPU",
+      "colour": "#5b8cf2",
+      "vram": "12.0-12.1 GB measured"
+    },
+    {
+      "id": "t4",
+      "label": "80 GB VRAM GPU",
+      "colour": "#a97bf0",
+      "vram": "66.0-79.3 GB measured"
+    },
+    {
+      "id": "t5",
+      "label": "Paid API",
+      "colour": "#f2a03d",
+      "vram": "no local GPU"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "label": "Face",
+      "axis": "What happens to a person's identity",
+      "blurb": "A close face with head rotation. Eyes, hair and skin are where invented detail is least forgivable, because a viewer knows what a face is supposed to do.",
+      "width": 1344,
+      "height": 768,
+      "frames": 124,
+      "fps": 24,
+      "clip": "source/S01.mp4",
+      "poster": "poster/source/S01.jpg",
+      "target": [
+        2688,
+        1536
+      ],
+      "sha256": "f7e5d4b699546b2abb6918d9e8d41a7f1f7318f8fed32121d6fd6694e2877b43",
+      "required": "close or medium face, head rotation, visible eyes/hair/skin"
+    },
+    {
+      "id": "S03",
+      "label": "Detail",
+      "axis": "Fine structure that was never really there",
+      "blurb": "Dense micro-detail - fabric, foliage, edges. The hardest test of whether an upscaler is recovering detail or manufacturing it.",
+      "width": 1344,
+      "height": 768,
+      "frames": 124,
+      "fps": 24,
+      "clip": "source/S03.mp4",
+      "poster": "poster/source/S03.jpg",
+      "target": [
+        2688,
+        1536
+      ],
+      "sha256": "3c7df0002c87c975bdd21d5fc4120cf6f1a70412544f74ead40d598004118942",
+      "required": "fabric, jewelry, foliage, hair or mechanical microdetail"
+    },
+    {
+      "id": "S04",
+      "label": "Particles",
+      "axis": "Stochastic texture across time",
+      "blurb": "Rain and neon. Every frame's texture is legitimately different from the last, which is exactly the signal a temporal model can mistake for noise and smooth away.",
+      "width": 1024,
+      "height": 576,
+      "frames": 124,
+      "fps": 24,
+      "clip": "source/S04.mp4",
+      "poster": "poster/source/S04.jpg",
+      "target": [
+        2048,
+        1152
+      ],
+      "sha256": "b52184c9282eb35839a197bd4f0eeb8a055e0740d7b7e8877485f6bdaf77ce85",
+      "required": "rain, smoke, water, sparks or neon reflections; likely purpose-built"
+    },
+    {
+      "id": "S05",
+      "label": "Graphic",
+      "axis": "Hard edges and small stable text",
+      "blurb": "A flat cel-shaded render. Edges should stay hard and type should stay type; ringing and halo artefacts have nowhere to hide.",
+      "width": 1024,
+      "height": 576,
+      "frames": 124,
+      "fps": 24,
+      "clip": "source/S05.mp4",
+      "poster": "poster/source/S05.jpg",
+      "target": [
+        2048,
+        1152
+      ],
+      "sha256": "953d7d10f9f18be842bcef03fe6b5a9219cbd436bd402c936f65cf5959658271",
+      "required": "animation or CGI with hard edges and small stable text; purpose-built preferred"
+    },
+    {
+      "id": "S07",
+      "label": "Dance",
+      "axis": "Fast motion, locked-off camera",
+      "blurb": "Two dancers, camera perfectly still, so every moving pixel comes from the subjects. The hardest case in the set for a temporal upscaler.",
+      "width": 1024,
+      "height": 576,
+      "frames": 124,
+      "fps": 24,
+      "clip": "source/S07.mp4",
+      "poster": "poster/source/S07.jpg",
+      "target": [
+        2048,
+        1152
+      ],
+      "sha256": "ee9e1182ecef431a93a8addabbc2bd6f7cd0bb8f8b5e14d1809feadbe9afc251",
+      "required": "locked-off camera with fast two-person limb motion and natural motion blur"
+    }
+  ],
+  "methods": [
+    {
+      "id": "M00",
+      "name": "Lanczos resize",
+      "short": "Lanczos",
+      "kind": "Deterministic control",
+      "tier": "No GPU",
+      "tier_colour": "#c9d148",
+      "blurb": "A plain ffmpeg Lanczos resize to exactly 2x. No model, no GPU.",
+      "why": "The control. It is what every other method has to be compared against.",
+      "note": null,
+      "headline": false,
+      "commercial": false,
+      "links": [],
+      "variant_id": "M00-lanczos-ffmpeg8.0.1-v1",
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "settings": null,
+      "disclosed_limitation": null,
+      "workflow_files": [],
+      "command_template": "ffmpeg -hide_banner -n -i {source} -map 0:v:0 -an -vf scale=iw*2:ih*2:flags=lanczos -c:v libx264 -preset slow -crf 10 -pix_fmt yuv420p {output}",
+      "wall": "2.4 s - 12.0 s",
+      "peak_vram": null,
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 6.539
+    },
+    {
+      "id": "M05",
+      "name": "NVIDIA RTX Video Super Resolution",
+      "short": "RTX VSR",
+      "kind": "Frame-independent, driver-level",
+      "tier": "Any NVIDIA RTX card",
+      "tier_colour": "#4fd6a8",
+      "blurb": "The upscaler inside the NVIDIA driver, reached from ComfyUI through NVIDIA's VFX SDK. No checkpoint to download; it ships inside the nvidia-vfx wheel.",
+      "why": "Frame-independent: each frame is processed without reference to its neighbours.",
+      "note": "Its DENOISE, DEBLUR and HIGHBITRATE quality levels were not used. This comparison holds denoise and sharpening off everywhere they can be turned off.",
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "RTX nodes for ComfyUI",
+          "url": "https://github.com/Comfy-Org/Nvidia_RTX_Nodes_ComfyUI"
+        }
+      ],
+      "variant_id": "M05-rtxvsr-ultra-v1",
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "settings": {
+        "resize_type": "scale by multiplier",
+        "scale": 2.0,
+        "quality": "ULTRA"
+      },
+      "disclosed_limitation": null,
+      "workflow_files": [
+        "workflows/rtxvsr/S01-api.json",
+        "workflows/rtxvsr/S03-api.json",
+        "workflows/rtxvsr/S04-api.json",
+        "workflows/rtxvsr/S05-api.json",
+        "workflows/rtxvsr/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "15.0 s - 25.1 s",
+      "peak_vram": "920 - 1,017 MiB",
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 15.072
+    },
+    {
+      "id": "M01",
+      "name": "Real-ESRGAN x2plus",
+      "short": "Real-ESRGAN",
+      "kind": "Frame-independent GAN",
+      "tier": "6-8 GB VRAM GPU",
+      "tier_colour": "#45c0e0",
+      "blurb": "A per-frame GAN upscaler with no model of time, run with face enhancement off.",
+      "why": "Frame-independent, so any detail it adds is derived independently on each frame.",
+      "note": "Measured peak was 3,868 MiB across these five clips. The 6-8 GB tier name comes from a 7,379 MiB reading on a sixth clip that was later dropped from the set.",
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "Real-ESRGAN",
+          "url": "https://github.com/xinntao/Real-ESRGAN"
+        }
+      ],
+      "variant_id": "M01-realesrgan-x2plus-fp16-perbatch1-v1",
+      "checkpoint": "RealESRGAN_x2plus.pth",
+      "checkpoint_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+      "settings": {
+        "per_batch": 1,
+        "precision": "float16",
+        "downscale_ratio": 1.0
+      },
+      "disclosed_limitation": null,
+      "workflow_files": [
+        "workflows/realesrgan/S01-api.json",
+        "workflows/realesrgan/S02-api.json",
+        "workflows/realesrgan/S03-api.json",
+        "workflows/realesrgan/S04-api.json",
+        "workflows/realesrgan/S05-api.json",
+        "workflows/realesrgan/S06-api.json",
+        "workflows/realesrgan/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "85.2 s - 2 min 35 s",
+      "peak_vram": "1,858 - 3,868 MiB",
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 85.279
+    },
+    {
+      "id": "M06",
+      "name": "MiniMax H3 Latent Upscaler",
+      "short": "H3 Latent",
+      "kind": "Model-native latent",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "blurb": "MiniMax H3's own upscaler. The clip is encoded to the H3 latent, the latent is upscaled 2x, and the result is decoded.",
+      "why": "The one method here that is not general-purpose: it only works on H3 footage, because it round-trips through H3's own latent space.",
+      "note": "Post-hoc upscaling, not the upscale-and-resample path that pushes the latent back through the H3 transformer. That would be regeneration rather than upscaling.",
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "MiniMax H3",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+        },
+        {
+          "label": "Latent upscaler node",
+          "url": "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler"
+        }
+      ],
+      "variant_id": "M06-minimax-h3-latent-upscaler-3d-bf16-target-dims-v1",
+      "checkpoint": "minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "checkpoint_sha256": "4f57821f5837f32f7142b67d815606dbd7550f194e5c769f7d6c3f83b146a5e6",
+      "settings": {
+        "mode": "target dimensions",
+        "align": 32,
+        "enable_temporal_chunking": true,
+        "force_unload": true,
+        "device": "cuda",
+        "precision": "fp16",
+        "encode_upscale_method": "lanczos",
+        "keep_proportion": "stretch"
+      },
+      "disclosed_limitation": "M06 is POST-HOC upscaling: the clip is encoded to the H3 latent at its source resolution, the latent is upscaled 2x, and the result is decoded. It is NOT the upscale-plus-resample path, which pushes the upscaled latent back through the H3 transformer; that is model-native regeneration, METHODS.md de-scopes it, and it is not run here. Encoding is at source resolution so the upscaling genuinely happens in the latent rather than in a lanczos pre-resize. Because this is H3's own upscaler applied to H3-generated footage, it has a home-advantage the general purpose methods do not: it should be read as 'what the generator's own tooling achieves on its own output', not as a like-for-like contest. Runs LOCALLY on the RTX 3060, so its time and VRAM ARE comparable to M00/M01/M02/M02c/M05.",
+      "workflow_files": [
+        "workflows/h3-latent-upscale/S01-api.json",
+        "workflows/h3-latent-upscale/S03-api.json",
+        "workflows/h3-latent-upscale/S04-api.json",
+        "workflows/h3-latent-upscale/S05-api.json",
+        "workflows/h3-latent-upscale/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "4 min 10 s - 7 min 36 s",
+      "peak_vram": "11,887 - 12,024 MiB",
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 255.533
+    },
+    {
+      "id": "M02",
+      "name": "SeedVR2 3B int8, 4 frames",
+      "short": "SeedVR2 3B \u00b7 4f",
+      "kind": "Temporal diffusion, stock settings",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "blurb": "SeedVR2 as a 12 GB card configures it when chunking is left on auto.",
+      "why": "On 12 GB the auto chunker resolves to one latent frame, about four pixel frames, and temporal overlap resolves to zero. Included because it is what the defaults produce.",
+      "note": null,
+      "headline": true,
+      "commercial": false,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        },
+        {
+          "label": "SeedVR2 research code",
+          "url": "https://github.com/IceClear/SeedVR2"
+        }
+      ],
+      "variant_id": "M02-seedvr2-3b-int8-cpuaccum-chunkauto-v1",
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "auto",
+        "chunk_temporal_overlap": 0,
+        "color_correction_method": "none"
+      },
+      "disclosed_limitation": "chunking_mode auto selects frames_per_chunk=1 latent frame on a 12 GB card, an effective temporal window of about four pixel frames with no overlap. Cross-frame consistency therefore operates over roughly four frames, not the whole clip.",
+      "workflow_files": [
+        "workflows/seedvr2/S01-api.json",
+        "workflows/seedvr2/S02-api.json",
+        "workflows/seedvr2/S03-api.json",
+        "workflows/seedvr2/S04-api.json",
+        "workflows/seedvr2/S05-api.json",
+        "workflows/seedvr2/S06-api.json",
+        "workflows/seedvr2/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "16 min 38 s - 32 min 12 s",
+      "peak_vram": "10,128 - 11,090 MiB",
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 1017.584
+    },
+    {
+      "id": "M02c",
+      "name": "SeedVR2 3B int8, 21 frames",
+      "short": "SeedVR2 3B \u00b7 21f",
+      "kind": "Temporal diffusion, one setting changed",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "blurb": "The same checkpoint file as the row above. One setting differs: chunking_mode manual, frames_per_chunk 21, temporal_overlap 2.",
+      "why": "Same model, same card, same clip. The only variable is the temporal window.",
+      "note": "21 rather than the measured ceiling of 29, which leaves only 191 MiB of headroom on a 12 GB card. 41, 61, 81 and 125 all run out of memory.",
+      "headline": true,
+      "commercial": false,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ],
+      "variant_id": "M02c-seedvr2-3b-int8-cpuaccum-chunk21-ov2-v1",
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": 21
+      },
+      "disclosed_limitation": "chunking_mode auto selects frames_per_chunk=1 latent frame on a 12 GB card, an effective temporal window of about four pixel frames with no overlap. Cross-frame consistency therefore operates over roughly four frames, not the whole clip.",
+      "workflow_files": [],
+      "command_template": null,
+      "wall": "17 min 13 s - 60 min 15 s",
+      "peak_vram": "10,396 - 12,087 MiB",
+      "gpu": "NVIDIA GeForce RTX 3060",
+      "median_wall_seconds": 1038.421
+    },
+    {
+      "id": "M02r",
+      "name": "SeedVR2 3B int8, 121 frames",
+      "short": "SeedVR2 3B \u00b7 full",
+      "kind": "Temporal diffusion, whole clip",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "blurb": "The same 3B checkpoint with all 124 frames in one chunk, so there is no chunk boundary anywhere. Needs an 80 GB card to hold it.",
+      "why": "Completes the sweep: 4 frames, 21 frames, whole clip, at a fixed checkpoint.",
+      "note": null,
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ],
+      "variant_id": "M02r-seedvr2-3b-int8-wholeclip-chunk121-v1",
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": 121
+      },
+      "disclosed_limitation": "M02r differs from M02c in EXACTLY ONE input: frames_per_chunk 21 -> 121 (whole clip, one chunk, no merge seam). Checkpoint, VAE, sampler, steps, cfg and seed are identical, so M02 -> M02c -> M02r is a single-variable sweep of the temporal window at a fixed model. Run on an A100 80GB at $1.59/hr: its wall time and VRAM are NOT comparable to the local RTX 3060 cells, only its image and temporal quality are. The 12 GB CPU-accumulation patch is not applied here and is not needed at 80 GB.",
+      "workflow_files": [
+        "workflows/seedvr2-3b-whole/S01-api.json",
+        "workflows/seedvr2-3b-whole/S03-api.json",
+        "workflows/seedvr2-3b-whole/S04-api.json",
+        "workflows/seedvr2-3b-whole/S05-api.json",
+        "workflows/seedvr2-3b-whole/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "3 min 34 s - 7 min 7 s",
+      "peak_vram": "43,235 - 75,781 MiB",
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "median_wall_seconds": 256.092
+    },
+    {
+      "id": "M07f",
+      "name": "SeedVR2 7B fp16, 77-121 frames",
+      "short": "SeedVR2 7B",
+      "kind": "Temporal diffusion, larger model",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "blurb": "The larger SeedVR2 checkpoint in fp16, whole clip where it fits. On the two 2688x1536 clips it does not fit on 80 GB, and the chunk size was derived from measured per-frame activation cost.",
+      "why": "Differs from the 21-frame row in model size, weight precision and temporal window at once, so a difference here cannot be attributed to any one of them.",
+      "note": "The int8 build of this checkpoint produces an entirely black output on this stack. fp16 works, and is faster.",
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ],
+      "variant_id": "M07f-seedvr2-7b-fp16-wholeclip-chunk121-v1",
+      "checkpoint": "seedvr2_7b_fp16.safetensors",
+      "checkpoint_sha256": null,
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": "121 for S04/S05/S07; 77 for S01/S03 (see per_source_settings)"
+      },
+      "disclosed_limitation": "M07f differs from M02c in THREE ways at once - model size (3B->7B), weight precision (int8_convrot->fp16) and temporal chunk (21->121 whole clip) - so it CANNOT attribute a quality change to any single one of them. It exists because seedvr2_7b_int8_convrot emits NaN on this stack (verified black at both chunk 21 and 125, against a 3B control that produced real content at both), leaving fp16 as the only way to run 7B at all. Treat M07f as 'the best this method produces when capacity is not the constraint', not as a controlled comparison. The chunking claim rests on M02 -> M02c -> M02r, which holds checkpoint and precision fixed. A100 80GB at $1.59/hr: time and VRAM are not comparable to the local RTX 3060 cells. IMPORTANT: frames_per_chunk is NOT constant across sources in this method. S04, S05 and S07 run whole clip at 121; S01 and S03 run at 77 because whole clip does not fit 80 GB at 2688x1536. Every value is recorded in per_source_settings with its derivation, so the difference is disclosed rather than silent - but it does mean M07f's two large cells are not strictly the same configuration as its three small ones, and they should not be pooled into a single per-method claim.",
+      "workflow_files": [
+        "workflows/seedvr2-7b-fp16-whole/S01-api.json",
+        "workflows/seedvr2-7b-fp16-whole/S03-api.json",
+        "workflows/seedvr2-7b-fp16-whole/S04-api.json",
+        "workflows/seedvr2-7b-fp16-whole/S05-api.json",
+        "workflows/seedvr2-7b-fp16-whole/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "2 min 10 s - 6 min 43 s",
+      "peak_vram": "56,159 - 65,983 MiB",
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "median_wall_seconds": 224.925
+    },
+    {
+      "id": "M04b",
+      "name": "LTX 2.5, BF16",
+      "short": "LTX 2.5",
+      "kind": "Generative video model",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "blurb": "LTX 2.5's Pixel Spatial Upscaler IC-LoRA on the 22B BF16 base, at the precision its model card specifies. Seed 42, one frozen prompt per clip, first output kept.",
+      "why": "Generative: it can synthesise detail that is not present in the source. Worth knowing when judging what you see.",
+      "note": "It used 76-79 GB of an 81,920 MiB card on every clip, so it does not run below this tier. Attempts on a 12 GB card ran out of memory.",
+      "headline": false,
+      "commercial": false,
+      "links": [
+        {
+          "label": "LTX-2.5",
+          "url": "https://huggingface.co/Lightricks/LTX-2.5"
+        },
+        {
+          "label": "Pixel Spatial Upscaler IC-LoRA",
+          "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Pixel-Spatial-Upscaler"
+        },
+        {
+          "label": "ComfyUI-LTXVideo",
+          "url": "https://github.com/Lightricks/ComfyUI-LTXVideo"
+        }
+      ],
+      "variant_id": "M04b-ltx25-iclora-pixel-spatial-x2-bf16-v1",
+      "checkpoint": "ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+      "checkpoint_sha256": null,
+      "settings": null,
+      "disclosed_limitation": "M04b is LTX 2.5 at the precision its model card specifies. The local M04 attempts had to substitute the INT8 transformer and text encoder because 12 GB could not hold BF16, and never completed a cell - they OOMed in torch._int_mm, whose int32 accumulation makes the FFN intermediates LARGER than bf16 would be. 80 GB removes that substitution, so M04b is the first honest LTX measurement in this matrix. EmptyLTXVLatentVideo resolves ((length-1)//8)+1 latent frames, so only 8k+1 pixel lengths round-trip: the native is 129 frames against a 124-frame source by design, and run_cell.py trims to the source count for the normalized review encode, recording trimmed_to_frames. S07 has no local M04 graph and is derived from S04, which shares its source geometry, latent size and length. A100 80GB at $1.59/hr: time and VRAM are not comparable to the local RTX 3060 cells.",
+      "workflow_files": [
+        "workflows/ltx25-bf16/S01-api.json",
+        "workflows/ltx25-bf16/S03-api.json",
+        "workflows/ltx25-bf16/S04-api.json",
+        "workflows/ltx25-bf16/S05-api.json",
+        "workflows/ltx25-bf16/S07-api.json"
+      ],
+      "command_template": null,
+      "wall": "3 min 50 s - 8 min 35 s",
+      "peak_vram": "76,169 - 79,305 MiB",
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "median_wall_seconds": 261.525
+    },
+    {
+      "id": "M08",
+      "name": "Topaz Starlight",
+      "short": "Topaz",
+      "kind": "Commercial cloud service",
+      "tier": "Paid API",
+      "tier_colour": "#f2a03d",
+      "blurb": "Topaz Starlight Precise at a 4K target.",
+      "why": "Takes a target resolution rather than a scale factor, so it rendered at 2.86x or 3.75x depending on the clip and was resampled down to 2x for comparison. Rendering above the target and resampling down is a supersampling advantage.",
+      "note": null,
+      "headline": false,
+      "commercial": true,
+      "links": [
+        {
+          "label": "Topaz Labs",
+          "url": "https://www.topazlabs.com/"
+        }
+      ],
+      "variant_id": null,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "settings": null,
+      "disclosed_limitation": null,
+      "workflow_files": [],
+      "command_template": null,
+      "wall": null,
+      "peak_vram": null,
+      "gpu": null,
+      "median_wall_seconds": null
+    },
+    {
+      "id": "M09",
+      "name": "Flux 3.0",
+      "short": "Flux 3.0",
+      "kind": "Commercial cloud service",
+      "tier": "Paid API",
+      "tier_colour": "#f2a03d",
+      "blurb": "Flux 3.0 upscale at a 1440p target.",
+      "why": "Also resolution-targeted. On the two 2688x1536 clips it returned fewer pixels than 2x, so those two carry a Lanczos upscale to reach the comparison size.",
+      "note": "It returned 125 frames against the source's 124. The extra frame is a duplicate of the last one and the comparison copy is trimmed to 124.",
+      "headline": false,
+      "commercial": true,
+      "links": [],
+      "variant_id": null,
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "settings": null,
+      "disclosed_limitation": null,
+      "workflow_files": [],
+      "command_template": null,
+      "wall": null,
+      "peak_vram": null,
+      "gpu": null,
+      "median_wall_seconds": null
+    }
+  ],
+  "cells": {
+    "M00": {
+      "S01": {
+        "clip": "matrix/M00/S01.mp4",
+        "poster": "poster/matrix/M00/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 7405428,
+        "wall_seconds": 7.238,
+        "wall": "7.2 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": null,
+        "workflow_sha256": null,
+        "run_id": "S01-M00-a01"
+      },
+      "S03": {
+        "clip": "matrix/M00/S03.mp4",
+        "poster": "poster/matrix/M00/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 5002097,
+        "wall_seconds": 11.964,
+        "wall": "12.0 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": null,
+        "workflow_sha256": null,
+        "run_id": "S03-M00-a01"
+      },
+      "S04": {
+        "clip": "matrix/M00/S04.mp4",
+        "poster": "poster/matrix/M00/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3746440,
+        "wall_seconds": 6.539,
+        "wall": "6.5 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": null,
+        "workflow_sha256": null,
+        "run_id": "S04-M00-a01"
+      },
+      "S05": {
+        "clip": "matrix/M00/S05.mp4",
+        "poster": "poster/matrix/M00/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 2491983,
+        "wall_seconds": 2.417,
+        "wall": "2.4 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": null,
+        "workflow_sha256": null,
+        "run_id": "S05-M00-a01"
+      },
+      "S07": {
+        "clip": "matrix/M00/S07.mp4",
+        "poster": "poster/matrix/M00/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 2938862,
+        "wall_seconds": 3.482,
+        "wall": "3.5 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": null,
+        "workflow_sha256": null,
+        "run_id": "S07-M00-a01"
+      }
+    },
+    "M05": {
+      "S01": {
+        "clip": "matrix/M05/S01.mp4",
+        "poster": "poster/matrix/M05/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 9097682,
+        "wall_seconds": 25.096,
+        "wall": "25.1 s",
+        "peak_vram_mib": 1017,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/rtxvsr/S01-api.json",
+        "workflow_sha256": "011f29bce921d510fc8628863e8ea69b9aced55c459aac122379daea6d7daf67",
+        "run_id": "S01-M05-a01"
+      },
+      "S03": {
+        "clip": "matrix/M05/S03.mp4",
+        "poster": "poster/matrix/M05/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 5815399,
+        "wall_seconds": 25.072,
+        "wall": "25.1 s",
+        "peak_vram_mib": 1004,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/rtxvsr/S03-api.json",
+        "workflow_sha256": "5b069130f96ffe0b7eb46eada77084e94e99189985322d732b6c068c1082d8d5",
+        "run_id": "S03-M05-a01"
+      },
+      "S04": {
+        "clip": "matrix/M05/S04.mp4",
+        "poster": "poster/matrix/M05/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4556716,
+        "wall_seconds": 15.054,
+        "wall": "15.1 s",
+        "peak_vram_mib": 920,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/rtxvsr/S04-api.json",
+        "workflow_sha256": "c56e3fdf85ce9d7144480e21700e5bb5fe3aba743cf9c4665f49f5316f6230b9",
+        "run_id": "S04-M05-a01"
+      },
+      "S05": {
+        "clip": "matrix/M05/S05.mp4",
+        "poster": "poster/matrix/M05/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3231891,
+        "wall_seconds": 15.037,
+        "wall": "15.0 s",
+        "peak_vram_mib": 920,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/rtxvsr/S05-api.json",
+        "workflow_sha256": "3b7b2ae0843cf32ba20b62b0ea68fb000ed0bb1da4977b8d6bf40cf6ee890fef",
+        "run_id": "S05-M05-a01"
+      },
+      "S07": {
+        "clip": "matrix/M05/S07.mp4",
+        "poster": "poster/matrix/M05/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4160940,
+        "wall_seconds": 15.072,
+        "wall": "15.1 s",
+        "peak_vram_mib": 920,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/rtxvsr/S07-api.json",
+        "workflow_sha256": "38882300f3fe227e874899351b612c4d1722aa8b44a2141edc3df6dd3f4835be",
+        "run_id": "S07-M05-a01"
+      }
+    },
+    "M01": {
+      "S01": {
+        "clip": "matrix/M01/S01.mp4",
+        "poster": "poster/matrix/M01/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 8408384,
+        "wall_seconds": 132.713,
+        "wall": "2 min 13 s",
+        "peak_vram_mib": 3575,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/realesrgan/S01-api.json",
+        "workflow_sha256": "e63a394cacbe4b7f59019251c9286bba74e7ed1c96e78ea69c1318a03b817866",
+        "run_id": "S01-M01-a01"
+      },
+      "S03": {
+        "clip": "matrix/M01/S03.mp4",
+        "poster": "poster/matrix/M01/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 5448313,
+        "wall_seconds": 155.315,
+        "wall": "2 min 35 s",
+        "peak_vram_mib": 3868,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/realesrgan/S03-api.json",
+        "workflow_sha256": "84790ce258f31ebe5b2f25095e0dac6c09afb842b94ba3d5329868e0ead99b1a",
+        "run_id": "S03-M01-a01"
+      },
+      "S04": {
+        "clip": "matrix/M01/S04.mp4",
+        "poster": "poster/matrix/M01/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4477938,
+        "wall_seconds": 85.213,
+        "wall": "85.2 s",
+        "peak_vram_mib": 2780,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/realesrgan/S04-api.json",
+        "workflow_sha256": "6853d9ace9da1876f8c877ca2a3e91c37dbd468058c6aac1784cc5d558ca22d6",
+        "run_id": "S04-M01-a01"
+      },
+      "S05": {
+        "clip": "matrix/M01/S05.mp4",
+        "poster": "poster/matrix/M01/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3001970,
+        "wall_seconds": 85.279,
+        "wall": "85.3 s",
+        "peak_vram_mib": 2796,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/realesrgan/S05-api.json",
+        "workflow_sha256": "e7098bec090bfd5458c88739e83b9778c3ff7769da5df10c15afafa22fab3580",
+        "run_id": "S05-M01-a01"
+      },
+      "S07": {
+        "clip": "matrix/M01/S07.mp4",
+        "poster": "poster/matrix/M01/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3599843,
+        "wall_seconds": 85.223,
+        "wall": "85.2 s",
+        "peak_vram_mib": 1858,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/realesrgan/S07-api.json",
+        "workflow_sha256": "0e7fe7376634463d8d7ed9f81ac53823d5034921f8377900dd6da22358928e02",
+        "run_id": "S07-M01-a01"
+      }
+    },
+    "M06": {
+      "S01": {
+        "clip": "matrix/M06/S01.mp4",
+        "poster": "poster/matrix/M06/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 11233755,
+        "wall_seconds": 441.129,
+        "wall": "7 min 21 s",
+        "peak_vram_mib": 12024,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/h3-latent-upscale/S01-api.json",
+        "workflow_sha256": "838ccb47fea68af51e7631c2e92a3dc5493bf64b8d8863a6021cc2d99e7e464a",
+        "run_id": "S01-M06-a01"
+      },
+      "S03": {
+        "clip": "matrix/M06/S03.mp4",
+        "poster": "poster/matrix/M06/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 5733645,
+        "wall_seconds": 455.973,
+        "wall": "7 min 36 s",
+        "peak_vram_mib": 11995,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/h3-latent-upscale/S03-api.json",
+        "workflow_sha256": "b8b24fd87f6867126e98aed4160e2bafd12c15ee6f2d6b2d205e8cc7f076934c",
+        "run_id": "S03-M06-a01"
+      },
+      "S04": {
+        "clip": "matrix/M06/S04.mp4",
+        "poster": "poster/matrix/M06/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 5492796,
+        "wall_seconds": 253.581,
+        "wall": "4 min 14 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/h3-latent-upscale/S04-api.json",
+        "workflow_sha256": "9b4f16a20cd4391a569bdd2cdef474763c551f90bac44e08af45c965afb659c2",
+        "run_id": "S04-M06-a02"
+      },
+      "S05": {
+        "clip": "matrix/M06/S05.mp4",
+        "poster": "poster/matrix/M06/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4118297,
+        "wall_seconds": 255.533,
+        "wall": "4 min 16 s",
+        "peak_vram_mib": 11888,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/h3-latent-upscale/S05-api.json",
+        "workflow_sha256": "9f16b95468d1d015b134eb607ed6a8ffe13e9de3f5793bf22bd2eb54e89c1e0a",
+        "run_id": "S05-M06-a01"
+      },
+      "S07": {
+        "clip": "matrix/M06/S07.mp4",
+        "poster": "poster/matrix/M06/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3848316,
+        "wall_seconds": 250.447,
+        "wall": "4 min 10 s",
+        "peak_vram_mib": 11887,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/h3-latent-upscale/S07-api.json",
+        "workflow_sha256": "8e5d63732535f65e36535d086d158e55a744484e4a388c4d509c9399f52d2c56",
+        "run_id": "S07-M06-a01"
+      }
+    },
+    "M02": {
+      "S01": {
+        "clip": "matrix/M02/S01.mp4",
+        "poster": "poster/matrix/M02/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 19452420,
+        "wall_seconds": 1932.488,
+        "wall": "32 min 12 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2/S01-api.json",
+        "workflow_sha256": "08418de45e8f3a0815dff0f4f01983f2984c90318d2446af054fd7b24bc3093a",
+        "run_id": "S01-M02-a03"
+      },
+      "S03": {
+        "clip": "matrix/M02/S03.mp4",
+        "poster": "poster/matrix/M02/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 9524238,
+        "wall_seconds": 1858.451,
+        "wall": "30 min 58 s",
+        "peak_vram_mib": 11090,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2/S03-api.json",
+        "workflow_sha256": "ba050dc457a3e90b959a64ccba5439783a974e17edb943c9cb5c5362b4ff393c",
+        "run_id": "S03-M02-a01"
+      },
+      "S04": {
+        "clip": "matrix/M02/S04.mp4",
+        "poster": "poster/matrix/M02/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 9253269,
+        "wall_seconds": 1017.584,
+        "wall": "16 min 58 s",
+        "peak_vram_mib": 10774,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2/S04-api.json",
+        "workflow_sha256": "7e3f00ee85740753cceb221b6d5568a4e8bf4a55052bc67e6d732e3986198903",
+        "run_id": "S04-M02-a02"
+      },
+      "S05": {
+        "clip": "matrix/M02/S05.mp4",
+        "poster": "poster/matrix/M02/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 5381311,
+        "wall_seconds": 1017.566,
+        "wall": "16 min 58 s",
+        "peak_vram_mib": 10732,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2/S05-api.json",
+        "workflow_sha256": "0ac763754c619cff4d92f5e8c7eef602430a844b495952ef1f06d32495323eaa",
+        "run_id": "S05-M02-a01"
+      },
+      "S07": {
+        "clip": "matrix/M02/S07.mp4",
+        "poster": "poster/matrix/M02/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 6422475,
+        "wall_seconds": 997.565,
+        "wall": "16 min 38 s",
+        "peak_vram_mib": 10128,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2/S07-api.json",
+        "workflow_sha256": "98991dd0738a45dfc5836d94d359bc3ec395aafef6c18d2c84b00d0f6899af80",
+        "run_id": "S07-M02-a01"
+      }
+    },
+    "M02c": {
+      "S01": {
+        "clip": "matrix/M02c/S01.mp4",
+        "poster": "poster/matrix/M02c/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 16958943,
+        "wall_seconds": 3571.16,
+        "wall": "59 min 31 s",
+        "peak_vram_mib": 12087,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-tuned/S01-api.json",
+        "workflow_sha256": "74b984d0666f5f1c5a8d6184f8222d5aed7ecf1b613c0bd184b81a7c52b42d44",
+        "run_id": "S01-M02c-a01"
+      },
+      "S03": {
+        "clip": "matrix/M02c/S03.mp4",
+        "poster": "poster/matrix/M02c/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 8665708,
+        "wall_seconds": 3614.92,
+        "wall": "60 min 15 s",
+        "peak_vram_mib": 12076,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-tuned/S03-api.json",
+        "workflow_sha256": "90e28ab87279cd7b06e9f83badc8676f84d632fa4f2cf77977c123a04eead8c7",
+        "run_id": "S03-M02c-a02"
+      },
+      "S04": {
+        "clip": "matrix/M02c/S04.mp4",
+        "poster": "poster/matrix/M02c/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 7716900,
+        "wall_seconds": 1032.676,
+        "wall": "17 min 13 s",
+        "peak_vram_mib": 10882,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-tuned/S04-api.json",
+        "workflow_sha256": "2cd656aa475bd67897031d6595d52e922f8ba13d915b2b9348959b8bc4296b30",
+        "run_id": "S04-M02c-a01"
+      },
+      "S05": {
+        "clip": "matrix/M02c/S05.mp4",
+        "poster": "poster/matrix/M02c/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4360180,
+        "wall_seconds": 1038.421,
+        "wall": "17 min 18 s",
+        "peak_vram_mib": 11236,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-tuned/S05-api.json",
+        "workflow_sha256": "c6107de928f9739e7b8e4e5153a54a3fa9785114c1cc401d18af931b03cc0c98",
+        "run_id": "S05-M02c-a01"
+      },
+      "S07": {
+        "clip": "matrix/M02c/S07.mp4",
+        "poster": "poster/matrix/M02c/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 5657271,
+        "wall_seconds": 1038.323,
+        "wall": "17 min 18 s",
+        "peak_vram_mib": 10396,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-tuned/S07-api.json",
+        "workflow_sha256": "4957bce5f495aab838abbb839283d9af8d6bf6dd5659b90cbda9e630b798e329",
+        "run_id": "S07-M02c-a01"
+      }
+    },
+    "M02r": {
+      "S01": {
+        "clip": "matrix/M02r/S01.mp4",
+        "poster": "poster/matrix/M02r/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 16095017,
+        "wall_seconds": 427.332,
+        "wall": "7 min 7 s",
+        "peak_vram_mib": 75747,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-3b-whole/S01-api.json",
+        "workflow_sha256": "3244b7197b629aca115973b27a86fe5489693a7c926937e4fd1654f8a78d971d",
+        "run_id": "S01-M02r-a01"
+      },
+      "S03": {
+        "clip": "matrix/M02r/S03.mp4",
+        "poster": "poster/matrix/M02r/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 8338253,
+        "wall_seconds": 414.407,
+        "wall": "6 min 54 s",
+        "peak_vram_mib": 75781,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-3b-whole/S03-api.json",
+        "workflow_sha256": "c8b289062f4753464720ef2fe8cf09979df558261d9f17f85e15c6b95c3e5945",
+        "run_id": "S03-M02r-a02"
+      },
+      "S04": {
+        "clip": "matrix/M02r/S04.mp4",
+        "poster": "poster/matrix/M02r/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 7272407,
+        "wall_seconds": 214.121,
+        "wall": "3 min 34 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-3b-whole/S04-api.json",
+        "workflow_sha256": "b549fdefe79a16f980fcf70e3be1372e3d39a39c0518256bae53437f1ff6b16f",
+        "run_id": "S04-M02r-a02"
+      },
+      "S05": {
+        "clip": "matrix/M02r/S05.mp4",
+        "poster": "poster/matrix/M02r/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3857859,
+        "wall_seconds": 254.4,
+        "wall": "4 min 14 s",
+        "peak_vram_mib": 43235,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-3b-whole/S05-api.json",
+        "workflow_sha256": "8676e4fdaddcbc821329156a416477fc2b9466b7be180b4585bb228bd5d881ae",
+        "run_id": "S05-M02r-a01"
+      },
+      "S07": {
+        "clip": "matrix/M02r/S07.mp4",
+        "poster": "poster/matrix/M02r/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 5154867,
+        "wall_seconds": 256.092,
+        "wall": "4 min 16 s",
+        "peak_vram_mib": 43235,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-3b-whole/S07-api.json",
+        "workflow_sha256": "26c69bb0e53617203b53c8daa703830b4fb243e907c962765e0e8b044ca27528",
+        "run_id": "S07-M02r-a01"
+      }
+    },
+    "M07f": {
+      "S01": {
+        "clip": "matrix/M07f/S01.mp4",
+        "poster": "poster/matrix/M07f/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 14870852,
+        "wall_seconds": 399.916,
+        "wall": "6 min 40 s",
+        "peak_vram_mib": 65983,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-7b-fp16-whole/S01-api.json",
+        "workflow_sha256": "8792738203f10047003f6877da9a596a47ff3c4741d591564ac0e5fc42ed2854",
+        "run_id": "S01-M07f-a01"
+      },
+      "S03": {
+        "clip": "matrix/M07f/S03.mp4",
+        "poster": "poster/matrix/M07f/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 7557325,
+        "wall_seconds": 403.409,
+        "wall": "6 min 43 s",
+        "peak_vram_mib": 58495,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-7b-fp16-whole/S03-api.json",
+        "workflow_sha256": "c5cc51bd5f634733ce984412921e5e785f9e8879991c3b22188d3a3545310ee3",
+        "run_id": "S03-M07f-a01"
+      },
+      "S04": {
+        "clip": "matrix/M07f/S04.mp4",
+        "poster": "poster/matrix/M07f/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 6554930,
+        "wall_seconds": 129.829,
+        "wall": "2 min 10 s",
+        "peak_vram_mib": 57603,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-7b-fp16-whole/S04-api.json",
+        "workflow_sha256": "4c6e720680b56f5b97992edec7b9a1c05b6a339c65aa9059fcd84c1642e14e7d",
+        "run_id": "S04-M07f-a01"
+      },
+      "S05": {
+        "clip": "matrix/M07f/S05.mp4",
+        "poster": "poster/matrix/M07f/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3492784,
+        "wall_seconds": 185.736,
+        "wall": "3 min 6 s",
+        "peak_vram_mib": 57571,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-7b-fp16-whole/S05-api.json",
+        "workflow_sha256": "5852c3acaa994fbf16c3997771c98abd24a4154efd3d75e8884a305ada61ce26",
+        "run_id": "S05-M07f-a01"
+      },
+      "S07": {
+        "clip": "matrix/M07f/S07.mp4",
+        "poster": "poster/matrix/M07f/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4780002,
+        "wall_seconds": 224.925,
+        "wall": "3 min 45 s",
+        "peak_vram_mib": 56159,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/seedvr2-7b-fp16-whole/S07-api.json",
+        "workflow_sha256": "ffea53130fdd97d71f717814c5d8a67d7984c9252e2d3dbe4361146c1c18ab1f",
+        "run_id": "S07-M07f-a01"
+      }
+    },
+    "M04b": {
+      "S01": {
+        "clip": "matrix/M04b/S01.mp4",
+        "poster": "poster/matrix/M04b/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 7988883,
+        "wall_seconds": 507.177,
+        "wall": "8 min 27 s",
+        "peak_vram_mib": 79305,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/ltx25-bf16/S01-api.json",
+        "workflow_sha256": "3af385096364b7a3d0d49a346667bd64b8a47066698ca8c439968aa191ae086c",
+        "run_id": "S01-M04b-a01"
+      },
+      "S03": {
+        "clip": "matrix/M04b/S03.mp4",
+        "poster": "poster/matrix/M04b/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 5506035,
+        "wall_seconds": 515.485,
+        "wall": "8 min 35 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/ltx25-bf16/S03-api.json",
+        "workflow_sha256": "dd880b30afe1a9f93bf044b688f2bf938ad8e0d6fc38fab22e11e17c791930fa",
+        "run_id": "S03-M04b-a01"
+      },
+      "S04": {
+        "clip": "matrix/M04b/S04.mp4",
+        "poster": "poster/matrix/M04b/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3712105,
+        "wall_seconds": 261.525,
+        "wall": "4 min 22 s",
+        "peak_vram_mib": 79099,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/ltx25-bf16/S04-api.json",
+        "workflow_sha256": "f2a1dddf7cd52347cc8394653c8f58ff16eece629e0ae1e500e184a195a2c99e",
+        "run_id": "S04-M04b-a02"
+      },
+      "S05": {
+        "clip": "matrix/M04b/S05.mp4",
+        "poster": "poster/matrix/M04b/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 2866408,
+        "wall_seconds": 229.671,
+        "wall": "3 min 50 s",
+        "peak_vram_mib": null,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/ltx25-bf16/S05-api.json",
+        "workflow_sha256": "3faeaa2cfe87907718e5fcddce01219a2a099f15516bcc6d16c02849dc083469",
+        "run_id": "S05-M04b-a02"
+      },
+      "S07": {
+        "clip": "matrix/M04b/S07.mp4",
+        "poster": "poster/matrix/M04b/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 2760505,
+        "wall_seconds": 230.175,
+        "wall": "3 min 50 s",
+        "peak_vram_mib": 76169,
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "cost_usd": 0,
+        "workflow": "workflows/ltx25-bf16/S07-api.json",
+        "workflow_sha256": "1837d931f11cebf3834d7b9e86cc71a1c788fe4c68227adcabdf44d76077c7c8",
+        "run_id": "S07-M04b-a01"
+      }
+    },
+    "M08": {
+      "S01": {
+        "clip": "matrix/M08/S01.mp4",
+        "poster": "poster/matrix/M08/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 13927529,
+        "service": "Topaz",
+        "model": "Starlight Precise",
+        "delivered": [
+          3838,
+          2194
+        ],
+        "scale": 2.8557,
+        "settings_as_entered": "4K target resolution, 24fps, no frame interpolation",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S03": {
+        "clip": "matrix/M08/S03.mp4",
+        "poster": "poster/matrix/M08/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 7329881,
+        "service": "Topaz",
+        "model": "Starlight Precise",
+        "delivered": [
+          3838,
+          2194
+        ],
+        "scale": 2.8557,
+        "settings_as_entered": "4K target resolution, 24fps, no frame interpolation",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S04": {
+        "clip": "matrix/M08/S04.mp4",
+        "poster": "poster/matrix/M08/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 5454550,
+        "service": "Topaz",
+        "model": "Starlight Precise",
+        "delivered": [
+          3840,
+          2160
+        ],
+        "scale": 3.75,
+        "settings_as_entered": "4K target resolution, 24fps, no frame interpolation",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S05": {
+        "clip": "matrix/M08/S05.mp4",
+        "poster": "poster/matrix/M08/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3256565,
+        "service": "Topaz",
+        "model": "Starlight Precise",
+        "delivered": [
+          3840,
+          2160
+        ],
+        "scale": 3.75,
+        "settings_as_entered": "4K target resolution, 24fps, no frame interpolation",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S07": {
+        "clip": "matrix/M08/S07.mp4",
+        "poster": "poster/matrix/M08/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4279146,
+        "service": "Topaz",
+        "model": "Starlight Precise",
+        "delivered": [
+          3840,
+          2160
+        ],
+        "scale": 3.75,
+        "settings_as_entered": "4K target resolution, 24fps, no frame interpolation",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      }
+    },
+    "M09": {
+      "S01": {
+        "clip": "matrix/M09/S01.mp4",
+        "poster": "poster/matrix/M09/S01.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 10727822,
+        "service": "Flux",
+        "model": "3.0 upscale",
+        "delivered": [
+          2520,
+          1440
+        ],
+        "scale": 1.875,
+        "settings_as_entered": "1440p target resolution, 24fps",
+        "cost_usd": 0.0,
+        "matched_direction": "up"
+      },
+      "S03": {
+        "clip": "matrix/M09/S03.mp4",
+        "poster": "poster/matrix/M09/S03.jpg",
+        "width": 2688,
+        "height": 1536,
+        "bytes": 6262124,
+        "service": "Flux",
+        "model": "3.0 upscale",
+        "delivered": [
+          2520,
+          1440
+        ],
+        "scale": 1.875,
+        "settings_as_entered": "1440p target resolution, 24fps",
+        "cost_usd": 0.0,
+        "matched_direction": "up"
+      },
+      "S04": {
+        "clip": "matrix/M09/S04.mp4",
+        "poster": "poster/matrix/M09/S04.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 4320158,
+        "service": "Flux",
+        "model": "3.0 upscale",
+        "delivered": [
+          2560,
+          1440
+        ],
+        "scale": 2.5,
+        "settings_as_entered": "1440p target resolution, 24fps",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S05": {
+        "clip": "matrix/M09/S05.mp4",
+        "poster": "poster/matrix/M09/S05.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 2450497,
+        "service": "Flux",
+        "model": "3.0 upscale",
+        "delivered": [
+          2560,
+          1440
+        ],
+        "scale": 2.5,
+        "settings_as_entered": "1440p target resolution, 24fps",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      },
+      "S07": {
+        "clip": "matrix/M09/S07.mp4",
+        "poster": "poster/matrix/M09/S07.jpg",
+        "width": 2048,
+        "height": 1152,
+        "bytes": 3307621,
+        "service": "Flux",
+        "model": "3.0 upscale",
+        "delivered": [
+          2560,
+          1440
+        ],
+        "scale": 2.5,
+        "settings_as_entered": "1440p target resolution, 24fps",
+        "cost_usd": 0.0,
+        "matched_direction": "down"
+      }
+    }
+  },
+  "not_run": {
+    "id": "M03",
+    "name": "FlashVSR v1.1",
+    "tier": "80 GB VRAM GPU",
+    "blurb": "Planned but never run, so nothing on this page says anything about its quality. The build was still in progress when the rented GPU session ended.",
+    "links": [
+      {
+        "label": "FlashVSR",
+        "url": "https://github.com/OpenImagingLab/FlashVSR"
+      }
+    ],
+    "tier_colour": "#a97bf0"
+  },
+  "findings": [
+    {
+      "id": "chunking",
+      "question": "SeedVR2's default chunking on a 12 GB card",
+      "paras": [
+        "SeedVR2 processes a clip in temporal chunks. On a 12 GB card its auto mode resolves to frames_per_chunk=1 - one latent frame, about four pixel frames - and temporal_overlap resolves to zero, so the crossfade between chunks never engages. Setting chunking_mode=manual, frames_per_chunk=21, temporal_overlap=2 changes that without changing the model, the card or anything else.",
+        "The table measures a mod-4 periodicity metric: mean absolute inter-frame luma difference grouped by frame index modulo 4, which is the pixel-frame period of one latent frame at the VAE's 4:1 temporal compression. Lower is less periodic. Going from 4 frames to 21 moves every clip; going from 21 to the whole clip moves them by 0.6-2.9 points and is flat on one."
+      ],
+      "table": {
+        "caption": "mod-4 spread, lower is less periodic. Comparable within a row, not between rows.",
+        "head": [
+          "Clip",
+          "Lanczos",
+          "4 frames",
+          "21 frames",
+          "whole clip"
+        ],
+        "rows": [
+          [
+            "Face",
+            "4.2%",
+            "18.2%",
+            "13.2%",
+            "12.6%"
+          ],
+          [
+            "Detail",
+            "9.1%",
+            "38.0%",
+            "28.6%",
+            "26.7%"
+          ],
+          [
+            "Particles",
+            "6.1%",
+            "19.6%",
+            "7.4%",
+            "7.6%"
+          ],
+          [
+            "Graphic",
+            "13.4%",
+            "10.4%",
+            "10.0%",
+            "9.1%"
+          ],
+          [
+            "Dance",
+            "7.6%",
+            "14.3%",
+            "7.6%",
+            "4.7%"
+          ]
+        ]
+      },
+      "caveat": "This detects periodicity, not quality, and only compares within a row. The Graphic clip's Lanczos control scores worse than its SeedVR2 runs, which is not a statement about how they look."
+    },
+    {
+      "id": "black-file",
+      "question": "The SeedVR2 7B int8 checkpoint outputs black frames",
+      "paras": [
+        "seedvr2_7b_int8_convrot.safetensors produced an entirely black result on this stack - every sampled frame at YMIN=YAVG=YMAX=16. Resolution, frame count, fps and codec checks all passed it; only the file size looked wrong, at 8.95 MB against 140-182 MB for the same geometry elsewhere.",
+        "Isolated on one pod with one ComfyUI commit and one VAE: the 3B int8 checkpoint produced real content at both chunk sizes tested, and the 7B int8 checkpoint was black at both. seedvr2_7b_fp16 works, and ran faster - 129.8 s against the 3B int8's 214.1 s on the same clip, because the int8 path falls back to emulated kernels on this CUDA build."
+      ]
+    },
+    {
+      "id": "fourk",
+      "question": "At 4x",
+      "paras": [
+        "The Dance clip upscaled 4x in a single SeedVR2 7B fp16 pass: 4096x2304, 124 frames, mod-4 spread 5.4% against a 7.6% Lanczos floor for that clip, with VRAM forcing the chunk down from 121 to 33. One pass rather than two chained 2x passes, since chaining would treat the first pass's output as ground truth for the second."
+      ]
+    },
+    {
+      "id": "commercial",
+      "question": "Comparing the two paid services fairly",
+      "paras": [
+        "Topaz Starlight and Flux 3.0 both take a target resolution rather than a scale factor, so neither landed on exactly 2x: Topaz at 2.86x or 3.75x, Flux at 1.88x or 2.50x. The player shows both resampled to the 2x comparison size; the as-delivered versions are in Extras.",
+        "That resampling is not neutral. Topaz is downscaled on every clip, which is a supersampling advantage over methods that rendered natively at 2x. Flux is upscaled on two clips, because at 1.88x it returned fewer pixels than the comparison size.",
+        "Neither can be reproduced from this page: there is no workflow to publish, no checkpoint to pin, and any denoise or sharpening they apply cannot be switched off. The vendor can also change the model behind the same product name, so this is a snapshot of one date."
+      ]
+    }
+  ],
+  "extras": [
+    {
+      "id": "showcase-4k",
+      "title": "The 4x showcase",
+      "blurb": "S07 upscaled four times rather than twice, in a single SeedVR2 7B fp16 pass. This is NOT a matrix cell - the experiment's control is exactly 2x, so a 4x result answers a different question and must not be pooled with the rows above. It ran on the rented A100, not locally.",
+      "facts": [
+        [
+          "Output",
+          "4096x2304, 124 frames"
+        ],
+        [
+          "Method",
+          "SeedVR2 7B fp16, single pass, lanczos 4x pre-resize then refine"
+        ],
+        [
+          "Chunk",
+          "33 frames, derived from measurement"
+        ],
+        [
+          "Hardware",
+          "NVIDIA A100-SXM4-80GB"
+        ],
+        [
+          "mod-4 spread",
+          "5.4%, against a 7.6% Lanczos floor"
+        ]
+      ],
+      "finding": "Going to 4x did not cost temporal stability. Despite VRAM forcing the chunk down from 121 to 33, the 4x pass scores 5.4% - below the 7.6% lanczos floor for this source and slightly better than the 2x 7B run. The chunking fix holds at 4x.",
+      "clips": [
+        {
+          "label": "SeedVR2 7B fp16, 4x",
+          "clip": "extra/showcase/M07f4K-S07.mp4",
+          "poster": "poster/extra/showcase/M07f4K-S07.jpg",
+          "width": 4096,
+          "height": 2304
+        }
+      ]
+    },
+    {
+      "id": "chunk-sweep",
+      "title": "The chunking evidence",
+      "blurb": "The raw experiment behind the headline finding, run on S06. Same checkpoint file throughout; only frames_per_chunk and temporal_overlap change. Watch the background and the edges of the moving subject - this is what a four-frame temporal window looks like against a twenty-one frame one.",
+      "facts": [
+        [
+          "Source",
+          "S06 billboard text, withdrawn from the matrix"
+        ],
+        [
+          "Constant",
+          "checkpoint, VAE, sampler, steps, cfg, seed"
+        ],
+        [
+          "Variable",
+          "frames_per_chunk and temporal_overlap only"
+        ]
+      ],
+      "clips": [
+        {
+          "label": "Lanczos control",
+          "clip": "extra/chunks/control.mp4",
+          "poster": "poster/extra/chunks/control.jpg",
+          "width": 2048,
+          "height": 1152,
+          "note": "no model at all"
+        },
+        {
+          "label": "chunk 1, overlap 0",
+          "clip": "extra/chunks/chunk1.mp4",
+          "poster": "poster/extra/chunks/chunk1.jpg",
+          "width": 2048,
+          "height": 1152,
+          "note": "the stock 12 GB configuration"
+        },
+        {
+          "label": "chunk 5, overlap 1",
+          "clip": "extra/chunks/chunk5.mp4",
+          "poster": "poster/extra/chunks/chunk5.jpg",
+          "width": 2048,
+          "height": 1152,
+          "note": "the first step up"
+        },
+        {
+          "label": "chunk 21, overlap 2",
+          "clip": "extra/chunks/chunk21.mp4",
+          "poster": "poster/extra/chunks/chunk21.jpg",
+          "width": 2048,
+          "height": 1152,
+          "note": "the frozen fix"
+        }
+      ]
+    },
+    {
+      "id": "partial",
+      "title": "Two sources that left the matrix",
+      "blurb": "S02 and S06 were frozen, run on three local methods each, and then withdrawn from the active comparison - S02 because it was not used in the video, S06 because S05 already covers the text and hard-edge axis and S07 replaced its slot. Their frozen files, hashes and run records were kept rather than deleted, so they are published here as partial rows rather than quietly dropped.",
+      "facts": [
+        [
+          "Methods",
+          "Lanczos, Real-ESRGAN x2plus, SeedVR2 3B int8 at chunk 1"
+        ],
+        [
+          "Where",
+          "all local, RTX 3060 12 GB"
+        ],
+        [
+          "Status",
+          "evidence retained, outside the 45-cell matrix"
+        ]
+      ],
+      "finding": "S06 inverts the impression the face clip gives. On small type Real-ESRGAN produces the cleanest letterforms, while SeedVR2 is sharp but rings, with a white halo and uneven stroke weight. Measuring a text-free patch of flat painted billboard, where the real surface carries no detail at all, Real-ESRGAN invents 174x the control's texture and SeedVR2 58x. So Real-ESRGAN adds the most spurious texture to flat surfaces, while SeedVR2's invention concentrates on faces, motion and edge halos.",
+      "groups": [
+        {
+          "source": "S02",
+          "clips": [
+            {
+              "label": "Source",
+              "clip": "extra/partial/source/S02.mp4",
+              "poster": "poster/extra/partial/source/S02.jpg",
+              "width": 1344,
+              "height": 768
+            },
+            {
+              "label": "Lanczos resize",
+              "clip": "extra/partial/M00/S02.mp4",
+              "poster": "poster/extra/partial/M00/S02.jpg",
+              "width": 2688,
+              "height": 1536
+            },
+            {
+              "label": "Real-ESRGAN x2plus",
+              "clip": "extra/partial/M01/S02.mp4",
+              "poster": "poster/extra/partial/M01/S02.jpg",
+              "width": 2688,
+              "height": 1536
+            },
+            {
+              "label": "SeedVR2 3B int8, 4 frames",
+              "clip": "extra/partial/M02/S02.mp4",
+              "poster": "poster/extra/partial/M02/S02.jpg",
+              "width": 2688,
+              "height": 1536
+            }
+          ]
+        },
+        {
+          "source": "S06",
+          "clips": [
+            {
+              "label": "Source",
+              "clip": "extra/partial/source/S06.mp4",
+              "poster": "poster/extra/partial/source/S06.jpg",
+              "width": 1024,
+              "height": 576
+            },
+            {
+              "label": "Lanczos resize",
+              "clip": "extra/partial/M00/S06.mp4",
+              "poster": "poster/extra/partial/M00/S06.jpg",
+              "width": 2048,
+              "height": 1152
+            },
+            {
+              "label": "Real-ESRGAN x2plus",
+              "clip": "extra/partial/M01/S06.mp4",
+              "poster": "poster/extra/partial/M01/S06.jpg",
+              "width": 2048,
+              "height": 1152
+            },
+            {
+              "label": "SeedVR2 3B int8, 4 frames",
+              "clip": "extra/partial/M02/S06.mp4",
+              "poster": "poster/extra/partial/M02/S06.jpg",
+              "width": 2048,
+              "height": 1152
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delivered",
+      "title": "Topaz and Flux as delivered",
+      "blurb": "The commercial services at the resolution they actually returned, before the Lanczos resample that the player uses. Both take a target resolution rather than a scale factor, so neither landed on the matrix's exact 2x, and their scales differ from each other. A native-resolution side-by-side flatters whichever upscaled furthest, which is exactly why the comparison above uses the matched versions.",
+      "facts": [
+        [
+          "Topaz delivered",
+          "3838x2194 (2.86x) or 3840x2160 (3.75x)"
+        ],
+        [
+          "Flux delivered",
+          "2520x1440 (1.88x) or 2560x1440 (2.50x)"
+        ],
+        [
+          "Matrix target",
+          "exactly 2x the source"
+        ]
+      ],
+      "groups": [
+        {
+          "source": "S01",
+          "clips": [
+            {
+              "label": "Topaz Starlight, as delivered",
+              "clip": "extra/delivered/M08/S01.mp4",
+              "poster": "poster/extra/delivered/M08/S01.jpg",
+              "width": 3838,
+              "height": 2194
+            },
+            {
+              "label": "Flux 3.0, as delivered",
+              "clip": "extra/delivered/M09/S01.mp4",
+              "poster": "poster/extra/delivered/M09/S01.jpg",
+              "width": 2520,
+              "height": 1440
+            }
+          ]
+        },
+        {
+          "source": "S03",
+          "clips": [
+            {
+              "label": "Topaz Starlight, as delivered",
+              "clip": "extra/delivered/M08/S03.mp4",
+              "poster": "poster/extra/delivered/M08/S03.jpg",
+              "width": 3838,
+              "height": 2194
+            },
+            {
+              "label": "Flux 3.0, as delivered",
+              "clip": "extra/delivered/M09/S03.mp4",
+              "poster": "poster/extra/delivered/M09/S03.jpg",
+              "width": 2520,
+              "height": 1440
+            }
+          ]
+        },
+        {
+          "source": "S04",
+          "clips": [
+            {
+              "label": "Topaz Starlight, as delivered",
+              "clip": "extra/delivered/M08/S04.mp4",
+              "poster": "poster/extra/delivered/M08/S04.jpg",
+              "width": 3840,
+              "height": 2160
+            },
+            {
+              "label": "Flux 3.0, as delivered",
+              "clip": "extra/delivered/M09/S04.mp4",
+              "poster": "poster/extra/delivered/M09/S04.jpg",
+              "width": 2560,
+              "height": 1440
+            }
+          ]
+        },
+        {
+          "source": "S05",
+          "clips": [
+            {
+              "label": "Topaz Starlight, as delivered",
+              "clip": "extra/delivered/M08/S05.mp4",
+              "poster": "poster/extra/delivered/M08/S05.jpg",
+              "width": 3840,
+              "height": 2160
+            },
+            {
+              "label": "Flux 3.0, as delivered",
+              "clip": "extra/delivered/M09/S05.mp4",
+              "poster": "poster/extra/delivered/M09/S05.jpg",
+              "width": 2560,
+              "height": 1440
+            }
+          ]
+        },
+        {
+          "source": "S07",
+          "clips": [
+            {
+              "label": "Topaz Starlight, as delivered",
+              "clip": "extra/delivered/M08/S07.mp4",
+              "poster": "poster/extra/delivered/M08/S07.jpg",
+              "width": 3840,
+              "height": 2160
+            },
+            {
+              "label": "Flux 3.0, as delivered",
+              "clip": "extra/delivered/M09/S07.mp4",
+              "poster": "poster/extra/delivered/M09/S07.jpg",
+              "width": 2560,
+              "height": 1440
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "method": "M05",
+      "name": "NVIDIA RTX Video Super Resolution",
+      "tier": "Any NVIDIA RTX card",
+      "tier_colour": "#4fd6a8",
+      "dir": "workflows/rtxvsr",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/rtxvsr/S01-api.json",
+          "sha256": "011f29bce921d510fc8628863e8ea69b9aced55c459aac122379daea6d7daf67"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/rtxvsr/S03-api.json",
+          "sha256": "5b069130f96ffe0b7eb46eada77084e94e99189985322d732b6c068c1082d8d5"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/rtxvsr/S04-api.json",
+          "sha256": "c56e3fdf85ce9d7144480e21700e5bb5fe3aba743cf9c4665f49f5316f6230b9"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/rtxvsr/S05-api.json",
+          "sha256": "3b7b2ae0843cf32ba20b62b0ea68fb000ed0bb1da4977b8d6bf40cf6ee890fef"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/rtxvsr/S07-api.json",
+          "sha256": "38882300f3fe227e874899351b612c4d1722aa8b44a2141edc3df6dd3f4835be"
+        }
+      ],
+      "checkpoint": null,
+      "checkpoint_sha256": null,
+      "vae": null,
+      "settings": {
+        "resize_type": "scale by multiplier",
+        "scale": 2.0,
+        "quality": "ULTRA"
+      },
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "RTX nodes for ComfyUI",
+          "url": "https://github.com/Comfy-Org/Nvidia_RTX_Nodes_ComfyUI"
+        }
+      ]
+    },
+    {
+      "method": "M01",
+      "name": "Real-ESRGAN x2plus",
+      "tier": "6-8 GB VRAM GPU",
+      "tier_colour": "#45c0e0",
+      "dir": "workflows/realesrgan",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/realesrgan/S01-api.json",
+          "sha256": "e63a394cacbe4b7f59019251c9286bba74e7ed1c96e78ea69c1318a03b817866"
+        },
+        {
+          "source": "S02",
+          "path": "workflows/realesrgan/S02-api.json",
+          "sha256": "e112afee0b4e7e86a9052ce45071bbe240f5a50fa2d5c26ffc49355722c32dac"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/realesrgan/S03-api.json",
+          "sha256": "84790ce258f31ebe5b2f25095e0dac6c09afb842b94ba3d5329868e0ead99b1a"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/realesrgan/S04-api.json",
+          "sha256": "6853d9ace9da1876f8c877ca2a3e91c37dbd468058c6aac1784cc5d558ca22d6"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/realesrgan/S05-api.json",
+          "sha256": "e7098bec090bfd5458c88739e83b9778c3ff7769da5df10c15afafa22fab3580"
+        },
+        {
+          "source": "S06",
+          "path": "workflows/realesrgan/S06-api.json",
+          "sha256": "094a6a050a159741e3665b9c0c10e16ef72a8f011eb8f33e011f1f5543a7a68a"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/realesrgan/S07-api.json",
+          "sha256": "0e7fe7376634463d8d7ed9f81ac53823d5034921f8377900dd6da22358928e02"
+        }
+      ],
+      "checkpoint": "RealESRGAN_x2plus.pth",
+      "checkpoint_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+      "vae": null,
+      "settings": {
+        "per_batch": 1,
+        "precision": "float16",
+        "downscale_ratio": 1.0
+      },
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "Real-ESRGAN",
+          "url": "https://github.com/xinntao/Real-ESRGAN"
+        }
+      ]
+    },
+    {
+      "method": "M06",
+      "name": "MiniMax H3 Latent Upscaler",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "dir": "workflows/h3-latent-upscale",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/h3-latent-upscale/S01-api.json",
+          "sha256": "838ccb47fea68af51e7631c2e92a3dc5493bf64b8d8863a6021cc2d99e7e464a"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/h3-latent-upscale/S03-api.json",
+          "sha256": "b8b24fd87f6867126e98aed4160e2bafd12c15ee6f2d6b2d205e8cc7f076934c"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/h3-latent-upscale/S04-api.json",
+          "sha256": "9b4f16a20cd4391a569bdd2cdef474763c551f90bac44e08af45c965afb659c2"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/h3-latent-upscale/S05-api.json",
+          "sha256": "9f16b95468d1d015b134eb607ed6a8ffe13e9de3f5793bf22bd2eb54e89c1e0a"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/h3-latent-upscale/S07-api.json",
+          "sha256": "8e5d63732535f65e36535d086d158e55a744484e4a388c4d509c9399f52d2c56"
+        }
+      ],
+      "checkpoint": "minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "checkpoint_sha256": "4f57821f5837f32f7142b67d815606dbd7550f194e5c769f7d6c3f83b146a5e6",
+      "vae": "minimax_h3_video_vae_fp16.safetensors",
+      "settings": {
+        "mode": "target dimensions",
+        "align": 32,
+        "enable_temporal_chunking": true,
+        "force_unload": true,
+        "device": "cuda",
+        "precision": "fp16",
+        "encode_upscale_method": "lanczos",
+        "keep_proportion": "stretch"
+      },
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "MiniMax H3",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+        },
+        {
+          "label": "Latent upscaler node",
+          "url": "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler"
+        }
+      ]
+    },
+    {
+      "method": "M02",
+      "name": "SeedVR2 3B int8, 4 frames",
+      "tier": "12 GB VRAM GPU",
+      "tier_colour": "#5b8cf2",
+      "dir": "workflows/seedvr2",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/seedvr2/S01-api.json",
+          "sha256": "08418de45e8f3a0815dff0f4f01983f2984c90318d2446af054fd7b24bc3093a"
+        },
+        {
+          "source": "S02",
+          "path": "workflows/seedvr2/S02-api.json",
+          "sha256": "158fd98d80f537ddf021ad40b7a89abe8e3e6aebb072c28b7cd6065c1ea01447"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/seedvr2/S03-api.json",
+          "sha256": "ba050dc457a3e90b959a64ccba5439783a974e17edb943c9cb5c5362b4ff393c"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/seedvr2/S04-api.json",
+          "sha256": "7e3f00ee85740753cceb221b6d5568a4e8bf4a55052bc67e6d732e3986198903"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/seedvr2/S05-api.json",
+          "sha256": "0ac763754c619cff4d92f5e8c7eef602430a844b495952ef1f06d32495323eaa"
+        },
+        {
+          "source": "S06",
+          "path": "workflows/seedvr2/S06-api.json",
+          "sha256": "d179206d8d038f4c9ffa2ef4902b8b3c7518d8f92fd32331a69cebbd7aadb9a3"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/seedvr2/S07-api.json",
+          "sha256": "98991dd0738a45dfc5836d94d359bc3ec395aafef6c18d2c84b00d0f6899af80"
+        }
+      ],
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "vae": "ema_vae_fp16.safetensors",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "auto",
+        "chunk_temporal_overlap": 0,
+        "color_correction_method": "none"
+      },
+      "required_patch": "workflows/seedvr2/comfyui-seedvr2-cpu-accumulation.patch",
+      "patch_note": "ComfyUI 8a33128f must carry this patch or the tiled VAE decode OOMs on a 12 GB card. It moves only the decode accumulator to the CPU intermediate device; tile compute stays on the GPU and no pixel operation changes.",
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        },
+        {
+          "label": "SeedVR2 research code",
+          "url": "https://github.com/IceClear/SeedVR2"
+        }
+      ]
+    },
+    {
+      "method": "M02r",
+      "name": "SeedVR2 3B int8, 121 frames",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "dir": "workflows/seedvr2-3b-whole",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/seedvr2-3b-whole/S01-api.json",
+          "sha256": "3244b7197b629aca115973b27a86fe5489693a7c926937e4fd1654f8a78d971d"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/seedvr2-3b-whole/S03-api.json",
+          "sha256": "c8b289062f4753464720ef2fe8cf09979df558261d9f17f85e15c6b95c3e5945"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/seedvr2-3b-whole/S04-api.json",
+          "sha256": "b549fdefe79a16f980fcf70e3be1372e3d39a39c0518256bae53437f1ff6b16f"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/seedvr2-3b-whole/S05-api.json",
+          "sha256": "8676e4fdaddcbc821329156a416477fc2b9466b7be180b4585bb228bd5d881ae"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/seedvr2-3b-whole/S07-api.json",
+          "sha256": "26c69bb0e53617203b53c8daa703830b4fb243e907c962765e0e8b044ca27528"
+        }
+      ],
+      "checkpoint": "seedvr2_3b_int8_convrot.safetensors",
+      "checkpoint_sha256": "c3dec8bcc5916843a8a858572970597462e1f2dc598d6dfd818f6cd40f53a157",
+      "vae": "ema_vae_fp16.safetensors",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": 121
+      },
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ]
+    },
+    {
+      "method": "M07f",
+      "name": "SeedVR2 7B fp16, 77-121 frames",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "dir": "workflows/seedvr2-7b-fp16-whole",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/seedvr2-7b-fp16-whole/S01-api.json",
+          "sha256": "8792738203f10047003f6877da9a596a47ff3c4741d591564ac0e5fc42ed2854"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/seedvr2-7b-fp16-whole/S03-api.json",
+          "sha256": "c5cc51bd5f634733ce984412921e5e785f9e8879991c3b22188d3a3545310ee3"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/seedvr2-7b-fp16-whole/S04-api.json",
+          "sha256": "4c6e720680b56f5b97992edec7b9a1c05b6a339c65aa9059fcd84c1642e14e7d"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/seedvr2-7b-fp16-whole/S05-api.json",
+          "sha256": "5852c3acaa994fbf16c3997771c98abd24a4154efd3d75e8884a305ada61ce26"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/seedvr2-7b-fp16-whole/S07-api.json",
+          "sha256": "ffea53130fdd97d71f717814c5d8a67d7984c9252e2d3dbe4361146c1c18ab1f"
+        }
+      ],
+      "checkpoint": "seedvr2_7b_fp16.safetensors",
+      "checkpoint_sha256": null,
+      "vae": "ema_vae_fp16.safetensors",
+      "settings": {
+        "steps": 1,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0,
+        "seed": 959948902156062,
+        "tile_size": 512,
+        "tile_overlap": 128,
+        "temporal_size": 64,
+        "temporal_overlap": 8,
+        "chunking_mode": "manual",
+        "chunk_temporal_overlap": 2,
+        "color_correction_method": "none",
+        "frames_per_chunk": "121 for S04/S05/S07; 77 for S01/S03 (see per_source_settings)"
+      },
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "SeedVR2 in ComfyUI",
+          "url": "https://docs.comfy.org/tutorials/utility/seedvr2"
+        }
+      ]
+    },
+    {
+      "method": "M04b",
+      "name": "LTX 2.5, BF16",
+      "tier": "80 GB VRAM GPU",
+      "tier_colour": "#a97bf0",
+      "dir": "workflows/ltx25-bf16",
+      "files": [
+        {
+          "source": "S01",
+          "path": "workflows/ltx25-bf16/S01-api.json",
+          "sha256": "3af385096364b7a3d0d49a346667bd64b8a47066698ca8c439968aa191ae086c"
+        },
+        {
+          "source": "S03",
+          "path": "workflows/ltx25-bf16/S03-api.json",
+          "sha256": "dd880b30afe1a9f93bf044b688f2bf938ad8e0d6fc38fab22e11e17c791930fa"
+        },
+        {
+          "source": "S04",
+          "path": "workflows/ltx25-bf16/S04-api.json",
+          "sha256": "f2a1dddf7cd52347cc8394653c8f58ff16eece629e0ae1e500e184a195a2c99e"
+        },
+        {
+          "source": "S05",
+          "path": "workflows/ltx25-bf16/S05-api.json",
+          "sha256": "3faeaa2cfe87907718e5fcddce01219a2a099f15516bcc6d16c02849dc083469"
+        },
+        {
+          "source": "S07",
+          "path": "workflows/ltx25-bf16/S07-api.json",
+          "sha256": "1837d931f11cebf3834d7b9e86cc71a1c788fe4c68227adcabdf44d76077c7c8"
+        }
+      ],
+      "checkpoint": "ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+      "checkpoint_sha256": null,
+      "vae": null,
+      "settings": null,
+      "required_patch": null,
+      "patch_note": null,
+      "links": [
+        {
+          "label": "LTX-2.5",
+          "url": "https://huggingface.co/Lightricks/LTX-2.5"
+        },
+        {
+          "label": "Pixel Spatial Upscaler IC-LoRA",
+          "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Pixel-Spatial-Upscaler"
+        },
+        {
+          "label": "ComfyUI-LTXVideo",
+          "url": "https://github.com/Lightricks/ComfyUI-LTXVideo"
+        }
+      ]
+    }
+  ],
+  "generation_workflows": [
+    {
+      "path": "workflows/source-generation/S04-particles-ref2va.json",
+      "name": "S04-particles-ref2va.json",
+      "source": "S04"
+    },
+    {
+      "path": "workflows/source-generation/S05-graphic-ref2va.json",
+      "name": "S05-graphic-ref2va.json",
+      "source": "S05"
+    },
+    {
+      "path": "workflows/source-generation/S06-billboard-ref2va.json",
+      "name": "S06-billboard-ref2va.json",
+      "source": "S06"
+    },
+    {
+      "path": "workflows/source-generation/S07-dance-ref2va.json",
+      "name": "S07-dance-ref2va.json",
+      "source": "S07"
+    }
+  ],
+  "frozen_sources": [
+    {
+      "id": "S01",
+      "label": "Face",
+      "sha256": "f7e5d4b699546b2abb6918d9e8d41a7f1f7318f8fed32121d6fd6694e2877b43",
+      "clip": "frozen/S01.mp4",
+      "size": "1344x768",
+      "frames": 124
+    },
+    {
+      "id": "S03",
+      "label": "Detail",
+      "sha256": "3c7df0002c87c975bdd21d5fc4120cf6f1a70412544f74ead40d598004118942",
+      "clip": "frozen/S03.mp4",
+      "size": "1344x768",
+      "frames": 124
+    },
+    {
+      "id": "S04",
+      "label": "Particles",
+      "sha256": "b52184c9282eb35839a197bd4f0eeb8a055e0740d7b7e8877485f6bdaf77ce85",
+      "clip": "frozen/S04.mp4",
+      "size": "1024x576",
+      "frames": 124
+    },
+    {
+      "id": "S05",
+      "label": "Graphic",
+      "sha256": "953d7d10f9f18be842bcef03fe6b5a9219cbd436bd402c936f65cf5959658271",
+      "clip": "frozen/S05.mp4",
+      "size": "1024x576",
+      "frames": 124
+    },
+    {
+      "id": "S07",
+      "label": "Dance",
+      "sha256": "ee9e1182ecef431a93a8addabbc2bd6f7cd0bb8f8b5e14d1809feadbe9afc251",
+      "clip": "frozen/S07.mp4",
+      "size": "1024x576",
+      "frames": 124
+    }
+  ],
+  "credits": [
+    {
+      "heading": "Models and methods",
+      "items": [
+        {
+          "label": "SeedVR2",
+          "note": "Research implementation by the SeedVR2 authors; the nodes used here are ComfyUI core (comfy/ldm/seedvr), not a third-party pack.",
+          "url": "https://github.com/IceClear/SeedVR2"
+        },
+        {
+          "label": "LTX-2.5 and the Pixel Spatial Upscaler IC-LoRA",
+          "note": "Lightricks.",
+          "url": "https://huggingface.co/Lightricks/LTX-2.5"
+        },
+        {
+          "label": "Real-ESRGAN",
+          "note": "Xintao Wang and contributors.",
+          "url": "https://github.com/xinntao/Real-ESRGAN"
+        },
+        {
+          "label": "MiniMax H3",
+          "note": "MiniMax AI. Generated every source clip in this experiment and supplied its own latent upscaler.",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+        },
+        {
+          "label": "RTX Video Super Resolution",
+          "note": "NVIDIA, via the VFX SDK.",
+          "url": "https://github.com/Comfy-Org/Nvidia_RTX_Nodes_ComfyUI"
+        },
+        {
+          "label": "FlashVSR",
+          "note": "OpenImagingLab. Listed because it was planned and is honestly reported as not attempted.",
+          "url": "https://github.com/OpenImagingLab/FlashVSR"
+        }
+      ]
+    },
+    {
+      "heading": "Software",
+      "items": [
+        {
+          "label": "ComfyUI",
+          "note": "comfyanonymous and contributors. Every local and pod run used commit 8a33128f.",
+          "url": "https://github.com/comfyanonymous/ComfyUI"
+        },
+        {
+          "label": "ComfyUI-VideoHelperSuite",
+          "note": "Kosinkadink. Loaded and wrote every clip.",
+          "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
+        },
+        {
+          "label": "ComfyUI-KJNodes",
+          "note": "kijai.",
+          "url": "https://github.com/kijai/ComfyUI-KJNodes"
+        },
+        {
+          "label": "ComfyUI-LTXVideo",
+          "note": "Lightricks.",
+          "url": "https://github.com/Lightricks/ComfyUI-LTXVideo"
+        },
+        {
+          "label": "MiniMax H3 latent upscaler nodes",
+          "note": "LBH-123-AI.",
+          "url": "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler"
+        },
+        {
+          "label": "FFmpeg",
+          "note": "Every resize, normalization and web encode on this page.",
+          "url": "https://ffmpeg.org/"
+        }
+      ]
+    },
+    {
+      "heading": "Services",
+      "items": [
+        {
+          "label": "RunPod",
+          "note": "The rented A100 80 GB that made the 80 GB tier possible. $6.67 of a $10 budget.",
+          "url": "https://www.runpod.io/"
+        },
+        {
+          "label": "Topaz Labs",
+          "note": "Starlight Precise.",
+          "url": "https://www.topazlabs.com/"
+        },
+        {
+          "label": "Flux 3.0 upscale",
+          "note": "Commercial video upscaling service.",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "local": "RTX 3060 12 GB, i5-13400F, 32 GB RAM, Windows 11",
+    "pod": "RunPod A100-SXM4-80GB at $1.59/hr",
+    "comfyui": "0.34.0, commit 8a33128f2f8c5585c57486c07de481241e70a39c",
+    "video_helper_suite": "4ee72c065db22c9d96c2427954dc69e7b908444b",
+    "kjnodes": "e8e88f7c88e3f6205b122f5de87e69a09fbce5ac",
+    "ltxvideo": "15d09ab",
+    "seedvr2": "ComfyUI core (comfy/ldm/seedvr), no custom node pack",
+    "total_cost_usd": 6.67
+  },
+  "encode_note": "Clips here are x264 CRF 20 streaming copies. Measurements on this page were taken from the lossless originals, not from these."
+}
