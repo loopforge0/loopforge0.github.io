@@ -1,0 +1,260 @@
+/* /upscaler-shootout/ only. Tokens come from site.css; this file adds the player and the
+   tables that go with it. Loaded after site.css so it can lean on --paper, --ink and friends. */
+
+.sh-hero { padding-top: 12px; }
+.sh-message {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.25;
+  max-width: 22ch;
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+.sh-status {
+  border-left: 3px solid var(--accent);
+  padding: 6px 0 6px 16px;
+  margin: 28px 0 0;
+  max-width: 64ch;
+  font-size: 15.5px;
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------------ the player */
+.sh-player {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: clamp(14px, 2vw, 22px);
+  margin: 0 0 20px;
+}
+.sh-row { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.sh-row + .sh-row { margin-top: 14px; }
+.sh-label {
+  font-size: 12.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-2); flex: 0 0 auto; min-width: 58px;
+}
+.sh-group { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.sh-chip {
+  font: inherit; font-size: 14.5px; line-height: 1;
+  padding: 9px 13px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.sh-chip:hover { border-color: var(--ink-2); }
+.sh-chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.sh-chip[disabled] { opacity: .4; cursor: default; }
+/* the dot is the method's hardware tier, the same six colours the video uses */
+.sh-chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tier, var(--ink-2)); flex: 0 0 auto; }
+.sh-chip[data-slot="1"]::after, .sh-chip[data-slot="2"]::after,
+.sh-chip[data-slot="3"]::after, .sh-chip[data-slot="4"]::after {
+  content: attr(data-slot);
+  font-size: 11px; font-weight: 700;
+  width: 16px; height: 16px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--paper); color: var(--ink);
+}
+.sh-chip small { color: inherit; opacity: .62; font-size: 12.5px; }
+
+/* ------------------------------------------------------------------ stage */
+/* The wrapper exists so the loupe can sit over the picture: the stage itself has its
+   children replaced whenever the method selection changes, so nothing can live inside it. */
+.sh-stage-wrap { position: relative; margin: 16px 0 0; }
+.sh-stage {
+  position: relative;
+  background: #07090c;
+  border-radius: 10px;
+  overflow: hidden;
+  touch-action: none;
+  display: grid;
+  gap: 2px;
+}
+.sh-stage.sh-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.sh-stage.sh-split { grid-template-columns: 1fr; }
+.sh-grabbing { cursor: grabbing; }
+.sh-zoomed .sh-stage:not(.sh-grabbing) { cursor: grab; }
+
+.sh-pane { position: relative; min-width: 0; }
+.sh-view { position: relative; overflow: hidden; aspect-ratio: var(--ar, 16 / 9); background: #07090c; }
+.sh-view video { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: 50% 50%; }
+
+/* In split mode the second pane is laid over the first and clipped at --split, so both
+   halves are the same instant of the same shot rather than two separate boxes. */
+.sh-split .sh-pane { grid-area: 1 / 1; }
+.sh-split .sh-pane:nth-child(2) .sh-view { clip-path: inset(0 0 0 var(--split, 50%)); }
+.sh-split .sh-facts { display: none; }
+.sh-split .sh-pane:nth-child(1) .sh-tag { left: 10px; right: auto; }
+.sh-split .sh-pane:nth-child(2) .sh-tag { right: 10px; left: auto; }
+
+.sh-divider {
+  position: absolute; top: 0; bottom: 0; left: var(--split, 50%);
+  width: 2px; background: rgba(255, 255, 255, .85);
+  transform: translateX(-1px); cursor: ew-resize; z-index: 4;
+}
+.sh-divider::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border-radius: 50%; background: rgba(255, 255, 255, .92);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .45);
+}
+.sh-divider:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.sh-tag {
+  position: absolute; top: 10px; left: 10px; z-index: 3;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 7px 11px; border-radius: 7px;
+  background: rgba(7, 9, 12, .78);
+  backdrop-filter: blur(6px);
+  border-left: 3px solid var(--tier, #fff);
+  pointer-events: none;
+}
+.sh-tag b { color: #e8eff2; font-size: 14px; line-height: 1.2; }
+.sh-tag span { color: #93a7b2; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
+.sh-facts { color: var(--ink-2); font-size: 13px; padding: 7px 2px 0; font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------------------------------ transport */
+.sh-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 14px; }
+.sh-transport .sh-scrub { flex: 1 1 220px; min-width: 160px; accent-color: var(--accent); }
+.sh-frame { font-family: var(--script); font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.sh-hint { font-size: 13px; color: var(--ink-2); margin: 10px 0 0; }
+.sh-hint kbd {
+  font-family: var(--script); font-size: 12px;
+  padding: 1px 5px; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper-2);
+}
+
+.sh-loupe {
+  position: absolute; right: 12px; bottom: 12px; z-index: 5;
+  width: 108px; aspect-ratio: var(--ar, 16 / 9);
+  border: 1px solid rgba(255, 255, 255, .5);
+  background: rgba(7, 9, 12, .6);
+  pointer-events: none;
+  /* the box inside dims everything outside itself with a huge spread shadow, which
+     without this would tint the entire page rather than just the minimap */
+  overflow: hidden;
+}
+.sh-loupe-box { position: absolute; border: 1.5px solid #fff; box-shadow: 0 0 0 9999px rgba(7, 9, 12, .42); }
+
+.sh-geometry {
+  font-family: var(--script); font-size: 13px; color: var(--ink-2);
+  margin: 12px 0 0; font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ tables */
+.sh-table-wrap { overflow-x: auto; margin: 0 0 8px; }
+.sh-table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 560px; }
+.sh-table th, .sh-table td { text-align: left; padding: 11px 14px 11px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.sh-table th { font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); font-weight: 700; }
+.sh-table td.num, .sh-table th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 18px; }
+.sh-table tbody tr:hover { background: var(--paper-2); }
+.sh-name { display: flex; align-items: baseline; gap: 9px; font-weight: 600; }
+.sh-name .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tier); flex: 0 0 auto; align-self: center; }
+.sh-table small { display: block; color: var(--ink-2); font-weight: 400; font-size: 13px; margin-top: 2px; }
+
+.sh-caveat {
+  font-size: 14.5px; color: var(--ink-2);
+  border-left: 2px solid var(--rule); padding-left: 14px; margin: 16px 0 0; max-width: 64ch;
+}
+
+/* ------------------------------------------------------------------ picks */
+.sh-picks { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 0; }
+.sh-pick {
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px;
+  padding: 20px; border-top: 4px solid var(--tier);
+}
+.sh-pick dt { font-size: 12.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2); font-weight: 700; }
+.sh-pick dd { margin: 10px 0 0; }
+.sh-pick .who { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; line-height: 1.1; }
+.sh-pick .how { font-family: var(--script); font-size: 14px; color: var(--ink-2); margin-top: 6px; }
+
+/* ------------------------------------------------------------------ methods, extras */
+.sh-method {
+  border-top: 1px solid var(--rule); padding: 26px 0;
+  display: grid; gap: 6px 36px; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+.sh-method:last-child { border-bottom: 1px solid var(--rule); }
+.sh-method h3 { margin: 0 0 8px; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+.sh-method h3 .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--tier); flex: 0 0 auto; }
+.sh-method .kind { font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 10px; }
+.sh-method p { max-width: 58ch; }
+.sh-note { font-size: 14.5px; color: var(--ink-2); border-left: 2px solid var(--rule); padding-left: 14px; }
+.sh-spec { font-family: var(--script); font-size: 13px; color: var(--ink-2); overflow-wrap: anywhere; }
+.sh-spec b { color: var(--ink); font-weight: 400; }
+
+.sh-extra { border-top: 1px solid var(--rule); padding: 30px 0 34px; }
+.sh-extra h3 { font-size: 22px; margin: 0 0 10px; }
+.sh-clips { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin: 18px 0 0; }
+.sh-clip { min-width: 0; }
+.sh-clip video { width: 100%; border-radius: 8px; background: #07090c; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
+.sh-clip figcaption { font-size: 13.5px; margin-top: 7px; }
+.sh-clip figcaption small { display: block; color: var(--ink-2); }
+.sh-group-head { font-size: 12.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2); font-weight: 700; margin: 22px 0 0; }
+
+.sh-dl { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.sh-dl > li { border-top: 1px solid var(--rule); padding: 14px 0; }
+.sh-dl > li:last-child { border-bottom: 1px solid var(--rule); }
+.sh-dl .files { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 8px 0 0; font-family: var(--script); font-size: 13px; }
+.sh-dl .files a { padding: 3px 9px; border: 1px solid var(--rule); border-radius: 6px; text-decoration: none; }
+.sh-dl .files a:hover { border-color: var(--accent); }
+
+.sh-credits { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.sh-credits h3 { font-size: 13px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 12px; }
+.sh-credits ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; font-size: 14.5px; }
+.sh-credits b { font-weight: 600; }
+.sh-credits small { display: block; color: var(--ink-2); font-size: 13.5px; }
+
+@media (max-width: 720px) {
+  .sh-method { grid-template-columns: 1fr; }
+  .sh-label { min-width: 0; flex-basis: 100%; }
+  .sh-loupe { width: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-stage video { animation: none; }
+}
+
+.sh-rowbar { margin: 18px 0 0; }
+
+/* site.css lays the findings out as a grid, and a grid item will not shrink below its
+   content unless told to. Without this the 560px-wide table forces the whole page wider
+   than the phone instead of scrolling inside its own wrapper. */
+.topics > .topic, .topic > .topic-a { min-width: 0; }
+.sh-table-wrap { max-width: 100%; }
+/* Below the table's own min-width there is nothing to gain from holding it open; let the
+   columns collapse and the wrapper scroll instead. */
+@media (max-width: 620px) {
+  .sh-table { min-width: 0; font-size: 13.5px; }
+  .sh-table th, .sh-table td { padding-right: 10px; }
+}
+
+/* The player is the reason people come, so the hero is a title and one line and then
+   gets out of the way. Everything that explains the page sits below it. */
+.sh-hero { padding-top: 26px; margin-bottom: 18px; }
+.sh-hero .page-title { margin-bottom: 8px; }
+.sh-hero .lede { margin-bottom: 0; }
+#compare > .sh-status { margin-top: 20px; }
+#compare > .facts { margin-top: 18px; }
+
+/* Cap the picture by viewport height so the whole frame is visible on arrival without
+   scrolling. --arn is the clip's width/height as a number, set from JS; multiplying it by
+   a height gives the matching width, so the frame shrinks proportionally instead of
+   letterboxing. Falls back to 16:9 before the first clip loads. */
+/* No height cap. Capping it to fit one screenful shrank the picture enough that 4x zoom
+   only reached 1.14x native on the 2688-wide clips, which defeats the point of a page
+   built for inspecting detail. The frame takes the full column and you scroll. */
+.sh-spacer { flex: 1 1 auto; }
+.sh-row { row-gap: 8px; }
+.sh-chip { padding: 8px 12px; font-size: 14px; }
+.sh-hint { margin-top: 8px; line-height: 1.5; }
+@media (max-width: 720px) {
+  /* on a phone the height cap just makes the picture tiny; let it be full width */
+  .sh-stage-wrap { max-width: none; }
+}
+
+/* This page's job is the picture, so the masthead gives up height the other pages keep:
+   a smaller title, a single-line lede and tighter crumbs. Together they buy about 80px,
+   which is the difference between the whole frame being visible on arrival and not. */
+.sh-hero .page-title { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.05; }
+.sh-hero { padding-top: 18px; margin-bottom: 12px; }
+#compare .crumbs, .crumbs:has(+ .sh-hero) { padding-top: 16px; }

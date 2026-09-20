@@ -44,8 +44,11 @@ class Page(HTMLParser):
 def main():
     problems = 0
     checked = 0
-    for col_file in sorted(p for p in (ROOT / "content").glob("*.json") if p.stem not in ("site", "findings")):
+    for col_file in sorted((ROOT / "content").glob("*.json")):
         col = json.loads(col_file.read_text(encoding="utf-8"))
+        # site.json, findings.json and the standalone pages are not prompt collections
+        if "prompts" not in col:
+            continue
         for p in col["prompts"]:
             path = ROOT / "projects" / col["slug"] / p["slug"] / "index.html"
             parser = Page()
