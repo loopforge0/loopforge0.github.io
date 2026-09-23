@@ -572,8 +572,14 @@ def build_project(col, findings, site):
                   f' height="720"><span class="play">Watch on YouTube</span></a>'
                   f'<p class="yt-caption">{e(video["title"])}. Opens on YouTube in a new'
                   f' tab.</p></div>')
+        # The banner branch has no room for the thumbnail card, so the video gets a button
+        # instead. Same destination, stated in the first screen rather than only further down.
+        hero_watch = (f'<p class="col-hero-actions"><a class="button watch"'
+                      f' href="{watch_url(video)}" target="_blank" rel="noopener">'
+                      f'Watch on YouTube</a></p>')
     else:
         yt_col = ""
+        hero_watch = ""
 
     # Contents: the sections with their counts, then anything the page can open in a dialog.
     counts = collections.Counter(p["group"] for p in col["prompts"])
@@ -594,6 +600,7 @@ def build_project(col, findings, site):
     <p class="when">{long_date(col["published"])}</p>
     <h1 class="display page-title">{e(col["title"])}</h1>
     <div class="summary">{summary}</div>
+    {hero_watch}
   </div>
 </section>
 <div class="wrap">

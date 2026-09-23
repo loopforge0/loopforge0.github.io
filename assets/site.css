@@ -531,6 +531,16 @@ figcaption .dl { display: flex; }
 .col-hero .when { color: rgba(255,255,255,.72); }
 .col-hero .page-title { color: #fff; max-width: 18ch; margin-bottom: 18px; }
 .col-hero .summary p { color: rgba(255,255,255,.88); max-width: 60ch; }
+/* The default button is dark ink on paper, which sinks into the hero's picture. White
+   plate, dark type, and the same triangle the .yt card uses so the two read as one thing. */
+.col-hero-actions { margin: 24px 0 0; }
+.col-hero-actions .button { background: #fff; color: #14121f; }
+.col-hero-actions .button:hover { background: var(--accent); color: var(--accent-ink); }
+.button.watch::before {
+  content: ""; width: 0; height: 0; flex: none;
+  border-left: 11px solid currentColor;
+  border-block: 7px solid transparent;
+}
 /* The hero holds the title, so what follows is only the contents list. */
 .col-head-toc { grid-template-columns: minmax(0, 620px); }
 
