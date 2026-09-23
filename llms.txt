@@ -6,6 +6,10 @@ Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someo
 
 ## Projects
 
+### [Qwen-Image 2.1, run locally](https://loopforge.cc/projects/qwen-image-2-1/)
+
+Published 23 September 2026. 26 prompts. Qwen-Image 2.1 generates and edits with one 7 billion parameter model, and its autoencoder carries an alpha channel, so transparency comes out of the model rather than a background remover. Everything below ran locally on an RTX 3060, with every prompt exact and every timing measured.
+
 ### [MiniMax H3 camera shots](https://loopforge.cc/projects/h3-camera-shots/)
 
 Published 13 September 2026. 14 prompts. MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do. Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here.

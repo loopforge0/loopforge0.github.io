@@ -1,0 +1,2032 @@
+{
+ "slug": "qwen-image-2-1",
+ "title": "Qwen-Image 2.1, run locally",
+ "short": "Transparency, marking and 360s on a 12 GB card",
+ "published": "2026-09-23",
+ "models": [
+  "Qwen-Image 2.1"
+ ],
+ "summary": [
+  "Qwen-Image 2.1 generates and edits with one 7 billion parameter model, and its autoencoder carries an alpha channel, so transparency comes out of the model rather than a background remover. Everything below ran locally on an RTX 3060, with every prompt exact and every timing measured."
+ ],
+ "facts": [
+  [
+   "Transformer",
+   "7B single-stream DiT, 32 layers"
+  ],
+  [
+   "Text encoder",
+   "Qwen3-VL 8B"
+  ],
+  [
+   "VAE",
+   "64 channel RGBA, 16x spatial compression"
+  ],
+  [
+   "Native output",
+   "2K, about 4.2 megapixels"
+  ],
+  [
+   "Peak VRAM",
+   "10.5 to 11.7 GiB at int8"
+  ],
+  [
+   "Licence",
+   "Qwen Research, non-commercial"
+  ],
+  [
+   "Ran on",
+   "RTX 3060, 12GB (local)"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "transparency",
+   "title": "Transparent backgrounds"
+  },
+  {
+   "id": "editing",
+   "title": "Editing by circling"
+  },
+  {
+   "id": "scene",
+   "title": "One scene, four edits"
+  },
+  {
+   "id": "references",
+   "title": "Multiple references"
+  },
+  {
+   "id": "panorama",
+   "title": "Panoramic generation"
+  },
+  {
+   "id": "text",
+   "title": "Text rendering"
+  },
+  {
+   "id": "resolution",
+   "title": "Resolution and cost"
+  },
+  {
+   "id": "limits",
+   "title": "Where it struggles"
+  }
+ ],
+ "refs": [],
+ "links": [
+  {
+   "label": "Qwen-Image 2.1 on Hugging Face, the weights and the licence",
+   "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+  },
+  {
+   "label": "Comfy-Org/Qwen-Image-2.1, the repackaged files ComfyUI loads",
+   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1"
+  },
+  {
+   "label": "The default ComfyUI workflow, and which file goes where",
+   "url": "https://docs.comfy.org/tutorials/image/qwen/qwen-image-2-1"
+  },
+  {
+   "label": "Qwen-Image on GitHub",
+   "url": "https://github.com/QwenLM/Qwen-Image"
+  },
+  {
+   "label": "ComfyUI",
+   "url": "https://github.com/comfyanonymous/ComfyUI"
+  },
+  {
+   "label": "Drag the cut-outs onto a background",
+   "url": "/assets/interactive/qwen-image-2-1/stickers.html"
+  }
+ ],
+ "banner": {
+  "src": "img/qwen-image-2-1/banner.jpg",
+  "thumb": "img/qwen-image-2-1/banner-t.jpg",
+  "w": 2200,
+  "h": 1476,
+  "dl": "dl/qwen-image-2-1/banner.jpg",
+  "bytes": 1024414
+ },
+ "try": [
+  {
+   "label": "Look around the 360",
+   "note": "Drag to pan. Generated as one equirectangular image.",
+   "url": "/assets/interactive/qwen-image-2-1/viewer.html",
+   "image": {
+    "src": "img/qwen-image-2-1/pano-edit.jpg",
+    "thumb": "img/qwen-image-2-1/pano-edit-t.jpg",
+    "w": 1600,
+    "h": 800,
+    "dl": "dl/qwen-image-2-1/pano-edit.jpg",
+    "bytes": 721537
+   }
+  },
+  {
+   "label": "Drag the cut-outs",
+   "note": "Every object came out of the model with its own alpha.",
+   "url": "/assets/interactive/qwen-image-2-1/stickers.html",
+   "image": {
+    "src": "img/qwen-image-2-1/rgba-sheet.jpg",
+    "thumb": "img/qwen-image-2-1/rgba-sheet-t.jpg",
+    "w": 1600,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/rgba-sheet.png",
+    "bytes": 3048156
+   }
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "rgba-sheet",
+   "title": "Eight objects on one alpha channel",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1/rgba-sheet.jpg",
+    "thumb": "img/qwen-image-2-1/rgba-sheet-t.jpg",
+    "w": 1600,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/rgba-sheet.png",
+    "bytes": 3048156
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "RGBA"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2048×2048 RGBA"
+    ],
+    [
+     "Generated in",
+     "392.7 s"
+    ],
+    [
+     "Alpha",
+     "70.5% clear, 28.4% opaque, 1.1% partial"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "This is an RGBA image with transparency. A flat lay asset sheet of eight separate hand-drawn travel objects arranged in two rows of four against nothing, each object complete and not touching any other, with clear empty space between them. In the top row, from left to right: a brown leather suitcase with two brass buckles seen from the side; a folded paper map showing pale green and blue areas with thin road lines; a black film camera with a silver lens barrel and a worn leather strap looped beside it; a pair of round sunglasses with thin gold frames and dark green lenses. In the bottom row, from left to right: a dark red vacuum flask with a silver cup screwed onto its top; a small potted cactus in a terracotta pot with three rounded pads; a coiled length of climbing rope in faded orange and cream; a white enamel mug with a chipped navy rim. Every object is drawn in the same style, a clean illustration with soft flat colour and a fine darker outline, lit evenly from the upper left so each carries a soft highlight on its upper surface and no cast shadow falls on the background. The image has alpha channel and the background is transparent."
+    }
+   ],
+   "notes": [
+    "One pass, no cut-out tool. The partial band is the soft edge a matte has to get right, and it is where every background remover struggles."
+   ],
+   "links": [
+    {
+     "label": "Drag these cut-outs onto a background",
+     "url": "/assets/interactive/qwen-image-2-1/stickers.html"
+    }
+   ]
+  },
+  {
+   "slug": "extract-good",
+   "title": "The phrasing that cuts cleanly",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1/extract-good.jpg",
+    "thumb": "img/qwen-image-2-1/extract-good-t.jpg",
+    "w": 1088,
+    "h": 1440,
+    "dl": "dl/qwen-image-2-1/extract-good.png",
+    "bytes": 2456711
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "RGBA",
+    "Extraction"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1088×1440 RGBA"
+    ],
+    [
+     "Generated in",
+     "81.3 s"
+    ],
+    [
+     "Difference from source",
+     "2.48 mean, 0.4% of pixels over 16/255"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Create an RGBA image with transparent background and place the person in that image."
+    }
+   ],
+   "notes": [
+    "Asking for the image to be created with the subject placed in it preserves the subject exactly. It was faithful in every case tested here."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The flattened input",
+     "image": {
+      "src": "img/qwen-image-2-1/extract-good-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/extract-good-source-1-t.jpg",
+      "w": 831,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/extract-good-source-1.jpg",
+      "bytes": 305159
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/extract-good.jpg",
+      "thumb": "img/qwen-image-2-1/extract-good-t.jpg",
+      "w": 1088,
+      "h": 1440,
+      "dl": "dl/qwen-image-2-1/extract-good.png",
+      "bytes": 2456711
+     }
+    }
+   ]
+  },
+  {
+   "slug": "extract-bad",
+   "title": "The phrasing that redraws the subject",
+   "group": "limits",
+   "still": {
+    "src": "img/qwen-image-2-1/extract-bad.jpg",
+    "thumb": "img/qwen-image-2-1/extract-bad-t.jpg",
+    "w": 1088,
+    "h": 1440,
+    "dl": "dl/qwen-image-2-1/extract-bad.png",
+    "bytes": 3051550
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "RGBA",
+    "Extraction"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1088×1440 RGBA"
+    ],
+    [
+     "Generated in",
+     "81.7 s"
+    ],
+    [
+     "Difference from source",
+     "39.09 mean, 67.3% of pixels over 16/255"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Remove the background, and output an image with an alpha channel and a transparent background"
+    }
+   ],
+   "notes": [
+    "Same image, same seed, same size, same 81 seconds. Asking for the background to be removed redrew the subject instead of cutting it out: blue bled into the hair, the knit turned to noise and the freckles blew out.",
+    "This is narrow. The removal phrasing is faithful on photographs and on a naturally generated image. It failed only on a generated subject that had been composited onto a synthetic background and re-extracted."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The flattened input",
+     "image": {
+      "src": "img/qwen-image-2-1/extract-bad-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/extract-bad-source-1-t.jpg",
+      "w": 831,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/extract-bad-source-1.jpg",
+      "bytes": 305159
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/extract-bad.jpg",
+      "thumb": "img/qwen-image-2-1/extract-bad-t.jpg",
+      "w": 1088,
+      "h": 1440,
+      "dl": "dl/qwen-image-2-1/extract-bad.png",
+      "bytes": 3051550
+     }
+    }
+   ]
+  },
+  {
+   "slug": "circle-jacket",
+   "title": "Two circles, two changes",
+   "group": "editing",
+   "still": {
+    "src": "img/qwen-image-2-1/circle-jacket.jpg",
+    "thumb": "img/qwen-image-2-1/circle-jacket-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/circle-jacket.jpg",
+    "bytes": 1109341
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Marking"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "Change inside vs outside",
+     "22 : 1"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Change the yellow jacket in the red circle to a dark green waxed jacket, and change the black plastic crate in the green circle to a wooden one. Do not render the circles in the output."
+    }
+   ],
+   "notes": [
+    "The jacket changed 22 times more than the red coat a few steps away. The circle bounds the edit; it does not stop the rest of the frame being redrawn."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The marked input",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-jacket-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/circle-jacket-source-1-t.jpg",
+      "w": 1100,
+      "h": 738,
+      "dl": "dl/qwen-image-2-1/circle-jacket-source-1.jpg",
+      "bytes": 1126870
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-jacket.jpg",
+      "thumb": "img/qwen-image-2-1/circle-jacket-t.jpg",
+      "w": 1600,
+      "h": 1073,
+      "dl": "dl/qwen-image-2-1/circle-jacket.jpg",
+      "bytes": 1109341
+     }
+    }
+   ]
+  },
+  {
+   "slug": "circle-leaves",
+   "title": "Three leaves in a canopy",
+   "group": "limits",
+   "still": {
+    "src": "img/qwen-image-2-1/circle-leaves.jpg",
+    "thumb": "img/qwen-image-2-1/circle-leaves-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1/circle-leaves.jpg",
+    "bytes": 261478
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Marking"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "Marked",
+     "Three coloured outlines"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Apply these three edits to the image. Change the colour of this leaf to a deep autumn red, the one marked by the red outline. Change the colour of this leaf to a golden amber, the one marked by the green outline. Change the colour of this leaf to a burnt orange, the one marked by the blue outline. Leave everything else in the image exactly as it is, and do not render the coloured outlines or any other marking in the output."
+    }
+   ],
+   "notes": [
+    "Extra small leaves appeared that were not in the source. The circles were small against a dense repeating pattern, which is where marking degrades."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The marked input",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-leaves-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/circle-leaves-source-1-t.jpg",
+      "w": 1100,
+      "h": 753,
+      "dl": "dl/qwen-image-2-1/circle-leaves-source-1.jpg",
+      "bytes": 288327
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-leaves.jpg",
+      "thumb": "img/qwen-image-2-1/circle-leaves-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/circle-leaves.jpg",
+      "bytes": 261478
+     }
+    }
+   ]
+  },
+  {
+   "slug": "circle-crowd",
+   "title": "One person in a crowd",
+   "group": "limits",
+   "still": {
+    "src": "img/qwen-image-2-1/circle-crowd.jpg",
+    "thumb": "img/qwen-image-2-1/circle-crowd-t.jpg",
+    "w": 1600,
+    "h": 893,
+    "dl": "dl/qwen-image-2-1/circle-crowd.jpg",
+    "bytes": 1233735
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Marking"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2752×1536"
+    ],
+    [
+     "Change spread",
+     "Edge to edge"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Change the woman in the red circle to full natural colour, and keep every other person in the photograph black and white. Do not render the circle in the output."
+    }
+   ],
+   "notes": [
+    "Several people picked up colour, not just the marked one. Differencing source against result puts the change across the full width of the frame."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The marked input",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-crowd-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/circle-crowd-source-1-t.jpg",
+      "w": 1100,
+      "h": 614,
+      "dl": "dl/qwen-image-2-1/circle-crowd-source-1.jpg",
+      "bytes": 1294950
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-crowd.jpg",
+      "thumb": "img/qwen-image-2-1/circle-crowd-t.jpg",
+      "w": 1600,
+      "h": 893,
+      "dl": "dl/qwen-image-2-1/circle-crowd.jpg",
+      "bytes": 1233735
+     }
+    }
+   ]
+  },
+  {
+   "slug": "circle-classroom",
+   "title": "A cap and a backpack, in a room full of people",
+   "group": "editing",
+   "still": {
+    "src": "img/qwen-image-2-1/circle-classroom.jpg",
+    "thumb": "img/qwen-image-2-1/circle-classroom-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/circle-classroom.jpg",
+    "bytes": 893061
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Marking"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "Change inside vs outside",
+     "10 : 1"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Change the baseball cap in the red circle to curly brown hair, and change the backpack in the green circle to a dark green canvas one. Do not render the circles in the output."
+    }
+   ],
+   "notes": [
+    "The circled cap changed ten times more than the green-hoodie student sitting two desks away. Neither circle was rendered, and the whiteboard behind them is intact."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The marked input",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-classroom-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/circle-classroom-source-1-t.jpg",
+      "w": 1100,
+      "h": 738,
+      "dl": "dl/qwen-image-2-1/circle-classroom-source-1.jpg",
+      "bytes": 818933
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-classroom.jpg",
+      "thumb": "img/qwen-image-2-1/circle-classroom-t.jpg",
+      "w": 1600,
+      "h": 1073,
+      "dl": "dl/qwen-image-2-1/circle-classroom.jpg",
+      "bytes": 893061
+     }
+    }
+   ]
+  },
+  {
+   "slug": "circle-cups",
+   "title": "One cup, with its twin left alone",
+   "group": "editing",
+   "still": {
+    "src": "img/qwen-image-2-1/circle-cups.jpg",
+    "thumb": "img/qwen-image-2-1/circle-cups-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/circle-cups.jpg",
+    "bytes": 896732
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Marking"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "Change inside vs outside",
+     "8 : 1"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Change the paper coffee cup in the red circle to a clear glass jar. Do not render the circle in the output."
+    }
+   ],
+   "notes": [
+    "The hardest version of this test: a near identical paper cup sits 220 pixels away and was left alone, changing eight times less than the circled one. A prompt naming the cup could not have told them apart."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The marked input",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-cups-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/circle-cups-source-1-t.jpg",
+      "w": 1100,
+      "h": 738,
+      "dl": "dl/qwen-image-2-1/circle-cups-source-1.jpg",
+      "bytes": 810432
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/circle-cups.jpg",
+      "thumb": "img/qwen-image-2-1/circle-cups-t.jpg",
+      "w": 1600,
+      "h": 1073,
+      "dl": "dl/qwen-image-2-1/circle-cups.jpg",
+      "bytes": 896732
+     }
+    }
+   ]
+  },
+  {
+   "slug": "beach-scene",
+   "title": "The plate",
+   "group": "scene",
+   "still": {
+    "src": "img/qwen-image-2-1/beach-scene.jpg",
+    "thumb": "img/qwen-image-2-1/beach-scene-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/beach-scene.jpg",
+    "bytes": 1024414
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a wide realistic photograph of a sandy beach in the early afternoon, taken from standing height and looking slightly down, with the dry pale sand filling the lower two thirds of the frame and a calm blue-green sea and a clear sky beyond it across the top. A young couple lie sunbathing together on a large striped towel in the centre of the frame, the towel laid flat on the sand and running diagonally away from the viewer. The woman lies on her back on the left of the towel with her eyes closed, wearing a plain coral swimsuit, one knee raised and one forearm resting across her forehead. The man lies on his front on the right of the towel, propped on both elbows and facing away toward the sea, wearing plain navy swim shorts. A folded paperback and a pair of sunglasses lie on the towel between them. Standing upright on the open sand to the left of the towel, about an arm's length clear of it with bare sand visible all the way around its base, is a galvanised metal pail filled with ice and five brown glass beer bottles, the bottles leaning outward at slight angles with their necks above the rim, each bottle carrying a plain cream paper label that is blank and unprinted, and a little condensation running down the outside of the pail. To the right of the towel the sand is open and empty for a similar distance. In the middle distance behind them a scatter of other beachgoers sit under two faded parasols, small and out of focus. The lighting is bright overhead sunlight from slightly behind the viewer, throwing short hard shadows to the near side of the towel and of the pail and putting a hard highlight along the pail's rim. The overall composition is wide and horizontal with the towel across the centre, the palette built from pale sand, coral, navy, galvanised grey and sea blue, and the mood is bright and still."
+    }
+   ],
+   "notes": [
+    "Bottle labels asked for as blank and unprinted: beer bottles are exactly where invented lettering creeps in."
+   ],
+   "links": []
+  },
+  {
+   "slug": "beach-pail",
+   "title": "The pail extracted",
+   "group": "scene",
+   "still": {
+    "src": "img/qwen-image-2-1/beach-pail.jpg",
+    "thumb": "img/qwen-image-2-1/beach-pail-t.jpg",
+    "w": 832,
+    "h": 1248,
+    "dl": "dl/qwen-image-2-1/beach-pail.png",
+    "bytes": 737658
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "RGBA",
+    "Extraction"
+   ],
+   "facts": [
+    [
+     "Output",
+     "832×1248 RGBA"
+    ],
+    [
+     "Generated in",
+     "81.3 s"
+    ],
+    [
+     "Difference from source",
+     "4.30 mean"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Create an RGBA image with transparent background and place the metal pail of beer bottles in that image."
+    }
+   ],
+   "notes": [],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The generated plate",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-pail-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/beach-pail-source-1-t.jpg",
+      "w": 1100,
+      "h": 738,
+      "dl": "dl/qwen-image-2-1/beach-pail-source-1.jpg",
+      "bytes": 1024414
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-pail.jpg",
+      "thumb": "img/qwen-image-2-1/beach-pail-t.jpg",
+      "w": 832,
+      "h": 1248,
+      "dl": "dl/qwen-image-2-1/beach-pail.png",
+      "bytes": 737658
+     }
+    }
+   ]
+  },
+  {
+   "slug": "beach-removed",
+   "title": "The pail removed",
+   "group": "scene",
+   "still": {
+    "src": "img/qwen-image-2-1/beach-removed.jpg",
+    "thumb": "img/qwen-image-2-1/beach-removed-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1/beach-removed.jpg",
+    "bytes": 266803
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Removal"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Remove the metal pail of beer bottles from the sand, leaving the bare sand it was standing on, and keep everything else in the photograph unchanged."
+    }
+   ],
+   "notes": [
+    "No mark needed. The pail had bare sand all the way around it, which is the condition under which the noun alone carries the extent."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The generated plate",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-removed-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/beach-removed-source-1-t.jpg",
+      "w": 1100,
+      "h": 738,
+      "dl": "dl/qwen-image-2-1/beach-removed-source-1.jpg",
+      "bytes": 1024414
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-removed.jpg",
+      "thumb": "img/qwen-image-2-1/beach-removed-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/beach-removed.jpg",
+      "bytes": 266803
+     }
+    }
+   ]
+  },
+  {
+   "slug": "beach-replaced",
+   "title": "Put back on the far side",
+   "group": "scene",
+   "still": {
+    "src": "img/qwen-image-2-1/beach-replaced.jpg",
+    "thumb": "img/qwen-image-2-1/beach-replaced-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1/beach-replaced.jpg",
+    "bytes": 262844
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Composition"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "References",
+     "2"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Place the pail of beer bottles from <image2> onto the sand inside the green circle in <image1>, standing upright on the sand with its base settled into it, at the size it would be at that distance, lit by the same overhead sun and throwing the same short hard shadow to the near side as the other objects in the photograph. Do not render the circle in the output."
+    }
+   ],
+   "notes": [
+    "Two inputs: the cleaned plate and the cut-out. Marking empty sand made the model draw the circle as content, so the final pass carries no mark at all."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The scene with the pail removed",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-replaced-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/beach-replaced-source-1-t.jpg",
+      "w": 1100,
+      "h": 753,
+      "dl": "dl/qwen-image-2-1/beach-replaced-source-1.jpg",
+      "bytes": 266803
+     }
+    },
+    {
+     "label": "The extracted pail",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-replaced-source-2.jpg",
+      "thumb": "img/qwen-image-2-1/beach-replaced-source-2-t.jpg",
+      "w": 733,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/beach-replaced-source-2.png",
+      "bytes": 737658
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/beach-replaced.jpg",
+      "thumb": "img/qwen-image-2-1/beach-replaced-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/beach-replaced.jpg",
+      "bytes": 262844
+     }
+    }
+   ]
+  },
+  {
+   "slug": "nine-references",
+   "title": "Nine people in one pass",
+   "group": "references",
+   "still": {
+    "src": "img/qwen-image-2-1/nine-references.jpg",
+    "thumb": "img/qwen-image-2-1/nine-references-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/nine-references.jpg",
+    "bytes": 995163
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Multiple references"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "References",
+     "9"
+    ],
+    [
+     "Generated in",
+     "2681.8 s"
+    ],
+    [
+     "Peak VRAM",
+     "9.84 GiB"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Combine the people from <image1> <image2> <image3> <image4> <image5> <image6> <image7> <image8> <image9> into one group photograph. <image4> is the woman in her thirties with dark red curly hair and a plain top <image8> is the young woman in her early twenties with long ginger curls, heavy freckles and a cross pendant. They stand together in two rows in front of a plain pale brick wall, the taller row behind and slightly raised so every face is fully visible, packed shoulder to shoulder and filling the width of the frame. Each person keeps their own face, hair and clothing exactly as it is in their reference image. They all look into the lens with a relaxed expression. The lighting is soft even daylight from the front with no hard shadow. The overall composition is wide and evenly filled, and the mood is plain and friendly. The two women with red hair are different people and must look different from each other, matching their own reference images."
+    }
+   ],
+   "notes": [
+    "Two of the nine were redheads, and without the clause naming them the model merged them into one person. Dropping one instead was worse: it duplicated a pendant and rendered nine people from eight references. Naming them fixed it."
+   ],
+   "links": [],
+   "sources": [
+    {
+     "label": "Reference 1",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-1-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-1.jpg",
+      "bytes": 175458
+     }
+    },
+    {
+     "label": "Reference 2",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-2.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-2-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-2.jpg",
+      "bytes": 169670
+     }
+    },
+    {
+     "label": "Reference 3",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-3.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-3-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-3.jpg",
+      "bytes": 132725
+     }
+    },
+    {
+     "label": "Reference 4",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-4.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-4-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-4.jpg",
+      "bytes": 160977
+     }
+    },
+    {
+     "label": "Reference 5",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-5.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-5-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-5.jpg",
+      "bytes": 111928
+     }
+    },
+    {
+     "label": "Reference 6",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-6.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-6-t.jpg",
+      "w": 753,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-6.jpg",
+      "bytes": 162645
+     }
+    },
+    {
+     "label": "Reference 7",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-7.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-7-t.jpg",
+      "w": 480,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/nine-references-source-7.jpg",
+      "bytes": 66454
+     }
+    },
+    {
+     "label": "Reference 8",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-8.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-8-t.jpg",
+      "w": 569,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/nine-references-source-8.jpg",
+      "bytes": 102825
+     }
+    },
+    {
+     "label": "Reference 9",
+     "image": {
+      "src": "img/qwen-image-2-1/nine-references-source-9.jpg",
+      "thumb": "img/qwen-image-2-1/nine-references-source-9-t.jpg",
+      "w": 821,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/nine-references-source-9.jpg",
+      "bytes": 1063339
+     }
+    }
+   ]
+  },
+  {
+   "slug": "storyboard",
+   "title": "Four panels, two characters",
+   "group": "references",
+   "still": {
+    "src": "img/qwen-image-2-1/storyboard.jpg",
+    "thumb": "img/qwen-image-2-1/storyboard-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/storyboard.jpg",
+    "bytes": 867367
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Multiple references"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "References",
+     "2"
+    ],
+    [
+     "Generated in",
+     "1211.4 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Combine the two people from <image1> and <image2> into a four panel storyboard, laid out as a two by two grid with a narrow even white gutter between the panels and a white margin around the outside. Both keep their own face, hair and clothing exactly as in their reference images. All four panels are the same realistic photographic style, the same overcast daylight, and the same railway platform setting with a long canopy and a brick station building behind. Top left: a wide shot of the empty platform with both women small in the distance at the far end, walking toward the camera. Top right: a medium shot of the two of them standing together mid platform, the first woman pointing off to the right while the second looks where she is pointing. Bottom left: a close shot of the second woman alone, head and shoulders, turning to look back over her shoulder. Bottom right: a wide shot from behind them both as they walk away down the platform toward the station building. The mood is quiet and cinematic."
+    }
+   ],
+   "notes": [
+    "Identity, wardrobe, setting and light hold across all four panels. The layout instruction is the weak part: the requested even outer margin only appears on two sides, and in one panel the gaze goes to the lens instead of where it was told."
+   ],
+   "links": [],
+   "sources": [
+    {
+     "label": "First reference",
+     "image": {
+      "src": "img/qwen-image-2-1/storyboard-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/storyboard-source-1-t.jpg",
+      "w": 821,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/storyboard-source-1.jpg",
+      "bytes": 1063339
+     }
+    },
+    {
+     "label": "Second reference",
+     "image": {
+      "src": "img/qwen-image-2-1/storyboard-source-2.jpg",
+      "thumb": "img/qwen-image-2-1/storyboard-source-2-t.jpg",
+      "w": 569,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/storyboard-source-2.jpg",
+      "bytes": 102825
+     }
+    }
+   ]
+  },
+  {
+   "slug": "turnaround",
+   "title": "A character turnaround sheet",
+   "group": "references",
+   "still": {
+    "src": "img/qwen-image-2-1/turnaround.jpg",
+    "thumb": "img/qwen-image-2-1/turnaround-t.jpg",
+    "w": 1600,
+    "h": 893,
+    "dl": "dl/qwen-image-2-1/turnaround.jpg",
+    "bytes": 401156
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Character sheet"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "References",
+     "1"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Turn this into a character turnaround reference sheet on a plain flat light grey studio background with no floor line and no cast shadow. Keep the same woman, with the same face, the same long dark wavy hair, the same white lace crop top and the same cream high waisted trousers. The sheet has two rows. The upper row, which fills about two thirds of the height, holds six full length standing views in a single evenly spaced line, stepping around her. From left to right they are: her full profile facing the viewer's left; turned forty five degrees toward the viewer's left; facing the camera straight on; turned forty five degrees toward the viewer's right; her full profile facing the viewer's right; and seen from directly behind. In every one of the six she stands in the same relaxed neutral pose with her arms hanging at her sides and her weight even on both feet, and she is the same height and the same distance from the camera, so the top of her head and the soles of her feet line up across all six. The lower row holds three larger head and shoulders close ups, evenly spaced and centred beneath the upper row, each showing the same face at the same size: her head in profile facing the viewer's left, her head facing the camera straight on, and her head in profile facing the viewer's right. The lighting is flat even studio light from the front in every view with no strong shadow. The overall composition is a wide horizontal sheet, the palette built from grey, cream, white and dark brown hair, and the mood is plain and technical."
+    }
+   ],
+   "notes": [
+    "Six full-length views both ways plus three head close-ups, from one photograph. Written as the viewer's left and right, because a sheet is read from the front."
+   ],
+   "links": [],
+   "sources": [
+    {
+     "label": "The reference",
+     "image": {
+      "src": "img/qwen-image-2-1/turnaround-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/turnaround-source-1-t.jpg",
+      "w": 480,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/turnaround-source-1.jpg",
+      "bytes": 66454
+     }
+    }
+   ]
+  },
+  {
+   "slug": "expressions",
+   "title": "Twelve labelled expressions",
+   "group": "references",
+   "still": {
+    "src": "img/qwen-image-2-1/expressions.jpg",
+    "thumb": "img/qwen-image-2-1/expressions-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/expressions.jpg",
+    "bytes": 743379
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Character sheet"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "References",
+     "1"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Turn this into an expression reference sheet. Keep the same young woman, with the same face, the same freckles, the same long curly ginger hair and the same cream t-shirt, and show her head and shoulders twelve times in a grid of four columns and three rows against a plain flat light grey background, the original snowy harbour setting removed entirely. Every portrait is the same size, framed the same way and lit the same way, with flat even studio light from the front, and she faces the camera in all twelve. In each one her facial expression is different. Beneath each portrait, centred, is a single line of small black capitals in a plain sans-serif naming that expression. Reading left to right along the top row the expressions and their labels are “HAPPY”, “SAD”, “ANGRY” and “AFRAID”. Along the middle row they are “SURPRISED”, “DISGUSTED”, “CONFUSED” and “BORED”. Along the bottom row they are “PROUD”, “RELIEVED”, “DETERMINED” and “EMBARRASSED”. The grid is evenly spaced with a narrow even margin around the outside. The overall composition is flat and frontal, the palette built from light grey, cream, freckled skin and ginger hair, and the mood is plain and technical."
+    }
+   ],
+   "notes": [],
+   "links": [],
+   "sources": [
+    {
+     "label": "The reference",
+     "image": {
+      "src": "img/qwen-image-2-1/expressions-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/expressions-source-1-t.jpg",
+      "w": 569,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/expressions-source-1.jpg",
+      "bytes": 102825
+     }
+    }
+   ]
+  },
+  {
+   "slug": "tryon",
+   "title": "Three garments onto one person",
+   "group": "references",
+   "still": {
+    "src": "img/qwen-image-2-1/tryon.jpg",
+    "thumb": "img/qwen-image-2-1/tryon-t.jpg",
+    "w": 1126,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/tryon.jpg",
+    "bytes": 208805
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Multiple references"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×1728"
+    ],
+    [
+     "References",
+     "4"
+    ],
+    [
+     "Generated in",
+     "711.6 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Dress the woman from <image1> in the clothes from the other images: the denim jacket from <image2>, the green pleated skirt from <image3> and the tan ankle boots from <image4>. Keep her face and hair exactly as they are. She stands full length facing the camera in a relaxed neutral pose with her arms at her sides, against a plain flat light grey studio background with no floor line and no cast shadow. The garments fit her naturally, hanging and creasing as real fabric would, lit by the same soft even studio light from the front. The overall composition is a single centred full length figure, and the mood is plain and technical."
+    }
+   ],
+   "notes": [
+    "Identity holds. The garments do not transfer literally: the skirt came back shorter than the cut-out, the boots lost their stacked heel, and a top nothing asked for appeared under the jacket."
+   ],
+   "links": [],
+   "sources": [
+    {
+     "label": "The person",
+     "image": {
+      "src": "img/qwen-image-2-1/tryon-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/tryon-source-1-t.jpg",
+      "w": 480,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1/tryon-source-1.jpg",
+      "bytes": 66454
+     }
+    },
+    {
+     "label": "Jacket",
+     "image": {
+      "src": "img/qwen-image-2-1/tryon-source-2.jpg",
+      "thumb": "img/qwen-image-2-1/tryon-source-2-t.jpg",
+      "w": 1100,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/tryon-source-2.png",
+      "bytes": 2485311
+     }
+    },
+    {
+     "label": "Skirt",
+     "image": {
+      "src": "img/qwen-image-2-1/tryon-source-3.jpg",
+      "thumb": "img/qwen-image-2-1/tryon-source-3-t.jpg",
+      "w": 1100,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/tryon-source-3.png",
+      "bytes": 1739631
+     }
+    },
+    {
+     "label": "Boots",
+     "image": {
+      "src": "img/qwen-image-2-1/tryon-source-4.jpg",
+      "thumb": "img/qwen-image-2-1/tryon-source-4-t.jpg",
+      "w": 1100,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/tryon-source-4.png",
+      "bytes": 1274473
+     }
+    }
+   ]
+  },
+  {
+   "slug": "pano-edit",
+   "title": "A selfie turned into a full 360",
+   "group": "panorama",
+   "still": {
+    "src": "img/qwen-image-2-1/pano-edit.jpg",
+    "thumb": "img/qwen-image-2-1/pano-edit-t.jpg",
+    "w": 1600,
+    "h": 800,
+    "dl": "dl/qwen-image-2-1/pano-edit.jpg",
+    "bytes": 721537
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Panorama"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2880×1440, equirectangular"
+    ],
+    [
+     "Generated in",
+     "1362.5 s"
+    ],
+    [
+     "In the viewer",
+     "5760×2880, a wrap-padded 2× upscale"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Turn this into a 360 degree panorama in equirectangular projection. Keep the woman exactly as she is, at the centre of the frame with her arm reaching down toward the camera, and build the whole surrounding place around her: the paved square continuing behind the camera so it fills the frame from edge to edge, the trees and buildings running all the way around the horizon, the paving stretching and curving outward toward the bottom edge, and the sky stretching and curving outward toward the top edge. The horizon is a straight horizontal line across the middle of the frame, and the left edge continues seamlessly into the right edge."
+    }
+   ],
+   "notes": [
+    "2880×1440 is only about 600×600 pixels inside a 75 degree view, because a 360 image is mostly behind you. A wrap-padded 2x upscale gets to 5760×2880 without breaking the seam."
+   ],
+   "links": [],
+   "viewer": "/assets/interactive/qwen-image-2-1/viewer.html",
+   "sources": [
+    {
+     "label": "The selfie it started from",
+     "image": {
+      "src": "img/qwen-image-2-1/pano-edit-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/pano-edit-source-1-t.jpg",
+      "w": 821,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/pano-edit-source-1.jpg",
+      "bytes": 960692
+     }
+    }
+   ]
+  },
+  {
+   "slug": "pano-t2i",
+   "title": "A 360 from text alone",
+   "group": "panorama",
+   "still": {
+    "src": "img/qwen-image-2-1/pano-t2i.jpg",
+    "thumb": "img/qwen-image-2-1/pano-t2i-t.jpg",
+    "w": 1600,
+    "h": 800,
+    "dl": "dl/qwen-image-2-1/pano-t2i.jpg",
+    "bytes": 691197
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Panorama"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2880×1440, equirectangular"
+    ],
+    [
+     "Generated in",
+     "392.4 s"
+    ],
+    [
+     "In the viewer",
+     "2880×1440, as generated"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A 360 degree panorama in equirectangular projection of a wide paved public square in daylight. The square fills the whole frame from edge to edge, low trees and pale modern buildings run all the way around the horizon, and a few people walk at a distance. The paving stretches and curves outward toward the bottom edge of the frame and the bright hazy sky stretches and curves outward toward the top edge. The horizon is a straight horizontal line across the middle of the frame, and the left edge continues seamlessly into the right edge."
+    }
+   ],
+   "notes": [],
+   "links": [],
+   "viewer": "/assets/interactive/qwen-image-2-1/viewer_t2i.html"
+  },
+  {
+   "slug": "text-magazine",
+   "title": "A magazine cover over a photograph it did not generate",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1/text-magazine.jpg",
+    "thumb": "img/qwen-image-2-1/text-magazine-t.jpg",
+    "w": 1047,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/text-magazine.jpg",
+    "bytes": 413888
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Typography"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1152×1760"
+    ],
+    [
+     "Generated in",
+     "392.7 s"
+    ],
+    [
+     "Strings",
+     "8 of 9 correct"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical photorealistic fashion magazine cover built on the supplied photograph of a woman with long platinum hair, which is kept exactly as it is: her face, hair, pose, clothing and the warm beige plaster wall behind her are unchanged, and only printed matter is added over the top. Across the top of the cover the masthead \"LOOP FORGE\" is set very large in a heavy condensed white sans-serif, letter-spaced wide and running nearly the full width of the page, with the crown of her hair overlapping the bottom of the letters so the type sits behind her. Tucked into the upper-left corner, small white text reads \"ISSUE 12\" on one line and \"OCTOBER\" beneath it. In the upper-right corner, a short white line reads \"LOCAL AI, WEEKLY\". Down the left edge, in the upper-third below the issue line, a stack of three white cover lines reads \"THE OPEN WEIGHTS ISSUE\" in bold, then \"What 12 GB actually gets you\" in a lighter weight, then \"Forty steps, or twenty?\" in the same lighter weight. In the lower-left corner a single bold white line reads \"BUILT ON ONE DESKTOP\". Across the lower-third on the right, set clear of her figure, a two-line white pull quote reads \"EVERY IMAGE HERE\" above \"RAN ON MY OWN GPU\". In the bottom-right corner sits a small white rectangle holding a black barcode with the digits \"0 12 34567 89\" printed under it. The type is white throughout except the barcode block, the palette is warm beige, black and white, and the overall look is a clean contemporary newsstand cover with crisp, fully legible lettering."
+    }
+   ],
+   "notes": [
+    "Eight of the nine strings came back character for character. The ninth is the barcode: the prompt asked for 0 12 34567 89 and the cover reads 0 1234567 899. Display type it handles; a run of digits with no word shape to hold on to it does not."
+   ],
+   "links": [],
+   "outputs": [
+    {
+     "label": "The photograph it was given",
+     "image": {
+      "src": "img/qwen-image-2-1/text-magazine-source-1.jpg",
+      "thumb": "img/qwen-image-2-1/text-magazine-source-1-t.jpg",
+      "w": 720,
+      "h": 1100,
+      "dl": "dl/qwen-image-2-1/text-magazine-source-1.jpg",
+      "bytes": 184672
+     }
+    },
+    {
+     "label": "What came back",
+     "image": {
+      "src": "img/qwen-image-2-1/text-magazine.jpg",
+      "thumb": "img/qwen-image-2-1/text-magazine-t.jpg",
+      "w": 1047,
+      "h": 1600,
+      "dl": "dl/qwen-image-2-1/text-magazine.jpg",
+      "bytes": 413888
+     }
+    }
+   ]
+  },
+  {
+   "slug": "text-fixed",
+   "title": "Seven strings, all correct",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1/text-fixed.jpg",
+    "thumb": "img/qwen-image-2-1/text-fixed-t.jpg",
+    "w": 1195,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/text-fixed.jpg",
+    "bytes": 522186
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Typography"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Strings",
+     "7 of 7 correct"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic photograph of a printed A2 poster pinned flat to a pale plaster wall, the poster filling almost the whole frame with a narrow margin of wall visible on all four sides. The poster stock is matte off-white with a faint paper texture and a soft crease running down from the upper-right pin. Across the top of the poster a heavy black headline in condensed sans-serif capitals reads \"NORTHERN LIGHTS\", set on one line and occupying the full width of the printed area. Directly beneath it, in a lighter weight and about a third of the headline's size, a line of black capitals reads \"AN EVENING OF FIELD RECORDINGS\". In the centre of the poster sits a large square block of flat deep teal, and within it, reversed out in white capitals at medium weight and centred on two lines, is \"SATURDAY 14 MARCH\" above \"DOORS 7PM\". On the left side of the poster, running vertically up the margin in small grey capitals, is \"ISSUE 04\". Across the lower third of the poster three short lines of small black body text are set left-aligned, reading “DOCK ROAD WAREHOUSE 4” above “TICKETS £12 ON THE DOOR” above “NORTHERNLIGHTS.FM”. In the lower-right corner a plain black circular logo mark about the size of a coin carries the white letters \"NL\". Four brass drawing pins hold the poster, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the paper so the crease and the texture read, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from off-white, black and deep teal, and the mood is plain and editorial."
+    }
+   ],
+   "notes": [
+    "The first version of this prompt asked for body text that was too small to read, and got invented glyphs. Committing to the exact strings fixed it. Text you cannot commit to should not be asked for at all."
+   ],
+   "links": []
+  },
+  {
+   "slug": "text-chinese",
+   "title": "Ten strings in Chinese",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1/text-chinese.jpg",
+    "thumb": "img/qwen-image-2-1/text-chinese-t.jpg",
+    "w": 1195,
+    "h": 1600,
+    "dl": "dl/qwen-image-2-1/text-chinese.jpg",
+    "bytes": 656258
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Typography"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1200"
+    ],
+    [
+     "Strings",
+     "10 of 10 correct"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic photograph of a printed tea-shop menu board mounted flat on a pale wooden wall, the board filling most of the frame with a narrow margin of wall visible on all four sides. The board is matte cream card with a faint paper grain and a thin dark green border running just inside its edge. Across the top of the board a heavy black headline in large Chinese characters reads “青山茶室”, centred on one line. Directly beneath it, in a much lighter weight and about a quarter of the headline's size, a line of black Chinese characters reads “手工烘焙 每日新鲜”. In the centre of the board a tall rectangle of flat deep green holds three lines of white Chinese characters at medium weight, centred, reading “龙井” above “铁观音” above “普洱”. On the right side of the board, running vertically down the margin in small grey Chinese characters, is “营业中”. Across the lower third of the board four short lines of small black Chinese characters are set left-aligned, reading “每日新茶” above “现点现泡” above “外带优惠” above “上午十点开门”. In the lower-left corner a plain dark green circular stamp about the size of a coin carries the white character “茶”. Four small brass screws hold the board, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the card so the grain reads, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from cream, black and deep green, and the mood is plain and calm."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "ladder-1-0mp",
+   "title": "The same prompt at 1.0 MP",
+   "group": "resolution",
+   "still": {
+    "src": "img/qwen-image-2-1/ladder-1-0mp.jpg",
+    "thumb": "img/qwen-image-2-1/ladder-1-0mp-t.jpg",
+    "w": 1216,
+    "h": 816,
+    "dl": "dl/qwen-image-2-1/ladder-1-0mp.jpg",
+    "bytes": 178063
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×816"
+    ],
+    [
+     "Generated in",
+     "55.5 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+    }
+   ],
+   "notes": [
+    "Same prompt and seed at every size. The knee is between 1 and 2 megapixels: below it wool stops being a texture and becomes a surface."
+   ],
+   "links": []
+  },
+  {
+   "slug": "ladder-2-0mp",
+   "title": "The same prompt at 2.0 MP",
+   "group": "resolution",
+   "still": {
+    "src": "img/qwen-image-2-1/ladder-2-0mp.jpg",
+    "thumb": "img/qwen-image-2-1/ladder-2-0mp-t.jpg",
+    "w": 1600,
+    "h": 1067,
+    "dl": "dl/qwen-image-2-1/ladder-2-0mp.jpg",
+    "bytes": 372913
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1728×1152"
+    ],
+    [
+     "Generated in",
+     "134.0 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "ladder-3-0mp",
+   "title": "The same prompt at 3.0 MP",
+   "group": "resolution",
+   "still": {
+    "src": "img/qwen-image-2-1/ladder-3-0mp.jpg",
+    "thumb": "img/qwen-image-2-1/ladder-3-0mp-t.jpg",
+    "w": 1600,
+    "h": 1079,
+    "dl": "dl/qwen-image-2-1/ladder-3-0mp.jpg",
+    "bytes": 547298
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2112×1424"
+    ],
+    [
+     "Generated in",
+     "241.1 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "ladder-4-3mp",
+   "title": "The same prompt at 4.3 MP",
+   "group": "resolution",
+   "still": {
+    "src": "img/qwen-image-2-1/ladder-4-3mp.jpg",
+    "thumb": "img/qwen-image-2-1/ladder-4-3mp-t.jpg",
+    "w": 1600,
+    "h": 1073,
+    "dl": "dl/qwen-image-2-1/ladder-4-3mp.jpg",
+    "bytes": 791084
+   },
+   "models": [
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2528×1696"
+    ],
+    [
+     "Generated in",
+     "413.3 s"
+    ],
+    [
+     "Steps",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  }
+ ]
+}
