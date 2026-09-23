@@ -445,3 +445,158 @@ section.block:first-of-type { border-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ------------------------------------------------------------------ interactive dialog
+   The widgets under /assets/interactive/ open over the page rather than replacing it, so
+   trying one never costs the reader their place. */
+.modal[hidden] { display: none; }
+.modal {
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(12px, 3vw, 40px);
+  background: rgba(10, 9, 20, .72);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+}
+.modal-panel {
+  position: relative; display: flex; flex-direction: column;
+  width: min(1400px, 100%); height: min(860px, 100%);
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 10px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .45); overflow: hidden;
+}
+.modal-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 14px 12px 18px; border-bottom: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+.modal-bar h2 { margin: 0; font-size: 16px; font-weight: 650; color: var(--ink); }
+.modal-bar .modal-open { font-size: 13px; color: var(--ink-2); margin-left: auto; }
+.modal-close {
+  flex: none; width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--ink);
+  font: inherit; font-size: 18px; line-height: 1;
+}
+.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+.modal iframe { flex: 1; width: 100%; border: 0; display: block; background: var(--paper); }
+@media (max-width: 640px) {
+  .modal { padding: 0; }
+  .modal-panel { height: 100%; border-radius: 0; border: 0; }
+}
+
+/* A download sits under the image it belongs to, quiet until wanted. */
+.dl {
+  display: inline-flex; align-items: baseline; gap: 8px; margin-top: 6px;
+  font-size: 13px; color: var(--ink-2); text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.dl:hover { color: var(--accent); border-bottom-color: currentColor; }
+.dl span { font-size: 12px; opacity: .7; }
+figcaption .dl { display: flex; }
+
+/* ------------------------------------------------------------------ contents, banner, inputs */
+.toc { margin-top: 26px; }
+.toc h2 {
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-2); margin: 0 0 10px; font-weight: 650;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { border-top: 1px solid var(--rule); }
+.toc li:last-child { border-bottom: 1px solid var(--rule); }
+.toc a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 9px 2px; text-decoration: none; color: var(--ink); font-size: 16px;
+}
+.toc a:hover { color: var(--accent); }
+.toc a span {
+  margin-left: auto; font-size: 12px; color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+/* A collection without a video leads with its own picture, full width, words on top.
+   Same construction as the home banner: media, a gradient over it, then the copy. */
+.col-hero {
+  position: relative; isolation: isolate; color: #fff; background: #0d0c17;
+  min-height: clamp(380px, 52vh, 560px); display: grid; align-items: end;
+}
+.col-hero-media {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+}
+.col-hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(13,12,23,.45) 0%, rgba(13,12,23,.18) 26%,
+                    rgba(13,12,23,.66) 62%, rgba(13,12,23,.94) 100%),
+    linear-gradient(90deg, rgba(13,12,23,.62) 0%, rgba(13,12,23,0) 62%);
+}
+.col-hero-body { width: 100%; padding-block: 34px clamp(34px, 5vw, 56px); }
+.col-hero .crumbs, .col-hero .crumbs a { color: rgba(255,255,255,.72); }
+.col-hero .when { color: rgba(255,255,255,.72); }
+.col-hero .page-title { color: #fff; max-width: 18ch; margin-bottom: 18px; }
+.col-hero .summary p { color: rgba(255,255,255,.88); max-width: 60ch; }
+/* The hero holds the title, so what follows is only the contents list. */
+.col-head-toc { grid-template-columns: minmax(0, 620px); }
+
+/* The inputs to an image-to-image run: evidence under the result, not equals beside it. */
+.sources { margin-top: 26px; }
+.source-row {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+  gap: 18px 14px;
+}
+.source-row figure { margin: 0; }
+.source-row .img {
+  border-radius: 6px; overflow: hidden; background: var(--paper-2); aspect-ratio: 1;
+}
+.source-row img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.source-row figcaption { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
+
+/* ------------------------------------------------------------------ image lightbox */
+.lightbox[hidden] { display: none; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 95;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(10, 9, 20, .84);
+}
+.lightbox figure { margin: 0; max-width: 100%; max-height: 100%; display: flex;
+                   flex-direction: column; gap: 10px; }
+.lightbox img {
+  max-width: 100%; max-height: calc(100vh - 150px); width: auto; height: auto;
+  object-fit: contain; border-radius: 6px; display: block; margin: 0 auto;
+  /* Transparency is the subject of half these images, so it needs a ground. */
+  background: repeating-conic-gradient(#d6d6db 0 25%, #b8b8be 0 50%) 0 0 / 22px 22px;
+}
+.lightbox figcaption {
+  display: flex; align-items: baseline; gap: 20px; justify-content: center;
+  color: #e8e6f2; font-size: 14px;
+}
+.lb-dl { color: #e8e6f2; text-decoration: underline; }
+.lb-dl[hidden] { display: none; }
+.lb-close {
+  position: absolute; top: 16px; right: 18px; width: 40px; height: 40px;
+  border-radius: 9px; cursor: pointer; font: inherit; font-size: 22px; line-height: 1;
+  color: #e8e6f2; background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
+}
+.lb-close:hover { background: rgba(255, 255, 255, .2); }
+img[data-full] { cursor: zoom-in; }
+/* Matches the JS: a linked image and the hero are not lightbox targets. */
+a img[data-full], .col-hero-media { cursor: inherit; }
+
+/* A panorama opens in the viewer, because a flat equirectangular strip misrepresents it. */
+.pano-open { position: relative; display: block; border-radius: 6px; overflow: hidden; }
+.pano-open img { display: block; }
+.badge-360 {
+  position: absolute; left: 16px; top: 16px;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 999px;
+  background: rgba(13, 12, 23, .74); color: #fff;
+  font-size: 14px; font-weight: 700; letter-spacing: .06em;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.pano-hint {
+  position: absolute; right: 16px; bottom: 16px;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(13, 12, 23, .74); color: #fff; font-size: 14px;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.pano-open:hover .badge-360, .pano-open:hover .pano-hint {
+  background: var(--accent); color: var(--accent-ink);
+}

@@ -1,0 +1,80 @@
+[
+ {
+  "name": "suitcase",
+  "w": 450,
+  "h": 674,
+  "partial_pct": 1.33
+ },
+ {
+  "name": "map",
+  "w": 334,
+  "h": 589,
+  "partial_pct": 1.68
+ },
+ {
+  "name": "camera",
+  "w": 431,
+  "h": 632,
+  "partial_pct": 2.31
+ },
+ {
+  "name": "sunglasses",
+  "w": 318,
+  "h": 519,
+  "partial_pct": 3.21
+ },
+ {
+  "name": "thermos",
+  "w": 283,
+  "h": 892,
+  "partial_pct": 1.53
+ },
+ {
+  "name": "cactus",
+  "w": 359,
+  "h": 690,
+  "partial_pct": 1.95
+ },
+ {
+  "name": "rope",
+  "w": 273,
+  "h": 792,
+  "partial_pct": 2.95
+ },
+ {
+  "name": "mug",
+  "w": 472,
+  "h": 400,
+  "partial_pct": 3.52
+ },
+ {
+  "name": "glass",
+  "w": 300,
+  "h": 810,
+  "partial_pct": 30.89
+ },
+ {
+  "name": "fern",
+  "w": 977,
+  "h": 705,
+  "partial_pct": 12.2
+ },
+ {
+  "name": "teapot",
+  "w": 813,
+  "h": 710,
+  "partial_pct": 2.83
+ },
+ {
+  "name": "woman",
+  "w": 921,
+  "h": 1377,
+  "partial_pct": 8.5
+ },
+ {
+  "name": "pail",
+  "w": 393,
+  "h": 557,
+  "partial_pct": 2.24
+ }
+]

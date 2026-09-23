@@ -197,3 +197,122 @@ document.querySelectorAll(".script").forEach((script) => {
     if (t) light(t.dataset.tag, false);
   });
 });
+
+// A widget marked data-modal opens over the page. The href is left alone, so without
+// JavaScript the link still works as a plain navigation.
+(() => {
+  let box = null, opener = null;
+
+  const close = () => {
+    if (!box) return;
+    box.hidden = true;
+    box.querySelector("iframe").src = "about:blank";
+    document.documentElement.style.overflow = "";
+    if (opener) opener.focus();
+    opener = null;
+  };
+
+  const build = () => {
+    box = document.createElement("div");
+    box.className = "modal";
+    box.hidden = true;
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.innerHTML =
+      '<div class="modal-panel">' +
+        '<div class="modal-bar"><h2></h2>' +
+          '<a class="modal-open" target="_blank" rel="noopener">Open in a new tab</a>' +
+          '<button class="modal-close" type="button" aria-label="Close">&times;</button>' +
+        "</div><iframe title=\"\"></iframe>" +
+      "</div>";
+    // The backdrop closes; a click inside the panel must not.
+    box.addEventListener("click", (e) => { if (e.target === box) close(); });
+    box.querySelector(".modal-close").addEventListener("click", close);
+    document.body.appendChild(box);
+    return box;
+  };
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-modal]");
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    box = box || build();
+    opener = a;
+    const label = a.dataset.modal || a.textContent.trim();
+    box.querySelector("h2").textContent = label;
+    box.querySelector(".modal-open").href = a.href;
+    const frame = box.querySelector("iframe");
+    frame.title = label;
+    frame.src = a.href;
+    box.hidden = false;
+    // Stops the page behind scrolling while a widget has the pointer.
+    document.documentElement.style.overflow = "hidden";
+    box.querySelector(".modal-close").focus();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && box && !box.hidden) close();
+  });
+})();
+
+// Any image with a full-size version opens over the page, with its download. One overlay,
+// built once, reused; Escape and a backdrop click both close it.
+(() => {
+  let box = null, opener = null;
+
+  const close = () => {
+    if (!box) return;
+    box.hidden = true;
+    box.querySelector("img").src = "";
+    document.documentElement.style.overflow = "";
+    if (opener) opener.focus({ preventScroll: true });
+    opener = null;
+  };
+
+  const build = () => {
+    const el = document.createElement("div");
+    el.className = "lightbox";
+    el.hidden = true;
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.innerHTML =
+      '<button class="lb-close" type="button" aria-label="Close">&times;</button>' +
+      '<figure><img alt=""><figcaption><span></span>' +
+      '<a class="lb-dl" download>Download</a></figcaption></figure>';
+    el.addEventListener("click", (e) => {
+      // Only the backdrop closes; the picture and its caption do not.
+      if (!e.target.closest("figure") || e.target.closest(".lb-close")) close();
+    });
+    el.querySelector(".lb-close").addEventListener("click", close);
+    document.body.appendChild(el);
+    return el;
+  };
+
+  document.addEventListener("click", (e) => {
+    const im = e.target.closest("img[data-full]");
+    if (!im || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    // A linked image and its caption are one link: the picture must not do something else.
+    // The hero is the top of the page rather than an exhibit, so it is left alone too.
+    if (im.closest("a") || im.classList.contains("col-hero-media")) return;
+    e.preventDefault();
+    box = box || build();
+    opener = im;
+    box.querySelector("img").src = im.dataset.full;
+    box.querySelector("img").alt = im.alt || "";
+    box.querySelector("figcaption span").textContent = im.dataset.cap || im.alt || "";
+    const a = box.querySelector(".lb-dl");
+    if (im.dataset.dl) {
+      a.href = im.dataset.dl;
+      a.hidden = false;
+    } else {
+      a.hidden = true;
+    }
+    box.hidden = false;
+    document.documentElement.style.overflow = "hidden";
+    box.querySelector(".lb-close").focus({ preventScroll: true });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && box && !box.hidden) close();
+  });
+})();
