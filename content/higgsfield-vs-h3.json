@@ -214,7 +214,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 31
   },
   {
    "slug": "set-on-fire",
@@ -293,7 +294,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 64
   },
   {
    "slug": "disintegration",
@@ -372,7 +374,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 90
   },
   {
    "slug": "melting",
@@ -451,7 +454,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 114
   },
   {
    "slug": "vanish",
@@ -525,7 +529,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 136
   },
   {
    "slug": "thunder-god",
@@ -604,7 +609,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 159
   },
   {
    "slug": "levitation",
@@ -683,7 +689,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 184
   },
   {
    "slug": "architecture-wave",
@@ -757,7 +764,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 209
   },
   {
    "slug": "incline",
@@ -831,7 +839,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 234
   },
   {
    "slug": "mighty-fighter",
@@ -905,7 +914,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 263
   },
   {
    "slug": "floating-fall",
@@ -979,7 +989,8 @@
     }
    ],
    "notes": [],
-   "links": []
+   "links": [],
+   "time": 294
   }
  ],
  "banner": {
@@ -989,5 +1000,9 @@
   "h": 760,
   "dl": "dl/higgsfield-vs-h3/banner.jpg",
   "bytes": 287891
+ },
+ "video": {
+  "id": "xmE4JePAQUQ",
+  "title": "Higgsfield Effects vs MiniMax H3 in ComfyUI: 11 tests"
  }
 }

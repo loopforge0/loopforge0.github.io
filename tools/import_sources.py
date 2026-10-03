@@ -773,7 +773,7 @@ HF_ROUNDS = [
 ]
 HF_PLATES = {"amber-main": "Amber", "kate": "Kate", "sofia": "Sofia", "cyberpunk": "Cyberpunk",
              "allie": "Allie", "cowgirl": "Cowgirl", "pirate": "Pirate"}
-HF_VIDEO = None          # {"id": ..., "title": ...} once the video is up
+HF_VIDEO = {"id": "xmE4JePAQUQ", "title": "Higgsfield Effects vs MiniMax H3 in ComfyUI: 11 tests"}
 HF_CHAPTERS = [31, 64, 90, 114, 136, 159, 184, 209, 234, 263, 294]   # seconds, same order as HF_ROUNDS
 
 
