@@ -30,6 +30,7 @@ CHAIN_PROMPTS = WALK / "prompts-publish"   # identical to ComfyUI-H3-Continuous/
 FIRSTDATE = REPOS / "local-director" / "firstdate-video" / "share"
 LTXCMP = REPOS / "ltxminimaxcomparison"
 TURBO = REPOS / "minimaxh3"
+HFCMP = REPOS / "minimaxref2vcomparison"
 
 STILL_EDGE = 1280   # long edge of the large still on a prompt page
 THUMB_EDGE = 560    # long edge of grid thumbnails
@@ -754,8 +755,157 @@ def import_turbo():
     })
 
 
+# ---------------------------------------------------------------------------- higgsfield vs h3
+
+# Video order. (clip id, title, plate, Higgsfield kind, credits at today's price, H3 render minutes)
+HF_ROUNDS = [
+    ("04_amber_street-colossus", "Street colossus", "amber-main", "Effect", 70, 74.2),
+    ("03_amber_set-on-fire", "Set on fire", "amber-main", "Motion preset", 10, 30.1),
+    ("02_kate_disintegration", "Disintegration", "kate", "Motion preset", 10, 40.1),
+    ("05_sofia_melting", "Melting", "sofia", "Motion preset", 10, 30.1),
+    ("06_sofia_vanish", "Vanish", "sofia", "Effect", 22.5, 24.1),
+    ("11_cyberpunk_thunder-god", "Thunder God", "cyberpunk", "Motion preset", 10, 39.6),
+    ("07_allie_levitation", "Levitation", "allie", "Motion preset", 10, 30.1),
+    ("12_cyberpunk_architecture-wave", "Architecture wave", "cyberpunk", "Effect", 49, 54.1),
+    ("13_cowgirl_incline", "Incline", "cowgirl", "Effect", 49, 54.7),
+    ("09_pirate_mighty-fighter", "Mighty fighter", "pirate", "Effect", 27.5, 149.3),
+    ("01_kate_floating-fall", "Floating fall", "kate", "Effect", 84, 81.2),
+]
+HF_PLATES = {"amber-main": "Amber", "kate": "Kate", "sofia": "Sofia", "cyberpunk": "Cyberpunk",
+             "allie": "Allie", "cowgirl": "Cowgirl", "pirate": "Pirate"}
+HF_VIDEO = None          # {"id": ..., "title": ...} once the video is up
+HF_CHAPTERS = [31, 64, 90, 114, 136, 159, 184, 209, 234, 263, 294]   # seconds, same order as HF_ROUNDS
+
+
+def import_higgsfield():
+    slug = "higgsfield-vs-h3"
+    clips = HFCMP / "comparison-video" / "assets" / "clips"   # the exact files the video used
+    refs_dir = HFCMP / "higgsfield-effects" / "refs"
+    dl = ROOT / "assets" / "dl" / slug
+    dl.mkdir(parents=True, exist_ok=True)
+    refs = []
+    for stem, name in HF_PLATES.items():
+        src = refs_dir / f"{stem}.png"
+        image = save_image(src, f"ref-{stem}", slug)
+        # The original PNG, byte for byte: H3 ran with ref_image_size max, so the full file is the input.
+        (dl / src.name).write_bytes(src.read_bytes())
+        image.update({"dl": f"dl/{slug}/{src.name}", "bytes": src.stat().st_size})
+        refs.append({"id": stem, "label": name, "note": "Character photo, given to both sides", "image": image})
+
+    # Motion presets take a prompt; read from the Higgsfield asset history. Effects take none.
+    hf_prompts = json.loads((HFCMP / "higgsfield-effects" / "prompts" / "higgsfield_motion_prompts.json")
+                            .read_text(encoding="utf-8"))
+    prompts = []
+    for n, (cid, title, plate, kind, credits, minutes) in enumerate(HF_ROUNDS):
+        hf, h3 = clips / f"hf-{cid}.mp4", clips / f"h3-{cid}.mp4"
+        g = embedded_graph(h3)
+        node = nodes_of(g, "MiniMaxH3ReferenceToVideo")[0]["inputs"]
+        seed = nodes_of(g, "RandomNoise")[0]["inputs"]["noise_seed"]
+        steps = nodes_of(g, "BasicScheduler")[0]["inputs"]["steps"]
+        outputs, specs = [], {}
+        for label, path in (("Higgsfield", hf), ("MiniMax H3", h3)):
+            still, info = mid_frame(path)
+            v = next(x for x in info["streams"] if x["codec_type"] == "video")
+            fps = round(eval(v["r_frame_rate"]))
+            audio = any(x["codec_type"] == "audio" for x in info["streams"])
+            specs[label] = f"{v['width']}×{v['height']}, {fps}fps{'' if audio else ', no audio'}"
+            stem = f"{slugify(title)}-{'higgsfield' if label == 'Higgsfield' else 'h3'}"
+            image = save_image(still, stem, slug)
+            still.convert("RGB").save(dl / f"{stem}.jpg", quality=92, optimize=True)
+            image.update({"dl": f"dl/{slug}/{stem}.jpg", "bytes": (dl / f"{stem}.jpg").stat().st_size})
+            outputs.append({"label": label, "image": image})
+        p = {
+            "slug": slugify(title),
+            "title": title,
+            "code": f"Round {n + 1}",
+            "group": "rounds",
+            "still": outputs[1]["image"],
+            "outputs": outputs,
+            "models": ["Higgsfield", "MiniMax H3"],
+            "techniques": ["Reference to video", "Effects"],
+            "facts": [
+                ["Higgsfield", f"{kind}, {credits:g} credits, {specs['Higgsfield']}"],
+                ["MiniMax H3", f"{specs['MiniMax H3']}, {steps} steps, seed {seed}"],
+                ["H3 render", f"{minutes:.0f} min on an RTX 3060, 12GB"],
+            ],
+            "refs": [{"tag": "<Picture 1>", "ref": plate}],
+            "variants": [{"label": "MiniMax H3", "text": node["prompt"]}],
+            "notes": [],
+            "links": [],
+        }
+        if cid in hf_prompts:
+            p["variants"].append({"label": "Higgsfield", "text": hf_prompts[cid]["prompt"],
+                                  "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt "
+                                          "that was typed."})
+        if HF_VIDEO:
+            p["time"] = HF_CHAPTERS[n]
+        prompts.append(p)
+
+    # The hero strip is about 3.3:1, so the banner is cut wide and from the top of each frame, where her head is.
+    bw, bh = 2400, 760
+    banner = Image.new("RGB", (bw, bh))
+    for i, side in enumerate(("hf", "h3")):
+        path = clips / f"{side}-13_cowgirl_incline.mp4"   # sharp on both sides, mid-tilt
+        info = probe(path)
+        v = next(x for x in info["streams"] if x["codec_type"] == "video")
+        fr = frame_at(path, round(3.5 * eval(v["r_frame_rate"]))).convert("RGB")
+        fr = fr.resize((1500, round(fr.height * 1500 / fr.width)), Image.LANCZOS)
+        x0 = (fr.width - bw // 2) // 2
+        banner.paste(fr.crop((x0, 0, x0 + bw // 2, bh)), (i * bw // 2, 0))
+    banner.paste((7, 9, 12), (bw // 2 - 3, 0, bw // 2 + 3, bh))   # a thin seam between the two sides
+    banner_img = save_image(banner, "banner", slug)
+    # The hero shows the large file full width, so it keeps the full 2400 px rather than the 1280 still size.
+    banner.save(IMG / slug / "banner.jpg", quality=86, optimize=True, progressive=True)
+    banner.save(dl / "banner.jpg", quality=90, optimize=True)
+    banner_img.update({"dl": f"dl/{slug}/banner.jpg", "bytes": (dl / "banner.jpg").stat().st_size})
+
+    col = {
+        "slug": slug,
+        "title": "Higgsfield effects vs MiniMax H3",
+        "short": "Eleven effects, side by side",
+        "published": "2026-10-03",
+        "models": ["Higgsfield", "MiniMax H3"],
+        "summary": [
+            "Eleven Higgsfield effects and motion presets, remade locally with MiniMax H3 Ref2VA in ComfyUI from "
+            "the same character photo. Each round has the H3 prompt, the photo and a frame from both sides.",
+        ],
+        "facts": [
+            ["MiniMax H3", "minimax_h3_ref2va_pruned_int8_convrot, 20 steps, res_multistep, simple"],
+            ["Reference", "One character photo, ref_image_size max"],
+            ["Higgsfield", "Effects need no prompt; motion presets take a short one"],
+            ["Ran on", "RTX 3060 with 12GB, i5-13400F, 32GB RAM, PyTorch on CUDA 13"],
+        ],
+        "groups": [{"id": "rounds", "title": "Rounds"}],
+        "refs": refs,
+        "links": [
+            {"label": "The H3 Ref2VA workflow (json)", "url": f"/assets/workflows/{slug}.json"},
+            {"label": "MiniMax's official prompt writing guide",
+             "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"},
+            {"label": "Higgsfield effects", "url": "https://higgsfield.ai/"},
+        ],
+        "prompts": prompts,
+        "banner": banner_img,
+    }
+    if HF_VIDEO:
+        col["video"] = HF_VIDEO
+    write(col)
+    # Until the video is up the cards use the recommended YouTube thumbnail.
+    Image.open(HFCMP / "comparison-video" / "thumbs" / "thumb_a.png").convert("RGB").save(
+        IMG / slug / "card.jpg", quality=86, optimize=True, progressive=True)
+
+    # The workflow from the video's graph tour, with a pointer in place of a prompt.
+    wf = json.loads((HFCMP / "comparison-video" / "assets" / "graph-h3-ui.json").read_text(encoding="utf-8"))
+    for nd in wf["nodes"]:
+        if nd["type"] == "MiniMaxH3ReferenceToVideo":
+            nd["widgets_values"][0] = f"Paste a prompt from https://loopforge.cc/projects/{slug}/"
+        if nd["type"] == "SaveVideo":
+            nd["widgets_values"][0] = "video/higgsfield-vs-h3"
+    (ROOT / "assets" / "workflows" / f"{slug}.json").write_text(json.dumps(wf, indent=1), encoding="utf-8")
+
+
 IMPORTERS = {"shots": import_shots, "chained": import_chained, "firstdate": import_first_date,
-             "ltx": import_ltx, "turbo": import_turbo}
+             "ltx": import_ltx, "turbo": import_turbo,
+             "higgsfield": import_higgsfield}
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or IMPORTERS:

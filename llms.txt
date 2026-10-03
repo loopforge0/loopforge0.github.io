@@ -6,6 +6,10 @@ Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someo
 
 ## Projects
 
+### [Higgsfield effects vs MiniMax H3](https://loopforge.cc/projects/higgsfield-vs-h3/)
+
+Published 3 October 2026. 11 prompts. Eleven Higgsfield effects and motion presets, remade locally with MiniMax H3 Ref2VA in ComfyUI from the same character photo. Each round has the H3 prompt, the photo and a frame from both sides.
+
 ### [Qwen-Image 2.1, run locally](https://loopforge.cc/projects/qwen-image-2-1/)
 
 Published 23 September 2026. 26 prompts. Qwen-Image 2.1 generates and edits with one 7 billion parameter model, and its autoencoder carries an alpha channel, so transparency comes out of the model rather than a background remover. Everything below ran locally on an RTX 3060, with every prompt exact and every timing measured.

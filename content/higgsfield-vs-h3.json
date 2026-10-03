@@ -1,0 +1,993 @@
+{
+ "slug": "higgsfield-vs-h3",
+ "title": "Higgsfield effects vs MiniMax H3",
+ "short": "Eleven effects, side by side",
+ "published": "2026-10-03",
+ "models": [
+  "Higgsfield",
+  "MiniMax H3"
+ ],
+ "summary": [
+  "Eleven Higgsfield effects and motion presets, remade locally with MiniMax H3 Ref2VA in ComfyUI from the same character photo. Each round has the H3 prompt, the photo and a frame from both sides."
+ ],
+ "facts": [
+  [
+   "MiniMax H3",
+   "minimax_h3_ref2va_pruned_int8_convrot, 20 steps, res_multistep, simple"
+  ],
+  [
+   "Reference",
+   "One character photo, ref_image_size max"
+  ],
+  [
+   "Higgsfield",
+   "Effects need no prompt; motion presets take a short one"
+  ],
+  [
+   "Ran on",
+   "RTX 3060 with 12GB, i5-13400F, 32GB RAM, PyTorch on CUDA 13"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "rounds",
+   "title": "Rounds"
+  }
+ ],
+ "refs": [
+  {
+   "id": "amber-main",
+   "label": "Amber",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-amber-main.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-amber-main-t.jpg",
+    "w": 569,
+    "h": 832,
+    "dl": "dl/higgsfield-vs-h3/amber-main.png",
+    "bytes": 594882
+   }
+  },
+  {
+   "id": "kate",
+   "label": "Kate",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-kate.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-kate-t.jpg",
+    "w": 1792,
+    "h": 2400,
+    "dl": "dl/higgsfield-vs-h3/kate.png",
+    "bytes": 7200932
+   }
+  },
+  {
+   "id": "sofia",
+   "label": "Sofia",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-sofia.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-sofia-t.jpg",
+    "w": 480,
+    "h": 832,
+    "dl": "dl/higgsfield-vs-h3/sofia.png",
+    "bytes": 326816
+   }
+  },
+  {
+   "id": "cyberpunk",
+   "label": "Cyberpunk",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-cyberpunk.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-cyberpunk-t.jpg",
+    "w": 1696,
+    "h": 2528,
+    "dl": "dl/higgsfield-vs-h3/cyberpunk.png",
+    "bytes": 6473688
+   }
+  },
+  {
+   "id": "allie",
+   "label": "Allie",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-allie.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-allie-t.jpg",
+    "w": 554,
+    "h": 832,
+    "dl": "dl/higgsfield-vs-h3/allie.png",
+    "bytes": 507995
+   }
+  },
+  {
+   "id": "cowgirl",
+   "label": "Cowgirl",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-cowgirl.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-cowgirl-t.jpg",
+    "w": 1696,
+    "h": 2528,
+    "dl": "dl/higgsfield-vs-h3/cowgirl.png",
+    "bytes": 9252005
+   }
+  },
+  {
+   "id": "pirate",
+   "label": "Pirate",
+   "note": "Character photo, given to both sides",
+   "image": {
+    "src": "img/higgsfield-vs-h3/ref-pirate.jpg",
+    "thumb": "img/higgsfield-vs-h3/ref-pirate-t.jpg",
+    "w": 1696,
+    "h": 2528,
+    "dl": "dl/higgsfield-vs-h3/pirate.png",
+    "bytes": 6719600
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "The H3 Ref2VA workflow (json)",
+   "url": "/assets/workflows/higgsfield-vs-h3.json"
+  },
+  {
+   "label": "MiniMax's official prompt writing guide",
+   "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"
+  },
+  {
+   "label": "Higgsfield effects",
+   "url": "https://higgsfield.ai/"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "street-colossus",
+   "title": "Street colossus",
+   "code": "Round 1",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/street-colossus-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/street-colossus-h3-t.jpg",
+    "w": 1344,
+    "h": 768,
+    "dl": "dl/higgsfield-vs-h3/street-colossus-h3.jpg",
+    "bytes": 147463
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/street-colossus-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/street-colossus-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/street-colossus-higgsfield.jpg",
+      "bytes": 119372
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/street-colossus-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/street-colossus-h3-t.jpg",
+      "w": 1344,
+      "h": 768,
+      "dl": "dl/higgsfield-vs-h3/street-colossus-h3.jpg",
+      "bytes": 147463
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 70 credits, 1280×720, 24fps"
+    ],
+    [
+     "MiniMax H3",
+     "1344×768, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "74 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> as a towering giant walking down a busy Manhattan avenue while people flee, then seen from inside a taxi as a passenger films her on a phone, and finally from street level as she rests her hand against a skyscraper with news helicopters circling.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift, only her scale changes.\n\ndetailed_description:\nThe target video is live-action and cinematic, a hazy late-afternoon Manhattan avenue with glass towers and warm sunlight.\n[Shot 1] A low-angle wide shot looks up a crowded avenue lined with skyscrapers, yellow taxis in the foreground. <Subject 1>, grown to the height of a six-storey building, walks slowly down the middle of the avenue toward the camera, her ginger hair and cross pendant swinging with each step, her expression curious as she looks around. Pedestrians run past the lens in panic and taxis swerve. The camera tilts up slowly to keep her in frame.\n[Shot 2] At 00:04.200, the shot cuts to inside a taxi looking out through the rear side window: a passenger's hand holds up a phone recording her. Outside, beside the glass towers, the giant <Subject 1> turns her head and gazes up at the sky, a news helicopter hovering behind her.\n[Shot 3] At 00:07.000, the shot cuts to an extreme low angle from the street, looking up past her giant hip and arm: <Subject 1> places her palm flat against the glass facade of a skyscraper and looks up along it with quiet wonder, while two helicopters circle overhead against the pale sky. The camera holds a static shot.\n\noverall_soundscape: City traffic and horns, people shouting and running, heavy ground-shaking footfalls, the muffled cabin sound and engine idle inside the taxi, then the chop of helicopter rotors overhead.\n\nnon_diegetic_music: A slow, awed orchestral swell with low strings and a distant choir.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "set-on-fire",
+   "title": "Set on fire",
+   "code": "Round 2",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/set-on-fire-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/set-on-fire-h3-t.jpg",
+    "w": 768,
+    "h": 1344,
+    "dl": "dl/higgsfield-vs-h3/set-on-fire-h3.jpg",
+    "bytes": 157597
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/set-on-fire-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/set-on-fire-higgsfield-t.jpg",
+      "w": 784,
+      "h": 1152,
+      "dl": "dl/higgsfield-vs-h3/set-on-fire-higgsfield.jpg",
+      "bytes": 177113
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/set-on-fire-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/set-on-fire-h3-t.jpg",
+      "w": 768,
+      "h": 1344,
+      "dl": "dl/higgsfield-vs-h3/set-on-fire-h3.jpg",
+      "bytes": 157597
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Motion preset, 10 credits, 784×1152, 30fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "768×1344, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "30 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long wavy ginger-red hair, fair skin with light freckles, wearing a cream short-sleeve t-shirt, a dark cord necklace with a metal cross pendant, high-waisted blue jeans with a brown leather belt and a small brown pouch, and woven cord wrist wraps on both wrists. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing on a snowy arctic shore under the aurora, beside a moored wooden sailing ship, when she suddenly bursts into flames and becomes a standing figure of roaring fire.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, hair and outfit are held identical to <Picture 1> until the flames engulf them, and her silhouette stays hers inside the fire.\n\ndetailed_description:\nThe target video is live-action and cinematic, a cold blue-green arctic dusk with the aurora glowing overhead, snow-covered rocks and dark cliffs, an old wooden sailing ship moored behind.\n[Shot 1] A vertical full-length static shot frames <Subject 1> standing centred on the snowy shore from head to knees, breathing softly, hair stirring in the cold wind, her expression calm and a little wary. She glances down as a bright orange glow kindles at the centre of her chest. In an instant the glow erupts into flame that races outward over her whole body, up through her ginger hair and down her legs, until she is fully engulfed and standing as a tall figure of roaring fire, her shape and features still readable inside the flames. Embers and sparks swirl upward into the aurora, the snow at her feet hisses into steam, and the flames light the snow, the rocks and the side of the ship in flickering orange.\n\noverall_soundscape: Cold wind over the shore, a sharp whoomph of ignition, then a continuous roar and crackle of fire with sizzling steam from the snow.\n\nnon_diegetic_music: A deep low brass swell that rises with the ignition and holds.\n"
+    },
+    {
+     "label": "Higgsfield",
+     "text": "The young woman stands resolutely on the snowy arctic shore, her fiery red hair contrasting against the frosty landscape. As she gazes forward, a sudden flame ignites around her, engulfing her body in a vibrant blaze of fire that contrasts with the cool tones of the arctic. The flames consume her flesh while leaving her clothes untouched, flickering with warmth amidst the cold. Her head remains intact, revealing her face framed by dancing fire, illuminating her features. Embers swirl dramatically around her, creating a captivating spectacle in the frigid environment. The scene unfolds in slow motion, with the glow of the flames reflecting beautifully against the ice and snow.",
+     "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt that was typed."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "disintegration",
+   "title": "Disintegration",
+   "code": "Round 3",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/disintegration-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/disintegration-h3-t.jpg",
+    "w": 768,
+    "h": 1344,
+    "dl": "dl/higgsfield-vs-h3/disintegration-h3.jpg",
+    "bytes": 205221
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/disintegration-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/disintegration-higgsfield-t.jpg",
+      "w": 816,
+      "h": 1104,
+      "dl": "dl/higgsfield-vs-h3/disintegration-higgsfield.jpg",
+      "bytes": 235005
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/disintegration-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/disintegration-h3-t.jpg",
+      "w": 768,
+      "h": 1344,
+      "dl": "dl/higgsfield-vs-h3/disintegration-h3.jpg",
+      "bytes": 205221
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Motion preset, 10 credits, 816×1104, 30fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "768×1344, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "40 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair with a faint violet sheen, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> in a cozy library in a close portrait, crumbling away like ash from the top of her head down to her chest in one steady sweep, the coarse grains breaking into fine dust and blowing off to the left of the frame, until only the empty library is left.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> until the crumbling edge reaches them.\n\ndetailed_description:\nThe target video is live-action and cinematic, a warm cozy library lit by soft window light, bookshelves blurred behind, a gentle warm palette.\n[Shot 1] A static vertical medium close-up frames <Subject 1> from the chest up, centred, in front of tall wooden bookshelves, breathing softly, her warm smile fading into a puzzled frown as she feels something is wrong. Then she starts to dissolve into dust, beginning at the very top of her head and moving steadily downward in one continuous sweep: first her hair, then her forehead and eyes, then her mouth and chin, then her neck, shoulders and sweater, until the sweep reaches the bottom of the frame. Above the moving edge she is gone; below it she stays completely solid and unchanged, her skin and sweater smooth and whole right up to the edge, with no marks, lines or cracks anywhere on her. Exactly at the edge she turns directly into a dense spray of loose grey-brown grains, like dry sand blown off the top of a dune, the grains breaking into finer and finer dust as they lift away, all of it carried off to the left of the frame on a steady wind in a long trailing stream. When the sweep reaches the bottom, nothing of her is left, only the last specks of dust drifting out of the frame to the left in front of the out-of-focus bookshelves.\n\noverall_soundscape: Quiet library room tone, then a dry crackling, crumbling sound like ash and sand as she breaks apart, carried away on a soft rushing wind, fading into silence.\n\nnon_diegetic_music: A single soft sustained piano chord that swells as she dissolves and fades out.\n"
+    },
+    {
+     "label": "Higgsfield",
+     "text": "In a cozy library bathed in warm light, a young woman stands confidently, her vibrant eyes meeting the camera with an inviting smile. She wears a soft, knitted sweater that contrasts with the surrounding shelves filled with books. As she holds her gaze, a subtle tension begins to fill the air, and the light around her starts to shimmer. Suddenly, her body starts to disintegrate - the edges of her form blur and soften, as strands of hair shimmer into fine particles. The particles, like dust caught in a sunbeam, drift gracefully into the air, swirling and fluttering as they float away. With each passing moment, the fragments scatter, leaving behind an empty space where she once stood, the library now echoing a profound silence where connection was lost.",
+     "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt that was typed."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "melting",
+   "title": "Melting",
+   "code": "Round 4",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/melting-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/melting-h3-t.jpg",
+    "w": 768,
+    "h": 1344,
+    "dl": "dl/higgsfield-vs-h3/melting-h3.jpg",
+    "bytes": 116215
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/melting-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/melting-higgsfield-t.jpg",
+      "w": 720,
+      "h": 1248,
+      "dl": "dl/higgsfield-vs-h3/melting-higgsfield.jpg",
+      "bytes": 123501
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/melting-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/melting-h3-t.jpg",
+      "w": 768,
+      "h": 1344,
+      "dl": "dl/higgsfield-vs-h3/melting-h3.jpg",
+      "bytes": 116215
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Motion preset, 10 credits, 720×1248, 30fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "768×1344, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "30 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long dark brown wavy hair, warm olive skin and a bright open smile, wearing a white lace-trimmed cropped camisole and high-waisted beige trousers. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> smiling in a grey studio as her body softens under intense heat and melts from the top down, her skin, hair and clothes dripping into a glossy liquid pool at her feet.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, hair and clothing are held identical to <Picture 1> until the melt deforms them.\n\ndetailed_description:\nThe target video is live-action and cinematic, a stark seamless grey studio with soft even key light and a clean neutral palette.\n[Shot 1] A vertical medium-full static shot frames <Subject 1> from head to mid-thigh, centred against the grey backdrop, breathing softly, her long curls stirring, smiling brightly at the lens. A glossy wet sheen spreads across her skin and clothing as if under intense heat. Then she begins to melt from the top down: thick glossy drips run from her hair and face down over her shoulders, the white lace camisole slumps and runs, and her beige trousers sag and liquefy. Her smile stays as her features soften and slide, her whole figure sinking lower and lower until she has collapsed into a thick, shining, molten pool spreading across the studio floor, rippling as the last drips fall into it.\n\noverall_soundscape: Quiet studio room tone, a rising low heat hum, then wet dripping, slow viscous oozing and a final soft splash into the pool.\n\nnon_diegetic_music: N/A\n"
+    },
+    {
+     "label": "Higgsfield",
+     "text": "In a stark grey studio, a young woman stands confidently, her long, dark curls cascading over her delicate shoulders. She wears a lacy white crop top and high-waisted beige pants, exuding a warm, inviting smile. Suddenly, her body begins to deteriorate, skin softening as the heat envelops her. Her once vibrant hair, now slick and draping, sags alongside her melting form. Each moment, her clothes drip and slink down, pooling around her as she transforms. The light casts reflections on her glossy remnants, capturing the surreal horror as she collapses into a shimmering puddle on the floor.",
+     "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt that was typed."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "vanish",
+   "title": "Vanish",
+   "code": "Round 5",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/vanish-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/vanish-h3-t.jpg",
+    "w": 1344,
+    "h": 768,
+    "dl": "dl/higgsfield-vs-h3/vanish-h3.jpg",
+    "bytes": 60145
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/vanish-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/vanish-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/vanish-higgsfield.jpg",
+      "bytes": 52680
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/vanish-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/vanish-h3-t.jpg",
+      "w": 1344,
+      "h": 768,
+      "dl": "dl/higgsfield-vs-h3/vanish-h3.jpg",
+      "bytes": 60145
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 22.5 credits, 1280×720, 24fps"
+    ],
+    [
+     "MiniMax H3",
+     "1344×768, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "24 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long dark brown wavy hair, warm olive skin and a bright open smile, wearing a white lace-trimmed cropped camisole and high-waisted beige trousers. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing in an empty grey studio when her body instantly disappears, leaving her empty clothes to collapse and fall flat onto the floor.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> until she vanishes, and the empty clothes remain the same camisole and trousers.\n\ndetailed_description:\nThe target video is live-action and cinematic, shot through a wide lens with a dark circular vignette around the edges of the frame, an empty seamless grey studio with a pale floor.\n[Shot 1] A wide static shot frames <Subject 1> full length, standing small and centred in the middle of the empty studio, smiling at the lens, shifting her weight and brushing her curls back. Suddenly her body disappears in an instant: for a split second the white lace camisole and beige trousers keep her shape, standing upright on their own and empty, then they crumple and drop straight down, landing flat in a small soft heap on the studio floor. The camera holds the wide shot on the empty studio and the little pile of clothes, nothing else moving.\n\noverall_soundscape: Quiet studio room tone, a sudden soft pop of air, then the rustle and soft flop of fabric hitting the floor, followed by silence.\n\nnon_diegetic_music: N/A\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "thunder-god",
+   "title": "Thunder God",
+   "code": "Round 6",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/thunder-god-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/thunder-god-h3-t.jpg",
+    "w": 768,
+    "h": 1344,
+    "dl": "dl/higgsfield-vs-h3/thunder-god-h3.jpg",
+    "bytes": 179886
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/thunder-god-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/thunder-god-higgsfield-t.jpg",
+      "w": 784,
+      "h": 1168,
+      "dl": "dl/higgsfield-vs-h3/thunder-god-higgsfield.jpg",
+      "bytes": 187353
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/thunder-god-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/thunder-god-h3-t.jpg",
+      "w": 768,
+      "h": 1344,
+      "dl": "dl/higgsfield-vs-h3/thunder-god-h3.jpg",
+      "bytes": 179886
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Motion preset, 10 credits, 784×1168, 30fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "768×1344, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "40 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "cyberpunk"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1> in cyberpunk street style: an asymmetric jaw-length bob dyed electric teal with black roots, light olive skin, dark eyes, a small septum ring and silver studs along one ear, wearing an oversized glossy black cropped puffer jacket over a black mesh top, a black utility harness with silver clips, baggy charcoal cargo trousers with reflective strips, chunky black platform boots and fingerless black gloves. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing in a rain-slick neon alley at night as her eyes begin to glow white-hot and crackling lightning arcs around her body, her teal hair lifting with the static charge.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a rain-slick neon-lit night alley with pink and blue signs, steam rising from a grate and wet reflective ground.\n[Shot 1] A vertical full-length shot frames <Subject 1> standing centred in the alley, breathing steadily, her gloved hands loose at her sides, looking into the lens with a cool, level expression that hardens into fierce focus. The camera pushes in slowly toward her. Her eyes begin to glow, brightening to a blinding white-blue light. Thin forks of electric lightning spark from her shoulders and hands, then grow into bright crackling bolts arcing around her body and up into the air, lighting the wet walls in flashing blue. Her teal hair lifts and floats outward with the static charge, the puddles at her feet reflect every flash, and the steam swirls around her as the energy builds.\n\noverall_soundscape: Rain dripping and a humming neon buzz, then sharp electrical crackles and snapping lightning bolts building into a sustained sizzling roar.\n\nnon_diegetic_music: A dark pulsing synth bass that rises in intensity with the lightning.\n"
+    },
+    {
+     "label": "Higgsfield",
+     "text": "In the vibrant neon-lit alley, a young woman with teal hair stands confidently, clad in a sleek black puffer jacket and loose cargo pants, the rain-soaked pavement reflecting a kaleidoscope of colors. Her eyes suddenly ignite with a fierce electric blue glow, signaling a powerful awakening, as arcs of lightning crackle and dance around her, pulsating with energy. The sharp tension in the air intensifies, her hair lifting as if caught in an unseen wind, glowing and shimmering with the electric charge. Wisps of smoke swirl around her, mixing with the vibrant lights to create an atmosphere thick with anticipation and surrealism. The camera moves in close, capturing the detail of her fierce expression and the sharp contrasts of light, showcasing every crack of electric power igniting the scene.",
+     "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt that was typed."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "levitation",
+   "title": "Levitation",
+   "code": "Round 7",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/levitation-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/levitation-h3-t.jpg",
+    "w": 768,
+    "h": 1344,
+    "dl": "dl/higgsfield-vs-h3/levitation-h3.jpg",
+    "bytes": 105339
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/levitation-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/levitation-higgsfield-t.jpg",
+      "w": 768,
+      "h": 1168,
+      "dl": "dl/higgsfield-vs-h3/levitation-higgsfield.jpg",
+      "bytes": 97339
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/levitation-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/levitation-h3-t.jpg",
+      "w": 768,
+      "h": 1344,
+      "dl": "dl/higgsfield-vs-h3/levitation-h3.jpg",
+      "bytes": 105339
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Motion preset, 10 credits, 768×1168, 30fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "768×1344, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "30 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "allie"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: long light brown wavy hair, fair freckled skin, round gold-rimmed glasses, wearing a simple white slip dress with thin straps. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing barefoot on the wooden floor of a pale studio, then slowly rising off the ground and floating serenely in the air.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a pale softly lit studio with pale sage-grey walls and a warm wooden floor, calm and airy.\n[Shot 1] A vertical medium shot frames <Subject 1> from the head to the knees, standing barefoot and centred, breathing softly, looking into the lens with a calm, curious smile. The camera pulls out slowly to a full-length shot that shows the floor beneath her feet. Her heels lift, then her toes leave the floorboards and she rises smoothly upward until she is floating well above the floor, toes pointed down, a clear gap of empty air beneath her feet. Her hair and the hem of her white slip dress lift and drift as if underwater, her arms float slightly out from her sides, and her expression eases from surprise into serene wonder as she hangs in the air.\n\noverall_soundscape: Soft studio room tone, a faint airy whoosh as she lifts, then a gentle resonant hum while she floats.\n\nnon_diegetic_music: A soft ethereal pad with a slow rising harp arpeggio.\n"
+    },
+    {
+     "label": "Higgsfield",
+     "text": "In a pale, softly lit studio, a young woman with round gold glasses stands poised, her feet firmly grounded on the smooth floor. The air is calm, and an aura of peaceful serenity surrounds her. As she begins to rise, her body lifts slowly off the ground, toes hovering just above the floor. Her hair cascades softly upwards, catching the light, while the delicate fabric of her white dress flutters gently around her, as if in a slow dance with the unseen breeze. This moment feels timeless, almost dreamlike, as the world below fades into a still silence. The camera orbits slowly, capturing the ethereal beauty of her levitating form as she floats gracefully in the air, suspended in a moment of tranquil transcendence.",
+     "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt that was typed."
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "architecture-wave",
+   "title": "Architecture wave",
+   "code": "Round 8",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/architecture-wave-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/architecture-wave-h3-t.jpg",
+    "w": 1344,
+    "h": 768,
+    "dl": "dl/higgsfield-vs-h3/architecture-wave-h3.jpg",
+    "bytes": 168723
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/architecture-wave-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/architecture-wave-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/architecture-wave-higgsfield.jpg",
+      "bytes": 174695
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/architecture-wave-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/architecture-wave-h3-t.jpg",
+      "w": 1344,
+      "h": 768,
+      "dl": "dl/higgsfield-vs-h3/architecture-wave-h3.jpg",
+      "bytes": 168723
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 49 credits, 1280×720, 24fps, no audio"
+    ],
+    [
+     "MiniMax H3",
+     "1344×768, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "54 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "cyberpunk"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1> in cyberpunk street style: an asymmetric jaw-length bob dyed electric teal with black roots, light olive skin, dark eyes, a small septum ring and silver studs along one ear, wearing an oversized glossy black cropped puffer jacket over a black mesh top, a black utility harness with silver clips, baggy charcoal cargo trousers with reflective strips, chunky black platform boots and fingerless black gloves. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> walking toward the camera down a narrow graffiti-covered neon alley at night while the brick buildings on both sides bend, ripple and fold inward over her like liquid.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a narrow rain-slick alley at night between tall brick buildings covered in graffiti, pink and blue neon signs, fire escapes and steam, wet ground reflecting the light.\n[Shot 1] A symmetrical wide shot looks straight down the alley, and <Subject 1> walks steadily toward the camera from deep in the frame, small at first, her teal hair and glossy black puffer catching the neon, steam drifting past her. The camera pulls back slowly ahead of her as she walks. As she comes closer, the buildings on both sides begin to move like liquid: the brick walls ripple in slow waves, the upper storeys bend and lean inward, and windows, neon signs and fire escapes warp and flow as the facades fold over the top of the alley into an arching tunnel above her. <Subject 1> keeps walking at the same easy pace, unbothered, glancing up once with a faint smile as the architecture bends around her.\n\noverall_soundscape: Distant city hum and dripping water, her boots splashing on the wet ground, then deep groaning and grinding of stone and brick as the buildings bend.\n\nnon_diegetic_music: A slow, heavy synthwave beat with a deep rising drone.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "incline",
+   "title": "Incline",
+   "code": "Round 9",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/incline-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/incline-h3-t.jpg",
+    "w": 1344,
+    "h": 768,
+    "dl": "dl/higgsfield-vs-h3/incline-h3.jpg",
+    "bytes": 180528
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/incline-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/incline-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/incline-higgsfield.jpg",
+      "bytes": 158474
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/incline-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/incline-h3-t.jpg",
+      "w": 1344,
+      "h": 768,
+      "dl": "dl/higgsfield-vs-h3/incline-h3.jpg",
+      "bytes": 180528
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 49 credits, 1280×720, 24fps"
+    ],
+    [
+     "MiniMax H3",
+     "1344×768, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "55 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "cowgirl"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1> in western cowgirl style: long chestnut-brown hair in two loose braids under a worn tan suede cowboy hat, lightly tanned freckled skin and warm brown eyes, wearing a faded red-and-cream plaid pearl-snap shirt with rolled sleeves, a brown suede fringe vest, a tooled leather belt with a large silver buckle, dark indigo bootcut jeans, dusty brown cowboy boots and a red bandana knotted at her neck. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing on a ranch at sunset when the whole world around her tilts steeply and stays tilted, locked at that steep angle, sending a bucket, barrels, feed sacks, a horse and a ranch hand sliding and tumbling past her while she stays calmly upright.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a ranch at golden-hour sunset with a weathered wooden rail fence, dry grass and low golden hills under a pale sky.\n[Shot 1] A medium-wide shot frames <Subject 1> full length, centred in front of the rail fence, thumbs hooked in her jean pockets, breathing easily, smiling warmly at the lens. Early in the shot the entire world around her tilts once, in a single smooth movement: the ground, the fence and the horizon slant steeply down toward the right side of the frame, about thirty degrees. Then the world stays locked at exactly that steep angle for the rest of the shot, perfectly still, the horizon and fence holding the same slant without rocking, wobbling or easing back toward level, while <Subject 1> stays perfectly upright and relaxed in the centre as if nothing is happening. Loose things slide and tumble past her down the fixed slope: a metal bucket bouncing end over end, a rusty oil drum rolling, burlap feed sacks skidding through the dust, a brown horse scrambling sideways, and a ranch hand in a hat stumbling and sliding past behind her. She tips her hat with an amused grin as they go by, and the shot ends with the world still tilted at the same steep angle and the dust settling against the downhill side of the fence.\n\noverall_soundscape: A soft prairie breeze, then a deep creaking groan as the ground tilts, the clang and roll of the bucket and drum, sacks scraping through dirt, a horse whinnying and hooves scrambling, a man yelling, then dust settling back to quiet.\n\nnon_diegetic_music: A playful twangy western guitar riff with a comic slide.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "mighty-fighter",
+   "title": "Mighty fighter",
+   "code": "Round 10",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/mighty-fighter-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/mighty-fighter-h3-t.jpg",
+    "w": 1344,
+    "h": 768,
+    "dl": "dl/higgsfield-vs-h3/mighty-fighter-h3.jpg",
+    "bytes": 102186
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/mighty-fighter-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/mighty-fighter-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/mighty-fighter-higgsfield.jpg",
+      "bytes": 104349
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/mighty-fighter-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/mighty-fighter-h3-t.jpg",
+      "w": 1344,
+      "h": 768,
+      "dl": "dl/higgsfield-vs-h3/mighty-fighter-h3.jpg",
+      "bytes": 102186
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 27.5 credits, 1280×720, 24fps"
+    ],
+    [
+     "MiniMax H3",
+     "1344×768, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "149 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "pirate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1> dressed as a pirate captain: long dark auburn windswept hair under a weathered black tricorn hat, sun-bronzed skin, green eyes and small gold hoop earrings, wearing a loose ivory linen shirt under a fitted oxblood leather corset vest, a long faded navy captain's coat with brass buttons, a wide leather belt with a brass buckle and a crimson silk sash, dark brown breeches and tall scuffed leather boots. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1>, reimagined as a battle-worn knight in plate armour and a white cloak, walking through a misty field of red poppies at dusk, pausing exhausted, then sinking to her knees and lying back among the flowers.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1], [Shot 2], [Shot 3]): partially_preserved - her face, auburn hair and build are preserved from <Picture 1>, while her pirate costume is replaced by knight's armour.\n\ndetailed_description:\nThe target video is live-action and cinematic, a misty field of red poppies at dusk under a pale overcast sky, rolling hills and hedgerows fading into haze, muted cold tones.\n[Shot 1] A low ground-level tracking shot follows the armoured boots and trailing white cloak of <Subject 1> as she walks slowly through the tall grass and poppies, a sword hanging at her side, stepping past a dented steel helmet lying on the ground. The camera pedestals up slowly along her body, rising past the steel greaves, the white cloak and the scratched plate armour toward her shoulders.\n[Shot 2] At 00:03.400, the shot cuts to a medium shot of <Subject 1>: in full silver plate armour and a torn white cloak, her auburn hair loose and damp, face smudged with dirt, she stops walking and stares into the distance, her breathing heavy, her expression shifting from grim resolve to deep exhaustion as her shoulders drop.\n[Shot 3] At 00:06.400, the shot cuts to a wide static shot across the poppy field: <Subject 1> sinks slowly to her knees among the flowers, then lets herself fall back and lies flat on the ground, the white cloak spreading out beside her, poppies nodding in the breeze around her still form as the mist drifts across the hills.\n\noverall_soundscape: A soft evening breeze through the grass, the heavy clink and scrape of armour with each step, a low weary exhale, then the rustle of the poppies as she lies down.\n\nnon_diegetic_music: A slow, mournful solo cello over a low string drone.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  },
+  {
+   "slug": "floating-fall",
+   "title": "Floating fall",
+   "code": "Round 11",
+   "group": "rounds",
+   "still": {
+    "src": "img/higgsfield-vs-h3/floating-fall-h3.jpg",
+    "thumb": "img/higgsfield-vs-h3/floating-fall-h3-t.jpg",
+    "w": 1184,
+    "h": 672,
+    "dl": "dl/higgsfield-vs-h3/floating-fall-h3.jpg",
+    "bytes": 122810
+   },
+   "outputs": [
+    {
+     "label": "Higgsfield",
+     "image": {
+      "src": "img/higgsfield-vs-h3/floating-fall-higgsfield.jpg",
+      "thumb": "img/higgsfield-vs-h3/floating-fall-higgsfield-t.jpg",
+      "w": 1280,
+      "h": 720,
+      "dl": "dl/higgsfield-vs-h3/floating-fall-higgsfield.jpg",
+      "bytes": 96592
+     }
+    },
+    {
+     "label": "MiniMax H3",
+     "image": {
+      "src": "img/higgsfield-vs-h3/floating-fall-h3.jpg",
+      "thumb": "img/higgsfield-vs-h3/floating-fall-h3-t.jpg",
+      "w": 1184,
+      "h": 672,
+      "dl": "dl/higgsfield-vs-h3/floating-fall-h3.jpg",
+      "bytes": 122810
+     }
+    }
+   ],
+   "models": [
+    "Higgsfield",
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Reference to video",
+    "Effects"
+   ],
+   "facts": [
+    [
+     "Higgsfield",
+     "Effect, 84 credits, 1280×720, 24fps"
+    ],
+    [
+     "MiniMax H3",
+     "1184×672, 24fps, 20 steps, seed 552013742"
+    ],
+    [
+     "H3 render",
+     "81 min on an RTX 3060, 12GB"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "MiniMax H3",
+     "text": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair with a faint violet sheen, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> walking along a sunlit city sidewalk on the phone, getting bumped by a passer-by and falling backward in extreme slow motion while one continuous camera whip pans from her to her floating flip phone, coffee cup and red leather notebook and back to her, before time snaps back and she lands flat on the pavement with her belongings scattered.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1] through [Shot 3]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a warm golden-hour city street with shallow depth of field, soft backlight through trees and a gently desaturated palette.\n[Shot 1] A tight close-up frames the torso of <Subject 1> as she walks along a red-brick sidewalk, a takeaway coffee cup with a white lid in one hand and a red leather notebook tucked under her arm; the camera tilts up with medium amplitude at medium speed to her face as she lifts a small dark clamshell flip phone to her ear, relaxed and half-smiling, while in the foreground a man in a dark jacket, seen only from behind with his back to the camera, walks away from the lens down the sidewalk straight toward her.\n[Shot 2] At 00:02.400, the shot cuts to a wide shot down the sidewalk and holds as one continuous take with no further cuts: the man in the dark jacket, his back to the camera, keeps walking away from the lens toward her as she walks toward the camera, and he walks straight into her head-on, his shoulder slamming hard into her chest; the force of the impact knocks <Subject 1> backward off her feet, arms flung wide, while he stumbles on past, the phone, the coffee cup and the notebook flying up out of her hands. Time slows to a crawl and she tips backward, hanging in the air. The camera pushes in toward her, then starts framed on <Subject 1> and whip pans left away from her to land on the flip phone turning over in mid-air in the foreground, sharp and detailed: the same small dark clamshell phone, hinged across its short top edge, the screen half above the hinge and the keypad half below it, <Subject 1> soft and out of focus behind it. The camera then whip pans right from the phone to land on the coffee cup drifting weightlessly, its lid lifting away as brown droplets of coffee hang suspended beside it. The camera then whip pans from the cup to land on the red leather notebook tumbling slowly in mid-air and pushes in with large amplitude at slow speed until its gold metal clasp fills the entire frame. The camera then whip pans back from the notebook to land on <Subject 1> in the wide shot: time snaps back to full speed and the phone, cup and notebook drop as she falls the last distance backward onto the pavement.\n[Shot 3] At 00:11.000, the shot cuts to a low ground-level static shot along the pavement: <Subject 1> lies flat on her back on the brick sidewalk, arms out, blinking up at the sky in stunned embarrassment, the same clamshell flip phone, the spilled cup and the notebook scattered around her while pedestrians walk on in the distance.\n\noverall_soundscape: Busy street ambience with distant traffic and footsteps, a muffled phone voice, a soft shoulder bump, then the sound stretches into a slow, hollow, underwater-like drone during the floating moment, snapping back to full-speed street sound with the clatter of the phone, cup and notebook hitting the pavement and a soft thud as she lands.\n\nnon_diegetic_music: A light, playful pizzicato string motif under the walk, dissolving into a suspended airy synth pad during the slow-motion float, then cut off on the landing.\n"
+    }
+   ],
+   "notes": [],
+   "links": []
+  }
+ ],
+ "banner": {
+  "src": "img/higgsfield-vs-h3/banner.jpg",
+  "thumb": "img/higgsfield-vs-h3/banner-t.jpg",
+  "w": 2400,
+  "h": 760,
+  "dl": "dl/higgsfield-vs-h3/banner.jpg",
+  "bytes": 287891
+ }
+}
