@@ -755,7 +755,7 @@ def build_prompt(col, p, prev, nxt, site):
     workflow = (f'<a class="button quiet" href="{e(wf["url"])}" download '
                 f'title="ComfyUI API-format graph">Download workflow</a>' if wf else "")
     origin = f'<a href="{project_url(col)}">{e(col["title"])}</a>'
-    code =f'<p class="code-line">{e(p["code"])}, from {origin}</p>' if p.get("code") else f'<p class="code-line">From {origin}</p>'
+    code = f'<p class="code-line">{e(p["code"])}, from {origin}</p>' if p.get("code") else f'<p class="code-line">From {origin}</p>'
     body = f"""
 <div class="wrap">
   <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a> / <a href="{project_url(col)}">{e(col["title"])}</a></div>
