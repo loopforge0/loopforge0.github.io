@@ -1,0 +1,178 @@
+{
+ "0": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "kate.png"
+  },
+  "is_changed": [
+   "cfb8226fc997a27ee3886170555d86a5fc8ab8b08d2d1ab2a055816649c04f7f"
+  ]
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+   "type": "minimax",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "6": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "prompt": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1>: shoulder-length dark brown wavy hair with a faint violet sheen, fair skin and blue-grey eyes, wearing a chunky oatmeal cable-knit wool sweater. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> in a cozy library in a close portrait, crumbling away like ash from the top of her head down to her chest in one steady sweep, the coarse grains breaking into fine dust and blowing off to the left of the frame, until only the empty library is left.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> until the crumbling edge reaches them.\n\ndetailed_description:\nThe target video is live-action and cinematic, a warm cozy library lit by soft window light, bookshelves blurred behind, a gentle warm palette.\n[Shot 1] A static vertical medium close-up frames <Subject 1> from the chest up, centred, in front of tall wooden bookshelves, breathing softly, her warm smile fading into a puzzled frown as she feels something is wrong. Then she starts to dissolve into dust, beginning at the very top of her head and moving steadily downward in one continuous sweep: first her hair, then her forehead and eyes, then her mouth and chin, then her neck, shoulders and sweater, until the sweep reaches the bottom of the frame. Above the moving edge she is gone; below it she stays completely solid and unchanged, her skin and sweater smooth and whole right up to the edge, with no marks, lines or cracks anywhere on her. Exactly at the edge she turns directly into a dense spray of loose grey-brown grains, like dry sand blown off the top of a dune, the grains breaking into finer and finer dust as they lift away, all of it carried off to the left of the frame on a steady wind in a long trailing stream. When the sweep reaches the bottom, nothing of her is left, only the last specks of dust drifting out of the frame to the left in front of the out-of-focus bookshelves.\n\noverall_soundscape: Quiet library room tone, then a dry crackling, crumbling sound like ash and sand as she breaks apart, carried away on a soft rushing wind, fading into silence.\n\nnon_diegetic_music: A single soft sustained piano chord that swells as she dissolves and fades out.\n",
+   "width": 768,
+   "height": 1344,
+   "length": 141,
+   "ref_image_size": "max",
+   "ref_images.ref_image_0": [
+    "0",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 552013742
+  }
+ },
+ "8": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "res_multistep"
+  }
+ },
+ "9": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "5",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 20,
+   "denoise": 1.0
+  }
+ },
+ "10": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "5",
+    0
+   ],
+   "conditioning": [
+    "6",
+    0
+   ]
+  }
+ },
+ "11": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "7",
+    0
+   ],
+   "guider": [
+    "10",
+    0
+   ],
+   "sampler": [
+    "8",
+    0
+   ],
+   "sigmas": [
+    "9",
+    0
+   ],
+   "latent_image": [
+    "6",
+    1
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "14": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "12",
+    0
+   ],
+   "audio": [
+    "13",
+    0
+   ],
+   "fps": 24.0
+  }
+ },
+ "15": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "14",
+    0
+   ],
+   "filename_prefix": "video/higgsfield-vs-h3/disintegration",
+   "format": "auto",
+   "codec": "auto"
+  }
+ }
+}

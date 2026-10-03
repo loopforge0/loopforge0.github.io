@@ -215,6 +215,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/street-colossus.json",
+    "bytes": 5074
+   },
    "time": 31
   },
   {
@@ -295,6 +299,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/set-on-fire.json",
+    "bytes": 4666
+   },
    "time": 64
   },
   {
@@ -375,6 +383,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/disintegration.json",
+    "bytes": 5023
+   },
    "time": 90
   },
   {
@@ -455,6 +467,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/melting.json",
+    "bytes": 4343
+   },
    "time": 114
   },
   {
@@ -530,6 +546,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/vanish.json",
+    "bytes": 4282
+   },
    "time": 136
   },
   {
@@ -610,6 +630,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/thunder-god.json",
+    "bytes": 4725
+   },
    "time": 159
   },
   {
@@ -690,6 +714,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/levitation.json",
+    "bytes": 4286
+   },
    "time": 184
   },
   {
@@ -765,6 +793,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/architecture-wave.json",
+    "bytes": 4801
+   },
    "time": 209
   },
   {
@@ -840,6 +872,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/incline.json",
+    "bytes": 5305
+   },
    "time": 234
   },
   {
@@ -915,6 +951,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/mighty-fighter.json",
+    "bytes": 5191
+   },
    "time": 263
   },
   {
@@ -990,6 +1030,10 @@
    ],
    "notes": [],
    "links": [],
+   "workflow": {
+    "url": "/assets/workflows/higgsfield-vs-h3/floating-fall.json",
+    "bytes": 6644
+   },
    "time": 294
   }
  ],

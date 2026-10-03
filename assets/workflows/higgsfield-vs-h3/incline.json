@@ -1,0 +1,178 @@
+{
+ "0": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "cowgirl.png"
+  },
+  "is_changed": [
+   "11ca7dfb3861274a3af08650cdc7ea9be09b792bc282d07850c83dcf3c4d264f"
+  ]
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+   "type": "minimax",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "6": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "prompt": "subject_definitions:\n<Subject 1> is the young woman in <Picture 1> in western cowgirl style: long chestnut-brown hair in two loose braids under a worn tan suede cowboy hat, lightly tanned freckled skin and warm brown eyes, wearing a faded red-and-cream plaid pearl-snap shirt with rolled sleeves, a brown suede fringe vest, a tooled leather belt with a large silver buckle, dark indigo bootcut jeans, dusty brown cowboy boots and a red bandana knotted at her neck. Her exact facial structure, features and proportions stay identical to <Picture 1> in every frame.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing on a ranch at sunset when the whole world around her tilts steeply and stays tilted, locked at that steep angle, sending a bucket, barrels, feed sacks, a horse and a ranch hand sliding and tumbling past her while she stays calmly upright.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic, a ranch at golden-hour sunset with a weathered wooden rail fence, dry grass and low golden hills under a pale sky.\n[Shot 1] A medium-wide shot frames <Subject 1> full length, centred in front of the rail fence, thumbs hooked in her jean pockets, breathing easily, smiling warmly at the lens. Early in the shot the entire world around her tilts once, in a single smooth movement: the ground, the fence and the horizon slant steeply down toward the right side of the frame, about thirty degrees. Then the world stays locked at exactly that steep angle for the rest of the shot, perfectly still, the horizon and fence holding the same slant without rocking, wobbling or easing back toward level, while <Subject 1> stays perfectly upright and relaxed in the centre as if nothing is happening. Loose things slide and tumble past her down the fixed slope: a metal bucket bouncing end over end, a rusty oil drum rolling, burlap feed sacks skidding through the dust, a brown horse scrambling sideways, and a ranch hand in a hat stumbling and sliding past behind her. She tips her hat with an amused grin as they go by, and the shot ends with the world still tilted at the same steep angle and the dust settling against the downhill side of the fence.\n\noverall_soundscape: A soft prairie breeze, then a deep creaking groan as the ground tilts, the clang and roll of the bucket and drum, sacks scraping through dirt, a horse whinnying and hooves scrambling, a man yelling, then dust settling back to quiet.\n\nnon_diegetic_music: A playful twangy western guitar riff with a comic slide.\n",
+   "width": 1344,
+   "height": 768,
+   "length": 175,
+   "ref_image_size": "max",
+   "ref_images.ref_image_0": [
+    "0",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 552013742
+  }
+ },
+ "8": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "res_multistep"
+  }
+ },
+ "9": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "5",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 20,
+   "denoise": 1.0
+  }
+ },
+ "10": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "5",
+    0
+   ],
+   "conditioning": [
+    "6",
+    0
+   ]
+  }
+ },
+ "11": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "7",
+    0
+   ],
+   "guider": [
+    "10",
+    0
+   ],
+   "sampler": [
+    "8",
+    0
+   ],
+   "sigmas": [
+    "9",
+    0
+   ],
+   "latent_image": [
+    "6",
+    1
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "14": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "12",
+    0
+   ],
+   "audio": [
+    "13",
+    0
+   ],
+   "fps": 24.0
+  }
+ },
+ "15": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "14",
+    0
+   ],
+   "filename_prefix": "video/higgsfield-vs-h3/incline",
+   "format": "auto",
+   "codec": "auto"
+  }
+ }
+}

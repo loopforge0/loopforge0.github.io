@@ -833,6 +833,17 @@ def import_higgsfield():
             "notes": [],
             "links": [],
         }
+        # The exact API graph embedded in the H3 clip, with the local image path swapped for a stock
+        # LoadImage of the character photo downloaded above, so the two together rerun the round.
+        for nd in g.values():
+            if nd["class_type"] == "VHS_LoadImagePath":
+                nd["class_type"], nd["inputs"] = "LoadImage", {"image": f"{plate}.png"}
+            if nd["class_type"] == "SaveVideo":
+                nd["inputs"]["filename_prefix"] = f"video/{slug}/{p['slug']}"
+        wf_path = ROOT / "assets" / "workflows" / slug / f"{p['slug']}.json"
+        wf_path.parent.mkdir(parents=True, exist_ok=True)
+        wf_path.write_text(json.dumps(g, indent=1), encoding="utf-8")
+        p["workflow"] = {"url": f"/assets/workflows/{slug}/{p['slug']}.json", "bytes": wf_path.stat().st_size}
         if cid in hf_prompts:
             p["variants"].append({"label": "Higgsfield", "text": hf_prompts[cid]["prompt"],
                                   "note": "As Higgsfield stored it, after its Enhance option rewrote the short prompt "
