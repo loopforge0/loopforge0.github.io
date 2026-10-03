@@ -749,8 +749,13 @@ def build_prompt(col, p, prev, nxt, site):
             return "<span></span>"
         return f'<a class="{cls}" href="{prompt_url(col, q)}"><span>{label}</span><b>{e(q["title"])}</b></a>'
 
+    # The graph that produced this result, its LoadImage nodes pointing at the input downloads
+    # above, so the two together rerun it.
+    wf = p.get("workflow")
+    workflow = (f'<a class="button quiet" href="{e(wf["url"])}" download '
+                f'title="ComfyUI API-format graph">Download workflow</a>' if wf else "")
     origin = f'<a href="{project_url(col)}">{e(col["title"])}</a>'
-    code = f'<p class="code-line">{e(p["code"])}, from {origin}</p>' if p.get("code") else f'<p class="code-line">From {origin}</p>'
+    code =f'<p class="code-line">{e(p["code"])}, from {origin}</p>' if p.get("code") else f'<p class="code-line">From {origin}</p>'
     body = f"""
 <div class="wrap">
   <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a> / <a href="{project_url(col)}">{e(col["title"])}</a></div>
@@ -770,7 +775,7 @@ def build_prompt(col, p, prev, nxt, site):
     <div class="script-bar">
       <h2 class="section">{"The prompts" if multi else "The prompt"}</h2>
       {tab_html}
-      <button type="button" class="button" data-copy>Copy prompt</button>
+      <button type="button" class="button" data-copy>Copy prompt</button>{workflow}
     </div>
     {"".join(panels)}
   </section>

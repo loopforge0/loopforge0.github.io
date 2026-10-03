@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1728,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/ladder-2-0mp"
+  }
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "beach_pail_crop.png"
+  },
+  "is_changed": [
+   "71fd73d653db9a309f2fa5ba97c2c015e6153e97813d101dae7fe2842ed06215"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Create an RGBA image with transparent background and place the metal pail of beer bottles in that image.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "encode",
+    2
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/beach-pail"
+  }
+ }
+}

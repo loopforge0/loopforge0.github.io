@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "A 360 degree panorama in equirectangular projection of a wide paved public square in daylight. The square fills the whole frame from edge to edge, low trees and pale modern buildings run all the way around the horizon, and a few people walk at a distance. The paving stretches and curves outward toward the bottom edge of the frame and the bright hazy sky stretches and curves outward toward the top edge. The horizon is a straight horizontal line across the middle of the frame, and the left edge continues seamlessly into the right edge.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2880,
+   "height": 1440,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/pano-t2i"
+  }
+ }
+}

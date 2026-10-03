@@ -1,0 +1,121 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "sofia.png"
+  },
+  "is_changed": [
+   "d5614bfa6fac23d1bb8b629447899d60d5fcbcf38e906cc7716f89f430c4cd7e"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Turn this into a character turnaround reference sheet on a plain flat light grey studio background with no floor line and no cast shadow. Keep the same woman, with the same face, the same long dark wavy hair, the same white lace crop top and the same cream high waisted trousers. The sheet has two rows. The upper row, which fills about two thirds of the height, holds six full length standing views in a single evenly spaced line, stepping around her. From left to right they are: her full profile facing the viewer's left; turned forty five degrees toward the viewer's left; facing the camera straight on; turned forty five degrees toward the viewer's right; her full profile facing the viewer's right; and seen from directly behind. In every one of the six she stands in the same relaxed neutral pose with her arms hanging at her sides and her weight even on both feet, and she is the same height and the same distance from the camera, so the top of her head and the soles of her feet line up across all six. The lower row holds three larger head and shoulders close ups, evenly spaced and centred beneath the upper row, each showing the same face at the same size: her head in profile facing the viewer's left, her head facing the camera straight on, and her head in profile facing the viewer's right. The lighting is flat even studio light from the front in every view with no strong shadow. The overall composition is a wide horizontal sheet, the palette built from grey, cream, white and dark brown hair, and the mood is plain and technical.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/turnaround"
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2752,
+   "height": 1536,
+   "batch_size": 1
+  }
+ }
+}

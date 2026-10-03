@@ -153,6 +153,10 @@
     "dl": "dl/qwen-image-2-1/rgba-sheet.png",
     "bytes": 3048156
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/rgba-sheet.json",
+    "bytes": 2633
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -215,6 +219,10 @@
     "dl": "dl/qwen-image-2-1/extract-good.png",
     "bytes": 2456711
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/extract-good.json",
+    "bytes": 2338
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -242,7 +250,7 @@
     ],
     [
      "Seed",
-     "21"
+     "684637126803021"
     ],
     [
      "Ran on",
@@ -268,8 +276,8 @@
       "thumb": "img/qwen-image-2-1/extract-good-source-1-t.jpg",
       "w": 831,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/extract-good-source-1.jpg",
-      "bytes": 305159
+      "dl": "workflows/qwen-image-2-1/inputs/extract_01_input.png",
+      "bytes": 1718932
      }
     },
     {
@@ -296,6 +304,10 @@
     "h": 1440,
     "dl": "dl/qwen-image-2-1/extract-bad.png",
     "bytes": 3051550
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/extract-bad.json",
+    "bytes": 2332
    },
    "models": [
     "Qwen-Image 2.1"
@@ -339,7 +351,7 @@
     }
    ],
    "notes": [
-    "Same image, same seed, same size, same 81 seconds. Asking for the background to be removed redrew the subject instead of cutting it out: blue bled into the hair, the knit turned to noise and the freckles blew out.",
+    "Same image, same size, same 81 seconds. Asking for the background to be removed redrew the subject instead of cutting it out: blue bled into the hair, the knit turned to noise and the freckles blew out.",
     "This is narrow. The removal phrasing is faithful on photographs and on a naturally generated image. It failed only on a generated subject that had been composited onto a synthetic background and re-extracted."
    ],
    "links": [],
@@ -351,8 +363,8 @@
       "thumb": "img/qwen-image-2-1/extract-bad-source-1-t.jpg",
       "w": 831,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/extract-bad-source-1.jpg",
-      "bytes": 305159
+      "dl": "workflows/qwen-image-2-1/inputs/extract_01_input.png",
+      "bytes": 1718932
      }
     },
     {
@@ -379,6 +391,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/circle-jacket.jpg",
     "bytes": 1109341
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/circle-jacket.json",
+    "bytes": 1980
    },
    "models": [
     "Qwen-Image 2.1"
@@ -428,8 +444,8 @@
       "thumb": "img/qwen-image-2-1/circle-jacket-source-1-t.jpg",
       "w": 1100,
       "h": 738,
-      "dl": "dl/qwen-image-2-1/circle-jacket-source-1.jpg",
-      "bytes": 1126870
+      "dl": "workflows/qwen-image-2-1/inputs/street2k_marked.png",
+      "bytes": 6589697
      }
     },
     {
@@ -457,6 +473,10 @@
     "dl": "dl/qwen-image-2-1/circle-leaves.jpg",
     "bytes": 261478
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/circle-leaves.json",
+    "bytes": 2328
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -475,7 +495,7 @@
     ],
     [
      "Steps",
-     "40, euler / simple, cfg 1.0"
+     "25, euler / simple, cfg 1.0"
     ],
     [
      "Seed",
@@ -490,7 +510,7 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "Apply these three edits to the image. Change the colour of this leaf to a deep autumn red, the one marked by the red outline. Change the colour of this leaf to a golden amber, the one marked by the green outline. Change the colour of this leaf to a burnt orange, the one marked by the blue outline. Leave everything else in the image exactly as it is, and do not render the coloured outlines or any other marking in the output."
+     "text": "Apply these three edits to the image. Change the colour of the whole maple leaf to a deep autumn red, across its entire blade, the one marked by the red outline. Change the colour of the whole maple leaf to a golden amber, across its entire blade, the one marked by the green outline. Change the colour of the whole maple leaf to a burnt orange, across its entire blade, the one marked by the blue outline. Leave everything else in the image exactly as it is, and do not render the coloured outlines or any other marking in the output."
     }
    ],
    "notes": [
@@ -505,8 +525,8 @@
       "thumb": "img/qwen-image-2-1/circle-leaves-source-1-t.jpg",
       "w": 1100,
       "h": 753,
-      "dl": "dl/qwen-image-2-1/circle-leaves-source-1.jpg",
-      "bytes": 288327
+      "dl": "workflows/qwen-image-2-1/inputs/leaves-source.png",
+      "bytes": 1524395
      }
     },
     {
@@ -534,6 +554,10 @@
     "dl": "dl/qwen-image-2-1/circle-crowd.jpg",
     "bytes": 1233735
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/circle-crowd.json",
+    "bytes": 1952
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -552,7 +576,7 @@
     ],
     [
      "Steps",
-     "40, euler / simple, cfg 1.0"
+     "25, euler / simple, cfg 1.0"
     ],
     [
      "Seed",
@@ -582,8 +606,8 @@
       "thumb": "img/qwen-image-2-1/circle-crowd-source-1-t.jpg",
       "w": 1100,
       "h": 614,
-      "dl": "dl/qwen-image-2-1/circle-crowd-source-1.jpg",
-      "bytes": 1294950
+      "dl": "workflows/qwen-image-2-1/inputs/crowd-source.png",
+      "bytes": 9259826
      }
     },
     {
@@ -610,6 +634,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/circle-classroom.jpg",
     "bytes": 893061
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/circle-classroom.json",
+    "bytes": 1976
    },
    "models": [
     "Qwen-Image 2.1"
@@ -659,8 +687,8 @@
       "thumb": "img/qwen-image-2-1/circle-classroom-source-1-t.jpg",
       "w": 1100,
       "h": 738,
-      "dl": "dl/qwen-image-2-1/circle-classroom-source-1.jpg",
-      "bytes": 818933
+      "dl": "workflows/qwen-image-2-1/inputs/classroom2k_marked.png",
+      "bytes": 5356842
      }
     },
     {
@@ -687,6 +715,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/circle-cups.jpg",
     "bytes": 896732
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/circle-cups.json",
+    "bytes": 1898
    },
    "models": [
     "Qwen-Image 2.1"
@@ -736,8 +768,8 @@
       "thumb": "img/qwen-image-2-1/circle-cups-source-1-t.jpg",
       "w": 1100,
       "h": 738,
-      "dl": "dl/qwen-image-2-1/circle-cups-source-1.jpg",
-      "bytes": 810432
+      "dl": "workflows/qwen-image-2-1/inputs/cups2k_marked.png",
+      "bytes": 5372916
      }
     },
     {
@@ -764,6 +796,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/beach-scene.jpg",
     "bytes": 1024414
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/beach-scene.json",
+    "bytes": 3325
    },
    "models": [
     "Qwen-Image 2.1"
@@ -813,6 +849,10 @@
     "dl": "dl/qwen-image-2-1/beach-pail.png",
     "bytes": 737658
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/beach-pail.json",
+    "bytes": 1896
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -858,14 +898,14 @@
    "links": [],
    "outputs": [
     {
-     "label": "The generated plate",
+     "label": "A crop of the plate around the pail",
      "image": {
       "src": "img/qwen-image-2-1/beach-pail-source-1.jpg",
       "thumb": "img/qwen-image-2-1/beach-pail-source-1-t.jpg",
-      "w": 1100,
-      "h": 738,
-      "dl": "dl/qwen-image-2-1/beach-pail-source-1.jpg",
-      "bytes": 1024414
+      "w": 733,
+      "h": 1100,
+      "dl": "workflows/qwen-image-2-1/inputs/beach_pail_crop.png",
+      "bytes": 1737155
      }
     },
     {
@@ -892,6 +932,10 @@
     "h": 832,
     "dl": "dl/qwen-image-2-1/beach-removed.jpg",
     "bytes": 266803
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/beach-removed.json",
+    "bytes": 1939
    },
    "models": [
     "Qwen-Image 2.1"
@@ -931,14 +975,14 @@
    "links": [],
    "outputs": [
     {
-     "label": "The generated plate",
+     "label": "The plate, downscaled to 1216×832",
      "image": {
       "src": "img/qwen-image-2-1/beach-removed-source-1.jpg",
       "thumb": "img/qwen-image-2-1/beach-removed-source-1-t.jpg",
       "w": 1100,
-      "h": 738,
-      "dl": "dl/qwen-image-2-1/beach-removed-source-1.jpg",
-      "bytes": 1024414
+      "h": 753,
+      "dl": "workflows/qwen-image-2-1/inputs/beach_small.png",
+      "bytes": 1610065
      }
     },
     {
@@ -966,6 +1010,10 @@
     "dl": "dl/qwen-image-2-1/beach-replaced.jpg",
     "bytes": 262844
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/beach-replaced.json",
+    "bytes": 2339
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -980,7 +1028,7 @@
     ],
     [
      "References",
-     "2"
+     "1"
     ],
     [
      "Steps",
@@ -988,7 +1036,7 @@
     ],
     [
      "Seed",
-     "21"
+     "663308384156086"
     ],
     [
      "Ran on",
@@ -999,34 +1047,23 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "Place the pail of beer bottles from <image2> onto the sand inside the green circle in <image1>, standing upright on the sand with its base settled into it, at the size it would be at that distance, lit by the same overhead sun and throwing the same short hard shadow to the near side as the other objects in the photograph. Do not render the circle in the output."
+     "text": "Modify the pail so that it is embedded in the sand, and has the appropriate shadow."
     }
    ],
    "notes": [
-    "Two inputs: the cleaned plate and the cut-out. Marking empty sand made the model draw the circle as content, so the final pass carries no mark at all."
+    "The extracted pail was pasted into the cleaned plate first. This one edit then seated it in the sand and gave it a shadow; no circle was used."
    ],
    "links": [],
    "outputs": [
     {
-     "label": "The scene with the pail removed",
+     "label": "The cleaned plate with the pail cut-out pasted in",
      "image": {
       "src": "img/qwen-image-2-1/beach-replaced-source-1.jpg",
       "thumb": "img/qwen-image-2-1/beach-replaced-source-1-t.jpg",
       "w": 1100,
       "h": 753,
-      "dl": "dl/qwen-image-2-1/beach-replaced-source-1.jpg",
-      "bytes": 266803
-     }
-    },
-    {
-     "label": "The extracted pail",
-     "image": {
-      "src": "img/qwen-image-2-1/beach-replaced-source-2.jpg",
-      "thumb": "img/qwen-image-2-1/beach-replaced-source-2-t.jpg",
-      "w": 733,
-      "h": 1100,
-      "dl": "dl/qwen-image-2-1/beach-replaced-source-2.png",
-      "bytes": 737658
+      "dl": "workflows/qwen-image-2-1/inputs/beach_pail_pasted.png",
+      "bytes": 1741310
      }
     },
     {
@@ -1053,6 +1090,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/nine-references.jpg",
     "bytes": 995163
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/nine-references.json",
+    "bytes": 4810
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1110,8 +1151,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-1-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-1.jpg",
-      "bytes": 175458
+      "dl": "workflows/qwen-image-2-1/inputs/id_a.png",
+      "bytes": 1408004
      }
     },
     {
@@ -1121,8 +1162,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-2-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-2.jpg",
-      "bytes": 169670
+      "dl": "workflows/qwen-image-2-1/inputs/id_b.png",
+      "bytes": 1422051
      }
     },
     {
@@ -1132,8 +1173,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-3-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-3.jpg",
-      "bytes": 132725
+      "dl": "workflows/qwen-image-2-1/inputs/id_c.png",
+      "bytes": 1240660
      }
     },
     {
@@ -1143,8 +1184,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-4-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-4.jpg",
-      "bytes": 160977
+      "dl": "workflows/qwen-image-2-1/inputs/id_d.png",
+      "bytes": 1346264
      }
     },
     {
@@ -1154,8 +1195,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-5-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-5.jpg",
-      "bytes": 111928
+      "dl": "workflows/qwen-image-2-1/inputs/id_e.png",
+      "bytes": 1139185
      }
     },
     {
@@ -1165,8 +1206,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-6-t.jpg",
       "w": 753,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-6.jpg",
-      "bytes": 162645
+      "dl": "workflows/qwen-image-2-1/inputs/id_f.png",
+      "bytes": 1402887
      }
     },
     {
@@ -1176,8 +1217,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-7-t.jpg",
       "w": 480,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/nine-references-source-7.jpg",
-      "bytes": 66454
+      "dl": "workflows/qwen-image-2-1/inputs/sofia.png",
+      "bytes": 318714
      }
     },
     {
@@ -1187,8 +1228,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-8-t.jpg",
       "w": 569,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/nine-references-source-8.jpg",
-      "bytes": 102825
+      "dl": "workflows/qwen-image-2-1/inputs/amber-main.png",
+      "bytes": 572850
      }
     },
     {
@@ -1198,8 +1239,8 @@
       "thumb": "img/qwen-image-2-1/nine-references-source-9-t.jpg",
       "w": 821,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/nine-references-source-9.jpg",
-      "bytes": 1063339
+      "dl": "workflows/qwen-image-2-1/inputs/kate.png",
+      "bytes": 7018416
      }
     }
    ]
@@ -1215,6 +1256,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/storyboard.jpg",
     "bytes": 867367
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/storyboard.json",
+    "bytes": 3172
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1268,8 +1313,8 @@
       "thumb": "img/qwen-image-2-1/storyboard-source-1-t.jpg",
       "w": 821,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/storyboard-source-1.jpg",
-      "bytes": 1063339
+      "dl": "workflows/qwen-image-2-1/inputs/kate.png",
+      "bytes": 7018416
      }
     },
     {
@@ -1279,8 +1324,8 @@
       "thumb": "img/qwen-image-2-1/storyboard-source-2-t.jpg",
       "w": 569,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/storyboard-source-2.jpg",
-      "bytes": 102825
+      "dl": "workflows/qwen-image-2-1/inputs/amber-main.png",
+      "bytes": 572850
      }
     }
    ]
@@ -1296,6 +1341,10 @@
     "h": 893,
     "dl": "dl/qwen-image-2-1/turnaround.jpg",
     "bytes": 401156
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/turnaround.json",
+    "bytes": 3465
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1345,8 +1394,8 @@
       "thumb": "img/qwen-image-2-1/turnaround-source-1-t.jpg",
       "w": 480,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/turnaround-source-1.jpg",
-      "bytes": 66454
+      "dl": "workflows/qwen-image-2-1/inputs/sofia.png",
+      "bytes": 318714
      }
     }
    ]
@@ -1362,6 +1411,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/expressions.jpg",
     "bytes": 743379
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/expressions.json",
+    "bytes": 3156
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1409,8 +1462,8 @@
       "thumb": "img/qwen-image-2-1/expressions-source-1-t.jpg",
       "w": 569,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/expressions-source-1.jpg",
-      "bytes": 102825
+      "dl": "workflows/qwen-image-2-1/inputs/amber-main.png",
+      "bytes": 572850
      }
     }
    ]
@@ -1426,6 +1479,10 @@
     "h": 1600,
     "dl": "dl/qwen-image-2-1/tryon.jpg",
     "bytes": 208805
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/tryon.json",
+    "bytes": 3295
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1479,8 +1536,8 @@
       "thumb": "img/qwen-image-2-1/tryon-source-1-t.jpg",
       "w": 480,
       "h": 832,
-      "dl": "dl/qwen-image-2-1/tryon-source-1.jpg",
-      "bytes": 66454
+      "dl": "workflows/qwen-image-2-1/inputs/sofia.png",
+      "bytes": 318714
      }
     },
     {
@@ -1490,7 +1547,7 @@
       "thumb": "img/qwen-image-2-1/tryon-source-2-t.jpg",
       "w": 1100,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/tryon-source-2.png",
+      "dl": "workflows/qwen-image-2-1/inputs/garment_jacket.png",
       "bytes": 2485311
      }
     },
@@ -1501,7 +1558,7 @@
       "thumb": "img/qwen-image-2-1/tryon-source-3-t.jpg",
       "w": 1100,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/tryon-source-3.png",
+      "dl": "workflows/qwen-image-2-1/inputs/garment_skirt.png",
       "bytes": 1739631
      }
     },
@@ -1512,7 +1569,7 @@
       "thumb": "img/qwen-image-2-1/tryon-source-4-t.jpg",
       "w": 1100,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/tryon-source-4.png",
+      "dl": "workflows/qwen-image-2-1/inputs/garment_boots.png",
       "bytes": 1274473
      }
     }
@@ -1529,6 +1586,10 @@
     "h": 800,
     "dl": "dl/qwen-image-2-1/pano-edit.jpg",
     "bytes": 721537
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/pano-edit.json",
+    "bytes": 2563
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1583,8 +1644,8 @@
       "thumb": "img/qwen-image-2-1/pano-edit-source-1-t.jpg",
       "w": 821,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/pano-edit-source-1.jpg",
-      "bytes": 960692
+      "dl": "workflows/qwen-image-2-1/inputs/selfie_source.png",
+      "bytes": 7019724
      }
     }
    ]
@@ -1600,6 +1661,10 @@
     "h": 800,
     "dl": "dl/qwen-image-2-1/pano-t2i.jpg",
     "bytes": 691197
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/pano-t2i.json",
+    "bytes": 2014
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1657,6 +1722,10 @@
     "dl": "dl/qwen-image-2-1/text-magazine.jpg",
     "bytes": 413888
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/text-magazine.json",
+    "bytes": 3490
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -1709,8 +1778,8 @@
       "thumb": "img/qwen-image-2-1/text-magazine-source-1-t.jpg",
       "w": 720,
       "h": 1100,
-      "dl": "dl/qwen-image-2-1/text-magazine-source-1.jpg",
-      "bytes": 184672
+      "dl": "workflows/qwen-image-2-1/inputs/dany.png",
+      "bytes": 1284172
      }
     },
     {
@@ -1738,6 +1807,10 @@
     "dl": "dl/qwen-image-2-1/text-fixed.jpg",
     "bytes": 522186
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/text-fixed.json",
+    "bytes": 3169
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -1760,7 +1833,7 @@
     ],
     [
      "Seed",
-     "21"
+     "1234"
     ],
     [
      "Ran on",
@@ -1791,6 +1864,10 @@
     "dl": "dl/qwen-image-2-1/text-chinese.jpg",
     "bytes": 656258
    },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/text-chinese.json",
+    "bytes": 3128
+   },
    "models": [
     "Qwen-Image 2.1"
    ],
@@ -1813,7 +1890,7 @@
     ],
     [
      "Seed",
-     "21"
+     "1234"
     ],
     [
      "Ran on",
@@ -1841,6 +1918,10 @@
     "h": 816,
     "dl": "dl/qwen-image-2-1/ladder-1-0mp.jpg",
     "bytes": 178063
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/ladder-1-0mp.json",
+    "bytes": 4143
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1874,7 +1955,7 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+     "text": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational."
     }
    ],
    "notes": [
@@ -1893,6 +1974,10 @@
     "h": 1067,
     "dl": "dl/qwen-image-2-1/ladder-2-0mp.jpg",
     "bytes": 372913
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/ladder-2-0mp.json",
+    "bytes": 4144
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1926,7 +2011,7 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+     "text": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational."
     }
    ],
    "notes": [],
@@ -1943,6 +2028,10 @@
     "h": 1079,
     "dl": "dl/qwen-image-2-1/ladder-3-0mp.jpg",
     "bytes": 547298
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/ladder-3-0mp.json",
+    "bytes": 4144
    },
    "models": [
     "Qwen-Image 2.1"
@@ -1976,7 +2065,7 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+     "text": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational."
     }
    ],
    "notes": [],
@@ -1993,6 +2082,10 @@
     "h": 1073,
     "dl": "dl/qwen-image-2-1/ladder-4-3mp.jpg",
     "bytes": 791084
+   },
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1/ladder-4-3mp.json",
+    "bytes": 4144
    },
    "models": [
     "Qwen-Image 2.1"
@@ -2026,7 +2119,7 @@
    "variants": [
     {
      "label": "Prompt",
-     "text": "A deliberately texture-dense close-up, for the resolution ladder.\n\nThe point of this prompt is to put as much fine structure in front of the model as one frame can\nhold — skin pores and freckles, fine flyaway hair in two dye colours, tattoo line work, engraved\nmetal, knitted wool — so that a resolution that cannot resolve detail has somewhere obvious to\nfail. The existing R1 portrait is a good photograph but a soft one, and §36 showed the difference\nbetween 1 MP and 4.3 MP on it is real but needs looking for.\n\nWritten to the PE-T2I spec: one observational paragraph, present tense, describing what is in the\nframe rather than instructing a camera.\n\nNo text anywhere in it, on purpose. §35: a prompt that asks for text it cannot spell out turns the\noutput into an unattributable result, and a tattoo is exactly where lettering would creep in.\n"
+     "text": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational."
     }
    ],
    "notes": [],

@@ -1,0 +1,121 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "dany.png"
+  },
+  "is_changed": [
+   "4d787e184312e87fcb7e684f344990f106918590e5261677daa49806dd6a3076"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical photorealistic fashion magazine cover built on the supplied photograph of a woman with long platinum hair, which is kept exactly as it is: her face, hair, pose, clothing and the warm beige plaster wall behind her are unchanged, and only printed matter is added over the top. Across the top of the cover the masthead \"LOOP FORGE\" is set very large in a heavy condensed white sans-serif, letter-spaced wide and running nearly the full width of the page, with the crown of her hair overlapping the bottom of the letters so the type sits behind her. Tucked into the upper-left corner, small white text reads \"ISSUE 12\" on one line and \"OCTOBER\" beneath it. In the upper-right corner, a short white line reads \"LOCAL AI, WEEKLY\". Down the left edge, in the upper-third below the issue line, a stack of three white cover lines reads \"THE OPEN WEIGHTS ISSUE\" in bold, then \"What 12 GB actually gets you\" in a lighter weight, then \"Forty steps, or twenty?\" in the same lighter weight. In the lower-left corner a single bold white line reads \"BUILT ON ONE DESKTOP\". Across the lower-third on the right, set clear of her figure, a two-line white pull quote reads \"EVERY IMAGE HERE\" above \"RAN ON MY OWN GPU\". In the bottom-right corner sits a small white rectangle holding a black barcode with the digits \"0 12 34567 89\" printed under it. The type is white throughout except the barcode block, the palette is warm beige, black and white, and the overall look is a clean contemporary newsstand cover with crisp, fully legible lettering.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/text-magazine"
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1152,
+   "height": 1760,
+   "batch_size": 1
+  }
+ }
+}

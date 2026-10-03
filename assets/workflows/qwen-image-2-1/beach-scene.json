@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a wide realistic photograph of a sandy beach in the early afternoon, taken from standing height and looking slightly down, with the dry pale sand filling the lower two thirds of the frame and a calm blue-green sea and a clear sky beyond it across the top. A young couple lie sunbathing together on a large striped towel in the centre of the frame, the towel laid flat on the sand and running diagonally away from the viewer. The woman lies on her back on the left of the towel with her eyes closed, wearing a plain coral swimsuit, one knee raised and one forearm resting across her forehead. The man lies on his front on the right of the towel, propped on both elbows and facing away toward the sea, wearing plain navy swim shorts. A folded paperback and a pair of sunglasses lie on the towel between them. Standing upright on the open sand to the left of the towel, about an arm's length clear of it with bare sand visible all the way around its base, is a galvanised metal pail filled with ice and five brown glass beer bottles, the bottles leaning outward at slight angles with their necks above the rim, each bottle carrying a plain cream paper label that is blank and unprinted, and a little condensation running down the outside of the pail. To the right of the towel the sand is open and empty for a similar distance. In the middle distance behind them a scatter of other beachgoers sit under two faded parasols, small and out of focus. The lighting is bright overhead sunlight from slightly behind the viewer, throwing short hard shadows to the near side of the towel and of the pail and putting a hard highlight along the pail's rim. The overall composition is wide and horizontal with the towel across the centre, the palette built from pale sand, coral, navy, galvanised grey and sea blue, and the mood is bright and still.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2528,
+   "height": 1696,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/beach-scene"
+  }
+ }
+}

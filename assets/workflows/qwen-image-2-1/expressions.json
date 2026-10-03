@@ -1,0 +1,121 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "amber-main.png"
+  },
+  "is_changed": [
+   "61a090144e60e3979c405db8bb3c49c07845e831aff8cedf2242f2f672262733"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Turn this into an expression reference sheet. Keep the same young woman, with the same face, the same freckles, the same long curly ginger hair and the same cream t-shirt, and show her head and shoulders twelve times in a grid of four columns and three rows against a plain flat light grey background, the original snowy harbour setting removed entirely. Every portrait is the same size, framed the same way and lit the same way, with flat even studio light from the front, and she faces the camera in all twelve. In each one her facial expression is different. Beneath each portrait, centred, is a single line of small black capitals in a plain sans-serif naming that expression. Reading left to right along the top row the expressions and their labels are “HAPPY”, “SAD”, “ANGRY” and “AFRAID”. Along the middle row they are “SURPRISED”, “DISGUSTED”, “CONFUSED” and “BORED”. Along the bottom row they are “PROUD”, “RELIEVED”, “DETERMINED” and “EMBARRASSED”. The grid is evenly spaced with a narrow even margin around the outside. The overall composition is flat and frontal, the palette built from light grey, cream, freckled skin and ginger hair, and the mood is plain and technical.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/expressions"
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2528,
+   "height": 1696,
+   "batch_size": 1
+  }
+ }
+}

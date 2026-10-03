@@ -1,0 +1,225 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_a.png"
+  },
+  "is_changed": [
+   "9908611bd310ae311d4301c5acc97a203722f431ee9e579823e26320dbd8110d"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Combine the people from <image1> <image2> <image3> <image4> <image5> <image6> <image7> <image8> <image9> into one group photograph. <image4> is the woman in her thirties with dark red curly hair and a plain top <image8> is the young woman in her early twenties with long ginger curls, heavy freckles and a cross pendant. They stand together in two rows in front of a plain pale brick wall, the taller row behind and slightly raised so every face is fully visible, packed shoulder to shoulder and filling the width of the frame. Each person keeps their own face, hair and clothing exactly as it is in their reference image. They all look into the lens with a relaxed expression. The lighting is soft even daylight from the front with no hard shadow. The overall composition is wide and evenly filled, and the mood is plain and friendly. The two women with red hair are different people and must look different from each other, matching their own reference images.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ],
+   "images.image_2": [
+    "load2",
+    0
+   ],
+   "images.image_3": [
+    "load3",
+    0
+   ],
+   "images.image_4": [
+    "load4",
+    0
+   ],
+   "images.image_5": [
+    "load5",
+    0
+   ],
+   "images.image_6": [
+    "load6",
+    0
+   ],
+   "images.image_7": [
+    "load7",
+    0
+   ],
+   "images.image_8": [
+    "load8",
+    0
+   ],
+   "images.image_9": [
+    "load9",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/nine-references"
+  }
+ },
+ "load2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_b.png"
+  },
+  "is_changed": [
+   "42dbde79dc31cae0db12bc9b12e8db47aa705a1c9b9bddd26bd2ad9dab5aec59"
+  ]
+ },
+ "load3": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_c.png"
+  },
+  "is_changed": [
+   "93231b9b0fc7330f7ea9b329a85794b1d0d15f51492b4bb778c3d2901f2cf046"
+  ]
+ },
+ "load4": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_d.png"
+  },
+  "is_changed": [
+   "85e2ac9372b49d6ed64abee8d13be2842043e42c2cfa2db515bc664bb6b922d0"
+  ]
+ },
+ "load5": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_e.png"
+  },
+  "is_changed": [
+   "4087f53972ab732827d2440e8f635f4ab0b9f069401ac13ffd88e5f0c54e098a"
+  ]
+ },
+ "load6": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_f.png"
+  },
+  "is_changed": [
+   "9c8f811526d90289e84079c0fcd858148cecd7b0c5e04797dbe1d2b6653fc89e"
+  ]
+ },
+ "load7": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "sofia.png"
+  },
+  "is_changed": [
+   "d5614bfa6fac23d1bb8b629447899d60d5fcbcf38e906cc7716f89f430c4cd7e"
+  ]
+ },
+ "load8": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "amber-main.png"
+  },
+  "is_changed": [
+   "61a090144e60e3979c405db8bb3c49c07845e831aff8cedf2242f2f672262733"
+  ]
+ },
+ "load9": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "kate.png"
+  },
+  "is_changed": [
+   "6346fa6fc7b7d7cf0292f1699b66cfd8f205176a0dfa485aea9d165f6daa86df"
+  ]
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2528,
+   "height": 1696,
+   "batch_size": 1
+  }
+ }
+}

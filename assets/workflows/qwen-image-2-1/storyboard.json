@@ -1,0 +1,134 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "kate.png"
+  },
+  "is_changed": [
+   "6346fa6fc7b7d7cf0292f1699b66cfd8f205176a0dfa485aea9d165f6daa86df"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Combine the two people from <image1> and <image2> into a four panel storyboard, laid out as a two by two grid with a narrow even white gutter between the panels and a white margin around the outside. Both keep their own face, hair and clothing exactly as in their reference images. All four panels are the same realistic photographic style, the same overcast daylight, and the same railway platform setting with a long canopy and a brick station building behind. Top left: a wide shot of the empty platform with both women small in the distance at the far end, walking toward the camera. Top right: a medium shot of the two of them standing together mid platform, the first woman pointing off to the right while the second looks where she is pointing. Bottom left: a close shot of the second woman alone, head and shoulders, turning to look back over her shoulder. Bottom right: a wide shot from behind them both as they walk away down the platform toward the station building. The mood is quiet and cinematic.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ],
+   "images.image_2": [
+    "load2",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/storyboard"
+  }
+ },
+ "load2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "amber-main.png"
+  },
+  "is_changed": [
+   "61a090144e60e3979c405db8bb3c49c07845e831aff8cedf2242f2f672262733"
+  ]
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 2528,
+   "height": 1696,
+   "batch_size": 1
+  }
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "sofia.png"
+  },
+  "is_changed": [
+   "d5614bfa6fac23d1bb8b629447899d60d5fcbcf38e906cc7716f89f430c4cd7e"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Dress the woman from <image1> in the clothes from the other images: the denim jacket from <image2>, the green pleated skirt from <image3> and the tan ankle boots from <image4>. Keep her face and hair exactly as they are. She stands full length facing the camera in a relaxed neutral pose with her arms at her sides, against a plain flat light grey studio background with no floor line and no cast shadow. The garments fit her naturally, hanging and creasing as real fabric would, lit by the same soft even studio light from the front. The overall composition is a single centred full length figure, and the mood is plain and technical.",
+   "negative_prompt": "",
+   "vae": [
+    "vae",
+    0
+   ],
+   "resolution": 0,
+   "images.image_1": [
+    "load1",
+    0
+   ],
+   "images.image_2": [
+    "load2",
+    0
+   ],
+   "images.image_3": [
+    "load3",
+    0
+   ],
+   "images.image_4": [
+    "load4",
+    0
+   ]
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/tryon"
+  }
+ },
+ "load2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "garment_jacket.png"
+  },
+  "is_changed": [
+   "f6e65b793e30dca4a2f6fed71c3adb8e5aa6227518d006fbdd5fe3a0e2d9933a"
+  ]
+ },
+ "load3": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "garment_skirt.png"
+  },
+  "is_changed": [
+   "a057053012f2540fd0d81e7e9e947e765c03ea221de19716e07e26bf4d230157"
+  ]
+ },
+ "load4": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "garment_boots.png"
+  },
+  "is_changed": [
+   "c9202685726d8e9bbf3d912fe492623b0649daf50cd158d36e92f2ac31a1f2a6"
+  ]
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 1728,
+   "batch_size": 1
+  }
+ }
+}

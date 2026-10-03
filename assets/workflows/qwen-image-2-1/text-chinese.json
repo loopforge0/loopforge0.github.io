@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical realistic photograph of a printed tea-shop menu board mounted flat on a pale wooden wall, the board filling most of the frame with a narrow margin of wall visible on all four sides. The board is matte cream card with a faint paper grain and a thin dark green border running just inside its edge. Across the top of the board a heavy black headline in large Chinese characters reads “青山茶室”, centred on one line. Directly beneath it, in a much lighter weight and about a quarter of the headline's size, a line of black Chinese characters reads “手工烘焙 每日新鲜”. In the centre of the board a tall rectangle of flat deep green holds three lines of white Chinese characters at medium weight, centred, reading “龙井” above “铁观音” above “普洱”. On the right side of the board, running vertically down the margin in small grey Chinese characters, is “营业中”. Across the lower third of the board four short lines of small black Chinese characters are set left-aligned, reading “每日新茶” above “现点现泡” above “外带优惠” above “上午十点开门”. In the lower-left corner a plain dark green circular stamp about the size of a coin carries the white character “茶”. Four small brass screws hold the board, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the card so the grain reads, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from cream, black and deep green, and the mood is plain and calm.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1792,
+   "height": 2400,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1/text-chinese"
+  }
+ }
+}
