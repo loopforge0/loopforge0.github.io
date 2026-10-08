@@ -10,6 +10,7 @@
   "headline": "Open models, tested in the open",
   "lede": "Prompts, ComfyUI workflows and findings from hands-on projects with AI models you can run yourself, published exactly as they ran, with the failures left in.",
   "featured": [
+    "higgsfield-vs-h3",
     "qwen-image-2-1",
     "h3-camera-shots",
     "h3-chained-renders",

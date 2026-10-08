@@ -1,0 +1,400 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+   "type": "ltxv",
+   "device": "default"
+  }
+ },
+ "vae_video": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "ltx-2.5-video-vae-bf16.safetensors"
+  }
+ },
+ "vae_audio": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "ltx-2.5-audio-vae-bf16.safetensors"
+  }
+ },
+ "pos": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "text": "Extreme slow-motion footage from a high-speed camera, every movement stretched out and unhurried. The red-haired young woman runs down the middle of the wet, neon-lit Tokyo street toward the camera. The camera tracks her face, holding it centred, close and in sharp focus while it swings in a smooth arc around her, the glowing signs and red lanterns sliding past behind her. Raindrops hang in the air around her face and burst into fine spray on her freckled cheek, every curl of her copper hair floats apart in the neon light, her arms pump and the cross pendant lifts off her cream t-shirt on its cord. A deep, stretched whoosh and the muffled patter of rain."
+  }
+ },
+ "neg": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "text": ""
+  }
+ },
+ "cond": {
+  "class_type": "LTXVConditioning",
+  "inputs": {
+   "positive": [
+    "pos",
+    0
+   ],
+   "negative": [
+    "neg",
+    0
+   ],
+   "frame_rate": 24.0
+  }
+ },
+ "upscaler_model": {
+  "class_type": "LatentUpscaleModelLoader",
+  "inputs": {
+   "model_name": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors"
+  }
+ },
+ "load_image": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "still14_amber_tokyo.png"
+  }
+ },
+ "resize": {
+  "class_type": "ResizeImageMaskNode",
+  "inputs": {
+   "input": [
+    "load_image",
+    0
+   ],
+   "resize_type": "scale longer dimension",
+   "resize_type.longer_size": 1536,
+   "scale_method": "lanczos"
+  }
+ },
+ "preproc": {
+  "class_type": "LTXVPreprocess",
+  "inputs": {
+   "image": [
+    "resize",
+    0
+   ],
+   "img_compression": 18
+  }
+ },
+ "empty_video": {
+  "class_type": "EmptyLTXVLatentVideo",
+  "inputs": {
+   "width": 960,
+   "height": 544,
+   "length": 121,
+   "batch_size": 1
+  }
+ },
+ "img2vid_1": {
+  "class_type": "LTXVImgToVideoInplace",
+  "inputs": {
+   "vae": [
+    "vae_video",
+    0
+   ],
+   "image": [
+    "preproc",
+    0
+   ],
+   "latent": [
+    "empty_video",
+    0
+   ],
+   "strength": 0.7,
+   "bypass": false
+  }
+ },
+ "empty_audio": {
+  "class_type": "LTXVEmptyLatentAudio",
+  "inputs": {
+   "frames_number": 121,
+   "frame_rate": 24,
+   "batch_size": 1,
+   "audio_vae": [
+    "vae_audio",
+    0
+   ]
+  }
+ },
+ "concat_1": {
+  "class_type": "LTXVConcatAVLatent",
+  "inputs": {
+   "video_latent": [
+    "img2vid_1",
+    0
+   ],
+   "audio_latent": [
+    "empty_audio",
+    0
+   ]
+  }
+ },
+ "noise_1": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 42
+  }
+ },
+ "guider_1": {
+  "class_type": "LTXVDualCFGGuider",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "cond",
+    0
+   ],
+   "negative": [
+    "cond",
+    1
+   ],
+   "video_cfg": 1.0,
+   "audio_cfg": 1.0
+  }
+ },
+ "sampler_sel_1": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler_ancestral"
+  }
+ },
+ "sigmas_1": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "1.0, 0.99375, 0.9875, 0.98125, 0.975, 0.909375, 0.725, 0.421875, 0.0"
+  }
+ },
+ "sample_1": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "noise_1",
+    0
+   ],
+   "guider": [
+    "guider_1",
+    0
+   ],
+   "sampler": [
+    "sampler_sel_1",
+    0
+   ],
+   "sigmas": [
+    "sigmas_1",
+    0
+   ],
+   "latent_image": [
+    "concat_1",
+    0
+   ]
+  }
+ },
+ "sep_1": {
+  "class_type": "LTXVSeparateAVLatent",
+  "inputs": {
+   "av_latent": [
+    "sample_1",
+    0
+   ]
+  }
+ },
+ "noise_2": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 42
+  }
+ },
+ "guider_2": {
+  "class_type": "LTXVDualCFGGuider",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "cond",
+    0
+   ],
+   "negative": [
+    "cond",
+    1
+   ],
+   "video_cfg": 1.0,
+   "audio_cfg": 1.0
+  }
+ },
+ "sampler_sel_2": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler_ancestral"
+  }
+ },
+ "sigmas_2": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "0.85, 0.7250, 0.4219, 0.0"
+  }
+ },
+ "sample_2": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "noise_2",
+    0
+   ],
+   "guider": [
+    "guider_2",
+    0
+   ],
+   "sampler": [
+    "sampler_sel_2",
+    0
+   ],
+   "sigmas": [
+    "sigmas_2",
+    0
+   ],
+   "latent_image": [
+    "concat_2",
+    0
+   ]
+  }
+ },
+ "sep_2": {
+  "class_type": "LTXVSeparateAVLatent",
+  "inputs": {
+   "av_latent": [
+    "sample_2",
+    0
+   ]
+  }
+ },
+ "upsample": {
+  "class_type": "LTXVLatentUpsampler",
+  "inputs": {
+   "samples": [
+    "sep_1",
+    0
+   ],
+   "upscale_model": [
+    "upscaler_model",
+    0
+   ],
+   "vae": [
+    "vae_video",
+    0
+   ]
+  }
+ },
+ "img2vid_2": {
+  "class_type": "LTXVImgToVideoInplace",
+  "inputs": {
+   "vae": [
+    "vae_video",
+    0
+   ],
+   "image": [
+    "preproc",
+    0
+   ],
+   "latent": [
+    "upsample",
+    0
+   ],
+   "strength": 1.0,
+   "bypass": false
+  }
+ },
+ "concat_2": {
+  "class_type": "LTXVConcatAVLatent",
+  "inputs": {
+   "video_latent": [
+    "img2vid_2",
+    0
+   ],
+   "audio_latent": [
+    "sep_1",
+    1
+   ]
+  }
+ },
+ "decode_video": {
+  "class_type": "VAEDecodeTiled",
+  "inputs": {
+   "samples": [
+    "sep_2",
+    0
+   ],
+   "vae": [
+    "vae_video",
+    0
+   ],
+   "tile_size": 512,
+   "overlap": 64,
+   "temporal_size": 64,
+   "temporal_overlap": 16
+  }
+ },
+ "decode_audio": {
+  "class_type": "LTXVAudioVAEDecode",
+  "inputs": {
+   "samples": [
+    "sep_2",
+    1
+   ],
+   "audio_vae": [
+    "vae_audio",
+    0
+   ]
+  }
+ },
+ "create_video": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "decode_video",
+    0
+   ],
+   "fps": 24.0,
+   "audio": [
+    "decode_audio",
+    0
+   ],
+   "bit_depth": 8
+  }
+ },
+ "save": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "create_video",
+    0
+   ],
+   "filename_prefix": "video/ltx-2-5-loras/running-through-tokyo-rain",
+   "format": "mp4",
+   "format.codec": "h264",
+   "format.codec.encoding": "re-encode",
+   "format.codec.encoding.crf": 12.0
+  }
+ }
+}

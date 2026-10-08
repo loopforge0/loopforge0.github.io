@@ -1,0 +1,5803 @@
+{
+ "slug": "ltx-2-5-loras",
+ "title": "LTX 2.5 Creative Lab LoRAs, tested locally",
+ "short": "Fourteen LoRAs and three chains",
+ "published": "2026-10-09",
+ "models": [
+  "LTX 2.5"
+ ],
+ "summary": [
+  "Lightricks has released a set of official LoRAs for LTX 2.5 that add things the base model does not do on its own, from building a shot out of a reference sheet to colouring a black-and-white film. I ran 14 of them in ComfyUI on my own desktop, plus three tests that chain two LoRAs in one generation.",
+  "Each test has a frame from every clip in it, the exact prompt, the workflow that ran and the inputs it was given. 25 of the 31 tests worked, and the other 6 show where a LoRA reached its limit."
+ ],
+ "facts": [
+  [
+   "Base model",
+   "LTX 2.5 22B distilled, int8 (ltx-2.5-22b-distilled-transformer-comfy-int8-convrot)"
+  ],
+  [
+   "Text encoder",
+   "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot"
+  ],
+  [
+   "LoRAs",
+   "14 official Lightricks LoRAs, of which 12 are IC-LoRAs guided by a video or an image"
+  ],
+  [
+   "Clips",
+   "About 5 seconds each, mostly 121 frames at 24fps, at each LoRA's trained size or the largest size that worked"
+  ],
+  [
+   "Render times",
+   "3 to 36 minutes per clip"
+  ],
+  [
+   "Ran on",
+   "My RTX 3060 with 12GB, i5-13400F, 32GB RAM, PyTorch on CUDA 13"
+  ]
+ ],
+ "groups": [
+  {
+   "id": "ingr",
+   "title": "Ingredients"
+  },
+  {
+   "id": "color",
+   "title": "Colorization"
+  },
+  {
+   "id": "slow",
+   "title": "Slow Motion Control"
+  },
+  {
+   "id": "cine",
+   "title": "Cinemagraph"
+  },
+  {
+   "id": "plate",
+   "title": "Clean Plate"
+  },
+  {
+   "id": "night",
+   "title": "Day-to-Night"
+  },
+  {
+   "id": "water",
+   "title": "Water Simulation"
+  },
+  {
+   "id": "decomp",
+   "title": "Decompression"
+  },
+  {
+   "id": "deblur",
+   "title": "Deblur"
+  },
+  {
+   "id": "restore",
+   "title": "Restore"
+  },
+  {
+   "id": "refine",
+   "title": "Refine Details"
+  },
+  {
+   "id": "hdr",
+   "title": "SDR to HDR"
+  },
+  {
+   "id": "alpha",
+   "title": "Alpha Gen"
+  },
+  {
+   "id": "layout",
+   "title": "Layout to Render"
+  },
+  {
+   "id": "chain",
+   "title": "Chained LoRAs"
+  }
+ ],
+ "refs_title": "Inputs",
+ "refs": [
+  {
+   "id": "ingredient_sheet3_subject",
+   "label": "Rooftop sheet",
+   "note": "Ingredients sheet: character, camera and rooftop panels on black",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-ingredient-sheet3-subject.jpg",
+    "thumb": "img/ltx-2-5-loras/in-ingredient-sheet3-subject-t.jpg",
+    "w": 1536,
+    "h": 896,
+    "dl": "workflows/ltx-2-5-loras/inputs/ingredient_sheet3_subject.png",
+    "bytes": 722229
+   }
+  },
+  {
+   "id": "ingredient_sheet3_studio",
+   "label": "Stage sheet",
+   "note": "Ingredients sheet: character, guitar and stage panels on black",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-ingredient-sheet3-studio.jpg",
+    "thumb": "img/ltx-2-5-loras/in-ingredient-sheet3-studio-t.jpg",
+    "w": 1536,
+    "h": 896,
+    "dl": "workflows/ltx-2-5-loras/inputs/ingredient_sheet3_studio.png",
+    "bytes": 702453
+   }
+  },
+  {
+   "id": "ingredient_sheet18_faces",
+   "label": "Two-face sheet",
+   "note": "Two face crops, a guitar and a jazz club, 2×2 on black",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-ingredient-sheet18-faces.jpg",
+    "thumb": "img/ltx-2-5-loras/in-ingredient-sheet18-faces-t.jpg",
+    "w": 1536,
+    "h": 896,
+    "dl": "workflows/ltx-2-5-loras/inputs/ingredient_sheet18_faces.png",
+    "bytes": 662188
+   }
+  },
+  {
+   "id": "colorization2_gray_hd",
+   "label": "Grayscale market",
+   "note": "A generated market clip, desaturated with FFmpeg",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-colorization2-gray-hd.jpg",
+    "thumb": "img/ltx-2-5-loras/in-colorization2-gray-hd-t.jpg",
+    "w": 1152,
+    "h": 640,
+    "dl": "workflows/ltx-2-5-loras/inputs/colorization2_gray_hd.mp4",
+    "bytes": 3742931
+   }
+  },
+  {
+   "id": "bucket1959_gray_121",
+   "label": "A Bucket of Blood",
+   "note": "Roger Corman, 1959. Public domain, via Wikimedia Commons",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-bucket1959-gray-121.jpg",
+    "thumb": "img/ltx-2-5-loras/in-bucket1959-gray-121-t.jpg",
+    "w": 1152,
+    "h": 640,
+    "dl": "workflows/ltx-2-5-loras/inputs/bucket1959_gray_121.mp4",
+    "bytes": 2811660
+   }
+  },
+  {
+   "id": "still14_amber_tokyo",
+   "label": "Tokyo still",
+   "note": "Start still, made with Qwen-Image 2.1",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-still14-amber-tokyo.jpg",
+    "thumb": "img/ltx-2-5-loras/in-still14-amber-tokyo-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/still14_amber_tokyo.png",
+    "bytes": 2904514
+   }
+  },
+  {
+   "id": "still19_dove",
+   "label": "Dove still",
+   "note": "Start still, made with Qwen-Image 2.1",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-still19-dove.jpg",
+    "thumb": "img/ltx-2-5-loras/in-still19-dove-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/still19_dove.png",
+    "bytes": 2290655
+   }
+  },
+  {
+   "id": "char_kate",
+   "label": "Kate",
+   "note": "Character photo",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-char-kate.jpg",
+    "thumb": "img/ltx-2-5-loras/in-char-kate-t.jpg",
+    "w": 1792,
+    "h": 2400,
+    "dl": "workflows/ltx-2-5-loras/inputs/char_kate.png",
+    "bytes": 7200932
+   }
+  },
+  {
+   "id": "char_allie",
+   "label": "Allie",
+   "note": "Character photo",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-char-allie.jpg",
+    "thumb": "img/ltx-2-5-loras/in-char-allie-t.jpg",
+    "w": 554,
+    "h": 832,
+    "dl": "workflows/ltx-2-5-loras/inputs/char_allie.png",
+    "bytes": 507995
+   }
+  },
+  {
+   "id": "still4_autumn",
+   "label": "Autumn tree",
+   "note": "First frame of a clip generated with LTX 2.5",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-still4-autumn.jpg",
+    "thumb": "img/ltx-2-5-loras/in-still4-autumn-t.jpg",
+    "w": 512,
+    "h": 704,
+    "dl": "workflows/ltx-2-5-loras/inputs/still4_autumn.png",
+    "bytes": 636138
+   }
+  },
+  {
+   "id": "src5_crossing_129",
+   "label": "Umbrella clip",
+   "note": "Generated with LTX 2.5, no LoRA. 129 frames at 25fps",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-src5-crossing-129.jpg",
+    "thumb": "img/ltx-2-5-loras/in-src5-crossing-129-t.jpg",
+    "w": 1024,
+    "h": 576,
+    "dl": "workflows/ltx-2-5-loras/inputs/src5_crossing_129.mp4",
+    "bytes": 957601
+   }
+  },
+  {
+   "id": "src4_canal_dolly",
+   "label": "Canal clip",
+   "note": "Generated with LTX 2.5, no LoRA",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-src4-canal-dolly.jpg",
+    "thumb": "img/ltx-2-5-loras/in-src4-canal-dolly-t.jpg",
+    "w": 960,
+    "h": 544,
+    "dl": "workflows/ltx-2-5-loras/inputs/src4_canal_dolly.mp4",
+    "bytes": 1560772
+   }
+  },
+  {
+   "id": "src2_day_park_hd",
+   "label": "Park clip",
+   "note": "Generated with LTX 2.5, no LoRA",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-src2-day-park-hd.jpg",
+    "thumb": "img/ltx-2-5-loras/in-src2-day-park-hd-t.jpg",
+    "w": 1152,
+    "h": 640,
+    "dl": "workflows/ltx-2-5-loras/inputs/src2_day_park_hd.mp4",
+    "bytes": 1925297
+   }
+  },
+  {
+   "id": "src13_sandbox_two",
+   "label": "Sandbox clip",
+   "note": "Generated with LTX 2.5, no LoRA",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-src13-sandbox-two.jpg",
+    "thumb": "img/ltx-2-5-loras/in-src13-sandbox-two-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/src13_sandbox_two.mp4",
+    "bytes": 10501267
+   }
+  },
+  {
+   "id": "src2_dry_stairs_hd",
+   "label": "Stairs clip",
+   "note": "Generated with LTX 2.5, no LoRA",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-src2-dry-stairs-hd.jpg",
+    "thumb": "img/ltx-2-5-loras/in-src2-dry-stairs-hd-t.jpg",
+    "w": 1152,
+    "h": 640,
+    "dl": "workflows/ltx-2-5-loras/inputs/src2_dry_stairs_hd.mp4",
+    "bytes": 783869
+   }
+  },
+  {
+   "id": "decompression2_blocky_960",
+   "label": "Blocky market",
+   "note": "A generated market clip, re-encoded at 120 kbps",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-decompression2-blocky-960.jpg",
+    "thumb": "img/ltx-2-5-loras/in-decompression2-blocky-960-t.jpg",
+    "w": 960,
+    "h": 544,
+    "dl": "workflows/ltx-2-5-loras/inputs/decompression2_blocky_960.mp4",
+    "bytes": 74864
+   }
+  },
+  {
+   "id": "superman1941_4x3_896_161",
+   "label": "Superman",
+   "note": "Fleischer Studios, 1941. Public domain, via the Internet Archive. Scaled to 896×672",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-superman1941-4x3-896-161.jpg",
+    "thumb": "img/ltx-2-5-loras/in-superman1941-4x3-896-161-t.jpg",
+    "w": 896,
+    "h": 672,
+    "dl": "workflows/ltx-2-5-loras/inputs/superman1941_4x3_896_161.mp4",
+    "bytes": 8434220
+   }
+  },
+  {
+   "id": "pexels_854040_blur_161_1536",
+   "label": "Clowns walking",
+   "note": "By Coverr on Pexels, Pexels License. First 161 frames, scaled to 1536×864",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-pexels-854040-blur-161-1536.jpg",
+    "thumb": "img/ltx-2-5-loras/in-pexels-854040-blur-161-1536-t.jpg",
+    "w": 1536,
+    "h": 864,
+    "dl": "workflows/ltx-2-5-loras/inputs/pexels_854040_blur_161_1536.mp4",
+    "bytes": 4375326
+   }
+  },
+  {
+   "id": "npc74_blur_a_161",
+   "label": "Japanese Bride School",
+   "note": "US Navy, 1956, National Archives 75330. Public domain, via the Internet Archive",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-npc74-blur-a-161.jpg",
+    "thumb": "img/ltx-2-5-loras/in-npc74-blur-a-161-t.jpg",
+    "w": 960,
+    "h": 544,
+    "dl": "workflows/ltx-2-5-loras/inputs/npc74_blur_a_161.mp4",
+    "bytes": 2748242
+   }
+  },
+  {
+   "id": "restore26_market_st_1906",
+   "label": "A Trip Down Market Street",
+   "note": "Miles Brothers, 1906. Public domain, via the Internet Archive. 640×480",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-restore26-market-st-1906.jpg",
+    "thumb": "img/ltx-2-5-loras/in-restore26-market-st-1906-t.jpg",
+    "w": 640,
+    "h": 480,
+    "dl": "workflows/ltx-2-5-loras/inputs/restore26_market_st_1906.mp4",
+    "bytes": 2187323
+   }
+  },
+  {
+   "id": "hdr27_diana_creek",
+   "label": "Diana Creek",
+   "note": "By Extemporalist, CC0, via Wikimedia Commons",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-hdr27-diana-creek.jpg",
+    "thumb": "img/ltx-2-5-loras/in-hdr27-diana-creek-t.jpg",
+    "w": 1280,
+    "h": 720,
+    "dl": "workflows/ltx-2-5-loras/inputs/hdr27_diana_creek.mp4",
+    "bytes": 20836367
+   }
+  },
+  {
+   "id": "alpha25_run",
+   "label": "Tokyo run",
+   "note": "The Slow Motion LoRA result from this project",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-alpha25-run.jpg",
+    "thumb": "img/ltx-2-5-loras/in-alpha25-run-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/alpha25_run.mp4",
+    "bytes": 6235668
+   }
+  },
+  {
+   "id": "alpha25_kate",
+   "label": "Kate portrait",
+   "note": "The Cinemagraph LoRA result from this project",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-alpha25-kate.jpg",
+    "thumb": "img/ltx-2-5-loras/in-alpha25-kate-t.jpg",
+    "w": 768,
+    "h": 1024,
+    "dl": "workflows/ltx-2-5-loras/inputs/alpha25_kate.mp4",
+    "bytes": 3741847
+   }
+  },
+  {
+   "id": "layout28_plaza_clay",
+   "label": "Clay layout",
+   "note": "Rendered in Blender from primitives with clay shading",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-layout28-plaza-clay.jpg",
+    "thumb": "img/ltx-2-5-loras/in-layout28-plaza-clay-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/layout28_plaza_clay.mp4",
+    "bytes": 9024299
+   }
+  },
+  {
+   "id": "layout28_look",
+   "label": "Look still",
+   "note": "Qwen-Image 2.1 edit of the layout's first frame, with a character photo",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-layout28-look.jpg",
+    "thumb": "img/ltx-2-5-loras/in-layout28-look-t.jpg",
+    "w": 1920,
+    "h": 1088,
+    "dl": "workflows/ltx-2-5-loras/inputs/layout28_look.png",
+    "bytes": 4198337
+   }
+  },
+  {
+   "id": "restore5_gray_blocky_960",
+   "label": "Grayscale, blocky market",
+   "note": "A generated market clip, grayscale and at 120 kbps",
+   "image": {
+    "src": "img/ltx-2-5-loras/in-restore5-gray-blocky-960.jpg",
+    "thumb": "img/ltx-2-5-loras/in-restore5-gray-blocky-960-t.jpg",
+    "w": 960,
+    "h": 544,
+    "dl": "workflows/ltx-2-5-loras/inputs/restore5_gray_blocky_960.mp4",
+    "bytes": 73285
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "LTX 2.5 on Hugging Face",
+   "url": "https://huggingface.co/Lightricks/LTX-2.5"
+  },
+  {
+   "label": "ComfyUI-LTXVideo, the LTX nodes and the official workflows",
+   "url": "https://github.com/Lightricks/ComfyUI-LTXVideo"
+  },
+  {
+   "label": "ComfyUI",
+   "url": "https://github.com/comfyanonymous/ComfyUI"
+  },
+  {
+   "label": "Footage: A Bucket of Blood (Roger Corman, 1959), public domain, on Wikimedia Commons",
+   "url": "https://commons.wikimedia.org/wiki/File:A_Bucket_of_Blood_(1959)_by_Roger_Corman_2.webm"
+  },
+  {
+   "label": "Footage: Superman (Fleischer Studios, 1941), public domain, on the Internet Archive",
+   "url": "https://archive.org/details/superman_1941"
+  },
+  {
+   "label": "Footage: Clowns walking, by Coverr on Pexels, Pexels License",
+   "url": "https://www.pexels.com/video/clowns-walking-854040/"
+  },
+  {
+   "label": "Footage: Japanese Bride School, Yokosuka, Japan (US Navy, 1956), public domain, on the Internet Archive",
+   "url": "https://archive.org/details/NPC-74"
+  },
+  {
+   "label": "Footage: A Trip Down Market Street Before the Fire (Miles Brothers, 1906), public domain, on the Internet Archive",
+   "url": "https://archive.org/details/TripDown1905"
+  },
+  {
+   "label": "Footage: Golden hour rays break through mist on Diana Creek, by Extemporalist, CC0, on Wikimedia Commons",
+   "url": "https://commons.wikimedia.org/wiki/File:Golden_hour_rays_break_through_mist_on_Diana_Creek.webm"
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "character-prop-and-location",
+   "title": "Character, prop and location",
+   "code": "Works",
+   "group": "ingr",
+   "still": {
+    "src": "img/ltx-2-5-loras/character-prop-and-location-2.jpg",
+    "thumb": "img/ltx-2-5-loras/character-prop-and-location-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Reference sheet",
+     "image": {
+      "src": "img/ltx-2-5-loras/character-prop-and-location-1.jpg",
+      "thumb": "img/ltx-2-5-loras/character-prop-and-location-1-t.jpg",
+      "w": 1536,
+      "h": 896
+     }
+    },
+    {
+     "label": "Ingredients LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/character-prop-and-location-2.jpg",
+      "thumb": "img/ltx-2-5-loras/character-prop-and-location-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/character-prop-and-location.json",
+    "bytes": 5796
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Ingredients"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Ingredients at 1.4"
+    ],
+    [
+     "Output",
+     "960×544, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral_cfg_pp"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "12 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.4 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference sheet",
+     "ref": "ingredient_sheet3_subject"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference sheet: a portrait photo of a young woman with shoulder-length dark hair streaked pink and blue, large gold hoop earrings, a small tattoo on her neck and a beige knitted sweater; a product photo of a vintage yellow 35mm film camera with a black strap; a plain photo of an empty rooftop terrace with a brick parapet, potted olive trees and a city skyline. Generated video: the same woman is standing on the rooftop terrace at golden hour, lifting the yellow film camera to her eye, taking a photo of the skyline and then lowering it with a small smile toward the camera, in a static medium shot with a light breeze and distant traffic below."
+    },
+    {
+     "label": "Negative",
+     "text": "worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The woman, her yellow camera and the rooftop each come from a separate panel of the sheet, and they end up together in a new moving shot."
+   },
+   "notes": [
+    "The sheet follows the Lightricks demo layout: a 1536×896 black canvas, 16 px gutters and plain photo panels. Keeping to that sizing and those margins gave me better results."
+   ],
+   "links": [
+    {
+     "label": "The Ingredients LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/character-prop-and-location.zip",
+     "bytes": 725256
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 33
+  },
+  {
+   "slug": "guitarist-on-a-stage",
+   "title": "Guitarist on a stage",
+   "code": "Works",
+   "group": "ingr",
+   "still": {
+    "src": "img/ltx-2-5-loras/guitarist-on-a-stage-2.jpg",
+    "thumb": "img/ltx-2-5-loras/guitarist-on-a-stage-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Reference sheet",
+     "image": {
+      "src": "img/ltx-2-5-loras/guitarist-on-a-stage-1.jpg",
+      "thumb": "img/ltx-2-5-loras/guitarist-on-a-stage-1-t.jpg",
+      "w": 1536,
+      "h": 896
+     }
+    },
+    {
+     "label": "Ingredients LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/guitarist-on-a-stage-2.jpg",
+      "thumb": "img/ltx-2-5-loras/guitarist-on-a-stage-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/guitarist-on-a-stage.json",
+    "bytes": 5639
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Ingredients"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Ingredients at 1.4"
+    ],
+    [
+     "Output",
+     "960×544, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral_cfg_pp"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "12 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference sheet",
+     "ref": "ingredient_sheet3_studio"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference sheet: a portrait photo of a woman with a straight dark bob and a light beige crew-neck sweater; a product photo of a red electric guitar with a white pickguard; a plain photo of a small empty jazz-club stage with a red velvet curtain and a microphone stand. Generated video: the same woman is standing on the jazz-club stage under a warm spotlight, strumming the red electric guitar slowly and nodding along, in a static medium shot with the guitar chords ringing softly in the quiet room."
+    },
+    {
+     "label": "Negative",
+     "text": "worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The woman, the red guitar and the curtained stage with its piano are each taken from their own panel. LTX 2.5 generates audio as well, so the clip comes with sound that fits the scene."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Ingredients LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/guitarist-on-a-stage.zip",
+     "bytes": 705369
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 49
+  },
+  {
+   "slug": "two-characters-from-one-sheet",
+   "title": "Two characters from one sheet",
+   "code": "Limit",
+   "group": "ingr",
+   "still": {
+    "src": "img/ltx-2-5-loras/two-characters-from-one-sheet-2.jpg",
+    "thumb": "img/ltx-2-5-loras/two-characters-from-one-sheet-2-t.jpg",
+    "w": 768,
+    "h": 448
+   },
+   "outputs": [
+    {
+     "label": "Reference sheet",
+     "image": {
+      "src": "img/ltx-2-5-loras/two-characters-from-one-sheet-1.jpg",
+      "thumb": "img/ltx-2-5-loras/two-characters-from-one-sheet-1-t.jpg",
+      "w": 1536,
+      "h": 896
+     }
+    },
+    {
+     "label": "Ingredients LoRA, 1.4",
+     "image": {
+      "src": "img/ltx-2-5-loras/two-characters-from-one-sheet-2.jpg",
+      "thumb": "img/ltx-2-5-loras/two-characters-from-one-sheet-2-t.jpg",
+      "w": 768,
+      "h": 448
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/two-characters-from-one-sheet.json",
+    "bytes": 6289
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Ingredients"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Ingredients at 1.4"
+    ],
+    [
+     "Output",
+     "768×448, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral_cfg_pp"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "3 min"
+    ],
+    [
+     "Peak VRAM",
+     "9.8 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference sheet",
+     "ref": "ingredient_sheet18_faces"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference sheet: Top Row Left (Character): a close-up of a young woman's face with long, voluminous curly copper-red hair, freckles across her nose and cheeks and grey-blue eyes. Top Row Right (Character): a close-up of a smiling young woman's face with long, voluminous curly dark-brown hair and dark eyes. Bottom Row Left (Prop): a red electric guitar with a white pickguard and a maple neck. Bottom Row Right (Setting): a small, empty jazz-club stage with a red velvet curtain, a wooden floor, a microphone stand and an upright piano. Generated video: On the small jazz-club stage in front of the red velvet curtain, the young woman with curly copper-red hair and freckles, wearing a cream t-shirt and blue jeans, stands on the left playing the red electric guitar with the white pickguard. On the right, the smiling young woman with long curly dark-brown hair, wearing a white crop top and cream trousers, sings into the microphone on its stand. They turn to smile at each other as they play, in a steady medium shot that shows both of them from the knees up, with warm stage lights on them and the upright piano behind. The sound is the electric guitar and her singing voice filling the small room."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "I put two faces on one sheet to see whether both would hold. The scene, the guitar and the outfits came through. The guitarist's face stays hidden behind her hair, the singer does not clearly match the woman on the sheet, and her freckles turn into red marks on her arm."
+   },
+   "notes": [
+    "This run used large face panels, the prompt format from the model card and the outfits described in the prompt."
+   ],
+   "links": [
+    {
+     "label": "The Ingredients LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/two-characters-from-one-sheet.zip",
+     "bytes": 665364
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 68
+  },
+  {
+   "slug": "the-sheet-comes-through",
+   "title": "The sheet comes through",
+   "code": "Limit",
+   "group": "ingr",
+   "still": {
+    "src": "img/ltx-2-5-loras/the-sheet-comes-through-2.jpg",
+    "thumb": "img/ltx-2-5-loras/the-sheet-comes-through-2-t.jpg",
+    "w": 768,
+    "h": 448
+   },
+   "outputs": [
+    {
+     "label": "Reference sheet",
+     "image": {
+      "src": "img/ltx-2-5-loras/the-sheet-comes-through-1.jpg",
+      "thumb": "img/ltx-2-5-loras/the-sheet-comes-through-1-t.jpg",
+      "w": 1536,
+      "h": 896
+     }
+    },
+    {
+     "label": "Ingredients 1.4 + Slow Motion",
+     "image": {
+      "src": "img/ltx-2-5-loras/the-sheet-comes-through-2.jpg",
+      "thumb": "img/ltx-2-5-loras/the-sheet-comes-through-2-t.jpg",
+      "w": 768,
+      "h": 448
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/the-sheet-comes-through.json",
+    "bytes": 6430
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Ingredients"
+   ],
+   "facts": [
+    [
+     "LoRAs",
+     "Ingredients at 1.4 and Slow Motion Control at 1.0"
+    ],
+    [
+     "Output",
+     "768×448, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral_cfg_pp"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "3 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.0 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference sheet",
+     "ref": "ingredient_sheet3_subject"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference sheet: Top Row Left (Character): a portrait photo of a young woman with shoulder-length dark hair streaked pink and blue, large gold hoop earrings, a small leaf tattoo on her neck and a beige knitted sweater. Top Row Right (Prop): a chunky, boxy bright-yellow camera with a round lens and a textured grille on its side. Bottom Row Left (Setting): an empty rooftop terrace with a brick parapet, potted olive trees, string lights and a city skyline. Generated video: On the rooftop terrace at golden hour, the young woman with pink-and-blue streaked hair and gold hoop earrings, wearing the beige knitted sweater, faces the lens holding the chunky bright-yellow camera up to her right eye with both hands. She presses the shutter, then slowly lowers the camera to her chest with both hands still on it, and looks straight into the lens with a small smile as a breeze lifts her streaked hair. Static medium shot from the waist up, the brick parapet and olive trees behind her. The sound is the click of the shutter, a light breeze and distant traffic."
+    },
+    {
+     "label": "Negative",
+     "text": "worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "The sheet is clean and evenly spaced with one character on it, and the output still reproduces the sheet panel by panel. When this happened, a small prompt change and a new seed usually cleared it."
+   },
+   "notes": [
+    "This run also had the Slow Motion LoRA chained in. The same failure shows up in the chaining tests at the end of the page."
+   ],
+   "links": [
+    {
+     "label": "The Ingredients LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients"
+    },
+    {
+     "label": "The Slow Motion Control LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/the-sheet-comes-through.zip",
+     "bytes": 725492
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control/resolve/main/ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "bytes": 654474448,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 86
+  },
+  {
+   "slug": "grayscale-market",
+   "title": "Grayscale market",
+   "code": "Works",
+   "group": "color",
+   "still": {
+    "src": "img/ltx-2-5-loras/grayscale-market-3.jpg",
+    "thumb": "img/ltx-2-5-loras/grayscale-market-3-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "Grayscale input",
+     "image": {
+      "src": "img/ltx-2-5-loras/grayscale-market-1.jpg",
+      "thumb": "img/ltx-2-5-loras/grayscale-market-1-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Original colour",
+     "image": {
+      "src": "img/ltx-2-5-loras/grayscale-market-2.jpg",
+      "thumb": "img/ltx-2-5-loras/grayscale-market-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Colorization LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/grayscale-market-3.jpg",
+      "thumb": "img/ltx-2-5-loras/grayscale-market-3-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/grayscale-market.json",
+    "bytes": 5938
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Colorization"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Colorization at 1.0"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "10 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.0 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "colorization2_gray_hd"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a market stall under a striped awning where a bearded vendor in an apron is arranging fruit in wooden crates while a customer in a headscarf reaches for lemons, with a busy market crowd behind, rendered in monochrome under soft daylight. Edited shows the same scene with natural colors restored. COLORIZE a green and white striped awning, bright orange oranges, red apples and yellow bananas in pale wooden crates, the vendor in a blue apron with a grey beard, the customer in a dark red headscarf and coat, warm natural skin tones and a muted colorful crowd behind. Subject identity, framing, and background geometry are identical to the reference; only color information differs between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "I took a generated market clip, turned it grayscale and gave that to the LoRA. The colours it picked for the fruit, the vegetables, the awning and the clothes came out close to the original."
+   },
+   "notes": [
+    "The trigger is COLORIZE. The colours you name in the prompt are the colours you get."
+   ],
+   "links": [
+    {
+     "label": "The Colorization LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/grayscale-market.zip",
+     "bytes": 3745912
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Colorization",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization/resolve/main/ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 114
+  },
+  {
+   "slug": "a-bucket-of-blood-1959",
+   "title": "A Bucket of Blood, 1959",
+   "code": "Works",
+   "group": "color",
+   "still": {
+    "src": "img/ltx-2-5-loras/a-bucket-of-blood-1959-2.jpg",
+    "thumb": "img/ltx-2-5-loras/a-bucket-of-blood-1959-2-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "1959 film",
+     "image": {
+      "src": "img/ltx-2-5-loras/a-bucket-of-blood-1959-1.jpg",
+      "thumb": "img/ltx-2-5-loras/a-bucket-of-blood-1959-1-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Colorization LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/a-bucket-of-blood-1959-2.jpg",
+      "thumb": "img/ltx-2-5-loras/a-bucket-of-blood-1959-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/a-bucket-of-blood-1959.json",
+    "bytes": 6289
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Colorization"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Colorization at 1.0"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "5 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.3 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "bucket1959_gray_121"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a cluttered 1950s bohemian apartment where a smiling young woman with wavy shoulder-length hair, in a fitted cardigan, a wide belt and a dark skirt, holds a wicker handbag beside a grinning young man in a dark sweater and jeans, while a man in a dark suit with a cane stands by the doorway behind them and a tall sculpture draped in a sheet fills the right of the frame, rendered in monochrome film. Edited shows the same scene with natural colors restored. COLORIZE the woman with strawberry-blonde hair in a dusty-rose cardigan, a black leather belt and a charcoal skirt with a pale straw handbag, the young man with light-brown hair in a navy sweater and faded blue jeans, the man by the door in a black suit, an off-white canvas sheet over the sculpture, pale sage-green walls and cream doors, a warm yellow lampshade glowing above a dark wooden dresser, a worn red patterned sofa and warm natural skin tones. Subject identity, framing, and background geometry are identical to the reference; only color information differs between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This is a real black-and-white film, so there is no colour original to check against. Every colour I named in the prompt lands, from the dusty-rose cardigan to the yellow lampshade, and the faces hold through the shot. The cane comes out red without being asked for."
+   },
+   "notes": [
+    "The film's own soundtrack is put back on the result after generation."
+   ],
+   "links": [
+    {
+     "label": "The Colorization LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization"
+    },
+    {
+     "label": "Source footage: A Bucket of Blood (Roger Corman, 1959), public domain, on Wikimedia Commons",
+     "url": "https://commons.wikimedia.org/wiki/File:A_Bucket_of_Blood_(1959)_by_Roger_Corman_2.webm"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/a-bucket-of-blood-1959.zip",
+     "bytes": 2814856
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Colorization",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization/resolve/main/ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 137
+  },
+  {
+   "slug": "running-through-tokyo-rain",
+   "title": "Running through Tokyo rain",
+   "code": "Works",
+   "group": "slow",
+   "still": {
+    "src": "img/ltx-2-5-loras/running-through-tokyo-rain-3.jpg",
+    "thumb": "img/ltx-2-5-loras/running-through-tokyo-rain-3-t.jpg",
+    "w": 1920,
+    "h": 1088
+   },
+   "outputs": [
+    {
+     "label": "Start still",
+     "image": {
+      "src": "img/ltx-2-5-loras/running-through-tokyo-rain-1.jpg",
+      "thumb": "img/ltx-2-5-loras/running-through-tokyo-rain-1-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "No LoRA, slow motion in the prompt",
+     "image": {
+      "src": "img/ltx-2-5-loras/running-through-tokyo-rain-2.jpg",
+      "thumb": "img/ltx-2-5-loras/running-through-tokyo-rain-2-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Slow Motion LoRA, speed 0.2",
+     "image": {
+      "src": "img/ltx-2-5-loras/running-through-tokyo-rain-3.jpg",
+      "thumb": "img/ltx-2-5-loras/running-through-tokyo-rain-3-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/running-through-tokyo-rain.json",
+    "bytes": 7446
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Slow Motion Control"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Slow Motion Control at 1.0"
+    ],
+    [
+     "Output",
+     "1920×1088, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 + 3 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "5 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.6 GiB"
+    ],
+    [
+     "No LoRA run",
+     "Same graph without the LoRA, seed 42, 6 min"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "still14_amber_tokyo"
+    }
+   ],
+   "variants": [
+    {
+     "label": "With the LoRA",
+     "text": "A medium close-up at night follows a young woman with long, curly copper-red hair and freckles as she runs down the middle of a narrow, wet Tokyo side street toward the camera, wearing a cream t-shirt and a bronze cross pendant on a long cord. Her arms pump, her curls bounce and swing around her face with each stride, and the pendant swings against her t-shirt. Light rain falls through the street, landing on her face and hair. The camera tracks her face, keeping it centred and in focus while it moves in a smooth arc around her, and the glowing neon signs, red paper lanterns and lit shop fronts behind her slide past, their pink, blue and amber light reflecting on the wet asphalt. The soundscape is her footsteps slapping on the wet street, her breathing, the patter of rain and the distant hum of the city, rendered with crisp high-resolution detail and moody, neon-lit cinematic colour."
+    },
+    {
+     "label": "No LoRA",
+     "text": "Extreme slow-motion footage from a high-speed camera, every movement stretched out and unhurried. The red-haired young woman runs down the middle of the wet, neon-lit Tokyo street toward the camera. The camera tracks her face, holding it centred, close and in sharp focus while it swings in a smooth arc around her, the glowing signs and red lanterns sliding past behind her. Raindrops hang in the air around her face and burst into fine spray on her freckled cheek, every curl of her copper hair floats apart in the neon light, her arms pump and the cross pendant lifts off her cream t-shirt on its cord. A deep, stretched whoosh and the muffled patter of rain."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The LoRA clip uses a plain caption of a normal-speed run, as the model card asks, and speed 0.2 alone slows it down. The clip without the LoRA has slow motion written into the prompt instead. That one runs faster and the effect comes and goes, while the LoRA holds it steady through the shot."
+   },
+   "notes": [
+    "Speed is set through the conditioning frame rate, which is 24 divided by the speed, so 120 here. Playback stays at 24fps. There is no trigger word."
+   ],
+   "links": [
+    {
+     "label": "Download the workflow without the LoRA (json)",
+     "url": "/assets/workflows/ltx-2-5-loras/running-through-tokyo-rain-no-lora.json"
+    },
+    {
+     "label": "The Slow Motion Control LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/running-through-tokyo-rain.zip",
+     "bytes": 2909610
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "folder": "latent_upscale_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "bytes": 995778752,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control/resolve/main/ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "bytes": 654474448,
+      "gated": true
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 156
+  },
+  {
+   "slug": "dove-in-flight",
+   "title": "Dove in flight",
+   "code": "Works",
+   "group": "slow",
+   "still": {
+    "src": "img/ltx-2-5-loras/dove-in-flight-3.jpg",
+    "thumb": "img/ltx-2-5-loras/dove-in-flight-3-t.jpg",
+    "w": 1920,
+    "h": 1088
+   },
+   "outputs": [
+    {
+     "label": "Start still",
+     "image": {
+      "src": "img/ltx-2-5-loras/dove-in-flight-1.jpg",
+      "thumb": "img/ltx-2-5-loras/dove-in-flight-1-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "No LoRA, slow motion in the prompt",
+     "image": {
+      "src": "img/ltx-2-5-loras/dove-in-flight-2.jpg",
+      "thumb": "img/ltx-2-5-loras/dove-in-flight-2-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Slow Motion LoRA, speed 0.2",
+     "image": {
+      "src": "img/ltx-2-5-loras/dove-in-flight-3.jpg",
+      "thumb": "img/ltx-2-5-loras/dove-in-flight-3-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/dove-in-flight.json",
+    "bytes": 7285
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Slow Motion Control"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Slow Motion Control at 1.0"
+    ],
+    [
+     "Output",
+     "1920×1088, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 + 3 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "6 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.7 GiB"
+    ],
+    [
+     "No LoRA run",
+     "Same graph without the LoRA, seed 42, 6 min"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "still19_dove"
+    }
+   ],
+   "variants": [
+    {
+     "label": "With the LoRA",
+     "text": "A side-on medium shot follows a white dove flying from left to right low over a sunlit park in the early morning, the trees and grass behind it soft and out of focus. The dove beats its wings: they sweep down from high above its back, the long white flight feathers bending and spreading apart as they push against the air, then fold and rise again for the next stroke, while its fanned tail tilts and its head stays level, its eye fixed ahead. Low golden sunlight shines through the edges of the feathers and rims the bird in light; the camera pans smoothly with the dove to keep it in the frame. The soundscape is the soft, rhythmic whoosh of wing beats and birdsong in a quiet park, rendered with crisp high-resolution detail and warm natural colour."
+    },
+    {
+     "label": "No LoRA",
+     "text": "Extreme slow-motion footage from a high-speed camera, every movement stretched out and unhurried. A side-on medium shot follows a white dove flying from left to right low over a sunlit park in the early morning, the trees and grass behind it soft and out of focus. The dove beats its wings: they sweep down from high above its back, the long white flight feathers bending and spreading apart as they push against the air, then fold and rise again for the next stroke, while its fanned tail tilts and its head stays level, its eye fixed ahead. Low golden sunlight shines through the edges of the feathers and rims the bird in light; the camera pans smoothly with the dove to keep it in the frame. The soundscape is the soft, rhythmic whoosh of wing beats and birdsong in a quiet park, rendered with crisp high-resolution detail and warm natural colour."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Both clips have the same start still and the same caption. Without the LoRA the wings beat faster and the feather tips blur. With it each frame moves a little, and the flight feathers stay sharp and separate through the stroke."
+   },
+   "notes": [
+    "The clip without the LoRA mixed slow wings with a neck moving at normal speed, which looked unnatural to me."
+   ],
+   "links": [
+    {
+     "label": "Download the workflow without the LoRA (json)",
+     "url": "/assets/workflows/ltx-2-5-loras/dove-in-flight-no-lora.json"
+    },
+    {
+     "label": "The Slow Motion Control LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/dove-in-flight.zip",
+     "bytes": 2295669
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "folder": "latent_upscale_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "bytes": 995778752,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control/resolve/main/ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "bytes": 654474448,
+      "gated": true
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 187
+  },
+  {
+   "slug": "portrait-hair-in-the-breeze",
+   "title": "Portrait, hair in the breeze",
+   "code": "Works",
+   "group": "cine",
+   "still": {
+    "src": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-3.jpg",
+    "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-3-t.jpg",
+    "w": 768,
+    "h": 1024
+   },
+   "outputs": [
+    {
+     "label": "Still",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-1.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-1-t.jpg",
+      "w": 1792,
+      "h": 2400
+     }
+    },
+    {
+     "label": "No LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-2.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-2-t.jpg",
+      "w": 768,
+      "h": 1024
+     }
+    },
+    {
+     "label": "Cinemagraph LoRA, 1.5, card-style prompt",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-3.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-breeze-3-t.jpg",
+      "w": 768,
+      "h": 1024
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/portrait-hair-in-the-breeze.json",
+    "bytes": 5117
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Cinemagraph"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Cinemagraph at 1.5"
+    ],
+    [
+     "Output",
+     "768×1024, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "6 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.5 GiB"
+    ],
+    [
+     "No LoRA run",
+     "Same graph without the LoRA, seed 42, 6 min"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "char_kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "With the LoRA",
+     "text": "CINEMAGRAPH_MOTION, tripod locked-off static camera, zero camera movement, the woman is frozen, her face, eyes, smile, head, knitted sweater, the bookshelves and the window remain completely frozen, only a few loose strands of her wavy brown hair sway gently in a soft breeze, everything else stays perfectly still, seamless natural loop."
+    },
+    {
+     "label": "No LoRA",
+     "text": "CINEMAGRAPH_MOTION, tripod locked-off static camera, zero camera movement, only the loose strands of her wavy brown hair sway gently in a soft breeze, her face, eyes, smile, knitted sweater and the bookshelves and window behind her stay perfectly still, seamless natural loop"
+    },
+    {
+     "label": "Negative",
+     "text": "camera movement, pan, tilt, zoom, parallax, whole image moving, background sliding, person moving, face moving, flicker on entire image, noisy texture, crawling texture, distorted, blurry, low quality"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Only a few strands of hair move and the head stays still. I could not get this without the LoRA, whatever I changed in the prompt."
+   },
+   "notes": [
+    "Writing the prompt in the card's order, with what is frozen first and then what moves, made the face slightly stiller than my first prompt did. The trigger is CINEMAGRAPH_MOTION, at strength 1.5."
+   ],
+   "links": [
+    {
+     "label": "Download the workflow without the LoRA (json)",
+     "url": "/assets/workflows/ltx-2-5-loras/portrait-hair-in-the-breeze-no-lora.json"
+    },
+    {
+     "label": "The Cinemagraph LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/portrait-hair-in-the-breeze.zip",
+     "bytes": 7205319
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Cinemagraph",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph/resolve/main/ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "bytes": 201462650,
+      "gated": true
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 228
+  },
+  {
+   "slug": "standing-figure",
+   "title": "Standing figure",
+   "code": "Works",
+   "group": "cine",
+   "still": {
+    "src": "img/ltx-2-5-loras/standing-figure-3.jpg",
+    "thumb": "img/ltx-2-5-loras/standing-figure-3-t.jpg",
+    "w": 768,
+    "h": 1152
+   },
+   "outputs": [
+    {
+     "label": "Still",
+     "image": {
+      "src": "img/ltx-2-5-loras/standing-figure-1.jpg",
+      "thumb": "img/ltx-2-5-loras/standing-figure-1-t.jpg",
+      "w": 554,
+      "h": 832
+     }
+    },
+    {
+     "label": "No LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/standing-figure-2.jpg",
+      "thumb": "img/ltx-2-5-loras/standing-figure-2-t.jpg",
+      "w": 768,
+      "h": 1152
+     }
+    },
+    {
+     "label": "Cinemagraph LoRA, 1.5",
+     "image": {
+      "src": "img/ltx-2-5-loras/standing-figure-3.jpg",
+      "thumb": "img/ltx-2-5-loras/standing-figure-3-t.jpg",
+      "w": 768,
+      "h": 1152
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/standing-figure.json",
+    "bytes": 5045
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Cinemagraph"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Cinemagraph at 1.5"
+    ],
+    [
+     "Output",
+     "768×1152, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "6 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.4 GiB"
+    ],
+    [
+     "No LoRA run",
+     "Same graph without the LoRA, seed 42, 6 min"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "char_allie"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "CINEMAGRAPH_MOTION, tripod locked-off static camera, zero camera movement, only the hem of her white dress is swaying gently in a light breeze while her face, glasses, hair and the plain wall behind her stay perfectly still, seamless natural loop, a soft breeze the only sound."
+    },
+    {
+     "label": "Negative",
+     "text": "camera movement, pan, tilt, zoom, parallax, whole image moving, background sliding, person moving, face moving, flicker on entire image, noisy texture, crawling texture, distorted, blurry, low quality"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Her head, her body and the wall stay locked while the hem of the dress and the ends of her hair sway. The eyes still shift slightly, and neither strength 1.5 nor the card's prompt order removed that."
+   },
+   "notes": [
+    "If the face has to be completely frozen, mask it in the edit."
+   ],
+   "links": [
+    {
+     "label": "Download the workflow without the LoRA (json)",
+     "url": "/assets/workflows/ltx-2-5-loras/standing-figure-no-lora.json"
+    },
+    {
+     "label": "The Cinemagraph LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/standing-figure.zip",
+     "bytes": 512268
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Cinemagraph",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph/resolve/main/ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "bytes": 201462650,
+      "gated": true
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 266
+  },
+  {
+   "slug": "tree-full-of-falling-leaves",
+   "title": "Tree full of falling leaves",
+   "code": "Limit",
+   "group": "cine",
+   "still": {
+    "src": "img/ltx-2-5-loras/tree-full-of-falling-leaves-2.jpg",
+    "thumb": "img/ltx-2-5-loras/tree-full-of-falling-leaves-2-t.jpg",
+    "w": 768,
+    "h": 1056
+   },
+   "outputs": [
+    {
+     "label": "Still",
+     "image": {
+      "src": "img/ltx-2-5-loras/tree-full-of-falling-leaves-1.jpg",
+      "thumb": "img/ltx-2-5-loras/tree-full-of-falling-leaves-1-t.jpg",
+      "w": 512,
+      "h": 704
+     }
+    },
+    {
+     "label": "Cinemagraph LoRA, 1.5",
+     "image": {
+      "src": "img/ltx-2-5-loras/tree-full-of-falling-leaves-2.jpg",
+      "thumb": "img/ltx-2-5-loras/tree-full-of-falling-leaves-2-t.jpg",
+      "w": 768,
+      "h": 1056
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/tree-full-of-falling-leaves.json",
+    "bytes": 5077
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Cinemagraph"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Cinemagraph at 1.5"
+    ],
+    [
+     "Output",
+     "768×1056, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "6 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.6 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Start image",
+     "ref": "still4_autumn"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "CINEMAGRAPH_MOTION, tripod locked-off static camera, zero camera movement, only a few orange leaves are drifting down from the maple and the leaf tips are trembling in a light breeze, while the trunk, the bench, the grass and the sky stay perfectly still, seamless natural loop, faint birdsong."
+    },
+    {
+     "label": "Negative",
+     "text": "camera movement, pan, tilt, zoom, parallax, whole image moving, background sliding, person moving, face moving, flicker on entire image, noisy texture, crawling texture, distorted, blurry, low quality"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "A tree has thousands of small moving parts, and the whole frame drifts instead of only the leaves moving. I rewrote the prompt in the card's order and asked for just three falling leaves, with every leaf on the tree frozen, and it changed nothing."
+   },
+   "notes": [
+    "The LoRA was trained at 512×704 with 25 frames. The two people above held far better at 121 frames than this did."
+   ],
+   "links": [
+    {
+     "label": "The Cinemagraph LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/tree-full-of-falling-leaves.zip",
+     "bytes": 638932
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Cinemagraph",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph/resolve/main/ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+      "bytes": 201462650,
+      "gated": true
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 285
+  },
+  {
+   "slug": "woman-with-umbrella",
+   "title": "Woman with umbrella",
+   "code": "Works",
+   "group": "plate",
+   "still": {
+    "src": "img/ltx-2-5-loras/woman-with-umbrella-2.jpg",
+    "thumb": "img/ltx-2-5-loras/woman-with-umbrella-2-t.jpg",
+    "w": 1024,
+    "h": 576
+   },
+   "outputs": [
+    {
+     "label": "Source",
+     "image": {
+      "src": "img/ltx-2-5-loras/woman-with-umbrella-1.jpg",
+      "thumb": "img/ltx-2-5-loras/woman-with-umbrella-1-t.jpg",
+      "w": 1024,
+      "h": 576
+     }
+    },
+    {
+     "label": "Clean Plate",
+     "image": {
+      "src": "img/ltx-2-5-loras/woman-with-umbrella-2.jpg",
+      "thumb": "img/ltx-2-5-loras/woman-with-umbrella-2-t.jpg",
+      "w": 1024,
+      "h": 576
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/woman-with-umbrella.json",
+    "bytes": 5866
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Clean Plate"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Clean Plate at 1.0"
+    ],
+    [
+     "Output",
+     "1024×576, 129 frames at 25fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "8 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.6 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src5_crossing_129"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "An empty clean plate of the exact same location: identical graffiti-covered concrete wall, glass bus-stop shelter, metal bin, pavement and soft daylight as the source video, with no people, no humans, no figures, no umbrella, no trench coat, and no body parts such as arms, hands or legs anywhere in the frame. Static photorealistic footage, natural light, high detail."
+    },
+    {
+     "label": "Negative",
+     "text": "person, people, human, figure, limb, arm, hand, leg, body part, umbrella, red umbrella, trench coat, shadow of a person, leftover people, leftover figures, ghosting, semi-transparent remnants, blurry, soft, distorted, inconsistent motion, jitter, worst quality, cartoon, video game, ugly"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "She and her umbrella are removed from every frame and the graffiti behind her is rebuilt. The bus in the opening frames is left where it was."
+   },
+   "notes": [
+    "Describe the empty scene in the prompt, and name what to remove in both the prompt and the negative. The LoRA was trained at 1024×576 and 25fps, so this runs 129 frames."
+   ],
+   "links": [
+    {
+     "label": "The Clean Plate LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/woman-with-umbrella.zip",
+     "bytes": 960574
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate/resolve/main/ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "bytes": 327318439,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 318
+  },
+  {
+   "slug": "couple-on-a-canal-moving-camera",
+   "title": "Couple on a canal, moving camera",
+   "code": "Works",
+   "group": "plate",
+   "still": {
+    "src": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-2.jpg",
+    "thumb": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-2-t.jpg",
+    "w": 1024,
+    "h": 576
+   },
+   "outputs": [
+    {
+     "label": "Source",
+     "image": {
+      "src": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-1.jpg",
+      "thumb": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Clean Plate",
+     "image": {
+      "src": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-2.jpg",
+      "thumb": "img/ltx-2-5-loras/couple-on-a-canal-moving-camera-2-t.jpg",
+      "w": 1024,
+      "h": 576
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/couple-on-a-canal-moving-camera.json",
+    "bytes": 5783
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Clean Plate"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Clean Plate at 1.0"
+    ],
+    [
+     "Output",
+     "1024×576, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "8 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src4_canal_dolly"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "An empty clean plate of the exact same canal-side street with the same sideways camera movement: identical brick houses, white window frames, moored boats, stone quay and afternoon light, with no people, no humans, no figures, no backpack and no body parts anywhere in the frame. Photorealistic footage, natural light, high detail."
+    },
+    {
+     "label": "Negative",
+     "text": "person, people, human, figure, limb, arm, hand, leg, body part, car, vehicle, bicycle, cyclist, shadow of a person, leftover people, ghosting, semi-transparent remnants, blurry, distorted, inconsistent motion, jitter, worst quality"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The camera dollies along a canal while a couple walks through the shot. Both of them are removed along with their shadows, and the rest of the scene stays as it was."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Clean Plate LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/couple-on-a-canal-moving-camera.zip",
+     "bytes": 1563751
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate/resolve/main/ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "bytes": 327318439,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 347
+  },
+  {
+   "slug": "park-with-fountain",
+   "title": "Park with fountain",
+   "code": "Works",
+   "group": "night",
+   "still": {
+    "src": "img/ltx-2-5-loras/park-with-fountain-2.jpg",
+    "thumb": "img/ltx-2-5-loras/park-with-fountain-2-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "Day source",
+     "image": {
+      "src": "img/ltx-2-5-loras/park-with-fountain-1.jpg",
+      "thumb": "img/ltx-2-5-loras/park-with-fountain-1-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Day-to-Night, 1.5",
+     "image": {
+      "src": "img/ltx-2-5-loras/park-with-fountain-2.jpg",
+      "thumb": "img/ltx-2-5-loras/park-with-fountain-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/park-with-fountain.json",
+    "bytes": 5721
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Day-to-Night"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Day-to-Night at 1.5"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "10 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.9 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src2_day_park_hd"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A realistic nighttime version of the same park: the fountain, bench, lamp post and trees in the same positions and the jogger following the same path, the lamp post lit with a warm glow, cool moonlight on the gravel and the fountain water catching the light, deep natural shadows under the trees. Only the lighting changes from day to night; identical composition, framing, camera movement and motion."
+    },
+    {
+     "label": "Negative",
+     "text": "daytime, bright sunlight, blue sky, overexposed, worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The lamps come on and the sky goes dark, and the jogger and the pigeons keep to their original paths. At 1152×640 this needed strength 1.5."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Day-to-Night LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/park-with-fountain.zip",
+     "bytes": 1928181
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night/resolve/main/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "bytes": 327318440,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 388
+  },
+  {
+   "slug": "canal-at-night-moving-camera",
+   "title": "Canal at night, moving camera",
+   "code": "Works",
+   "group": "night",
+   "still": {
+    "src": "img/ltx-2-5-loras/canal-at-night-moving-camera-2.jpg",
+    "thumb": "img/ltx-2-5-loras/canal-at-night-moving-camera-2-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "Day source",
+     "image": {
+      "src": "img/ltx-2-5-loras/canal-at-night-moving-camera-1.jpg",
+      "thumb": "img/ltx-2-5-loras/canal-at-night-moving-camera-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Day-to-Night, 1.5",
+     "image": {
+      "src": "img/ltx-2-5-loras/canal-at-night-moving-camera-2.jpg",
+      "thumb": "img/ltx-2-5-loras/canal-at-night-moving-camera-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/canal-at-night-moving-camera.json",
+    "bytes": 7140
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Day-to-Night"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Day-to-Night at 1.5"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "1212"
+    ],
+    [
+     "Generated in",
+     "5 min"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src4_canal_dolly"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A realistic nighttime version of the same canal-side street with the same sideways camera movement: warm light glowing from the windows of the brick houses, street lamps reflected in the canal and a dark blue night sky. The two walkers follow the same path. Only the lighting changes from day to night; identical composition, framing, camera movement and motion."
+    },
+    {
+     "label": "Negative",
+     "text": "daytime, bright sunlight, blue sky, overexposed, worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The dolly move and the boats are kept and the windows and lamps light up. The reflections in the water follow the new lights."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Day-to-Night LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/canal-at-night-moving-camera.zip",
+     "bytes": 1563981
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night/resolve/main/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "bytes": 327318440,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 413
+  },
+  {
+   "slug": "same-park-at-strength-1-0",
+   "title": "Same park at strength 1.0",
+   "code": "Limit",
+   "group": "night",
+   "still": {
+    "src": "img/ltx-2-5-loras/same-park-at-strength-1-0-2.jpg",
+    "thumb": "img/ltx-2-5-loras/same-park-at-strength-1-0-2-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "Day source",
+     "image": {
+      "src": "img/ltx-2-5-loras/same-park-at-strength-1-0-1.jpg",
+      "thumb": "img/ltx-2-5-loras/same-park-at-strength-1-0-1-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Day-to-Night, 1.0",
+     "image": {
+      "src": "img/ltx-2-5-loras/same-park-at-strength-1-0-2.jpg",
+      "thumb": "img/ltx-2-5-loras/same-park-at-strength-1-0-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/same-park-at-strength-1-0.json",
+    "bytes": 5728
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Day-to-Night"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Day-to-Night at 1.0"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "9 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.0 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src2_day_park_hd"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A realistic nighttime version of the same park: the fountain, bench, lamp post and trees in the same positions and the jogger following the same path, the lamp post lit with a warm glow, cool moonlight on the gravel and the fountain water catching the light, deep natural shadows under the trees. Only the lighting changes from day to night; identical composition, framing, camera movement and motion."
+    },
+    {
+     "label": "Negative",
+     "text": "daytime, bright sunlight, blue sky, overexposed, worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "At 1152×640 the default strength only lights the lamps. The scene stays partly in daylight, with some parts of it day and some night."
+   },
+   "notes": [
+    "The LoRA was trained at 768×448 with 97 frames. At the larger size used here it needed a strength of 1.3 to 1.5."
+   ],
+   "links": [
+    {
+     "label": "The Day-to-Night LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/same-park-at-strength-1-0.zip",
+     "bytes": 1928206
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night/resolve/main/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "bytes": 327318440,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 437
+  },
+  {
+   "slug": "water-into-a-sandbox",
+   "title": "Water into a sandbox",
+   "code": "Works",
+   "group": "water",
+   "still": {
+    "src": "img/ltx-2-5-loras/water-into-a-sandbox-2.jpg",
+    "thumb": "img/ltx-2-5-loras/water-into-a-sandbox-2-t.jpg",
+    "w": 1920,
+    "h": 1088
+   },
+   "outputs": [
+    {
+     "label": "Dry source",
+     "image": {
+      "src": "img/ltx-2-5-loras/water-into-a-sandbox-1.jpg",
+      "thumb": "img/ltx-2-5-loras/water-into-a-sandbox-1-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Water LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/water-into-a-sandbox-2.jpg",
+      "thumb": "img/ltx-2-5-loras/water-into-a-sandbox-2-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/water-into-a-sandbox.json",
+    "bytes": 6007
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Water Simulation"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Water Simulation at 1.0"
+    ],
+    [
+     "Output",
+     "1920×1088, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "1212"
+    ],
+    [
+     "Generated in",
+     "34 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.5 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src13_sandbox_two"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows two young women kneeling side by side in a wooden sandbox full of dry golden sand in a sunny backyard, scooping sand in their hands, pouring sand from a red bucket and patting the sand. Edited shows the same scene with water added. ADD WATER clear shallow water flooding the whole sandbox and completely covering the sand up to their knees, rippling around their legs; water streaming out of their cupped hands and dripping from their fingers, the red bucket pouring a stream of water that splashes into the flooded sandbox, and their palms slapping the water surface into splashes and spreading rings of ripples. Subject identity, clothing, framing, and background geometry are identical to the reference; only water-related elements differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This uses the card's prompt template on a clip of a dry sandbox. Water pools around their knees and the bucket pours water instead of sand. The sand around the edges stays dry, and the cream trousers on the right come out as light jeans."
+   },
+   "notes": [
+    "I also tried to replace all of the sand with water and could not get that to work. This LoRA is strict about the prompt format it expects. The trigger is ADD WATER."
+   ],
+   "links": [
+    {
+     "label": "The Water Simulation LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/water-into-a-sandbox.zip",
+     "bytes": 10504281
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation/resolve/main/ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+      "bytes": 906080568,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 479
+  },
+  {
+   "slug": "wave-over-the-steps",
+   "title": "Wave over the steps",
+   "code": "Works",
+   "group": "water",
+   "still": {
+    "src": "img/ltx-2-5-loras/wave-over-the-steps-2.jpg",
+    "thumb": "img/ltx-2-5-loras/wave-over-the-steps-2-t.jpg",
+    "w": 1152,
+    "h": 640
+   },
+   "outputs": [
+    {
+     "label": "Dry source",
+     "image": {
+      "src": "img/ltx-2-5-loras/wave-over-the-steps-1.jpg",
+      "thumb": "img/ltx-2-5-loras/wave-over-the-steps-1-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    },
+    {
+     "label": "Water LoRA, 1.3",
+     "image": {
+      "src": "img/ltx-2-5-loras/wave-over-the-steps-2.jpg",
+      "thumb": "img/ltx-2-5-loras/wave-over-the-steps-2-t.jpg",
+      "w": 1152,
+      "h": 640
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/wave-over-the-steps.json",
+    "bytes": 5833
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Water Simulation"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Water Simulation at 1.3"
+    ],
+    [
+     "Output",
+     "1152×640, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "10 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src2_dry_stairs_hd"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a man in a grey suit and brown leather shoes walking down a wide flight of dry sandstone steps in a sunlit courtyard toward the camera, a stone balustrade on his left and a row of arched windows behind him. Edited shows the same scene with water added. ADD WATER a wave of foaming seawater surging across the courtyard from the left, washing up over the lower steps and crashing around his legs at knee height, spray flying off the balustrade. Subject identity, clothing, framing, and background geometry are identical to the reference; only water-related elements differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Spray bursts over the balustrade and a shallow wave washes over the lower steps. The way the water meets the steps looked more natural than I expected."
+   },
+   "notes": [
+    "At 1152×640 it needed strength 1.3. At 1.0 the water barely showed."
+   ],
+   "links": [
+    {
+     "label": "The Water Simulation LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/wave-over-the-steps.zip",
+     "bytes": 786839
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation/resolve/main/ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+      "bytes": 906080568,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 513
+  },
+  {
+   "slug": "heavily-macroblocked-market",
+   "title": "Heavily macroblocked market",
+   "code": "Works",
+   "group": "decomp",
+   "still": {
+    "src": "img/ltx-2-5-loras/heavily-macroblocked-market-3.jpg",
+    "thumb": "img/ltx-2-5-loras/heavily-macroblocked-market-3-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Blocky input (120 kbps)",
+     "image": {
+      "src": "img/ltx-2-5-loras/heavily-macroblocked-market-1.jpg",
+      "thumb": "img/ltx-2-5-loras/heavily-macroblocked-market-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Original",
+     "image": {
+      "src": "img/ltx-2-5-loras/heavily-macroblocked-market-2.jpg",
+      "thumb": "img/ltx-2-5-loras/heavily-macroblocked-market-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Decompression LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/heavily-macroblocked-market-3.jpg",
+      "thumb": "img/ltx-2-5-loras/heavily-macroblocked-market-3-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/heavily-macroblocked-market.json",
+    "bytes": 6153
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Decompression"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Decompression at 1.0"
+    ],
+    [
+     "Output",
+     "960×544, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "7 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.1 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "decompression2_blocky_960"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a market stall under a green and white striped awning where a vendor with a grey beard in a blue apron is arranging oranges, red apples and yellow bananas in wooden crates while a customer in a dark red headscarf reaches for lemons, with a busy market crowd behind, heavily compressed with visible macroblocking, chroma bleed, and ringing artifacts. Edited shows the same scene restored to high quality with sharp detail, clean edges, and no compression artifacts. ENHANCE QUALITY a market stall under a green and white striped awning where a vendor with a grey beard in a blue apron is arranging oranges, red apples and yellow bananas in wooden crates while a customer in a dark red headscarf reaches for lemons, with a busy market crowd behind. Subject identity, framing, and background geometry are identical to the reference; only compression artifacts and image quality differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "I re-encoded a generated market clip at 120 kbps to break it into blocks. The LoRA removes the blocks, and the fruit and the crowd come back clean and close to the original."
+   },
+   "notes": [
+    "It came out so close to the original that I tried footage that was never clean next. The trigger is ENHANCE QUALITY, and it only helps footage that is badly damaged."
+   ],
+   "links": [
+    {
+     "label": "The Decompression LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/heavily-macroblocked-market.zip",
+     "bytes": 77887
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Decompression",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression/resolve/main/ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 549
+  },
+  {
+   "slug": "superman-1941",
+   "title": "Superman, 1941",
+   "code": "Works",
+   "group": "decomp",
+   "still": {
+    "src": "img/ltx-2-5-loras/superman-1941-2.jpg",
+    "thumb": "img/ltx-2-5-loras/superman-1941-2-t.jpg",
+    "w": 896,
+    "h": 672
+   },
+   "outputs": [
+    {
+     "label": "1941 transfer",
+     "image": {
+      "src": "img/ltx-2-5-loras/superman-1941-1.jpg",
+      "thumb": "img/ltx-2-5-loras/superman-1941-1-t.jpg",
+      "w": 640,
+      "h": 480
+     }
+    },
+    {
+     "label": "Decompression LoRA, 1.3",
+     "image": {
+      "src": "img/ltx-2-5-loras/superman-1941-2.jpg",
+      "thumb": "img/ltx-2-5-loras/superman-1941-2-t.jpg",
+      "w": 896,
+      "h": 672
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/superman-1941.json",
+    "bytes": 6028
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Decompression"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Decompression at 1.3"
+    ],
+    [
+     "Output",
+     "896×672, 161 frames at 30fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "5 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "superman1941_4x3_896_161"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a 1940s hand-painted cel-animated cartoon: a close-up of a man with dark hair and round glasses in a blue suit and red tie, then a close-up of a woman with dark wavy hair and red lipstick in a grey jacket, against soft painted blue and purple backgrounds, from an old analogue video transfer with visible chroma bleed, colour noise, smeared edges and compression artifacts. Edited shows the same scene restored to high quality with sharp detail, clean edges, and no compression artifacts. ENHANCE QUALITY a 1940s hand-painted cel-animated cartoon, flat painted colours, clean dark ink outlines and smooth airbrushed painted backgrounds. Subject identity, framing, and background geometry are identical to the reference; only compression artifacts and image quality differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This is an old analogue transfer of the 1941 Fleischer cartoon. The colour smear and noise are cleaned up and the ink lines sharpen. It also invents detail, with extra lines on the face and the blurry handwriting redrawn."
+   },
+   "notes": [
+    "This ran at strength 1.3 and at 896×672, which keeps the cartoon's 4:3 shape. The original soundtrack is put back on after generation."
+   ],
+   "links": [
+    {
+     "label": "The Decompression LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression"
+    },
+    {
+     "label": "Source footage: Superman (Fleischer Studios, 1941), public domain, on the Internet Archive",
+     "url": "https://archive.org/details/superman_1941"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/superman-1941.zip",
+     "bytes": 8437232
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Decompression",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression/resolve/main/ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 587
+  },
+  {
+   "slug": "clowns-on-a-city-street",
+   "title": "Clowns on a city street",
+   "code": "Works",
+   "group": "deblur",
+   "still": {
+    "src": "img/ltx-2-5-loras/clowns-on-a-city-street-2.jpg",
+    "thumb": "img/ltx-2-5-loras/clowns-on-a-city-street-2-t.jpg",
+    "w": 1536,
+    "h": 864
+   },
+   "outputs": [
+    {
+     "label": "Out of focus",
+     "image": {
+      "src": "img/ltx-2-5-loras/clowns-on-a-city-street-1.jpg",
+      "thumb": "img/ltx-2-5-loras/clowns-on-a-city-street-1-t.jpg",
+      "w": 1536,
+      "h": 864
+     }
+    },
+    {
+     "label": "Deblur LoRA, 1536x864",
+     "image": {
+      "src": "img/ltx-2-5-loras/clowns-on-a-city-street-2.jpg",
+      "thumb": "img/ltx-2-5-loras/clowns-on-a-city-street-2-t.jpg",
+      "w": 1536,
+      "h": 864
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/clowns-on-a-city-street.json",
+    "bytes": 6309
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Deblur"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Deblur at 1.0"
+    ],
+    [
+     "Output",
+     "1536×864, 161 frames at 30fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "14 min"
+    ],
+    [
+     "Peak VRAM",
+     "7.5 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "pexels_854040_blur_161_1536"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a street scene in colour on an overcast day: two clowns in bright costumes walk from left to right along a city street, one in a red coat with blue and red checked trousers, a yellow wig, a small red hat and big red shoes, the other in a pink outfit behind, past a parked grey SUV and a black sedan, a white police motorcycle, and brick and stone shopfronts with red signs and lit windows, heavily out of focus with soft defocused blur and no fine detail. Edited shows the same scene in sharp focus with crisp detail and clean edges. DEBLUR a street scene in colour on an overcast day: two clowns in bright costumes walk from left to right along a city street, one in a red coat with blue and red checked trousers, a yellow wig, a small red hat and big red shoes, the other in a pink outfit behind, past a parked grey SUV and a black sedan, a white police motorcycle, and brick and stone shopfronts with red signs and lit windows Subject identity, framing, and background geometry are identical to the reference; only focus and sharpness differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This is phone footage that is out of focus from start to finish. The clowns' costumes, the cars, the police motorcycle and the brickwork come back sharp. The shop signs are redrawn as new lettering that does not say anything."
+   },
+   "notes": [
+    "I ran it at 1536×864, since the card suggests about 1536 wide for more detail. The trigger is DEBLUR, and it is meant for defocus only."
+   ],
+   "links": [
+    {
+     "label": "The Deblur LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Deblur"
+    },
+    {
+     "label": "Source footage: Clowns walking, by Coverr on Pexels, Pexels License",
+     "url": "https://www.pexels.com/video/clowns-walking-854040/"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/clowns-on-a-city-street.zip",
+     "bytes": 4378385
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Deblur",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Deblur/resolve/main/ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 630
+  },
+  {
+   "slug": "1956-navy-film-diploma-handover",
+   "title": "1956 Navy film, diploma handover",
+   "code": "Works",
+   "group": "deblur",
+   "still": {
+    "src": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-2.jpg",
+    "thumb": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "1956 film, out of focus",
+     "image": {
+      "src": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-1.jpg",
+      "thumb": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Deblur LoRA",
+     "image": {
+      "src": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-2.jpg",
+      "thumb": "img/ltx-2-5-loras/1956-navy-film-diploma-handover-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/1956-navy-film-diploma-handover.json",
+    "bytes": 6159
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Deblur"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Deblur at 1.0"
+    ],
+    [
+     "Output",
+     "960×544, 161 frames at 29.97fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "4 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.8 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "npc74_blur_a_161"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a 1950s black-and-white documentary film shot: a smiling middle-aged American woman in a small felt hat and a light wool suit with a brooch stands on a stage in a bright hall and hands a diploma to a young Japanese woman with short dark curled hair who bows and leans in from the right, a dark curtain behind them, heavily out of focus with soft defocused blur and no fine detail. Edited shows the same scene in sharp focus with crisp detail and clean edges. DEBLUR a 1950s black-and-white documentary film shot: a smiling middle-aged American woman in a small felt hat and a light wool suit with a brooch stands on a stage in a bright hall and hands a diploma to a young Japanese woman with short dark curled hair who bows and leans in from the right, a dark curtain behind them Subject identity, framing, and background geometry are identical to the reference; only focus and sharpness differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The National Archives catalogues this shot as out of focus. Her face, earring, collar and buttons come into focus and she stays the same woman, while the background stays soft."
+   },
+   "notes": [
+    "Together with Decompression, I think this is a good option for old footage."
+   ],
+   "links": [
+    {
+     "label": "The Deblur LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Deblur"
+    },
+    {
+     "label": "Source footage: Japanese Bride School, Yokosuka, Japan (US Navy, 1956), public domain, on the Internet Archive",
+     "url": "https://archive.org/details/NPC-74"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/1956-navy-film-diploma-handover.zip",
+     "bytes": 2751260
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Deblur",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Deblur/resolve/main/ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 664
+  },
+  {
+   "slug": "a-trip-down-market-street-1906",
+   "title": "A Trip Down Market Street, 1906",
+   "code": "Works",
+   "group": "restore",
+   "still": {
+    "src": "img/ltx-2-5-loras/a-trip-down-market-street-1906-2.jpg",
+    "thumb": "img/ltx-2-5-loras/a-trip-down-market-street-1906-2-t.jpg",
+    "w": 1440,
+    "h": 1088
+   },
+   "outputs": [
+    {
+     "label": "1906 film, 640x480",
+     "image": {
+      "src": "img/ltx-2-5-loras/a-trip-down-market-street-1906-1.jpg",
+      "thumb": "img/ltx-2-5-loras/a-trip-down-market-street-1906-1-t.jpg",
+      "w": 640,
+      "h": 480
+     }
+    },
+    {
+     "label": "Restore LoRA, 1440x1088",
+     "image": {
+      "src": "img/ltx-2-5-loras/a-trip-down-market-street-1906-2.jpg",
+      "thumb": "img/ltx-2-5-loras/a-trip-down-market-street-1906-2-t.jpg",
+      "w": 1440,
+      "h": 1088
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/a-trip-down-market-street-1906.json",
+    "bytes": 11086
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Restore"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Restore at 1.0"
+    ],
+    [
+     "Output",
+     "1440×1088, 97 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "18 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.4 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "restore26_market_st_1906"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "a busy city street in 1906 seen from the front of a moving cable car, pedestrians in dark period suits, long coats and bowler hats crossing the tracks, horse-drawn carriages and early open motor cars, a wooden cable car, tall stone and brick buildings, cobblestones and steel rails, spring daylight, natural colour, sharp photographic detail, crisp faces and clothing texture, natural grain, high resolution footage"
+    },
+    {
+     "label": "Negative",
+     "text": "blocky compression, banding, mosquito noise, ringing, blurry, smeared, ghosting, low resolution, logos, signage, lettering, modern vehicles, modern buildings, traffic lights, graffiti, plastic, oversharpened halos, warped faces"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This is a 640×480 web copy of a film shot from the front of a cable car in San Francisco in 1906. One pass adds colour, removes the scratches and the flicker and adds detail, and the SIGHT lettering on the cable car survives. The far background, the distant people and the building fronts are rebuilt rather than recovered, because there was little detail there to begin with."
+   },
+   "notes": [
+    "The source is resized to the 1440×1088 canvas with lanczos and nothing else, then processed in 960×544 tiles. The prompt names the period, the place, the light and the clothing, and the negative names modern objects."
+   ],
+   "links": [
+    {
+     "label": "The Restore LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Restore"
+    },
+    {
+     "label": "Source footage: A Trip Down Market Street Before the Fire (Miles Brothers, 1906), public domain, on the Internet Archive",
+     "url": "https://archive.org/details/TripDown1905"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/a-trip-down-market-street-1906.zip",
+     "bytes": 2191311
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4_e2b_it_bf16.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/gemma-4",
+      "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
+      "bytes": 10278774160,
+      "gated": false
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-restore-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Restore",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Restore/resolve/main/ltx-2.5-22b-ic-lora-restore-1.0.safetensors",
+      "bytes": 1711643914,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 713
+  },
+  {
+   "slug": "generated-canal-clip-at-2x",
+   "title": "Generated canal clip at 2x",
+   "code": "Works",
+   "group": "refine",
+   "still": {
+    "src": "img/ltx-2-5-loras/generated-canal-clip-at-2x-2.jpg",
+    "thumb": "img/ltx-2-5-loras/generated-canal-clip-at-2x-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Lanczos 2x, crop",
+     "image": {
+      "src": "img/ltx-2-5-loras/generated-canal-clip-at-2x-1.jpg",
+      "thumb": "img/ltx-2-5-loras/generated-canal-clip-at-2x-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "Refine Details 2x, crop",
+     "image": {
+      "src": "img/ltx-2-5-loras/generated-canal-clip-at-2x-2.jpg",
+      "thumb": "img/ltx-2-5-loras/generated-canal-clip-at-2x-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/generated-canal-clip-at-2x.json",
+    "bytes": 10641
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Refine Details"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Refine Details at 1.0"
+    ],
+    [
+     "Output",
+     "1920×1088, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "22 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.9 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src4_canal_dolly"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "sharp photographic detail, crisp natural texture, fine surface detail, clean edges, natural film grain, high resolution footage"
+    },
+    {
+     "label": "Negative",
+     "text": "blurry, soft, plastic, smeared detail, oversharpened halos, warped faces"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "I took a 960×544 clip generated with LTX 2.5 up to 1920×1088. Both frames show the same 960×544 crop, one from a plain lanczos upscale and one from Refine Details. The brickwork, the window bars and the faces have real texture in the refined version, where the plain upscale is smeared."
+   },
+   "notes": [
+    "Refine Details is for footage that is clean but soft, such as LTX output. Deblur is for footage that is out of focus, and Decompression is for blocky, compressed footage.",
+    "The crops were cut after generation. The workflow produces the full 1920×1088 clip."
+   ],
+   "links": [
+    {
+     "label": "The Refine Details LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Refine-Details"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/generated-canal-clip-at-2x.zip",
+     "bytes": 1564477
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4_e2b_it_bf16.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/gemma-4",
+      "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
+      "bytes": 10278774160,
+      "gated": false
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-refine-details-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Refine-Details",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Refine-Details/resolve/main/ltx-2.5-22b-ic-lora-refine-details-1.0.safetensors",
+      "bytes": 1308787534,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 781
+  },
+  {
+   "slug": "forest-creek-sun-through-mist",
+   "title": "Forest creek, sun through mist",
+   "code": "Works",
+   "group": "hdr",
+   "still": {
+    "src": "img/ltx-2-5-loras/forest-creek-sun-through-mist-3.jpg",
+    "thumb": "img/ltx-2-5-loras/forest-creek-sun-through-mist-3-t.jpg",
+    "w": 1280,
+    "h": 704
+   },
+   "outputs": [
+    {
+     "label": "SDR source",
+     "image": {
+      "src": "img/ltx-2-5-loras/forest-creek-sun-through-mist-1.jpg",
+      "thumb": "img/ltx-2-5-loras/forest-creek-sun-through-mist-1-t.jpg",
+      "w": 1280,
+      "h": 720
+     }
+    },
+    {
+     "label": "SDR, -2.5 stops",
+     "image": {
+      "src": "img/ltx-2-5-loras/forest-creek-sun-through-mist-2.jpg",
+      "thumb": "img/ltx-2-5-loras/forest-creek-sun-through-mist-2-t.jpg",
+      "w": 1280,
+      "h": 704
+     }
+    },
+    {
+     "label": "SDR to HDR, -2.5 stops",
+     "image": {
+      "src": "img/ltx-2-5-loras/forest-creek-sun-through-mist-3.jpg",
+      "thumb": "img/ltx-2-5-loras/forest-creek-sun-through-mist-3-t.jpg",
+      "w": 1280,
+      "h": 704
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/forest-creek-sun-through-mist.json",
+    "bytes": 8520
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "SDR to HDR"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "SDR to HDR at 1.0"
+    ],
+    [
+     "Output",
+     "1280×704, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "12 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "hdr27_diana_creek"
+    },
+    {
+     "tag": "Scene embedding",
+     "text": "ltx-2.5-22b-ic-lora-sdr-to-hdr-scene-emb.safetensors, in place of a prompt"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "",
+     "note": "SDR to HDR takes no prompt. A scene embedding goes in its place."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Both versions are pulled down 2.5 stops so that an SDR screen can show the highlights. The SDR source has nothing above white, so the sunlit water turns flat grey. The HDR version keeps the glints and the light shafts. That headroom is the model's estimate of what was there, not recovered data."
+   },
+   "notes": [
+    "The output is ACEScg EXR frames and a 10-bit HLG master, and the exposure was pulled down on both versions after generation."
+   ],
+   "links": [
+    {
+     "label": "The SDR to HDR LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR"
+    },
+    {
+     "label": "Source footage: Golden hour rays break through mist on Diana Creek, by Extemporalist, CC0, on Wikimedia Commons",
+     "url": "https://commons.wikimedia.org/wiki/File:Golden_hour_rays_break_through_mist_on_Diana_Creek.webm"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/forest-creek-sun-through-mist.zip",
+     "bytes": 20839678
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-sdr-to-hdr-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR/resolve/main/ltx-2.5-22b-ic-lora-sdr-to-hdr-1.0.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-sdr-to-hdr-scene-emb.safetensors",
+      "folder": "embeddings",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR/resolve/main/ltx-2.5-22b-ic-lora-sdr-to-hdr-scene-emb.safetensors",
+      "bytes": 12614165,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 828
+  },
+  {
+   "slug": "curly-hair-in-the-rain",
+   "title": "Curly hair in the rain",
+   "code": "Works",
+   "group": "alpha",
+   "still": {
+    "src": "img/ltx-2-5-loras/curly-hair-in-the-rain-2.jpg",
+    "thumb": "img/ltx-2-5-loras/curly-hair-in-the-rain-2-t.jpg",
+    "w": 1536,
+    "h": 864
+   },
+   "outputs": [
+    {
+     "label": "Source",
+     "image": {
+      "src": "img/ltx-2-5-loras/curly-hair-in-the-rain-1.jpg",
+      "thumb": "img/ltx-2-5-loras/curly-hair-in-the-rain-1-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Alpha Gen matte",
+     "image": {
+      "src": "img/ltx-2-5-loras/curly-hair-in-the-rain-2.jpg",
+      "thumb": "img/ltx-2-5-loras/curly-hair-in-the-rain-2-t.jpg",
+      "w": 1536,
+      "h": 864
+     }
+    },
+    {
+     "label": "Composite",
+     "image": {
+      "src": "img/ltx-2-5-loras/curly-hair-in-the-rain-3.jpg",
+      "thumb": "img/ltx-2-5-loras/curly-hair-in-the-rain-3-t.jpg",
+      "w": 1536,
+      "h": 864
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/curly-hair-in-the-rain.json",
+    "bytes": 5207
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Alpha Gen"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Alpha Gen at 1.0"
+    ],
+    [
+     "Output",
+     "1536×864, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Generated in",
+     "10 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.8 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "alpha25_run"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "",
+     "note": "Alpha Gen runs with an empty prompt. The source clip is the only guide."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "The matte keeps single strands of curly hair against a busy neon street. I composited her over a forest creek, and a few strands keep the pink of the neon they were lit by. That pink is in the source footage, not in the matte."
+   },
+   "notes": [
+    "The output is a grayscale matte, white for the subject. The composite multiplies the source by the matte and the background by its inverse, and was made after generation."
+   ],
+   "links": [
+    {
+     "label": "The Alpha Gen LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen"
+    },
+    {
+     "label": "Source footage: Golden hour rays break through mist on Diana Creek, by Extemporalist, CC0, on Wikimedia Commons",
+     "url": "https://commons.wikimedia.org/wiki/File:Golden_hour_rays_break_through_mist_on_Diana_Creek.webm"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/curly-hair-in-the-rain.zip",
+     "bytes": 6238271
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen/resolve/main/ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 890
+  },
+  {
+   "slug": "portrait-hair-in-the-wind",
+   "title": "Portrait, hair in the wind",
+   "code": "Works",
+   "group": "alpha",
+   "still": {
+    "src": "img/ltx-2-5-loras/portrait-hair-in-the-wind-2.jpg",
+    "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-wind-2-t.jpg",
+    "w": 768,
+    "h": 1024
+   },
+   "outputs": [
+    {
+     "label": "Source",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-wind-1.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-wind-1-t.jpg",
+      "w": 768,
+      "h": 1024
+     }
+    },
+    {
+     "label": "Alpha Gen matte",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-wind-2.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-wind-2-t.jpg",
+      "w": 768,
+      "h": 1024
+     }
+    },
+    {
+     "label": "Composite",
+     "image": {
+      "src": "img/ltx-2-5-loras/portrait-hair-in-the-wind-3.jpg",
+      "thumb": "img/ltx-2-5-loras/portrait-hair-in-the-wind-3-t.jpg",
+      "w": 768,
+      "h": 1024
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/portrait-hair-in-the-wind.json",
+    "bytes": 5211
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Alpha Gen"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Alpha Gen at 1.0"
+    ],
+    [
+     "Output",
+     "768×1024, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Generated in",
+     "5 min"
+    ],
+    [
+     "Peak VRAM",
+     "10.9 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "alpha25_kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "",
+     "note": "Alpha Gen runs with an empty prompt. The source clip is the only guide."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "This one is in portrait orientation, with loose wavy hair against a bright bookshelf. The flyaway strands stay soft in the matte instead of being cut off."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Alpha Gen LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/portrait-hair-in-the-wind.zip",
+     "bytes": 3744463
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen/resolve/main/ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 932
+  },
+  {
+   "slug": "town-square-camera-arc",
+   "title": "Town square, camera arc",
+   "code": "Limit",
+   "group": "layout",
+   "still": {
+    "src": "img/ltx-2-5-loras/town-square-camera-arc-3.jpg",
+    "thumb": "img/ltx-2-5-loras/town-square-camera-arc-3-t.jpg",
+    "w": 1920,
+    "h": 1088
+   },
+   "outputs": [
+    {
+     "label": "Clay layout (Blender)",
+     "image": {
+      "src": "img/ltx-2-5-loras/town-square-camera-arc-1.jpg",
+      "thumb": "img/ltx-2-5-loras/town-square-camera-arc-1-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Look still (Qwen-Image)",
+     "image": {
+      "src": "img/ltx-2-5-loras/town-square-camera-arc-2.jpg",
+      "thumb": "img/ltx-2-5-loras/town-square-camera-arc-2-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    },
+    {
+     "label": "Layout to Render",
+     "image": {
+      "src": "img/ltx-2-5-loras/town-square-camera-arc-3.jpg",
+      "thumb": "img/ltx-2-5-loras/town-square-camera-arc-3-t.jpg",
+      "w": 1920,
+      "h": 1088
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/town-square-camera-arc.json",
+    "bytes": 12541
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Layout to Render"
+   ],
+   "facts": [
+    [
+     "LoRA",
+     "Layout to Render at 1.0"
+    ],
+    [
+     "Output",
+     "1920×1088, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 + 3 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "36 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.8 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "layout28_plaza_clay"
+    },
+    {
+     "tag": "Look still",
+     "ref": "layout28_look"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A young woman with long curly red hair, in a cream knitted sweater and blue jeans, stands beside a weathered sandstone fountain in a small European town square at golden hour as the camera slowly arcs around her and moves closer. Cream and ochre townhouses with shuttered windows, a café awning, a leafy plane tree, black iron street lamps, wooden benches and worn cobblestones, warm low sunlight with long soft shadows. Match the first frame. Photoreal."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "I built the layout in Blender from primitives and made the look still from its first frame with Qwen-Image 2.1. The camera arc, the fountain, the tree and the lamp land where the layout put them. The box mannequin has no front, so she turns her back mid-shot. The nearest bench smears, and the empty sky in the layout became more houses."
+   },
+   "notes": [
+    "I have seen more side effects like these on busier layout animations, so I expect it to work better with simpler camera moves. The prompt matches the look still and leaves out the words clay and 3D."
+   ],
+   "links": [
+    {
+     "label": "The Layout to Render LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Layout-To-Render"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/town-square-camera-arc.zip",
+     "bytes": 13226498
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "folder": "latent_upscale_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "bytes": 995778752,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-layout-to-render-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Layout-To-Render",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Layout-To-Render/resolve/main/ltx-2.5-22b-ic-lora-layout-to-render-1.0.safetensors",
+      "bytes": 1308787439,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 976
+  },
+  {
+   "slug": "clean-plate-with-day-to-night",
+   "title": "Clean Plate with Day-to-Night",
+   "code": "Works",
+   "group": "chain",
+   "still": {
+    "src": "img/ltx-2-5-loras/clean-plate-with-day-to-night-2.jpg",
+    "thumb": "img/ltx-2-5-loras/clean-plate-with-day-to-night-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Source",
+     "image": {
+      "src": "img/ltx-2-5-loras/clean-plate-with-day-to-night-1.jpg",
+      "thumb": "img/ltx-2-5-loras/clean-plate-with-day-to-night-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "LoRAs: Clean Plate + Day-to-Night 1.3",
+     "image": {
+      "src": "img/ltx-2-5-loras/clean-plate-with-day-to-night-2.jpg",
+      "thumb": "img/ltx-2-5-loras/clean-plate-with-day-to-night-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/clean-plate-with-day-to-night.json",
+    "bytes": 5969
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Chained LoRAs"
+   ],
+   "facts": [
+    [
+     "LoRAs",
+     "Clean Plate at 1.0 and Day-to-Night at 1.3"
+    ],
+    [
+     "Output",
+     "960×544, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "7 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.6 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "src4_canal_dolly"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "An empty clean plate of the same canal-side street at night with the same sideways camera movement: identical brick houses, moored boats and stone quay, warm light glowing from the windows, street lamps reflected in the canal and a dark night sky, with no people, no figures and no backpack anywhere in the frame. Only the people are removed and the lighting changes from day to night; identical composition, framing and camera movement."
+    },
+    {
+     "label": "Negative",
+     "text": "person, people, human, figure, body part, backpack, ghosting, daytime, bright sunlight, blue sky, overexposed, worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "Both walkers are removed and the street turns to night in one pass. The dolly move, the boats and the buildings hold."
+   },
+   "notes": [
+    "The two LoRA loaders sit in series on one graph, and one prompt carries what both of them need."
+   ],
+   "links": [
+    {
+     "label": "The Clean Plate LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate"
+    },
+    {
+     "label": "The Day-to-Night LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/clean-plate-with-day-to-night.zip",
+     "bytes": 1563751
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate/resolve/main/ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+      "bytes": 327318439,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night/resolve/main/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+      "bytes": 327318440,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 1029
+  },
+  {
+   "slug": "colorization-with-decompression",
+   "title": "Colorization with Decompression",
+   "code": "Works",
+   "group": "chain",
+   "still": {
+    "src": "img/ltx-2-5-loras/colorization-with-decompression-2.jpg",
+    "thumb": "img/ltx-2-5-loras/colorization-with-decompression-2-t.jpg",
+    "w": 960,
+    "h": 544
+   },
+   "outputs": [
+    {
+     "label": "Grayscale and compressed",
+     "image": {
+      "src": "img/ltx-2-5-loras/colorization-with-decompression-1.jpg",
+      "thumb": "img/ltx-2-5-loras/colorization-with-decompression-1-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    },
+    {
+     "label": "LoRAs: Colorization + Decompression",
+     "image": {
+      "src": "img/ltx-2-5-loras/colorization-with-decompression-2.jpg",
+      "thumb": "img/ltx-2-5-loras/colorization-with-decompression-2-t.jpg",
+      "w": 960,
+      "h": 544
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/colorization-with-decompression.json",
+    "bytes": 6118
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Video to video",
+    "LoRA",
+    "Chained LoRAs"
+   ],
+   "facts": [
+    [
+     "LoRAs",
+     "Colorization at 1.0 and Decompression at 1.0"
+    ],
+    [
+     "Output",
+     "960×544, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral"
+    ],
+    [
+     "Seed",
+     "42"
+    ],
+    [
+     "Generated in",
+     "7 min"
+    ],
+    [
+     "Peak VRAM",
+     "11.2 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Guide video",
+     "ref": "restore5_gray_blocky_960"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference shows a market stall under a striped awning where a bearded vendor in an apron is arranging oranges, apples and bananas in wooden crates while a customer in a headscarf reaches for lemons, rendered in monochrome and heavily compressed with macroblocking and ringing. Edited shows the same scene with natural colors restored and clean detail. COLORIZE ENHANCE QUALITY a green and white striped awning, orange oranges, red apples and yellow bananas in pale wooden crates, the vendor in a blue apron, the customer in a dark red headscarf and warm natural skin tones, sharp and artifact-free. Subject identity, framing, and background geometry are identical to the reference; only color and image quality differ between reference and edited."
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Works",
+    "text": "I gave it the market clip in grayscale and at 120 kbps. One pass brings back full colour and removes the blocks. The colour runs hot, and it invents some crowd and stall detail."
+   },
+   "notes": [],
+   "links": [
+    {
+     "label": "The Colorization LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization"
+    },
+    {
+     "label": "The Decompression LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/colorization-with-decompression.zip",
+     "bytes": 76352
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Colorization",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization/resolve/main/ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Decompression",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression/resolve/main/ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+      "bytes": 906080571,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 1051
+  },
+  {
+   "slug": "ingredients-with-slow-motion",
+   "title": "Ingredients with Slow Motion",
+   "code": "Limit",
+   "group": "chain",
+   "still": {
+    "src": "img/ltx-2-5-loras/ingredients-with-slow-motion-3.jpg",
+    "thumb": "img/ltx-2-5-loras/ingredients-with-slow-motion-3-t.jpg",
+    "w": 768,
+    "h": 448
+   },
+   "outputs": [
+    {
+     "label": "LoRAs: Ingredients 1.4 + Slow Motion, seed 42",
+     "image": {
+      "src": "img/ltx-2-5-loras/ingredients-with-slow-motion-1.jpg",
+      "thumb": "img/ltx-2-5-loras/ingredients-with-slow-motion-1-t.jpg",
+      "w": 768,
+      "h": 448
+     }
+    },
+    {
+     "label": "LoRAs: Ingredients 1.4 + Slow Motion, seed 1212",
+     "image": {
+      "src": "img/ltx-2-5-loras/ingredients-with-slow-motion-2.jpg",
+      "thumb": "img/ltx-2-5-loras/ingredients-with-slow-motion-2-t.jpg",
+      "w": 768,
+      "h": 448
+     }
+    },
+    {
+     "label": "LoRAs: Ingredients 1.4 + Slow Motion, seed 7",
+     "image": {
+      "src": "img/ltx-2-5-loras/ingredients-with-slow-motion-3.jpg",
+      "thumb": "img/ltx-2-5-loras/ingredients-with-slow-motion-3-t.jpg",
+      "w": 768,
+      "h": 448
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/ltx-2-5-loras/ingredients-with-slow-motion.json",
+    "bytes": 6435
+   },
+   "models": [
+    "LTX 2.5"
+   ],
+   "techniques": [
+    "Image to video",
+    "LoRA",
+    "Chained LoRAs"
+   ],
+   "facts": [
+    [
+     "LoRAs",
+     "Ingredients at 1.4 and Slow Motion Control at 1.0"
+    ],
+    [
+     "Output",
+     "768×448, 121 frames at 24fps"
+    ],
+    [
+     "Sampling",
+     "8 steps, euler_ancestral_cfg_pp"
+    ],
+    [
+     "Seeds",
+     "42, 1212 and 7"
+    ],
+    [
+     "Generated in",
+     "3 min each"
+    ],
+    [
+     "Peak VRAM",
+     "11.0 GiB"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference sheet",
+     "ref": "ingredient_sheet3_subject"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Reference sheet: Top Row Left (Character): a portrait photo of a young woman with shoulder-length dark hair streaked pink and blue, large gold hoop earrings, a small leaf tattoo on her neck and a beige knitted sweater. Top Row Right (Prop): a chunky, boxy bright-yellow camera with a round lens and a textured grille on its side. Bottom Row Left (Setting): an empty rooftop terrace with a brick parapet, potted olive trees, string lights and a city skyline. Generated video: On the rooftop terrace at golden hour, the young woman with pink-and-blue streaked hair and gold hoop earrings, wearing the beige knitted sweater, faces the lens holding the chunky bright-yellow camera up to her right eye with both hands. She presses the shutter, then slowly lowers the camera to her chest with both hands still on it, and looks straight into the lens with a small smile as a breeze lifts her streaked hair. Static medium shot from the waist up, the brick parapet and olive trees behind her. The sound is the click of the shutter, a light breeze and distant traffic."
+    },
+    {
+     "label": "Negative",
+     "text": "worst quality, inconsistent motion, blurry, jittery, distorted"
+    }
+   ],
+   "verdict": {
+    "winner": null,
+    "label": "Limit",
+    "text": "I ran the same sheet and the same prompt on three seeds. She should hold the yellow camera to her eye on the rooftop, take a shot and lower it. One result copies the reference sheet panel by panel, one is a black void with no camera or rooftop, and one invents a second woman."
+   },
+   "notes": [
+    "This combination was frustrating. For me, chaining LoRAs came down to trial and error."
+   ],
+   "links": [
+    {
+     "label": "The Ingredients LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients"
+    },
+    {
+     "label": "The Slow Motion Control LoRA on Hugging Face",
+     "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control"
+    }
+   ],
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/ltx-2-5-loras/bundles/ingredients-with-slow-motion.zip",
+     "bytes": 725494
+    },
+    "models": [
+     {
+      "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "bytes": 21504034224,
+      "gated": true
+     },
+     {
+      "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "folder": "text_encoders",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "bytes": 15372971786,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-video-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+      "bytes": 1472223346,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-audio-vae-bf16.safetensors",
+      "folder": "vae",
+      "repo": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+      "bytes": 364866540,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+      "bytes": 1308787472,
+      "gated": true
+     },
+     {
+      "file": "ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "folder": "loras",
+      "repo": "Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control/resolve/main/ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+      "bytes": 654474448,
+      "gated": true
+     }
+    ],
+    "pack": {
+     "name": "ComfyUI-LTXVideo",
+     "commit": "3bf3ca6",
+     "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+    },
+    "comfy": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)"
+   },
+   "time": 1084
+  }
+ ],
+ "banner": {
+  "src": "img/ltx-2-5-loras/banner.jpg",
+  "thumb": "img/ltx-2-5-loras/banner-t.jpg",
+  "w": 2400,
+  "h": 900
+ },
+ "og_image": "img/ltx-2-5-loras/card.jpg",
+ "findings_last": true,
+ "run_it": {
+  "paragraphs": [
+   "Every test page has a zip with its workflow, every input it loads and a README listing the models it needs. Unzip it, copy the inputs into ComfyUI/input, put the models in the folders shown below and drag the workflow onto ComfyUI.",
+   "The workflows are in ComfyUI's API format, exactly as they ran. The ComfyUI frontend I used, 1.53.6, opens API files by drag and drop and lays the nodes out itself, so the graphs look plain but run the same.",
+   "The Lightricks repositories on Hugging Face, the LTX 2.5 base model and every LoRA, are gated. Log in, open each repository page and accept its terms before downloading, or the links return an error.",
+   "I ran everything on an RTX 3060 with 12GB of VRAM, an i5-13400F and 32GB of RAM. Peak VRAM across the tests was 7.5 to 11.8 GiB and each clip took 3 to 36 minutes."
+  ],
+  "software": [
+   {
+    "label": "ComfyUI 0.37.0 (commit 0f74f7fb, frontend 1.53.6)",
+    "url": "https://github.com/comfyanonymous/ComfyUI"
+   },
+   {
+    "label": "ComfyUI-LTXVideo at commit 3bf3ca6, for the tests that use its nodes",
+    "url": "https://github.com/Lightricks/ComfyUI-LTXVideo/tree/3bf3ca62595f1764c47d01c35c8e5dfe47e1a88f"
+   }
+  ],
+  "models": [
+   {
+    "file": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+    "folder": "diffusion_models",
+    "repo": "Lightricks/LTX-2.5",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+    "bytes": 21504034224,
+    "gated": true,
+    "used": 31
+   },
+   {
+    "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+    "folder": "text_encoders",
+    "repo": "Lightricks/LTX-2.5",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+    "bytes": 15372971786,
+    "gated": true,
+    "used": 30
+   },
+   {
+    "file": "gemma4_e2b_it_bf16.safetensors",
+    "folder": "text_encoders",
+    "repo": "Comfy-Org/gemma-4",
+    "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
+    "bytes": 10278774160,
+    "gated": false,
+    "used": 2
+   },
+   {
+    "file": "ltx-2.5-audio-vae-bf16.safetensors",
+    "folder": "vae",
+    "repo": "Lightricks/LTX-2.5",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+    "bytes": 364866540,
+    "gated": true,
+    "used": 31
+   },
+   {
+    "file": "ltx-2.5-video-vae-bf16.safetensors",
+    "folder": "vae",
+    "repo": "Lightricks/LTX-2.5",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+    "bytes": 1472223346,
+    "gated": true,
+    "used": 31
+   },
+   {
+    "file": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+    "folder": "latent_upscale_models",
+    "repo": "Lightricks/LTX-2.5",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+    "bytes": 995778752,
+    "gated": true,
+    "used": 3
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen/resolve/main/ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
+    "bytes": 1308787472,
+    "gated": true,
+    "used": 2
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Clean-Plate/resolve/main/ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
+    "bytes": 327318439,
+    "gated": true,
+    "used": 3
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Colorization",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Colorization/resolve/main/ltx-2.5-22b-ic-lora-colorization-0.9.safetensors",
+    "bytes": 906080571,
+    "gated": true,
+    "used": 3
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Day-To-Night/resolve/main/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
+    "bytes": 327318440,
+    "gated": true,
+    "used": 4
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Deblur",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Deblur/resolve/main/ltx-2.5-22b-ic-lora-deblur-0.9.safetensors",
+    "bytes": 906080571,
+    "gated": true,
+    "used": 2
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Decompression",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Decompression/resolve/main/ltx-2.5-22b-ic-lora-decompression-0.9.safetensors",
+    "bytes": 906080571,
+    "gated": true,
+    "used": 3
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Ingredients/resolve/main/ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors",
+    "bytes": 1308787472,
+    "gated": true,
+    "used": 5
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-layout-to-render-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Layout-To-Render",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Layout-To-Render/resolve/main/ltx-2.5-22b-ic-lora-layout-to-render-1.0.safetensors",
+    "bytes": 1308787439,
+    "gated": true,
+    "used": 1
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-refine-details-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Refine-Details",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Refine-Details/resolve/main/ltx-2.5-22b-ic-lora-refine-details-1.0.safetensors",
+    "bytes": 1308787534,
+    "gated": true,
+    "used": 1
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-restore-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Restore",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Restore/resolve/main/ltx-2.5-22b-ic-lora-restore-1.0.safetensors",
+    "bytes": 1711643914,
+    "gated": true,
+    "used": 1
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-sdr-to-hdr-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR/resolve/main/ltx-2.5-22b-ic-lora-sdr-to-hdr-1.0.safetensors",
+    "bytes": 1308787472,
+    "gated": true,
+    "used": 1
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Water-Simulation/resolve/main/ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
+    "bytes": 906080568,
+    "gated": true,
+    "used": 2
+   },
+   {
+    "file": "ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-LoRA-Cinemagraph",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Cinemagraph/resolve/main/ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+    "bytes": 201462650,
+    "gated": true,
+    "used": 3
+   },
+   {
+    "file": "ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+    "folder": "loras",
+    "repo": "Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-LoRA-Slow-Motion-Control/resolve/main/ltx-2.5-22b-lora-slow-motion-control-1.0.safetensors",
+    "bytes": 654474448,
+    "gated": true,
+    "used": 4
+   },
+   {
+    "file": "ltx-2.5-22b-ic-lora-sdr-to-hdr-scene-emb.safetensors",
+    "folder": "embeddings",
+    "repo": "Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR",
+    "url": "https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-SDR-To-HDR/resolve/main/ltx-2.5-22b-ic-lora-sdr-to-hdr-scene-emb.safetensors",
+    "bytes": 12614165,
+    "gated": true,
+    "used": 1
+   }
+  ]
+ },
+ "video": {
+  "id": "ZE9kvCCHlNk",
+  "title": "LTX 2.5 Official LoRAs: All 14 LoRAs tested"
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+   "type": "ltxv",
+   "device": "default"
+  }
+ },
+ "vae_video": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "ltx-2.5-video-vae-bf16.safetensors"
+  }
+ },
+ "vae_audio": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "ltx-2.5-audio-vae-bf16.safetensors"
+  }
+ },
+ "pos": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "text": "CINEMAGRAPH_MOTION, tripod locked-off static camera, zero camera movement, the woman is frozen, her face, eyes, smile, head, knitted sweater, the bookshelves and the window remain completely frozen, only a few loose strands of her wavy brown hair sway gently in a soft breeze, everything else stays perfectly still, seamless natural loop."
+  }
+ },
+ "neg": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "text": "camera movement, pan, tilt, zoom, parallax, whole image moving, background sliding, person moving, face moving, flicker on entire image, noisy texture, crawling texture, distorted, blurry, low quality"
+  }
+ },
+ "cond": {
+  "class_type": "LTXVConditioning",
+  "inputs": {
+   "positive": [
+    "pos",
+    0
+   ],
+   "negative": [
+    "neg",
+    0
+   ],
+   "frame_rate": 24.0
+  }
+ },
+ "adapter_0": {
+  "class_type": "LoraLoaderModelOnly",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "lora_name": "ltx-2.5-22b-lora-cinemagraph-0.9.safetensors",
+   "strength_model": 1.5
+  }
+ },
+ "empty_video": {
+  "class_type": "EmptyLTXVLatentVideo",
+  "inputs": {
+   "width": 768,
+   "height": 1024,
+   "length": 121,
+   "batch_size": 1
+  }
+ },
+ "load_image": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "char_kate.png"
+  }
+ },
+ "resize": {
+  "class_type": "ResizeImageMaskNode",
+  "inputs": {
+   "input": [
+    "load_image",
+    0
+   ],
+   "resize_type": "scale longer dimension",
+   "resize_type.longer_size": 1536,
+   "scale_method": "lanczos"
+  }
+ },
+ "preproc": {
+  "class_type": "LTXVPreprocess",
+  "inputs": {
+   "image": [
+    "resize",
+    0
+   ],
+   "img_compression": 18
+  }
+ },
+ "img2vid": {
+  "class_type": "LTXVImgToVideoInplace",
+  "inputs": {
+   "vae": [
+    "vae_video",
+    0
+   ],
+   "image": [
+    "preproc",
+    0
+   ],
+   "latent": [
+    "empty_video",
+    0
+   ],
+   "strength": 0.7,
+   "bypass": false
+  }
+ },
+ "empty_audio": {
+  "class_type": "LTXVEmptyLatentAudio",
+  "inputs": {
+   "frames_number": 121,
+   "frame_rate": 24,
+   "batch_size": 1,
+   "audio_vae": [
+    "vae_audio",
+    0
+   ]
+  }
+ },
+ "concat": {
+  "class_type": "LTXVConcatAVLatent",
+  "inputs": {
+   "video_latent": [
+    "img2vid",
+    0
+   ],
+   "audio_latent": [
+    "empty_audio",
+    0
+   ]
+  }
+ },
+ "noise": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 42
+  }
+ },
+ "guider": {
+  "class_type": "CFGGuider",
+  "inputs": {
+   "model": [
+    "adapter_0",
+    0
+   ],
+   "positive": [
+    "cond",
+    0
+   ],
+   "negative": [
+    "cond",
+    1
+   ],
+   "cfg": 1.0
+  }
+ },
+ "sampler_sel": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler_ancestral"
+  }
+ },
+ "sigmas": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "1.0, 0.99375, 0.9875, 0.98125, 0.975, 0.909375, 0.725, 0.421875, 0.0"
+  }
+ },
+ "sample": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "noise",
+    0
+   ],
+   "guider": [
+    "guider",
+    0
+   ],
+   "sampler": [
+    "sampler_sel",
+    0
+   ],
+   "sigmas": [
+    "sigmas",
+    0
+   ],
+   "latent_image": [
+    "concat",
+    0
+   ]
+  }
+ },
+ "sep": {
+  "class_type": "LTXVSeparateAVLatent",
+  "inputs": {
+   "av_latent": [
+    "sample",
+    0
+   ]
+  }
+ },
+ "decode_video": {
+  "class_type": "VAEDecodeTiled",
+  "inputs": {
+   "samples": [
+    "sep",
+    0
+   ],
+   "vae": [
+    "vae_video",
+    0
+   ],
+   "tile_size": 512,
+   "overlap": 64,
+   "temporal_size": 64,
+   "temporal_overlap": 16
+  }
+ },
+ "decode_audio": {
+  "class_type": "LTXVAudioVAEDecode",
+  "inputs": {
+   "samples": [
+    "sep",
+    1
+   ],
+   "audio_vae": [
+    "vae_audio",
+    0
+   ]
+  }
+ },
+ "create_video": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "decode_video",
+    0
+   ],
+   "fps": 24.0,
+   "audio": [
+    "decode_audio",
+    0
+   ],
+   "bit_depth": 8
+  }
+ },
+ "save": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "create_video",
+    0
+   ],
+   "filename_prefix": "video/ltx-2-5-loras/portrait-hair-in-the-breeze",
+   "format": "mp4",
+   "format.codec": "h264",
+   "format.codec.encoding": "re-encode",
+   "format.codec.encoding.crf": 12.0
+  }
+ }
+}

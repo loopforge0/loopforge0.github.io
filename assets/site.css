@@ -610,3 +610,18 @@ a img[data-full], .col-hero-media { cursor: inherit; }
 .pano-open:hover .badge-360, .pano-open:hover .pano-hint {
   background: var(--accent); color: var(--accent-ink);
 }
+
+/* ------------------------------------------------------------------ run it yourself (model lists) */
+
+.run-it-body { max-width: 980px; }
+.run-it-body p, .run-it p { max-width: var(--measure); }
+.run-it-body .group-title { margin: 28px 0 10px; }
+.table-wrap { overflow-x: auto; margin: 14px 0 18px; -webkit-overflow-scrolling: touch; }
+table.models { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15px; }
+table.models th, table.models td { text-align: left; vertical-align: top; padding: 9px 14px 9px 0;
+  border-top: 1px solid var(--rule); }
+table.models th { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+table.models td:first-child a { overflow-wrap: anywhere; }
+table.models small { color: var(--ink-2); margin-left: 6px; font-size: 12.5px; }
+table.models code { font-family: "Courier Prime", monospace; font-size: 14.5px; white-space: nowrap; }
+table.models td:nth-child(n+3) { white-space: nowrap; }
