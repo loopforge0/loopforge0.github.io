@@ -1,0 +1,110 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is an ultra-wide cinematic photograph of a narrow market street at night in heavy rain, the street running from the foreground into the centre of the frame and lined on both sides by three-storey buildings hung with glowing signs. Dozens of small pedestrians fill the street, most carrying umbrellas in black, clear plastic and red, and a few hurrying without. On the left side of the frame a noodle shop has a red neon sign reading \"NOODLE BAR\" in English capitals above a steamed-up window with figures seated inside. On the right side of the frame a vertical green neon sign reads \"營業中\" beside a fruit stall covered in a striped awning. Across the lower third of the frame the wet asphalt reflects every sign in long smeared streaks of red, green and amber. In the centre background a single delivery scooter with a white headlamp moves toward the camera through the crowd. Overhead, tangled power cables cross the strip of dark sky between the buildings. The lighting is entirely from the signs, shop windows and the scooter's headlamp, with rain visible as fine bright streaks against the dark. The overall composition is deep and symmetrical with the street leading the eye to the scooter, the palette built from red, green, amber and wet black, and the mood is crowded and atmospheric.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1568,
+   "height": 672,
+   "batch_size": 1
+  }
+ },
+ "sigmas": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0.0"
+  }
+ },
+ "sampler_select": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "sampler": {
+  "class_type": "SamplerCustom",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "add_noise": true,
+   "noise_seed": 1234,
+   "cfg": 1.0,
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "sampler": [
+    "sampler_select",
+    0
+   ],
+   "sigmas": [
+    "sigmas",
+    0
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ]
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/cinema-turbo"
+  }
+ }
+}

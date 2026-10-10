@@ -155,6 +155,19 @@ def facts_html(rows, cls="facts"):
     return f'<dl class="{cls}">' + "".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in rows) + "</dl>"
 
 
+def data_tables(tables):
+    """Optional `tables` on a collection: [{"title", "note", "head": [...], "rows": [[...]]}]. The first
+    column is a label; the rest are numbers, right-aligned in tabular figures."""
+    out = []
+    for t in tables:
+        head = "".join(f"<th>{e(h)}</th>" for h in t["head"])
+        rows = "".join("<tr>" + "".join(f"<td>{e(str(c))}</td>" for c in r) + "</tr>" for r in t["rows"])
+        note = f'<p class="table-note">{e(t["note"])}</p>' if t.get("note") else ""
+        out.append(f'<h3 class="group-title">{e(t["title"])}</h3><div class="table-wrap"><table class="data">'
+                   f"<thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>{note}")
+    return "".join(out)
+
+
 def inline_tags(text):
     """Escape a sentence and colour any <Picture N> in it the way prompts are coloured."""
     return re.sub(r"&lt;Picture (\d+|N)&gt;",
@@ -674,7 +687,7 @@ def build_project(col, findings, site):
     {"".join(groups)}
   </section>
   {run_it_project(col)}{refs_block}
-  <section class="block">
+  {f'<section class="block"><h2 class="section">Speed</h2>{data_tables(col["tables"])}</section>{chr(10)}  ' if col.get("tables") else ""}<section class="block">
     <h2 class="section">The model, and the machine</h2>
     {facts_html(col["facts"])}
   </section>

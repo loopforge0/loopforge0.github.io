@@ -1,0 +1,186 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_a.png"
+  },
+  "is_changed": [
+   "9908611bd310ae311d4301c5acc97a203722f431ee9e579823e26320dbd8110d"
+  ]
+ },
+ "load2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_b.png"
+  },
+  "is_changed": [
+   "42dbde79dc31cae0db12bc9b12e8db47aa705a1c9b9bddd26bd2ad9dab5aec59"
+  ]
+ },
+ "load3": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_c.png"
+  },
+  "is_changed": [
+   "93231b9b0fc7330f7ea9b329a85794b1d0d15f51492b4bb778c3d2901f2cf046"
+  ]
+ },
+ "load4": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_d.png"
+  },
+  "is_changed": [
+   "85e2ac9372b49d6ed64abee8d13be2842043e42c2cfa2db515bc664bb6b922d0"
+  ]
+ },
+ "load5": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_e.png"
+  },
+  "is_changed": [
+   "4087f53972ab732827d2440e8f635f4ab0b9f069401ac13ffd88e5f0c54e098a"
+  ]
+ },
+ "load6": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "id_f.png"
+  },
+  "is_changed": [
+   "9c8f811526d90289e84079c0fcd858148cecd7b0c5e04797dbe1d2b6653fc89e"
+  ]
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Create a single new group photograph of the six people from <image1>, <image2>, <image3>, <image4>, <image5> and <image6>, standing together in one row against a plain pale brick wall. Each of the six supplies the identity of one person and nothing else: take each person's face, hair and skin exactly as they appear in their own reference, and keep the clothing each of them is wearing. They stand shoulder to shoulder facing the camera, evenly spaced across the full width of the frame, framed from the waist up, all six lit by the same soft even daylight from the front. No one is cropped or hidden behind anyone else.",
+   "negative_prompt": "",
+   "resolution": 512,
+   "vae": [
+    "vae",
+    0
+   ],
+   "images.image_1": [
+    "load1",
+    0
+   ],
+   "images.image_2": [
+    "load2",
+    0
+   ],
+   "images.image_3": [
+    "load3",
+    0
+   ],
+   "images.image_4": [
+    "load4",
+    0
+   ],
+   "images.image_5": [
+    "load5",
+    0
+   ],
+   "images.image_6": [
+    "load6",
+    0
+   ]
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1536,
+   "height": 864,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 21,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/group-of-six-base"
+  }
+ }
+}

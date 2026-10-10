@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a square realistic studio headshot photograph of a woman in her early thirties with deep brown skin, the left side of her head shaved close and the top a cropped mass of silver-dyed tight curls, a thin pale scar crossing her right eyebrow, round brass-rimmed glasses, a single small gold hoop in her left ear only, wearing an olive-green bomber jacket with a small orange rectangular patch on the left chest that reads \"K-7\" in black capitals, over a mustard-yellow hoodie, framed from the upper chest up and centred, facing the camera directly with a calm neutral expression, the background a plain seamless mid-grey backdrop. The patch on the jacket is visible at the lower-left of the frame. The lighting is soft frontal key light from a large source slightly above the camera with gentle fill from the right. The overall composition is simple and symmetrical, the palette built from olive, mustard and grey, and the mood is direct and composed.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1024,
+   "height": 1024,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/character-four-shots-base-headshot"
+  }
+ }
+}

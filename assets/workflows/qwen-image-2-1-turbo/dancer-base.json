@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical realistic full-length photograph of a male ballet dancer at the peak of a grand jeté in an empty rehearsal studio, his whole body visible from the fingertips to the pointed toes with clear space around him, the background a long wall of mirrors with a wooden barre running across it. He is in the upper-centre of the frame, legs split in a near-straight line parallel to the floor, the front foot pointing to the left and the back foot to the right, his arms raised in a rounded shape above his head with the fingers softly separated. He wears a fitted plain white t-shirt, black tights and white ballet shoes. In the mirror behind him his reflection is visible from behind, matching the pose exactly. Across the lower third of the frame the pale wooden floor shows his small sharp shadow directly below him and a few scuff marks. On the right side of the frame a grey upright piano stands against the mirror wall with a closed lid. The lighting is bright daylight from tall windows on the left, catching the left side of his body and the muscles of his legs. The overall composition is vertical with generous headroom and the dancer as the clear focal point, the palette built from white, black and pale wood, and the mood is light and athletic.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 864,
+   "height": 1536,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/dancer-base"
+  }
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "cache": {
+  "class_type": "QwenImage21Cache",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "device": "auto",
+   "dtype": "default"
+  }
+ },
+ "load1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "src_rgba_sticker.png"
+  },
+  "is_changed": [
+   "56e8fe42f5aa87574d629a68284b2b53eff25600c6e7d30d7ae7f80a2ec5b6f3"
+  ]
+ },
+ "rgba1": {
+  "class_type": "JoinImageWithAlpha",
+  "inputs": {
+   "image": [
+    "load1",
+    0
+   ],
+   "alpha": [
+    "load1",
+    1
+   ]
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "Change the dragon's body colour from green to bright orange, keeping its shape, outline, pose and the white sticker border exactly as they are. The image stays an RGBA image with a transparent background.",
+   "negative_prompt": "",
+   "resolution": 0,
+   "vae": [
+    "vae",
+    0
+   ],
+   "images.image_1": [
+    "rgba1",
+    0
+   ]
+  }
+ },
+ "sigmas": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0.0"
+  }
+ },
+ "sampler_select": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "sampler": {
+  "class_type": "SamplerCustom",
+  "inputs": {
+   "model": [
+    "cache",
+    0
+   ],
+   "add_noise": true,
+   "noise_seed": 1234,
+   "cfg": 1.0,
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "sampler": [
+    "sampler_select",
+    0
+   ],
+   "sigmas": [
+    "sigmas",
+    0
+   ],
+   "latent_image": [
+    "encode",
+    2
+   ]
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/edit-a-transparent-layer-turbo"
+  }
+ }
+}

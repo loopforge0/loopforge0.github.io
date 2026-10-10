@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical flat-vector illustration of a lighthouse keeper's cottage on a rocky headland at dusk, drawn in clean geometric shapes with no outlines and no gradients, the background a deep indigo sky graded only in flat bands. The lighthouse stands slightly right of centre, a tall white cylinder with three broad red bands and a small dark gallery near the top, its lamp room glowing pale yellow. A single wedge of pale yellow light projects from the lamp toward the upper-left of the frame. Below and left of the lighthouse sits the keeper's cottage, a simple white rectangle with a steep dark roof, two square windows lit warm amber and a narrow chimney. Across the lower third of the frame the headland is built from four overlapping flat shapes in shades of deep green and near-black, each edge a clean straight or gently curved line. On the left side of the frame the sea is a flat dark teal plane broken by five evenly spaced white horizontal dashes standing for waves. In the upper-right corner a crescent moon sits as a plain cream shape beside seven small cream stars of two different sizes. Along the right edge of the frame three simplified seabirds are drawn as small dark chevrons at different heights. The shapes are filled with flat colour and the only shading is a single darker tone on the shadowed side of the lighthouse and the cottage. The lighting is implied rather than rendered, coming from the lamp and the cottage windows, with no cast shadows anywhere. The overall composition is vertical and balanced with the lighthouse as the clear focal point, the palette built from indigo, teal, cream and red, and the mood is calm and graphic.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 896,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/illustration-base"
+  }
+ }
+}

@@ -6,6 +6,10 @@ Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someo
 
 ## Projects
 
+### [Qwen-Image 2.1 Turbo, run locally](https://loopforge.cc/projects/qwen-image-2-1-turbo/)
+
+Published 11 October 2026. 23 prompts. Qwen's 8-step version of Qwen-Image 2.1, next to the regular model on the same prompts. Each test shows both images, the prompt and the time on my RTX 3060.
+
 ### [LTX 2.5 Creative Lab LoRAs, tested locally](https://loopforge.cc/projects/ltx-2-5-loras/)
 
 Published 9 October 2026. 31 prompts. Lightricks has released a set of official LoRAs for LTX 2.5 that add things the base model does not do on its own, from building a shot out of a reference sheet to colouring a black-and-white film. I ran 14 of them in ComfyUI on my own desktop, plus three tests that chain two LoRAs in one generation. Each test has a frame from every clip in it, the exact prompt, the workflow that ran and the inputs it was given. 25 of the 31 tests worked, and the other 6 show where a LoRA reached its limit.

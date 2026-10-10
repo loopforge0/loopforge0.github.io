@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical realistic portrait photograph of a woman in her late thirties seated at a window table in a quiet cafe, framed from the chest up and turned three quarters toward the camera, the background a warm blur of dark timber panelling and out-of-focus window light. Her skin is olive-toned and clear, with fine lines at the outer corners of the eyes and a small mole below the left cheekbone, and her eyes are dark brown and looking just past the lens. Her hair is dark brown and shoulder-length, tucked behind the right ear and falling loose on the left. She wears a charcoal wool coat over a thin cream polo-neck, the coat collar turned up against the side of her neck. In the upper-left of the frame a tall window admits soft grey daylight, its frame reduced to a pale vertical band. On the right side of the frame the timber panelling recedes into shadow. Across the lower third of the frame the edge of a marble table catches a narrow highlight, and a white ceramic cup sits on it, cropped by the frame edge, a thin curl of steam rising from it. In the lower-left corner her hand rests on the table, relaxed, with short unpainted nails. The wool of the coat shows a visible weave and a few pale fibres catching the light along the shoulder. The lighting is soft diffused daylight arriving from the window on the left and slightly in front, modelling the left side of her face and leaving the right in gentle falloff, with a small bright catchlight in each eye and no hard shadows. The overall composition is simple and off-centre with the window light leading the eye, the palette built from charcoal, cream and warm brown, and the mood is quiet and unposed.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 896,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/portrait-base"
+  }
+ }
+}

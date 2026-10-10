@@ -1,0 +1,110 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical realistic close-up photograph of an elderly man's two hands tying a fishing fly at a small steel vise on a cluttered wooden workbench, the background a warm dark blur of shelves. Both hands fill the centre of the frame, all ten fingers visible, the skin thin and spotted with raised veins and short clean nails. His left thumb and forefinger pinch a tiny hook held in the jaws of the vise, and his right hand holds a bobbin of fine red thread pulled taut toward the hook. Wound on the hook is a small body of grey dubbing with a short tuft of brown hackle feathers. In the lower-left corner of the frame lie a pair of small curved scissors and a few loose feathers in grey, brown and orange. On the right side of the frame a magnifying lamp on an articulated arm leans in from the edge. The lighting is a single warm lamp from the upper right, raking across the backs of the hands so every crease and vein reads, with deep soft shadow on the left. The overall composition is tight and intimate with the fingertips and the hook as the focal point, the palette built from warm skin tones, steel grey and the red thread, and the mood is patient and absorbed.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 896,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "sigmas": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0.0"
+  }
+ },
+ "sampler_select": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "sampler": {
+  "class_type": "SamplerCustom",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "add_noise": true,
+   "noise_seed": 1234,
+   "cfg": 1.0,
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "sampler": [
+    "sampler_select",
+    0
+   ],
+   "sigmas": [
+    "sigmas",
+    0
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ]
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/hands-turbo"
+  }
+ }
+}

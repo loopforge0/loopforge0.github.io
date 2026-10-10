@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a wide realistic photograph of a large group of people standing together for a group portrait in front of a plain pale brick wall, the wall filling the background evenly with no windows, signs or fittings. About twenty adults stand in three staggered rows, the front row standing straight and the rows behind raised slightly so every face is visible, and they are packed shoulder to shoulder across the full width of the frame. They are a mixed group of men and women of different ages, builds, skin tones and hair colours, most in their twenties to forties, and each wears ordinary plain clothing in muted colours with no logos or patterns. Their hair varies from dark brown and black to mid brown, auburn and blonde, worn at different lengths, some tied back and some loose. Across the top of the frame the brick wall continues above their heads to both edges. On the left side of the frame the group ends a little in from the edge and the wall shows plainly beside them. On the right side of the frame the group ends the same way. Along the lower edge of the frame the front row is cropped at around the waist. Most of them look directly into the lens with a relaxed expression and a few are smiling. The lighting is soft even daylight from the front, leaving faces evenly lit with no hard shadows and a gentle falloff toward the top of the wall. The overall composition is wide, symmetrical and evenly filled, the palette built from warm brick, muted clothing and skin tones, and the mood is plain and friendly.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/crowd-base"
+  }
+ }
+}

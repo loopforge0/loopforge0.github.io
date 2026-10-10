@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "This is an RGBA image with transparency. A flat lay asset sheet of eight separate hand-drawn travel objects arranged in two rows of four against nothing, each object complete and not touching any other, with clear empty space between them. In the top row, from left to right: a brown leather suitcase with two brass buckles seen from the side; a folded paper map showing pale green and blue areas with thin road lines; a black film camera with a silver lens barrel and a worn leather strap looped beside it; a pair of round sunglasses with thin gold frames and dark green lenses. In the bottom row, from left to right: a dark red vacuum flask with a silver cup screwed onto its top; a small potted cactus in a terracotta pot with three rounded pads; a coiled length of climbing rope in faded orange and cream; a white enamel mug with a chipped navy rim. Every object is drawn in the same style, a clean illustration with soft flat colour and a fine darker outline, lit evenly from the upper left so each carries a soft highlight on its upper surface and no cast shadow falls on the background. The image has alpha channel and the background is transparent.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1024,
+   "height": 1024,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/rgba-sheet-base"
+  }
+ }
+}

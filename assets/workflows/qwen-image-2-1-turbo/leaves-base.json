@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a realistic close photograph of a dense canopy of green maple leaves filling the entire frame, with no sky, trunk or horizon visible anywhere and the background falling away into deep shaded green between the layers. Several hundred leaves overlap each other across the whole frame, each a broad five-lobed maple leaf with a serrated edge and fine pale veins branching from a central stem. The leaves sit at every angle, some face-on and flat to the viewer, some edge-on and almost invisible, and many partly hidden behind the ones in front. Across the upper half of the frame the foliage is denser and darker, layered four or five leaves deep. In the lower-left of the frame a cluster of leaves catches more light and reads as a brighter yellow-green. On the right side of the frame several thin brown twigs run diagonally between the leaves, partly obscured. In the lower-right corner the foliage thins slightly and a small gap opens into dark shadow behind. Toward the centre of the frame one leaf sits flat and fully lit, larger in the frame than its neighbours. The leaf surfaces are matte with a fine texture, a few carrying small dark blemishes and one or two with a bitten notch out of the edge. The lighting is bright diffused daylight from above and slightly behind, so the nearer leaves are lit from the front while a few further back glow translucent with the light coming through them. The overall composition is dense, even and without a focal point, the palette built almost entirely from greens, and the mood is bright and crowded.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/leaves-base"
+  }
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical flat screenshot of a weather app on a phone, filling the whole frame edge to edge with no phone body visible, built from a smooth deep blue to pale blue vertical gradient background. At the very top of the frame a thin status bar shows \"9:41\" in small white text on the left. Below it, centred, the city name \"LISBON\" is set in medium white capitals, and beneath it a very large thin white numeral reads \"18°\", with the words \"Partly Cloudy\" in small white text under the numeral. Across the middle of the frame a translucent rounded white card holds a horizontal row of five columns, each with a time above a small weather icon above a temperature, reading \"Now\" \"18°\", \"14:00\" \"19°\", \"15:00\" \"19°\", \"16:00\" \"17°\" and \"17:00\" \"16°\". Below that card a second translucent rounded card lists five rows, one per day, each with the day on the left, a small icon in the middle and a temperature range on the right, reading \"Mon 14° 19°\", \"Tue 13° 18°\", \"Wed 15° 21°\", \"Thu 16° 22°\" and \"Fri 12° 17°\". In the lower part of the frame two small square tiles sit side by side, the left one labelled \"UV INDEX\" above a large \"4\", the right one labelled \"WIND\" above \"12 km/h\". The lighting is flat screen light with no shadows beyond the soft drop shadows under the cards. The overall composition is a clean vertical mobile interface layout, the palette built from deep blue, pale blue and white, and the mood is clear and modern.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 864,
+   "height": 1536,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/ui-app-base"
+  }
+ }
+}

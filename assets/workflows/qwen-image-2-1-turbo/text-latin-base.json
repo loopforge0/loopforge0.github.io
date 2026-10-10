@@ -1,0 +1,93 @@
+{
+ "unet": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+   "type": "qwen_image",
+   "device": "default"
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+  }
+ },
+ "encode": {
+  "class_type": "TextEncodeQwenImage21",
+  "inputs": {
+   "clip": [
+    "clip",
+    0
+   ],
+   "prompt": "The image is a vertical realistic photograph of a printed A2 poster pinned flat to a pale plaster wall, the poster filling almost the whole frame with a narrow margin of wall visible on all four sides. The poster stock is matte off-white with a faint paper texture and a soft crease running down from the upper-right pin. Across the top of the poster a heavy black headline in condensed sans-serif capitals reads \"NORTHERN LIGHTS\", set on one line and occupying the full width of the printed area. Directly beneath it, in a lighter weight and about a third of the headline's size, a line of black capitals reads \"AN EVENING OF FIELD RECORDINGS\". In the centre of the poster sits a large square block of flat deep teal, and within it, reversed out in white capitals at medium weight and centred on two lines, is \"SATURDAY 14 MARCH\" above \"DOORS 7PM\". On the left side of the poster, running vertically up the margin in small grey capitals, is \"ISSUE 04\". Across the lower third of the poster three short lines of small black body text are set left-aligned, reading “DOCK ROAD WAREHOUSE 4” above “TICKETS £12 ON THE DOOR” above “NORTHERNLIGHTS.FM”. In the lower-right corner a plain black circular logo mark about the size of a coin carries the white letters \"NL\". Four brass drawing pins hold the poster, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the paper so the crease and the texture read, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from off-white, black and deep teal, and the mood is plain and editorial.",
+   "negative_prompt": "",
+   "resolution": 1024
+  }
+ },
+ "latent": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 896,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "sampler": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "unet",
+    0
+   ],
+   "positive": [
+    "encode",
+    0
+   ],
+   "negative": [
+    "encode",
+    1
+   ],
+   "latent_image": [
+    "latent",
+    0
+   ],
+   "seed": 1234,
+   "steps": 40,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "denoise": 1.0
+  }
+ },
+ "decode": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "sampler",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "decode",
+    0
+   ],
+   "filename_prefix": "qwen-image-2-1-turbo/text-latin-base"
+  }
+ }
+}

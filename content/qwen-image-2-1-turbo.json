@@ -1,0 +1,2926 @@
+{
+ "slug": "qwen-image-2-1-turbo",
+ "title": "Qwen-Image 2.1 Turbo, run locally",
+ "short": "8 steps against 40 on a 12 GB card",
+ "published": "2026-10-11",
+ "video": {
+  "id": "QiSVLf-CGDI",
+  "title": "Qwen-Image 2.1 Turbo - fastest model yet?"
+ },
+ "models": [
+  "Qwen-Image 2.1 Turbo",
+  "Qwen-Image 2.1"
+ ],
+ "summary": [
+  "Qwen's 8-step version of Qwen-Image 2.1, next to the regular model on the same prompts. Each test shows both images, the prompt and the time on my RTX 3060."
+ ],
+ "facts": [
+  [
+   "Model",
+   "Qwen-Image 2.1 Turbo, Qwen's 8-step version of Qwen-Image 2.1"
+  ],
+  [
+   "Turbo file",
+   "qwen_image_2.1_turbo_int8_convrot.safetensors, 7.26 GB"
+  ],
+  [
+   "Turbo settings",
+   "8 steps, cfg 1, euler, with the trained sigmas in a ManualSigmas node: 1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0.0"
+  ],
+  [
+   "Base settings",
+   "40 steps, euler / simple, cfg 1.0"
+  ],
+  [
+   "Text encoder and VAE",
+   "qwen3vl_8b_int8_convrot.safetensors and qwen_image_2.1_vae_bf16.safetensors, the same as base 2.1"
+  ],
+  [
+   "Licence",
+   "Qwen Research, non-commercial"
+  ],
+  [
+   "Software",
+   "ComfyUI 0.37.0, PyTorch 2.11.0+cu130, sage attention"
+  ],
+  [
+   "Ran on",
+   "RTX 3060, 12GB (local)"
+  ]
+ ],
+ "tables": [
+  {
+   "title": "Seconds per image, by size",
+   "head": [
+    "Size",
+    "RTX 3060 Turbo",
+    "RTX 3060 base",
+    "RTX 5090 Turbo",
+    "RTX 5090 base"
+   ],
+   "rows": [
+    [
+     "1024×1024",
+     "15.0 s",
+     "34.9 s",
+     "2.0 s",
+     "4.5 s"
+    ],
+    [
+     "2048×2048",
+     "66.9 s",
+     "186.4 s",
+     "8.9 s",
+     "22.8 s"
+    ],
+    [
+     "3840×2160",
+     "180.5 s",
+     "518.2 s",
+     "23.2 s",
+     "63.7 s"
+    ]
+   ],
+   "note": "One recorded run each, seed 1234, the same portrait prompt, against ComfyUI's stock 2.1 template at 25 steps. RTX 3060 times are a stopwatch from Run to the finished image. RTX 5090 (RunPod) times are ComfyUI's own, because the stopwatch there includes about 1.3 s of proxy round trip."
+  },
+  {
+   "title": "Average seconds per image, by test (RTX 3060)",
+   "head": [
+    "Test",
+    "Images",
+    "Turbo, 8 steps",
+    "Base, 40 steps"
+   ],
+   "rows": [
+    [
+     "Text to image, 0.9 to 1.3 MP",
+     32,
+     "12.7 s",
+     "49.8 s"
+    ],
+    [
+     "One character in four shots",
+     8,
+     "14.0 s",
+     "54.7 s"
+    ],
+    [
+     "Edit from one reference photo",
+     6,
+     "23.5 s",
+     "63.2 s"
+    ],
+    [
+     "One edit from six references",
+     1,
+     "35.3 s",
+     "94.3 s"
+    ],
+    [
+     "Cut-out or removal from a photo",
+     10,
+     "18.6 s",
+     "59.0 s"
+    ],
+    [
+     "Transparent image from a prompt",
+     5,
+     "13.5 s",
+     "48.3 s"
+    ],
+    [
+     "Edit of a transparent image",
+     2,
+     "24.2 s",
+     "65.4 s"
+    ],
+    [
+     "Sketch to photo",
+     1,
+     "25.6 s",
+     "69.0 s"
+    ],
+    [
+     "360 panorama",
+     1,
+     "26.9 s",
+     "109.8 s"
+    ]
+   ],
+   "note": "Every image in the tests, both seeds, from queueing the job to the saved image. Base here is Qwen's pipeline default of 40 steps."
+  }
+ ],
+ "groups": [
+  {
+   "id": "quality",
+   "title": "Image quality",
+   "note": "Text to image at about 1 MP. Times are for seed 1234, the first run of each prompt, so they include encoding it."
+  },
+  {
+   "id": "text",
+   "title": "Text and interfaces"
+  },
+  {
+   "id": "adherence",
+   "title": "Following the prompt"
+  },
+  {
+   "id": "character",
+   "title": "The same person again"
+  },
+  {
+   "id": "transparency",
+   "title": "Transparency"
+  },
+  {
+   "id": "features",
+   "title": "Sketch to photo and 360"
+  }
+ ],
+ "refs_title": "Inputs",
+ "refs": [
+  {
+   "id": "id_d",
+   "label": "Person 4",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-d.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-d-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_d.png",
+    "bytes": 1346264
+   }
+  },
+  {
+   "id": "id_a",
+   "label": "Person 1",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-a.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-a-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_a.png",
+    "bytes": 1408004
+   }
+  },
+  {
+   "id": "id_b",
+   "label": "Person 2",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-b.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-b-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_b.png",
+    "bytes": 1422051
+   }
+  },
+  {
+   "id": "id_c",
+   "label": "Person 3",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-c.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-c-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_c.png",
+    "bytes": 1240660
+   }
+  },
+  {
+   "id": "id_e",
+   "label": "Person 5",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-e.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-e-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_e.png",
+    "bytes": 1139185
+   }
+  },
+  {
+   "id": "id_f",
+   "label": "Person 6",
+   "note": "Generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-id-f.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-id-f-t.jpg",
+    "w": 753,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/id_f.png",
+    "bytes": 1402887
+   }
+  },
+  {
+   "id": "src_kate",
+   "label": "Kate",
+   "note": "Character photo, cropped to 864×1152",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-src-kate.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-src-kate-t.jpg",
+    "w": 825,
+    "h": 1100,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/src_kate.png",
+    "bytes": 1651299
+   }
+  },
+  {
+   "id": "src_rgba_sticker",
+   "label": "Dragon sticker layer",
+   "note": "RGBA, generated with Qwen-Image 2.1 in the earlier project",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-src-rgba-sticker.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-src-rgba-sticker-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/src_rgba_sticker.png",
+    "bytes": 670620
+   }
+  },
+  {
+   "id": "src_boat_sketch",
+   "label": "Yacht sketch",
+   "note": "From the Turbo model card, scaled from 3200×1120 to 1760×608",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/in-src-boat-sketch.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/in-src-boat-sketch-t.jpg",
+    "w": 1100,
+    "h": 380,
+    "dl": "workflows/qwen-image-2-1-turbo/inputs/src_boat_sketch.png",
+    "bytes": 779477
+   }
+  }
+ ],
+ "links": [
+  {
+   "label": "My Qwen-Image 2.1 Turbo workflow on Civitai, 8 steps with the trained sigmas",
+   "url": "https://civitai.com/models/2995369/qwen-image-21-turbo-8-steps-comfyui-workflow"
+  },
+  {
+   "label": "The same workflow, downloaded from here (ComfyUI UI format)",
+   "url": "/assets/workflows/qwen-image-2-1-turbo/qwen21_turbo_t2i.json"
+  },
+  {
+   "label": "Qwen-Image 2.1 Turbo on Hugging Face, the model card and the licence",
+   "url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo"
+  },
+  {
+   "label": "Comfy-Org/Qwen-Image-2.1, the repackaged files ComfyUI loads",
+   "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1"
+  },
+  {
+   "label": "Qwen-Image 2.1, run locally: the earlier project on base 2.1",
+   "url": "/projects/qwen-image-2-1/"
+  },
+  {
+   "label": "ComfyUI",
+   "url": "https://github.com/comfyanonymous/ComfyUI"
+  },
+  {
+   "label": "Look around the Turbo 360 panorama",
+   "url": "/assets/interactive/qwen-image-2-1-turbo/viewer.html"
+  }
+ ],
+ "run_it": {
+  "paragraphs": [
+   "The workflow on Civitai is ComfyUI's own Qwen-Image 2.1 template with two changes: the Turbo model file, and a SamplerCustom with Turbo's trained 8-step schedule in a ManualSigmas node. It needs ComfyUI 0.37.0 or newer.",
+   "Every test below also has the workflow that produced it, in ComfyUI's API format, with the exact inputs it loaded published beside it. Copy the inputs into ComfyUI/input and drag the workflow onto ComfyUI.",
+   "The text encoder and VAE are the same files as base 2.1, so if you already run 2.1 you only need the Turbo file. The base file is only needed for the comparison images.",
+   "At cfg 1 the negative prompt has no effect. In my test the output was pixel-identical with and without one."
+  ],
+  "software": [
+   {
+    "label": "Qwen-Image 2.1 Turbo, 8 steps, the ComfyUI workflow on Civitai",
+    "url": "https://civitai.com/models/2995369/qwen-image-21-turbo-8-steps-comfyui-workflow"
+   },
+   {
+    "label": "ComfyUI 0.37.0",
+    "url": "https://github.com/comfyanonymous/ComfyUI"
+   }
+  ],
+  "models": [
+   {
+    "file": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+    "folder": "diffusion_models",
+    "repo": "Comfy-Org/Qwen-Image-2.1",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_turbo_int8_convrot.safetensors",
+    "bytes": 7256787829,
+    "gated": false,
+    "used": 23
+   },
+   {
+    "file": "qwen3vl_8b_int8_convrot.safetensors",
+    "folder": "text_encoders",
+    "repo": "Comfy-Org/Qwen-Image-2.1",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
+    "bytes": 9350798360,
+    "gated": false,
+    "used": 23
+   },
+   {
+    "file": "qwen_image_2.1_vae_bf16.safetensors",
+    "folder": "vae",
+    "repo": "Comfy-Org/Qwen-Image-2.1",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
+    "bytes": 675509688,
+    "gated": false,
+    "used": 23
+   },
+   {
+    "file": "qwen_image_2.1_int8_convrot.safetensors",
+    "folder": "diffusion_models",
+    "repo": "Comfy-Org/Qwen-Image-2.1",
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
+    "bytes": 7256783064,
+    "gated": false,
+    "used": 23
+   }
+  ]
+ },
+ "banner": {
+  "src": "img/qwen-image-2-1-turbo/banner.jpg",
+  "thumb": "img/qwen-image-2-1-turbo/banner-t.jpg",
+  "w": 1536,
+  "h": 864
+ },
+ "og_image": "img/qwen-image-2-1-turbo/card.jpg",
+ "try": [
+  {
+   "label": "Look around the 360",
+   "note": "Drag to pan. Generated by Turbo as one equirectangular image.",
+   "url": "/assets/interactive/qwen-image-2-1-turbo/viewer.html",
+   "image": {
+    "src": "img/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/panorama-360-turbo-t.jpg",
+    "w": 1600,
+    "h": 800,
+    "dl": "dl/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+    "bytes": 466830
+   }
+  }
+ ],
+ "prompts": [
+  {
+   "slug": "portrait",
+   "title": "A portrait by a cafe window",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/portrait-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/portrait-turbo-t.jpg",
+    "w": 896,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/portrait-turbo.jpg",
+    "bytes": 167323
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/portrait-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/portrait-turbo-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/portrait-turbo.jpg",
+      "bytes": 167323
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/portrait-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/portrait-base-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/portrait-base.jpg",
+      "bytes": 182273
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/portrait-turbo.json",
+    "bytes": 3487
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.7 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "47.9 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic portrait photograph of a woman in her late thirties seated at a window table in a quiet cafe, framed from the chest up and turned three quarters toward the camera, the background a warm blur of dark timber panelling and out-of-focus window light. Her skin is olive-toned and clear, with fine lines at the outer corners of the eyes and a small mole below the left cheekbone, and her eyes are dark brown and looking just past the lens. Her hair is dark brown and shoulder-length, tucked behind the right ear and falling loose on the left. She wears a charcoal wool coat over a thin cream polo-neck, the coat collar turned up against the side of her neck. In the upper-left of the frame a tall window admits soft grey daylight, its frame reduced to a pale vertical band. On the right side of the frame the timber panelling recedes into shadow. Across the lower third of the frame the edge of a marble table catches a narrow highlight, and a white ceramic cup sits on it, cropped by the frame edge, a thin curl of steam rising from it. In the lower-left corner her hand rests on the table, relaxed, with short unpainted nails. The wool of the coat shows a visible weave and a few pale fibres catching the light along the shoulder. The lighting is soft diffused daylight arriving from the window on the left and slightly in front, modelling the left side of her face and leaving the right in gentle falloff, with a small bright catchlight in each eye and no hard shadows. The overall composition is simple and off-centre with the window light leading the eye, the palette built from charcoal, cream and warm brown, and the mood is quiet and unposed."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/portrait-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "texture",
+   "title": "Skin and texture in close-up",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/texture-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/texture-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/texture-turbo.jpg",
+    "bytes": 212022
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/texture-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/texture-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/texture-turbo.jpg",
+      "bytes": 212022
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/texture-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/texture-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/texture-base.jpg",
+      "bytes": 226009
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/texture-turbo.json",
+    "bytes": 4474
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024"
+    ],
+    [
+     "Turbo, 8 steps",
+     "14.2 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "49.2 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a realistic close-up photograph of a young woman in her mid twenties, framed from the collarbone up and filling most of the frame, turned three quarters toward the lens with her chin slightly lowered and her eyes level with the camera. Her skin is fair and matte with visible pores across the nose and cheeks, a scatter of small freckles over the bridge of the nose and the tops of the cheeks, fine pale down along the jaw, and a faint flush on the cheekbones. Her eyebrows are full and dark with individual hairs distinct at their upper edge, her eyelashes are separated rather than clumped, and her grey-green irises show a fine radial fibre pattern with a small bright catchlight high in each one. Her hair is dark brown, shoulder length and worn loose with a centre parting, and through it run irregular hand-painted highlights of soft pink and muted blue, the two colours sitting in separate ribbons rather than blending, brightest toward the ends and fading out near the roots. A few fine flyaway strands stand away from the crown and catch the light. On the near side of her neck, running from below the ear down toward the collarbone, is a fine-line black tattoo of a botanical spray, drawn in single-weight strokes with small leaves and a seed head and no shading or colour, the ink slightly softened where it sits over the tendon. A second tattoo of the same fine black line work covers the outer edge of her near shoulder, mostly hidden by her top, showing a few stems and a curved stalk. She wears large circular earrings in warm brushed brass, about the width of two fingers, their faces cut with a shallow engraved pattern of concentric rings and their lower edges catching a bright specular highlight. A single small silver stud sits higher on the near ear. Her top is a heavy oatmeal wool knit with a wide ribbed collar, the individual stitches and the twist of the yarn clearly visible, and a few loose fibres standing up along the shoulder seam. The background is a plain mid-grey wall well behind her, softly out of focus and evenly lit, with no objects or markings on it. The lighting is soft diffused daylight arriving from the upper left, modelling the cheekbone and the bridge of the nose, leaving a gentle shadow under the jaw and picking out the raised texture of the knit along the near shoulder, with no hard shadow anywhere. Her expression is calm and direct, her lips closed and relaxed. The overall composition is a tight centred portrait with the head slightly above centre, the palette built from warm skin, dark brown hair, pink and blue, brass and oatmeal against neutral grey, and the mood is quiet and observational."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/texture-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "hands",
+   "title": "Two hands tying a fishing fly",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/hands-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/hands-turbo-t.jpg",
+    "w": 896,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/hands-turbo.jpg",
+    "bytes": 190301
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/hands-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/hands-turbo-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/hands-turbo.jpg",
+      "bytes": 190301
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/hands-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/hands-base-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/hands-base.jpg",
+      "bytes": 197018
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/hands-turbo.json",
+    "bytes": 2985
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.1 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic close-up photograph of an elderly man's two hands tying a fishing fly at a small steel vise on a cluttered wooden workbench, the background a warm dark blur of shelves. Both hands fill the centre of the frame, all ten fingers visible, the skin thin and spotted with raised veins and short clean nails. His left thumb and forefinger pinch a tiny hook held in the jaws of the vise, and his right hand holds a bobbin of fine red thread pulled taut toward the hook. Wound on the hook is a small body of grey dubbing with a short tuft of brown hackle feathers. In the lower-left corner of the frame lie a pair of small curved scissors and a few loose feathers in grey, brown and orange. On the right side of the frame a magnifying lamp on an articulated arm leans in from the edge. The lighting is a single warm lamp from the upper right, raking across the backs of the hands so every crease and vein reads, with deep soft shadow on the left. The overall composition is tight and intimate with the fingertips and the hook as the focal point, the palette built from warm skin tones, steel grey and the red thread, and the mood is patient and absorbed."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/hands-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "crowd",
+   "title": "About twenty people in a group portrait",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/crowd-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/crowd-turbo-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1-turbo/crowd-turbo.jpg",
+    "bytes": 242920
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/crowd-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/crowd-turbo-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/crowd-turbo.jpg",
+      "bytes": 242920
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/crowd-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/crowd-base-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/crowd-base.jpg",
+      "bytes": 279064
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/crowd-turbo.json",
+    "bytes": 3334
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.4 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "47.5 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a wide realistic photograph of a large group of people standing together for a group portrait in front of a plain pale brick wall, the wall filling the background evenly with no windows, signs or fittings. About twenty adults stand in three staggered rows, the front row standing straight and the rows behind raised slightly so every face is visible, and they are packed shoulder to shoulder across the full width of the frame. They are a mixed group of men and women of different ages, builds, skin tones and hair colours, most in their twenties to forties, and each wears ordinary plain clothing in muted colours with no logos or patterns. Their hair varies from dark brown and black to mid brown, auburn and blonde, worn at different lengths, some tied back and some loose. Across the top of the frame the brick wall continues above their heads to both edges. On the left side of the frame the group ends a little in from the edge and the wall shows plainly beside them. On the right side of the frame the group ends the same way. Along the lower edge of the frame the front row is cropped at around the waist. Most of them look directly into the lens with a relaxed expression and a few are smiling. The lighting is soft even daylight from the front, leaving faces evenly lit with no hard shadows and a gentle falloff toward the top of the wall. The overall composition is wide, symmetrical and evenly filled, the palette built from warm brick, muted clothing and skin tones, and the mood is plain and friendly."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/crowd-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "cinema",
+   "title": "A rainy market street at 21:9",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/cinema-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/cinema-turbo-t.jpg",
+    "w": 1568,
+    "h": 672,
+    "dl": "dl/qwen-image-2-1-turbo/cinema-turbo.jpg",
+    "bytes": 311239
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/cinema-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/cinema-turbo-t.jpg",
+      "w": 1568,
+      "h": 672,
+      "dl": "dl/qwen-image-2-1-turbo/cinema-turbo.jpg",
+      "bytes": 311239
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/cinema-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/cinema-base-t.jpg",
+      "w": 1568,
+      "h": 672,
+      "dl": "dl/qwen-image-2-1-turbo/cinema-base.jpg",
+      "bytes": 381589
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/cinema-turbo.json",
+    "bytes": 3119
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1568×672"
+    ],
+    [
+     "Turbo, 8 steps",
+     "14.2 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "50.1 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is an ultra-wide cinematic photograph of a narrow market street at night in heavy rain, the street running from the foreground into the centre of the frame and lined on both sides by three-storey buildings hung with glowing signs. Dozens of small pedestrians fill the street, most carrying umbrellas in black, clear plastic and red, and a few hurrying without. On the left side of the frame a noodle shop has a red neon sign reading \"NOODLE BAR\" in English capitals above a steamed-up window with figures seated inside. On the right side of the frame a vertical green neon sign reads \"營業中\" beside a fruit stall covered in a striped awning. Across the lower third of the frame the wet asphalt reflects every sign in long smeared streaks of red, green and amber. In the centre background a single delivery scooter with a white headlamp moves toward the camera through the crowd. Overhead, tangled power cables cross the strip of dark sky between the buildings. The lighting is entirely from the signs, shop windows and the scooter's headlamp, with rain visible as fine bright streaks against the dark. The overall composition is deep and symmetrical with the street leading the eye to the scooter, the palette built from red, green, amber and wet black, and the mood is crowded and atmospheric."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/cinema-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "landscape",
+   "title": "A glacial valley at first light",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/landscape-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/landscape-turbo-t.jpg",
+    "w": 1536,
+    "h": 864,
+    "dl": "dl/qwen-image-2-1-turbo/landscape-turbo.jpg",
+    "bytes": 377901
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/landscape-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/landscape-turbo-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/landscape-turbo.jpg",
+      "bytes": 377901
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/landscape-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/landscape-base-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/landscape-base.jpg",
+      "bytes": 441835
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/landscape-turbo.json",
+    "bytes": 3399
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1536×864"
+    ],
+    [
+     "Turbo, 8 steps",
+     "16.8 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "63.6 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a wide realistic landscape photograph of a glacial valley at first light, the background a line of jagged snow-covered peaks standing against a pale clearing sky. A shallow braided river runs from the lower-left corner of the frame toward the centre, splitting around three low gravel bars before disappearing into the middle distance. Along the left side of the frame a steep scree slope rises out of the water, its surface broken grey rock with patches of rust-coloured lichen. On the right side of the frame a stand of perhaps thirty dark spruce climbs the lower slope, thinning to single trees further up. Across the upper third of the frame the peaks carry fresh snow on their upper faces and bare dark rock below the snowline, the furthest range paling into blue haze. In the lower-right corner a single weathered boulder sits half in the water, pale grey and streaked. Across the middle of the frame a low band of mist lies along the valley floor, thin enough to see the river through. The water is clear and shallow over pale gravel, showing the stones on the bed, and it runs glassy where it is deep and broken white where it drops over the bars. The lighting is low warm sun arriving from the right and just above the peaks, catching the snow on the upper faces in warm gold while the valley floor stays in cool blue shadow, with long soft shadows reaching left from the spruce. The overall composition is deep and layered with the river leading the eye into the frame, the palette built from cool blue-grey, warm gold and dark green, and the mood is still and cold."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/landscape-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "leaves",
+   "title": "A canopy of maple leaves",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/leaves-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/leaves-turbo-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1-turbo/leaves-turbo.jpg",
+    "bytes": 252298
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/leaves-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/leaves-turbo-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/leaves-turbo.jpg",
+      "bytes": 252298
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/leaves-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/leaves-base-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/leaves-base.jpg",
+      "bytes": 343514
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/leaves-turbo.json",
+    "bytes": 3367
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "47.4 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a realistic close photograph of a dense canopy of green maple leaves filling the entire frame, with no sky, trunk or horizon visible anywhere and the background falling away into deep shaded green between the layers. Several hundred leaves overlap each other across the whole frame, each a broad five-lobed maple leaf with a serrated edge and fine pale veins branching from a central stem. The leaves sit at every angle, some face-on and flat to the viewer, some edge-on and almost invisible, and many partly hidden behind the ones in front. Across the upper half of the frame the foliage is denser and darker, layered four or five leaves deep. In the lower-left of the frame a cluster of leaves catches more light and reads as a brighter yellow-green. On the right side of the frame several thin brown twigs run diagonally between the leaves, partly obscured. In the lower-right corner the foliage thins slightly and a small gap opens into dark shadow behind. Toward the centre of the frame one leaf sits flat and fully lit, larger in the frame than its neighbours. The leaf surfaces are matte with a fine texture, a few carrying small dark blemishes and one or two with a bitten notch out of the edge. The lighting is bright diffused daylight from above and slightly behind, so the nearer leaves are lit from the front while a few further back glow translucent with the light coming through them. The overall composition is dense, even and without a focal point, the palette built almost entirely from greens, and the mood is bright and crowded."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/leaves-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "dancer",
+   "title": "A ballet dancer mid-leap",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/dancer-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/dancer-turbo-t.jpg",
+    "w": 864,
+    "h": 1536,
+    "dl": "dl/qwen-image-2-1-turbo/dancer-turbo.jpg",
+    "bytes": 128367
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/dancer-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/dancer-turbo-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/dancer-turbo.jpg",
+      "bytes": 128367
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/dancer-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/dancer-base-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/dancer-base.jpg",
+      "bytes": 145485
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/dancer-turbo.json",
+    "bytes": 3078
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image"
+   ],
+   "facts": [
+    [
+     "Output",
+     "864×1536"
+    ],
+    [
+     "Turbo, 8 steps",
+     "16.9 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "63.3 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic full-length photograph of a male ballet dancer at the peak of a grand jeté in an empty rehearsal studio, his whole body visible from the fingertips to the pointed toes with clear space around him, the background a long wall of mirrors with a wooden barre running across it. He is in the upper-centre of the frame, legs split in a near-straight line parallel to the floor, the front foot pointing to the left and the back foot to the right, his arms raised in a rounded shape above his head with the fingers softly separated. He wears a fitted plain white t-shirt, black tights and white ballet shoes. In the mirror behind him his reflection is visible from behind, matching the pose exactly. Across the lower third of the frame the pale wooden floor shows his small sharp shadow directly below him and a few scuff marks. On the right side of the frame a grey upright piano stands against the mirror wall with a closed lid. The lighting is bright daylight from tall windows on the left, catching the left side of his body and the muscles of his legs. The overall composition is vertical with generous headroom and the dancer as the clear focal point, the palette built from white, black and pale wood, and the mood is light and athletic."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/dancer-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "illustration",
+   "title": "A flat vector lighthouse",
+   "group": "quality",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/illustration-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/illustration-turbo-t.jpg",
+    "w": 896,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/illustration-turbo.jpg",
+    "bytes": 54474
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/illustration-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/illustration-turbo-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/illustration-turbo.jpg",
+      "bytes": 54474
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/illustration-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/illustration-base-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/illustration-base.jpg",
+      "bytes": 58392
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/illustration-turbo.json",
+    "bytes": 3484
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Illustration"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.3 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical flat-vector illustration of a lighthouse keeper's cottage on a rocky headland at dusk, drawn in clean geometric shapes with no outlines and no gradients, the background a deep indigo sky graded only in flat bands. The lighthouse stands slightly right of centre, a tall white cylinder with three broad red bands and a small dark gallery near the top, its lamp room glowing pale yellow. A single wedge of pale yellow light projects from the lamp toward the upper-left of the frame. Below and left of the lighthouse sits the keeper's cottage, a simple white rectangle with a steep dark roof, two square windows lit warm amber and a narrow chimney. Across the lower third of the frame the headland is built from four overlapping flat shapes in shades of deep green and near-black, each edge a clean straight or gently curved line. On the left side of the frame the sea is a flat dark teal plane broken by five evenly spaced white horizontal dashes standing for waves. In the upper-right corner a crescent moon sits as a plain cream shape beside seven small cream stars of two different sizes. Along the right edge of the frame three simplified seabirds are drawn as small dark chevrons at different heights. The shapes are filled with flat colour and the only shading is a single darker tone on the shadowed side of the lighthouse and the cottage. The lighting is implied rather than rendered, coming from the lamp and the cottage windows, with no cast shadows anywhere. The overall composition is vertical and balanced with the lighthouse as the clear focal point, the palette built from indigo, teal, cream and red, and the mood is calm and graphic."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/illustration-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "text-latin",
+   "title": "A printed poster",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/text-latin-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/text-latin-turbo-t.jpg",
+    "w": 896,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/text-latin-turbo.jpg",
+    "bytes": 120989
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/text-latin-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/text-latin-turbo-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/text-latin-turbo.jpg",
+      "bytes": 120989
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/text-latin-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/text-latin-base-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/text-latin-base.jpg",
+      "bytes": 138984
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/text-latin-turbo.json",
+    "bytes": 3501
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Typography"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.8 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.8 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic photograph of a printed A2 poster pinned flat to a pale plaster wall, the poster filling almost the whole frame with a narrow margin of wall visible on all four sides. The poster stock is matte off-white with a faint paper texture and a soft crease running down from the upper-right pin. Across the top of the poster a heavy black headline in condensed sans-serif capitals reads \"NORTHERN LIGHTS\", set on one line and occupying the full width of the printed area. Directly beneath it, in a lighter weight and about a third of the headline's size, a line of black capitals reads \"AN EVENING OF FIELD RECORDINGS\". In the centre of the poster sits a large square block of flat deep teal, and within it, reversed out in white capitals at medium weight and centred on two lines, is \"SATURDAY 14 MARCH\" above \"DOORS 7PM\". On the left side of the poster, running vertically up the margin in small grey capitals, is \"ISSUE 04\". Across the lower third of the poster three short lines of small black body text are set left-aligned, reading “DOCK ROAD WAREHOUSE 4” above “TICKETS £12 ON THE DOOR” above “NORTHERNLIGHTS.FM”. In the lower-right corner a plain black circular logo mark about the size of a coin carries the white letters \"NL\". Four brass drawing pins hold the poster, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the paper so the crease and the texture read, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from off-white, black and deep teal, and the mood is plain and editorial."
+    }
+   ],
+   "notes": [
+    "Every string on the poster was correct on both models, in both seeds tested (1234 and 99)."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/text-latin-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "text-chinese",
+   "title": "A tea-shop menu in Chinese",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/text-chinese-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/text-chinese-turbo-t.jpg",
+    "w": 896,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/text-chinese-turbo.jpg",
+    "bytes": 151245
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/text-chinese-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/text-chinese-turbo-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/text-chinese-turbo.jpg",
+      "bytes": 151245
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/text-chinese-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/text-chinese-base-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/text-chinese-base.jpg",
+      "bytes": 181505
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/text-chinese-turbo.json",
+    "bytes": 3460
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Typography"
+   ],
+   "facts": [
+    [
+     "Output",
+     "896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.6 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical realistic photograph of a printed tea-shop menu board mounted flat on a pale wooden wall, the board filling most of the frame with a narrow margin of wall visible on all four sides. The board is matte cream card with a faint paper grain and a thin dark green border running just inside its edge. Across the top of the board a heavy black headline in large Chinese characters reads “青山茶室”, centred on one line. Directly beneath it, in a much lighter weight and about a quarter of the headline's size, a line of black Chinese characters reads “手工烘焙 每日新鲜”. In the centre of the board a tall rectangle of flat deep green holds three lines of white Chinese characters at medium weight, centred, reading “龙井” above “铁观音” above “普洱”. On the right side of the board, running vertically down the margin in small grey Chinese characters, is “营业中”. Across the lower third of the board four short lines of small black Chinese characters are set left-aligned, reading “每日新茶” above “现点现泡” above “外带优惠” above “上午十点开门”. In the lower-left corner a plain dark green circular stamp about the size of a coin carries the white character “茶”. Four small brass screws hold the board, one near each corner, each catching a small highlight. The lighting is soft diffused daylight arriving from the upper left, raking gently across the card so the grain reads, with no hard shadow. The overall composition is flat, frontal and typographic, the palette built from cream, black and deep green, and the mood is plain and calm."
+    }
+   ],
+   "notes": [
+    "Every string on the menu was correct on both models, in both seeds tested (1234 and 99)."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/text-chinese-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "ui-app",
+   "title": "A weather app screen",
+   "group": "text",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/ui-app-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/ui-app-turbo-t.jpg",
+    "w": 864,
+    "h": 1536,
+    "dl": "dl/qwen-image-2-1-turbo/ui-app-turbo.jpg",
+    "bytes": 115329
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/ui-app-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/ui-app-turbo-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/ui-app-turbo.jpg",
+      "bytes": 115329
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/ui-app-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/ui-app-base-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/ui-app-base.jpg",
+      "bytes": 112186
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/ui-app-turbo.json",
+    "bytes": 3313
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Typography",
+    "UI"
+   ],
+   "facts": [
+    [
+     "Output",
+     "864×1536"
+    ],
+    [
+     "Turbo, 8 steps",
+     "16.9 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "64.1 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a vertical flat screenshot of a weather app on a phone, filling the whole frame edge to edge with no phone body visible, built from a smooth deep blue to pale blue vertical gradient background. At the very top of the frame a thin status bar shows \"9:41\" in small white text on the left. Below it, centred, the city name \"LISBON\" is set in medium white capitals, and beneath it a very large thin white numeral reads \"18°\", with the words \"Partly Cloudy\" in small white text under the numeral. Across the middle of the frame a translucent rounded white card holds a horizontal row of five columns, each with a time above a small weather icon above a temperature, reading \"Now\" \"18°\", \"14:00\" \"19°\", \"15:00\" \"19°\", \"16:00\" \"17°\" and \"17:00\" \"16°\". Below that card a second translucent rounded card lists five rows, one per day, each with the day on the left, a small icon in the middle and a temperature range on the right, reading \"Mon 14° 19°\", \"Tue 13° 18°\", \"Wed 15° 21°\", \"Thu 16° 22°\" and \"Fri 12° 17°\". In the lower part of the frame two small square tiles sit side by side, the left one labelled \"UV INDEX\" above a large \"4\", the right one labelled \"WIND\" above \"12 km/h\". The lighting is flat screen light with no shadows beyond the soft drop shadows under the cards. The overall composition is a clean vertical mobile interface layout, the palette built from deep blue, pale blue and white, and the mood is clear and modern."
+    }
+   ],
+   "notes": [
+    "The 30-plus strings and numbers on the screen were correct on both models, in both seeds tested (1234 and 99). The 9:41 in the status bar was wrong on both models, in both seeds."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/ui-app-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "adh-binding",
+   "title": "A corgi and a cat, each in its own clothes",
+   "group": "adherence",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/adh-binding-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/adh-binding-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/adh-binding-turbo.jpg",
+    "bytes": 232963
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/adh-binding-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/adh-binding-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/adh-binding-turbo.jpg",
+      "bytes": 232963
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/adh-binding-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/adh-binding-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/adh-binding-base.jpg",
+      "bytes": 278032
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/adh-binding-turbo.json",
+    "bytes": 2980
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Prompt following"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.6 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.5 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a square realistic photograph of a corgi and a black cat sitting side by side on a blue-painted wooden park bench on a damp autumn afternoon, the background a softly blurred park path lined with bare trees. The corgi sits on the left half of the bench and wears a bright yellow hooded raincoat with the hood down. The black cat sits on the right half of the bench and wears a red knitted scarf wrapped once around its neck, and a tiny closed green umbrella leans against the bench beside its front paws. On the bench seat exactly between the two animals lies a single orange maple leaf. Behind the bench, slightly right of centre, stands a black iron lamppost carrying a round white clock face with black hands, and the clock shows ten past three. In the lower-left corner a shallow puddle on the path reflects the blue of the bench and the yellow of the raincoat. The lighting is soft overcast daylight from above with no hard shadows. The overall composition is balanced and eye level with the two animals as the clear focal point, the palette built from blue, yellow, red and black against muted autumn browns, and the mood is calm and slightly comic."
+    }
+   ],
+   "notes": [
+    "The clothing, the umbrella and the leaf went to the right animal on both models, in both seeds tested (1234 and 99). Neither model set the clock to 3:10 in either seed; Turbo's read about 10:15 each time."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/adh-binding-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "adh-inverted",
+   "title": "An astronaut carrying a pony",
+   "group": "adherence",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/adh-inverted-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/adh-inverted-turbo-t.jpg",
+    "w": 1216,
+    "h": 832,
+    "dl": "dl/qwen-image-2-1-turbo/adh-inverted-turbo.jpg",
+    "bytes": 236161
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/adh-inverted-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/adh-inverted-turbo-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/adh-inverted-turbo.jpg",
+      "bytes": 236161
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/adh-inverted-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/adh-inverted-base-t.jpg",
+      "w": 1216,
+      "h": 832,
+      "dl": "dl/qwen-image-2-1-turbo/adh-inverted-base.jpg",
+      "bytes": 281713
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/adh-inverted-turbo.json",
+    "bytes": 2936
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Prompt following"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1216×832"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.3 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "47.1 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "The image is a wide realistic photograph of an astronaut in a white spacesuit standing on pale grey lunar dust, carrying a small brown pony on his shoulders, the pony's front legs draped over the front of the helmet on either side and its hind legs hanging down his back, the background a black sky with the blue Earth hanging low in the upper-right of the frame. The astronaut stands slightly left of centre with his knees bent under the weight and both gloved hands gripping the pony's front legs. His gold visor reflects a curved image of the lunar horizon. On the left side of the frame a row of deep boot prints leads back toward a small lunar lander standing on the horizon. In the lower-right corner a small United Nations blue flag on a thin pole stands planted in the dust. The lighting is harsh low sunlight arriving from the left, casting a single long sharp shadow of the astronaut and the pony across the dust to the right. The overall composition is wide and empty with the pair as the clear focal point, the palette built from white, grey, black and the blue of the Earth, and the mood is absurd and deadpan."
+    }
+   ],
+   "notes": [
+    "The astronaut carries the pony, not the other way round, on both models in both seeds tested (1234 and 99)."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/adh-inverted-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "character-four-shots",
+   "title": "One character in four shots, from text alone",
+   "group": "character",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/character-four-shots-turbo-headshot.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/character-four-shots-turbo-headshot-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/character-four-shots-turbo-headshot.jpg",
+    "bytes": 158134
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps, headshot",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-turbo-headshot.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-turbo-headshot-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-turbo-headshot.jpg",
+      "bytes": 158134
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, market",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-turbo-market.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-turbo-market-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-turbo-market.jpg",
+      "bytes": 284290
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, bridge",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-turbo-bridge.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-turbo-bridge-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-turbo-bridge.jpg",
+      "bytes": 222793
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, library",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-turbo-library.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-turbo-library-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-turbo-library.jpg",
+      "bytes": 212216
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, headshot",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-base-headshot.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-base-headshot-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-base-headshot.jpg",
+      "bytes": 170488
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, market",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-base-market.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-base-market-t.jpg",
+      "w": 864,
+      "h": 1536,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-base-market.jpg",
+      "bytes": 341459
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, bridge",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-base-bridge.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-base-bridge-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-base-bridge.jpg",
+      "bytes": 262547
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, library",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/character-four-shots-base-library.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/character-four-shots-base-library-t.jpg",
+      "w": 896,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/character-four-shots-base-library.jpg",
+      "bytes": 232547
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-turbo-headshot.json",
+    "bytes": 2794
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024, 864×1536, 1536×864, 896×1152"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.9 to 17.1 s per image"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.2 to 64.0 s per image"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Headshot",
+     "text": "The image is a square realistic studio headshot photograph of a woman in her early thirties with deep brown skin, the left side of her head shaved close and the top a cropped mass of silver-dyed tight curls, a thin pale scar crossing her right eyebrow, round brass-rimmed glasses, a single small gold hoop in her left ear only, wearing an olive-green bomber jacket with a small orange rectangular patch on the left chest that reads \"K-7\" in black capitals, over a mustard-yellow hoodie, framed from the upper chest up and centred, facing the camera directly with a calm neutral expression, the background a plain seamless mid-grey backdrop. The patch on the jacket is visible at the lower-left of the frame. The lighting is soft frontal key light from a large source slightly above the camera with gentle fill from the right. The overall composition is simple and symmetrical, the palette built from olive, mustard and grey, and the mood is direct and composed."
+    },
+    {
+     "label": "Market",
+     "text": "The image is a vertical realistic full-length photograph of a woman in her early thirties with deep brown skin, the left side of her head shaved close and the top a cropped mass of silver-dyed tight curls, a thin pale scar crossing her right eyebrow, round brass-rimmed glasses, a single small gold hoop in her left ear only, wearing an olive-green bomber jacket with a small orange rectangular patch on the left chest that reads \"K-7\" in black capitals, over a mustard-yellow hoodie, walking toward the camera through a covered fruit market in the morning, her whole body visible from head to shoes, carrying a brown paper bag of oranges in her right arm, the background a long aisle of stalls piled with fruit under a high glass roof. On the left side of the frame a stallholder in a green apron weighs apples. On the right side of the frame crates of lemons are stacked high. The lighting is soft diffused daylight from the glass roof above. The overall composition is vertical and centred with the aisle leading back behind her, the palette built from olive, mustard and the bright fruit colours, and the mood is busy and everyday."
+    },
+    {
+     "label": "Bridge",
+     "text": "The image is a wide realistic photograph of a woman in her early thirties with deep brown skin, the left side of her head shaved close and the top a cropped mass of silver-dyed tight curls, a thin pale scar crossing her right eyebrow, round brass-rimmed glasses, a single small gold hoop in her left ear only, wearing an olive-green bomber jacket with a small orange rectangular patch on the left chest that reads \"K-7\" in black capitals, over a mustard-yellow hoodie, riding a black city bicycle across a steel bridge at night in light rain, seen from the side at a moderate distance so that she fills about a third of the frame height, the background the lit skyline of a city across dark water. She is slightly right of centre, leaning forward on the handlebars, her face in profile turned to the left. Along the lower edge of the frame the wet bridge deck reflects the street lamps. Across the upper-left of the frame a row of bridge cables slants down out of the dark. The lighting is cool street lamp light from above with warm reflections from the skyline. The overall composition is wide and horizontal with the rider as the clear focal point, the palette built from olive, mustard, cool blue and amber, and the mood is quiet and moving."
+    },
+    {
+     "label": "Library",
+     "text": "The image is a vertical realistic photograph of a woman in her early thirties with deep brown skin, the left side of her head shaved close and the top a cropped mass of silver-dyed tight curls, a thin pale scar crossing her right eyebrow, round brass-rimmed glasses, a single small gold hoop in her left ear only, wearing an olive-green bomber jacket with a small orange rectangular patch on the left chest that reads \"K-7\" in black capitals, over a mustard-yellow hoodie, seated in a deep window seat in an old library reading a thick hardback book held open in both hands, turned three quarters to the left so that the shaved left side of her head faces the camera, the background tall wooden shelves of old books. In the upper-left of the frame rain runs down the leaded window panes. In the lower-right corner a brass reading lamp with a green glass shade glows on a side table beside a cup of tea. The lighting is warm lamplight from the lower right mixed with cool grey window light from the left. The overall composition is vertical and intimate, the palette built from olive, mustard, green and dark wood, and the mood is quiet and absorbed."
+    }
+   ],
+   "notes": [
+    "No reference image. The same description of the woman opens each of the four prompts, and the shots change the framing and the aspect ratio.",
+    "Both models kept the same person across all four shots, in both seeds tested (1234 and 99). The K-7 patch landed on the wearer's left in the headshot in 2 of 2 seeds on Turbo and 1 of 2 on base."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Turbo, 8 steps, market",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-turbo-market.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, bridge",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-turbo-bridge.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, library",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-turbo-library.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, headshot",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-base-headshot.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, market",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-base-market.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, bridge",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-base-bridge.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, library",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/character-four-shots-base-library.json"
+    }
+   ]
+  },
+  {
+   "slug": "same-face-six-scenes",
+   "title": "One reference, six scenes",
+   "group": "character",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1-t.jpg",
+    "w": 832,
+    "h": 1216,
+    "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1.jpg",
+    "bytes": 180206
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps, city street",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1.jpg",
+      "bytes": 180206
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, cliff path",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-2.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-2-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-2.jpg",
+      "bytes": 180583
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, workshop",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-3.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-3-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-3.jpg",
+      "bytes": 170153
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, library",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-4.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-4-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-4.jpg",
+      "bytes": 194117
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, kitchen",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-5.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-5-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-5.jpg",
+      "bytes": 169336
+     }
+    },
+    {
+     "label": "Turbo, 8 steps, platform",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-6.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-turbo-6-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-turbo-6.jpg",
+      "bytes": 175388
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, city street",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-1.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-1-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-1.jpg",
+      "bytes": 213870
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, cliff path",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-2.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-2-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-2.jpg",
+      "bytes": 214111
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, workshop",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-3.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-3-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-3.jpg",
+      "bytes": 212461
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, library",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-4.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-4-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-4.jpg",
+      "bytes": 220606
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, kitchen",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-5.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-5-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-5.jpg",
+      "bytes": 199916
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps, platform",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-6.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/same-face-six-scenes-base-6-t.jpg",
+      "w": 832,
+      "h": 1216,
+      "dl": "dl/qwen-image-2-1-turbo/same-face-six-scenes-base-6.jpg",
+      "bytes": 193899
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-1.json",
+    "bytes": 2290
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Character consistency"
+   ],
+   "facts": [
+    [
+     "Output",
+     "832×1216"
+    ],
+    [
+     "Turbo, 8 steps",
+     "23.3 to 24.1 s per image"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "62.9 to 63.5 s per image"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Reference",
+     "ref": "id_d"
+    }
+   ],
+   "variants": [
+    {
+     "label": "City street",
+     "text": "Place the person from the image in a busy city street at night, lit by shop signs, standing on the pavement and looking toward the camera, framed from the waist up."
+    },
+    {
+     "label": "Cliff path",
+     "text": "Place the person from the image on a windswept coastal cliff path in daylight, framed from the waist up, with the sea far behind and below."
+    },
+    {
+     "label": "Workshop",
+     "text": "Place the person from the image at a workbench in a bright workshop, wearing the same clothing, holding a small hand tool and looking up toward the camera."
+    },
+    {
+     "label": "Library",
+     "text": "Place the person from the image in a warmly lit library aisle between tall shelves, framed from the waist up, one hand resting on a shelf."
+    },
+    {
+     "label": "Kitchen",
+     "text": "Place the person from the image in a commercial kitchen in daylight, framed from the waist up, standing beside a stainless steel counter."
+    },
+    {
+     "label": "Platform",
+     "text": "Place the person from the image on a railway platform in cold morning light, framed from the waist up, with the platform receding behind."
+    }
+   ],
+   "notes": [
+    "One reference photo and a short prompt per scene. Identity held in all six scenes on both models."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Turbo, 8 steps, cliff path",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-2.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, workshop",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-3.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, library",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-4.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, kitchen",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-5.json"
+    },
+    {
+     "label": "Workflow: Turbo, 8 steps, platform",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-turbo-6.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, city street",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-1.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, cliff path",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-2.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, workshop",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-3.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, library",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-4.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, kitchen",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-5.json"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps, platform",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/same-face-six-scenes-base-6.json"
+    }
+   ]
+  },
+  {
+   "slug": "group-of-six",
+   "title": "Six references, one group photo",
+   "group": "character",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/group-of-six-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/group-of-six-turbo-t.jpg",
+    "w": 1536,
+    "h": 864,
+    "dl": "dl/qwen-image-2-1-turbo/group-of-six-turbo.jpg",
+    "bytes": 242853
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/group-of-six-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/group-of-six-turbo-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/group-of-six-turbo.jpg",
+      "bytes": 242853
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/group-of-six-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/group-of-six-base-t.jpg",
+      "w": 1536,
+      "h": 864,
+      "dl": "dl/qwen-image-2-1-turbo/group-of-six-base.jpg",
+      "bytes": 289974
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/group-of-six-turbo.json",
+    "bytes": 4073
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Multiple references"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1536×864"
+    ],
+    [
+     "Turbo, 8 steps",
+     "35.3 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "94.3 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "21"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<image1>",
+     "ref": "id_a"
+    },
+    {
+     "tag": "<image2>",
+     "ref": "id_b"
+    },
+    {
+     "tag": "<image3>",
+     "ref": "id_c"
+    },
+    {
+     "tag": "<image4>",
+     "ref": "id_d"
+    },
+    {
+     "tag": "<image5>",
+     "ref": "id_e"
+    },
+    {
+     "tag": "<image6>",
+     "ref": "id_f"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Create a single new group photograph of the six people from <image1>, <image2>, <image3>, <image4>, <image5> and <image6>, standing together in one row against a plain pale brick wall. Each of the six supplies the identity of one person and nothing else: take each person's face, hair and skin exactly as they appear in their own reference, and keep the clothing each of them is wearing. They stand shoulder to shoulder facing the camera, evenly spaced across the full width of the frame, framed from the waist up, all six lit by the same soft even daylight from the front. No one is cropped or hidden behind anyone else."
+    }
+   ],
+   "notes": [
+    "All six people from the references are present and distinct on both models."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/group-of-six-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "rgba-sheet",
+   "title": "Eight objects on one alpha channel",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/rgba-sheet-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/rgba-sheet-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/rgba-sheet-turbo.png",
+    "bytes": 755377
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/rgba-sheet-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/rgba-sheet-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/rgba-sheet-turbo.png",
+      "bytes": 755377
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/rgba-sheet-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/rgba-sheet-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/rgba-sheet-base.png",
+      "bytes": 765275
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/rgba-sheet-turbo.json",
+    "bytes": 2968
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "RGBA"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024 RGBA"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "47.4 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "This is an RGBA image with transparency. A flat lay asset sheet of eight separate hand-drawn travel objects arranged in two rows of four against nothing, each object complete and not touching any other, with clear empty space between them. In the top row, from left to right: a brown leather suitcase with two brass buckles seen from the side; a folded paper map showing pale green and blue areas with thin road lines; a black film camera with a silver lens barrel and a worn leather strap looped beside it; a pair of round sunglasses with thin gold frames and dark green lenses. In the bottom row, from left to right: a dark red vacuum flask with a silver cup screwed onto its top; a small potted cactus in a terracotta pot with three rounded pads; a coiled length of climbing rope in faded orange and cream; a white enamel mug with a chipped navy rim. Every object is drawn in the same style, a clean illustration with soft flat colour and a fine darker outline, lit evenly from the upper left so each carries a soft highlight on its upper surface and no cast shadow falls on the background. The image has alpha channel and the background is transparent."
+    }
+   ],
+   "notes": [
+    "The eight objects came out in the order asked on both models. The partial band, the soft edge between clear and opaque, is 2.0% of the image on Turbo and 1.6% on base."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/rgba-sheet-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "rgba-glass",
+   "title": "A wine glass on a transparent background",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/rgba-glass-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/rgba-glass-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/rgba-glass-turbo.png",
+    "bytes": 599421
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/rgba-glass-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/rgba-glass-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/rgba-glass-turbo.png",
+      "bytes": 599421
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/rgba-glass-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/rgba-glass-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/rgba-glass-base.png",
+      "bytes": 593098
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/rgba-glass-turbo.json",
+    "bytes": 2707
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "RGBA"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024 RGBA"
+    ],
+    [
+     "Turbo, 8 steps",
+     "13.5 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "48.5 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "This is an RGBA format image with transparency. The image is a realistic photograph of a single clear wine glass standing upright and about one third full of red wine. The bowl of the glass is thin colourless crystal and is genuinely see-through, so whatever lies behind it is visible through both the empty upper part of the bowl and, more darkly tinted, through the wine itself. The wine sits as a deep translucent red with a slightly darker meniscus where it meets the glass. The stem is thin and the foot is a wide flat disc, both clear. A bright narrow highlight runs down the left side of the bowl and a second smaller one catches the rim. There is no table, backdrop or surrounding scene. The lighting is soft studio light from the upper left. The overall composition is a single centred object with clear space around it. The image has an alpha channel and the background is transparent."
+    }
+   ],
+   "notes": [],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/rgba-glass-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "cut-out-from-a-photo",
+   "title": "A cut-out from a photograph",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo-t.jpg",
+    "w": 864,
+    "h": 1152,
+    "dl": "dl/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo.png",
+    "bytes": 1725989
+   },
+   "outputs": [
+    {
+     "label": "Input: Kate",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/in-src-kate.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/in-src-kate-t.jpg",
+      "w": 825,
+      "h": 1100,
+      "dl": "workflows/qwen-image-2-1-turbo/inputs/src_kate.png",
+      "bytes": 1651299
+     }
+    },
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo-t.jpg",
+      "w": 864,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo.png",
+      "bytes": 1725989
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/cut-out-from-a-photo-base-t.jpg",
+      "w": 864,
+      "h": 1152,
+      "dl": "dl/qwen-image-2-1-turbo/cut-out-from-a-photo-base.png",
+      "bytes": 1696093
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/cut-out-from-a-photo-turbo.json",
+    "bytes": 2213
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "RGBA",
+    "Extraction"
+   ],
+   "facts": [
+    [
+     "Output",
+     "864×1152 RGBA"
+    ],
+    [
+     "Turbo, 8 steps",
+     "23.4 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "62.7 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Kate",
+     "ref": "src_kate"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Create an RGBA image with transparent background and place the woman in that image."
+    }
+   ],
+   "notes": [
+    "Mean difference from the source photo over the opaque area: 4.70 on Turbo and 3.93 on base. In the earlier Qwen-Image 2.1 project a faithful cut-out measured about 2 to 4 and a redrawn subject 16 or more.",
+    "A second seed on the same photo took 13.8 s on Turbo and 53.1 s on base, because the prompt and the photo were already encoded."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/cut-out-from-a-photo-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "edit-a-transparent-layer",
+   "title": "Recolouring a transparent layer",
+   "group": "transparency",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo.png",
+    "bytes": 597498
+   },
+   "outputs": [
+    {
+     "label": "Input: Dragon sticker layer",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/in-src-rgba-sticker.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/in-src-rgba-sticker-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "workflows/qwen-image-2-1-turbo/inputs/src_rgba_sticker.png",
+      "bytes": 670620
+     }
+    },
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo.png",
+      "bytes": 597498
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/edit-a-transparent-layer-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/edit-a-transparent-layer-base.png",
+      "bytes": 609706
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/edit-a-transparent-layer-turbo.json",
+    "bytes": 2508
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "RGBA"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024 RGBA"
+    ],
+    [
+     "Turbo, 8 steps",
+     "24.1 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "65.4 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Dragon sticker layer",
+     "ref": "src_rgba_sticker"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Change the dragon's body colour from green to bright orange, keeping its shape, outline, pose and the white sticker border exactly as they are. The image stays an RGBA image with a transparent background."
+    }
+   ],
+   "notes": [
+    "The layer goes in with its alpha, through a JoinImageWithAlpha node. The alpha that comes back overlaps the input's by 99.8% on Turbo and 99.7% on base (intersection over union)."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/edit-a-transparent-layer-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "sketch-to-photo",
+   "title": "A sketch turned into a photograph",
+   "group": "features",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/sketch-to-photo-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/sketch-to-photo-turbo-t.jpg",
+    "w": 1024,
+    "h": 1024,
+    "dl": "dl/qwen-image-2-1-turbo/sketch-to-photo-turbo.jpg",
+    "bytes": 155473
+   },
+   "outputs": [
+    {
+     "label": "Input: Yacht sketch",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/in-src-boat-sketch.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/in-src-boat-sketch-t.jpg",
+      "w": 1100,
+      "h": 380,
+      "dl": "workflows/qwen-image-2-1-turbo/inputs/src_boat_sketch.png",
+      "bytes": 779477
+     }
+    },
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/sketch-to-photo-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/sketch-to-photo-turbo-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/sketch-to-photo-turbo.jpg",
+      "bytes": 155473
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/sketch-to-photo-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/sketch-to-photo-base-t.jpg",
+      "w": 1024,
+      "h": 1024,
+      "dl": "dl/qwen-image-2-1-turbo/sketch-to-photo-base.jpg",
+      "bytes": 175111
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/sketch-to-photo-turbo.json",
+    "bytes": 3847
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Image to image",
+    "Sketch"
+   ],
+   "facts": [
+    [
+     "Output",
+     "1024×1024"
+    ],
+    [
+     "Turbo, 8 steps",
+     "25.6 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "69.0 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "Yacht sketch",
+     "ref": "src_boat_sketch"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "Create a photorealistic photograph of the motor yacht from the input sketch, sailing on open sea, captured in full side profile with the camera at water level. Build the vessel with the structure shown in the input sketch: a long low hull; one tall mast stepped forward with a small cross-tree platform near its top; a wheelhouse superstructure with an open bridge wing just behind the mast; a midships deckhouse carrying a row of four rectangular windows with a lifeboat stowed on its roof; a rectangular funnel behind that deckhouse; an aft deckhouse with a row of three rectangular windows and a second lifeboat above it; thin railings along every deck edge; the hull side pierced by one small square window at the bow, an upper line of five round portholes on the raised forward section, and a lower line of nine round portholes along the main hull. Paint the hull black, the superstructures and the mast white, and the funnel yellow. Set the yacht broadside on a calm deep-blue sea with a low gentle swell and a thin white wake trailing from the bow, the straight horizon crossing behind the funnel top, under a clear sky with soft scattered clouds; sunlight from the front left lights the white superstructures and leaves a bright reflection path on the water beside the hull with a soft contact shadow along the waterline; the entire vessel fits inside the frame with open water in the foreground and sky above."
+    }
+   ],
+   "notes": [
+    "Qwen's own example from the Turbo model card, prompt included. The card runs it from a 3200×1120 sketch; here the sketch is scaled to 1760×608 and the canvas is 1024×1024.",
+    "Both models gave a black hull, a white superstructure, a yellow funnel and lifeboats. I did not count the windows and portholes."
+   ],
+   "links": [
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/sketch-to-photo-base.json"
+    }
+   ]
+  },
+  {
+   "slug": "panorama-360",
+   "title": "A 360 panorama from text",
+   "group": "features",
+   "still": {
+    "src": "img/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+    "thumb": "img/qwen-image-2-1-turbo/panorama-360-turbo-t.jpg",
+    "w": 1600,
+    "h": 800,
+    "dl": "dl/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+    "bytes": 466830
+   },
+   "outputs": [
+    {
+     "label": "Turbo, 8 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/panorama-360-turbo-t.jpg",
+      "w": 1600,
+      "h": 800,
+      "dl": "dl/qwen-image-2-1-turbo/panorama-360-turbo.jpg",
+      "bytes": 466830
+     }
+    },
+    {
+     "label": "Base 2.1, 40 steps",
+     "image": {
+      "src": "img/qwen-image-2-1-turbo/panorama-360-base.jpg",
+      "thumb": "img/qwen-image-2-1-turbo/panorama-360-base-t.jpg",
+      "w": 1600,
+      "h": 800,
+      "dl": "dl/qwen-image-2-1-turbo/panorama-360-base.jpg",
+      "bytes": 451651
+     }
+    }
+   ],
+   "workflow": {
+    "url": "/assets/workflows/qwen-image-2-1-turbo/panorama-360-turbo.json",
+    "bytes": 2353
+   },
+   "models": [
+    "Qwen-Image 2.1 Turbo",
+    "Qwen-Image 2.1"
+   ],
+   "techniques": [
+    "Text to image",
+    "Panorama"
+   ],
+   "facts": [
+    [
+     "Output",
+     "2048×1024"
+    ],
+    [
+     "Turbo, 8 steps",
+     "26.9 s"
+    ],
+    [
+     "Base 2.1, 40 steps",
+     "109.8 s"
+    ],
+    [
+     "Turbo sampling",
+     "8, euler, trained sigmas (ManualSigmas), cfg 1.0"
+    ],
+    [
+     "Base sampling",
+     "40, euler / simple, cfg 1.0"
+    ],
+    [
+     "Seed",
+     "1234"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "A 360 degree panorama in equirectangular projection of a wide paved public square in daylight. The square fills the whole frame from edge to edge, low trees and pale modern buildings run all the way around the horizon, and a few people walk at a distance. The paving stretches and curves outward toward the bottom edge of the frame and the bright hazy sky stretches and curves outward toward the top edge. The horizon is a straight horizontal line across the middle of the frame, and the left edge continues seamlessly into the right edge."
+    }
+   ],
+   "notes": [
+    "Both are equirectangular, with the horizon across the middle. I did not check the seam."
+   ],
+   "links": [
+    {
+     "label": "Look around the Turbo panorama in the 360 viewer",
+     "url": "/assets/interactive/qwen-image-2-1-turbo/viewer.html"
+    },
+    {
+     "label": "Workflow: Base 2.1, 40 steps",
+     "url": "/assets/workflows/qwen-image-2-1-turbo/panorama-360-base.json"
+    }
+   ]
+  }
+ ]
+}
