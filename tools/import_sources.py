@@ -1286,14 +1286,16 @@ def gb(n):
 def loras_readme(title, page_url, workflows, inputs, models, needs_pack, ran):
     lines = [f"{title}", "From LTX 2.5 Creative Lab LoRAs, tested locally", page_url, "",
              "IN THIS ZIP", ""]
-    lines += [f"  {w}  ComfyUI workflow, API format, exactly as it ran" for w in workflows]
+    lines += [f"  {w}  ComfyUI workflow with this test's settings" for w in workflows]
     lines += [f"  {f}  input the workflow loads" for f in inputs]
     lines += ["", "HOW TO RUN IT", "",
               "  1. Copy the input files into ComfyUI/input, keeping their names.",
               "  2. Download the models below into the ComfyUI/models subfolders shown.",
               "  3. Drag the workflow .json onto the ComfyUI window, or open it from the Workflow menu.",
-              "     It is in API format. The ComfyUI frontend I used (1.53.6) opens that directly and",
-              "     lays the nodes out itself, so the graph looks plain but runs the same.",
+              "     The prompt and the settings (Shorter side for the size, the length, the seed) are on the",
+              "     subgraph nodes; the note in the workflow says how to run it on your own footage. It needs",
+              "     ComfyUI 0.37 or newer. If any node shows up red, update ComfyUI or ComfyUI-LTXVideo",
+              "     to the commit below rather than rewiring the graph.",
               "  4. Queue it. The result is saved under ComfyUI/output/video/ltx-2-5-loras/.", "",
               "MODELS", ""]
     for m in models:
@@ -1374,21 +1376,19 @@ def import_loras():
         return refs[fname]["id"]
 
     def publish(run, pslug, wf_name):
-        """Write the run's API graph with its loaders pointed at the published copies of its inputs."""
-        g = json.loads(json.dumps(run["graph"]))
-        loads = []
-        for nd in g.values():
-            key = {"LoadImage": "image", "LoadVideo": "file"}.get(nd["class_type"])
-            if key:
-                fname = nd["inputs"][key].removeprefix("bestloras_")
-                nd["inputs"][key] = fname
-                loads.append((nd["class_type"], fname))
-            for k, v in nd["inputs"].items():
-                if k in ("filename_prefix", "output_dir") and isinstance(v, str) and "bestloras_" in v:
-                    nd["inputs"][k] = re.sub(r"bestloras_.*?(?=_ltxvsavehlg$|_exr$|$)", f"{slug}/{pslug}", v)
+        """Copy the simplified workflow built for this test (scripts/site_workflows.py in the experiment).
+
+        It is the family graph with this test's settings, checked input by input against the graph it was
+        built from and rerun from this exact file. Returns its link, the files it loads and its API graph."""
+        built = LORAS / "results" / "site_workflows"
+        wf = json.loads((built / f"{wf_name}.json").read_text(encoding="utf-8"))
+        api = json.loads((built / f"{wf_name}_api.json").read_text(encoding="utf-8"))
+        loads = [(nd["class_type"], nd["inputs"][{"LoadImage": "image", "LoadVideo": "file"}[nd["class_type"]]])
+                 for nd in api.values() if nd["class_type"] in ("LoadImage", "LoadVideo")]
         path = wf_dir / f"{wf_name}.json"
-        path.write_text(json.dumps(g, indent=1, ensure_ascii=False), encoding="utf-8")
-        return {"url": f"/assets/workflows/{slug}/{wf_name}.json", "bytes": path.stat().st_size}, loads
+        path.write_text(json.dumps(wf, indent=1, ensure_ascii=False), encoding="utf-8")
+        return {"url": f"/assets/workflows/{slug}/{wf_name}.json", "bytes": path.stat().st_size, "format": "ui",
+                "api": api}, loads
 
     prompts, groups, minutes, vram_seen = [], [], [], []
     works = limits = 0
@@ -1460,9 +1460,10 @@ def import_loras():
             facts.append(["Ran on", "RTX 3060, 12GB (local)"])
 
             workflow, loads = publish(main, pslug, pslug)
-            links = []
+            links, control_wfs = [], []
             for r in control_runs:
                 wf, extra = publish(runs[r], pslug, f"{pslug}-no-lora")
+                control_wfs.append(wf)
                 loads += extra
                 links.append({"label": "Download the workflow without the LoRA (json)", "url": wf["url"]})
             for f, _, _ in main["loras"]:
@@ -1489,7 +1490,7 @@ def import_loras():
             from_video = any(k == "LoadVideo" for k, _ in loads)
 
             # Everything needed to rerun this test, in one zip, plus the same list for the page.
-            graphs = [main["graph"]] + [runs[r]["graph"] for r in control_runs]
+            graphs = [workflow.pop("api")] + [w.pop("api") for w in control_wfs]
             models = loras_models(graphs, names)
             needs_pack = any(nd["class_type"] in LORAS_PACK_CLASSES for g in graphs for nd in g.values())
             input_files = list(dict.fromkeys(f for _, f in loads))
@@ -1592,9 +1593,14 @@ def import_loras():
                 "Every test page has a zip with its workflow, every input it loads and a README listing the "
                 "models it needs. Unzip it, copy the inputs into ComfyUI/input, put the models in the folders "
                 "shown below and drag the workflow onto ComfyUI.",
-                "The workflows are in ComfyUI's API format, exactly as they ran. The ComfyUI frontend I used, "
-                "1.53.6, opens API files by drag and drop and lays the nodes out itself, so the graphs look plain "
-                "but run the same.",
+                "The workflows follow the official Lightricks templates, one graph per kind of LoRA. The model "
+                "loaders and every ComfyUI-LTXVideo node stay in view; only core ComfyUI plumbing is folded into "
+                "subgraphs, with the prompt and settings on them. Every workflow sizes its output from what you "
+                "load with one setting, Shorter side, and the video ones take their length and frame rate from "
+                "the clip, so they run on your own footage as they are. "
+                "Every kind of workflow here was run from its downloadable file. The clips on these pages came "
+                "from the original test graphs, with the same settings. If a node shows up red, install or update "
+                "ComfyUI-LTXVideo to the commit listed rather than rewiring the graph.",
                 "The Lightricks repositories on Hugging Face, the LTX 2.5 base model and every LoRA, are gated. Log in, open each repository page and "
                 "accept its terms before downloading, or the links return an error.",
                 f"I ran everything on an RTX 3060 with 12GB of VRAM, an i5-13400F and 32GB of RAM. Peak VRAM "

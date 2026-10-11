@@ -511,7 +511,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/character-prop-and-location.json",
-    "bytes": 5796
+    "bytes": 80724,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -584,7 +585,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/character-prop-and-location.zip",
-     "bytes": 725256
+     "bytes": 732667
     },
     "models": [
      {
@@ -670,7 +671,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/guitarist-on-a-stage.json",
-    "bytes": 5639
+    "bytes": 80410,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -741,7 +743,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/guitarist-on-a-stage.zip",
-     "bytes": 705369
+     "bytes": 712766
     },
     "models": [
      {
@@ -827,7 +829,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/two-characters-from-one-sheet.json",
-    "bytes": 6289
+    "bytes": 81710,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -896,7 +899,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/two-characters-from-one-sheet.zip",
-     "bytes": 665364
+     "bytes": 672804
     },
     "models": [
      {
@@ -982,7 +985,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/the-sheet-comes-through.json",
-    "bytes": 6430
+    "bytes": 86538,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1059,7 +1063,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/the-sheet-comes-through.zip",
-     "bytes": 725492
+     "bytes": 733234
     },
     "models": [
      {
@@ -1162,7 +1166,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/grayscale-market.json",
-    "bytes": 5938
+    "bytes": 80862,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1231,7 +1236,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/grayscale-market.zip",
-     "bytes": 3745912
+     "bytes": 3753476
     },
     "models": [
      {
@@ -1317,7 +1322,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/a-bucket-of-blood-1959.json",
-    "bytes": 6289
+    "bytes": 81564,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1390,7 +1396,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/a-bucket-of-blood-1959.zip",
-     "bytes": 2814856
+     "bytes": 2822445
     },
     "models": [
      {
@@ -1485,7 +1491,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/running-through-tokyo-rain.json",
-    "bytes": 7446
+    "bytes": 91627,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1566,7 +1573,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/running-through-tokyo-rain.zip",
-     "bytes": 2909610
+     "bytes": 2923575
     },
     "models": [
      {
@@ -1665,7 +1672,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/dove-in-flight.json",
-    "bytes": 7285
+    "bytes": 91305,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1746,7 +1754,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/dove-in-flight.zip",
-     "bytes": 2295669
+     "bytes": 2309625
     },
     "models": [
      {
@@ -1845,7 +1853,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/portrait-hair-in-the-breeze.json",
-    "bytes": 5117
+    "bytes": 68242,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -1930,7 +1939,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/portrait-hair-in-the-breeze.zip",
-     "bytes": 7205319
+     "bytes": 7217176
     },
     "models": [
      {
@@ -2021,7 +2030,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/standing-figure.json",
-    "bytes": 5045
+    "bytes": 68098,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2102,7 +2112,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/standing-figure.zip",
-     "bytes": 512268
+     "bytes": 524119
     },
     "models": [
      {
@@ -2184,7 +2194,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/tree-full-of-falling-leaves.json",
-    "bytes": 5077
+    "bytes": 68162,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2257,7 +2268,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/tree-full-of-falling-leaves.zip",
-     "bytes": 638932
+     "bytes": 644864
     },
     "models": [
      {
@@ -2339,7 +2350,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/woman-with-umbrella.json",
-    "bytes": 5866
+    "bytes": 80718,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2412,7 +2424,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/woman-with-umbrella.zip",
-     "bytes": 960574
+     "bytes": 968143
     },
     "models": [
      {
@@ -2498,7 +2510,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/couple-on-a-canal-moving-camera.json",
-    "bytes": 5783
+    "bytes": 80552,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2569,7 +2582,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/couple-on-a-canal-moving-camera.zip",
-     "bytes": 1563751
+     "bytes": 1571310
     },
     "models": [
      {
@@ -2655,7 +2668,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/park-with-fountain.json",
-    "bytes": 5721
+    "bytes": 80432,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2726,7 +2740,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/park-with-fountain.zip",
-     "bytes": 1928181
+     "bytes": 1935736
     },
     "models": [
      {
@@ -2812,7 +2826,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/canal-at-night-moving-camera.json",
-    "bytes": 7140
+    "bytes": 80378,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -2879,7 +2894,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/canal-at-night-moving-camera.zip",
-     "bytes": 1563981
+     "bytes": 1571218
     },
     "models": [
      {
@@ -2965,7 +2980,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/same-park-at-strength-1-0.json",
-    "bytes": 5728
+    "bytes": 80442,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3038,7 +3054,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/same-park-at-strength-1-0.zip",
-     "bytes": 1928206
+     "bytes": 1935767
     },
     "models": [
      {
@@ -3124,7 +3140,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/water-into-a-sandbox.json",
-    "bytes": 6007
+    "bytes": 80998,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3193,7 +3210,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/water-into-a-sandbox.zip",
-     "bytes": 10504281
+     "bytes": 10511866
     },
     "models": [
      {
@@ -3279,7 +3296,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/wave-over-the-steps.json",
-    "bytes": 5833
+    "bytes": 80656,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3348,7 +3366,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/wave-over-the-steps.zip",
-     "bytes": 786839
+     "bytes": 794418
     },
     "models": [
      {
@@ -3443,7 +3461,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/heavily-macroblocked-market.json",
-    "bytes": 6153
+    "bytes": 81296,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3512,7 +3531,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/heavily-macroblocked-market.zip",
-     "bytes": 77887
+     "bytes": 85470
     },
     "models": [
      {
@@ -3598,7 +3617,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/superman-1941.json",
-    "bytes": 6028
+    "bytes": 81050,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3671,7 +3691,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/superman-1941.zip",
-     "bytes": 8437232
+     "bytes": 8444806
     },
     "models": [
      {
@@ -3757,7 +3777,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/clowns-on-a-city-street.json",
-    "bytes": 6309
+    "bytes": 81604,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3830,7 +3851,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/clowns-on-a-city-street.zip",
-     "bytes": 4378385
+     "bytes": 4385959
     },
     "models": [
      {
@@ -3916,7 +3937,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/1956-navy-film-diploma-handover.json",
-    "bytes": 6159
+    "bytes": 81298,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -3989,7 +4011,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/1956-navy-film-diploma-handover.zip",
-     "bytes": 2751260
+     "bytes": 2758840
     },
     "models": [
      {
@@ -4075,7 +4097,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/a-trip-down-market-street-1906.json",
-    "bytes": 11086
+    "bytes": 79878,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -4152,7 +4175,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/a-trip-down-market-street-1906.zip",
-     "bytes": 2191311
+     "bytes": 2198148
     },
     "models": [
      {
@@ -4162,14 +4185,6 @@
       "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
       "bytes": 21504034224,
       "gated": true
-     },
-     {
-      "file": "gemma4_e2b_it_bf16.safetensors",
-      "folder": "text_encoders",
-      "repo": "Comfy-Org/gemma-4",
-      "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
-      "bytes": 10278774160,
-      "gated": false
      },
      {
       "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
@@ -4246,7 +4261,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/generated-canal-clip-at-2x.json",
-    "bytes": 10641
+    "bytes": 78982,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -4320,7 +4336,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/generated-canal-clip-at-2x.zip",
-     "bytes": 1564477
+     "bytes": 1571289
     },
     "models": [
      {
@@ -4330,14 +4346,6 @@
       "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
       "bytes": 21504034224,
       "gated": true
-     },
-     {
-      "file": "gemma4_e2b_it_bf16.safetensors",
-      "folder": "text_encoders",
-      "repo": "Comfy-Org/gemma-4",
-      "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
-      "bytes": 10278774160,
-      "gated": false
      },
      {
       "file": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
@@ -4423,7 +4431,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/forest-creek-sun-through-mist.json",
-    "bytes": 8520
+    "bytes": 85156,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -4501,7 +4510,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/forest-creek-sun-through-mist.zip",
-     "bytes": 20839678
+     "bytes": 20846953
     },
     "models": [
      {
@@ -4596,7 +4605,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/curly-hair-in-the-rain.json",
-    "bytes": 5207
+    "bytes": 79400,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -4670,7 +4680,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/curly-hair-in-the-rain.zip",
-     "bytes": 6238271
+     "bytes": 6245806
     },
     "models": [
      {
@@ -4765,7 +4775,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/portrait-hair-in-the-wind.json",
-    "bytes": 5211
+    "bytes": 79408,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -4833,7 +4844,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/portrait-hair-in-the-wind.zip",
-     "bytes": 3744463
+     "bytes": 3751995
     },
     "models": [
      {
@@ -4928,7 +4939,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/town-square-camera-arc.json",
-    "bytes": 12541
+    "bytes": 104140,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -5001,7 +5013,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/town-square-camera-arc.zip",
-     "bytes": 13226498
+     "bytes": 13234218
     },
     "models": [
      {
@@ -5095,7 +5107,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/clean-plate-with-day-to-night.json",
-    "bytes": 5969
+    "bytes": 82161,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -5172,7 +5185,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/clean-plate-with-day-to-night.zip",
-     "bytes": 1563751
+     "bytes": 1571393
     },
     "models": [
      {
@@ -5266,7 +5279,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/colorization-with-decompression.json",
-    "bytes": 6118
+    "bytes": 82455,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -5337,7 +5351,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/colorization-with-decompression.zip",
-     "bytes": 76352
+     "bytes": 83999
     },
     "models": [
      {
@@ -5440,7 +5454,8 @@
    ],
    "workflow": {
     "url": "/assets/workflows/ltx-2-5-loras/ingredients-with-slow-motion.json",
-    "bytes": 6435
+    "bytes": 86548,
+    "format": "ui"
    },
    "models": [
     "LTX 2.5"
@@ -5517,7 +5532,7 @@
    "run_it": {
     "bundle": {
      "url": "/assets/workflows/ltx-2-5-loras/bundles/ingredients-with-slow-motion.zip",
-     "bytes": 725494
+     "bytes": 733238
     },
     "models": [
      {
@@ -5590,7 +5605,7 @@
  "run_it": {
   "paragraphs": [
    "Every test page has a zip with its workflow, every input it loads and a README listing the models it needs. Unzip it, copy the inputs into ComfyUI/input, put the models in the folders shown below and drag the workflow onto ComfyUI.",
-   "The workflows are in ComfyUI's API format, exactly as they ran. The ComfyUI frontend I used, 1.53.6, opens API files by drag and drop and lays the nodes out itself, so the graphs look plain but run the same.",
+   "The workflows follow the official Lightricks templates, one graph per kind of LoRA. The model loaders and every ComfyUI-LTXVideo node stay in view; only core ComfyUI plumbing is folded into subgraphs, with the prompt and settings on them. Every workflow sizes its output from what you load with one setting, Shorter side, and the video ones take their length and frame rate from the clip, so they run on your own footage as they are. Every kind of workflow here was run from its downloadable file. The clips on these pages came from the original test graphs, with the same settings. If a node shows up red, install or update ComfyUI-LTXVideo to the commit listed rather than rewiring the graph.",
    "The Lightricks repositories on Hugging Face, the LTX 2.5 base model and every LoRA, are gated. Log in, open each repository page and accept its terms before downloading, or the links return an error.",
    "I ran everything on an RTX 3060 with 12GB of VRAM, an i5-13400F and 32GB of RAM. Peak VRAM across the tests was 7.5 to 11.8 GiB and each clip took 3 to 36 minutes."
   ],
@@ -5622,15 +5637,6 @@
     "bytes": 15372971786,
     "gated": true,
     "used": 30
-   },
-   {
-    "file": "gemma4_e2b_it_bf16.safetensors",
-    "folder": "text_encoders",
-    "repo": "Comfy-Org/gemma-4",
-    "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
-    "bytes": 10278774160,
-    "gated": false,
-    "used": 2
    },
    {
     "file": "ltx-2.5-audio-vae-bf16.safetensors",

@@ -814,7 +814,8 @@ def build_prompt(col, p, prev, nxt, site):
     # above, so the two together rerun it.
     wf = p.get("workflow")
     workflow = (f'<a class="button quiet" href="{e(wf["url"])}" download '
-                f'title="ComfyUI API-format graph">Download workflow</a>' if wf else "")
+                f'title="{"ComfyUI workflow" if wf.get("format") == "ui" else "ComfyUI API-format graph"}">'
+                f'Download workflow</a>' if wf else "")
     bundle = (p.get("run_it") or {}).get("bundle")
     if bundle:
         workflow += (f'<a class="button" href="{e(bundle["url"])}" download>Download everything for this test '
