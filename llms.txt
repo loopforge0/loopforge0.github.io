@@ -102,6 +102,16 @@ Published 20 September 2026. Eleven upscalers on the same five clips, every outp
 - That resampling is not neutral. Topaz is downscaled on every clip, which is a supersampling advantage over methods that rendered natively at 2x. Flux is upscaled on two clips, because at 1.88x it returned fewer pixels than the comparison size.
 - Neither can be reproduced from this page: there is no workflow to publish, no checkpoint to pin, and any denoise or sharpening they apply cannot be switched off. The vendor can also change the model behind the same product name, so this is a snapshot of one date.
 
+## Apps
+
+### [Qwen Image Editor](https://loopforge.cc/apps/qwen-image-editor/)
+
+Edit and create images with Qwen-Image 2.1 Turbo on your own computer, in a simple editor or from Claude Desktop, ChatGPT and Goose.
+
+- [Download for Windows](https://github.com/loopforge0/qwen-image-editor/releases/download/v0.0.2/QwenImageEditor-Setup-0.0.2.exe) (NVIDIA graphics card with 12 GB+, driver 580 or newer, 32 GB RAM recommended, about 25 GB free disk)
+- [Download for macOS](https://github.com/loopforge0/qwen-image-editor/releases/download/v0.0.2/QwenImageEditor-0.0.2.dmg) (Apple Silicon Mac, macOS 14 or newer)
+- Source: https://github.com/loopforge0/qwen-image-editor
+
 ## Optional
 
 - [YouTube channel](https://www.youtube.com/@LoopForge0)

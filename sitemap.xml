@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://loopforge.cc/</loc></url>
   <url><loc>https://loopforge.cc/projects/</loc></url>
+  <url><loc>https://loopforge.cc/apps/</loc></url>
+  <url><loc>https://loopforge.cc/apps/qwen-image-editor/</loc></url>
   <url><loc>https://loopforge.cc/projects/video-upscaler/</loc></url>
   <url><loc>https://loopforge.cc/projects/qwen-image-2-1-turbo/</loc></url>
   <url><loc>https://loopforge.cc/projects/ltx-2-5-loras/</loc></url>

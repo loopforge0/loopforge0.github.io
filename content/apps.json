@@ -1,0 +1,144 @@
+{
+ "apps": [
+  {
+   "slug": "qwen-image-editor",
+   "name": "Qwen Image Editor",
+   "published": "2026-10-18",
+   "version": "0.0.2",
+   "tagline": "Edit and create images with Qwen-Image 2.1 Turbo on your own computer, in a simple editor or from Claude Desktop, ChatGPT and Goose.",
+   "icon": "img/apps/qwen-image-editor/icon.png",
+   "hero": {
+    "src": "img/apps/qwen-image-editor/chat.jpg",
+    "thumb": "img/apps/qwen-image-editor/chat-t.jpg",
+    "w": 1600,
+    "h": 900
+   },
+   "card": {
+    "src": "img/apps/qwen-image-editor/editor.jpg",
+    "thumb": "img/apps/qwen-image-editor/editor-t.jpg",
+    "w": 1600,
+    "h": 900
+   },
+   "github": "https://github.com/loopforge0/qwen-image-editor",
+   "releases": "https://github.com/loopforge0/qwen-image-editor/releases",
+   "video": null,
+   "downloads": [
+    {
+     "os": "Windows",
+     "url": "https://github.com/loopforge0/qwen-image-editor/releases/download/v0.0.2/QwenImageEditor-Setup-0.0.2.exe",
+     "needs": "NVIDIA graphics card with 12 GB+, driver 580 or newer, 32 GB RAM recommended, about 25 GB free disk"
+    },
+    {
+     "os": "macOS",
+     "url": "https://github.com/loopforge0/qwen-image-editor/releases/download/v0.0.2/QwenImageEditor-0.0.2.dmg",
+     "needs": "Apple Silicon Mac, macOS 14 or newer"
+    }
+   ],
+   "note": "The installers don't include the model. On first start the editor checks your computer, you accept Qwen's licence on Hugging Face, and the model downloads to your machine.",
+   "features": [
+    {
+     "title": "Point at what to change",
+     "text": "Circle parts of an image in colours and describe each change. The circles are removed from the result.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/mark.jpg",
+      "thumb": "img/apps/qwen-image-editor/mark-t.jpg",
+      "w": 1479,
+      "h": 1447
+     },
+     "prompt": "Replace the earring in the red circle with a small silver stud, and remove the tattoo in the green circle. Keep everything else unchanged."
+    },
+    {
+     "title": "See what changed",
+     "text": "Compare with a slider, side by side, or a Changes view that marks every edited pixel in red.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/compare.jpg",
+      "thumb": "img/apps/qwen-image-editor/compare-t.jpg",
+      "w": 1600,
+      "h": 762
+     }
+    },
+    {
+     "title": "Transparent images",
+     "text": "Make cut-outs and stickers with real transparency, or extract an object from a busy photo.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/transparent.jpg",
+      "thumb": "img/apps/qwen-image-editor/transparent-t.jpg",
+      "w": 720,
+      "h": 540
+     },
+     "prompt": "This is an RGBA image with transparency. Extract the latte cup and saucer from <image1> onto a transparent background. The image has alpha channel and the background is transparent."
+    },
+    {
+     "title": "Inside your chat app",
+     "text": "Claude Desktop, ChatGPT and Goose can generate and edit, and open the editor in the chat so you can step in.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/chat.jpg",
+      "thumb": "img/apps/qwen-image-editor/chat-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "Loop mode",
+     "text": "The agent makes an image, reviews it against a checklist, and fixes what fails, round after round until it passes.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/loop.jpg",
+      "thumb": "img/apps/qwen-image-editor/loop-t.jpg",
+      "w": 1440,
+      "h": 770
+     }
+    }
+   ],
+   "examples": [
+    {
+     "title": "A 2D flyer from real photos",
+     "text": "Claude Desktop, four inputs: a barista, a latte, the shopfront and a style reference.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/ex-flyer.jpg",
+      "thumb": "img/apps/qwen-image-editor/ex-flyer-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "A three-panel comic strip",
+     "text": "Claude Desktop, two character sheets and a café, the same characters in every panel.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/ex-comic.jpg",
+      "thumb": "img/apps/qwen-image-editor/ex-comic-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "A hotel brochure",
+     "text": "Goose with a free OpenRouter model: three models, a hotel and two products in, three pages out.",
+     "image": {
+      "src": "img/apps/qwen-image-editor/ex-brochure.jpg",
+      "thumb": "img/apps/qwen-image-editor/ex-brochure-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    }
+   ],
+   "facts": [
+    [
+     "Model",
+     "Qwen-Image 2.1 Turbo (weights under Qwen's non-commercial licence)"
+    ],
+    [
+     "Speed, RTX 3060 12 GB",
+     "new image 12.5 to 13 s, edit 17.2 s (ComfyUI: 14.97 s and 23 to 24 s)"
+    ],
+    [
+     "Chat apps",
+     "Claude Desktop, ChatGPT, Goose"
+    ],
+    [
+     "Source",
+     "Apache-2.0 on GitHub"
+    ]
+   ]
+  }
+ ]
+}

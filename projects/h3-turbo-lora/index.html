@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Courier+Prime:wght@400;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=18">
+<link rel="stylesheet" href="/assets/site.css?v=19">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "VideoObject", "name": "MiniMax H3 + Turbo LoRA: image to video with sound on low VRAM", "description": "The Turbo LoRA setup for MiniMax H3: six steps instead of twenty plus, on a low VRAM card, entirely local in ComfyUI. The prompt carries a separate audio line, so the character says something and the model generates the speech along with the motion, from one still image.", "uploadDate": "2026-08-15", "thumbnailUrl": "https://loopforge.cc/assets/img/video/97OYZMksJsQ.jpg", "url": "https://www.youtube.com/watch?v=97OYZMksJsQ", "embedUrl": "https://www.youtube.com/embed/97OYZMksJsQ", "publisher": {"@type": "Organization", "name": "Loop Forge", "url": "https://loopforge.cc/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you run MiniMax H3 on a 12GB GPU?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Everything local on this site ran on an RTX 3060 with 12GB of VRAM, including speech, singing and a one minute short film. The Turbo LoRA brings H3 image to video down to six steps, and the spoken line still transcribes back word for word. Reference to video at 864×480 ran out of memory past about 8 seconds on 12GB, and each generation took about 0.6 GPU-hours. A rented RTX 5090 ran the same prompts at 1344×768."}}]}]}</script>
 </head>
 <body>
@@ -26,7 +26,7 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="/"><img src="/assets/loopforge-logo.png" alt="" width="38" height="38">Loop Forge</a>
-    <nav aria-label="Site"><a href="/projects/" aria-current="page">Projects</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+    <nav aria-label="Site"><a href="/projects/" aria-current="page">Projects</a><a href="/apps/">Apps</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
     <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme"><svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg><svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></button>
   </div>
 </header>
@@ -65,10 +65,10 @@
 <footer class="foot">
   <div class="wrap">
     <span>Loop Forge. Prompts, ComfyUI workflows and findings from projects with AI models you can run.</span>
-    <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+    <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="/apps/">Apps</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
   </div>
 </footer>
-<script src="/assets/site.js?v=18" defer></script>
+<script src="/assets/site.js?v=19" defer></script>
 <!-- Cloudflare Web Analytics: cookieless, stores nothing on the visitor's device and does not fingerprint,
      so no consent banner is required. The same token goes on every page under loopforge.cc. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1315e25973424cb396840b167fdcc1da"}'></script>
