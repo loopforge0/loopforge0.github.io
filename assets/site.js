@@ -33,12 +33,12 @@
   });
 }
 
-// The banner reel plays only when motion is welcome and it is on screen, and can be paused.
+// The banner reel plays while it is on screen and can be paused. With reduced motion it starts
+// paused on its poster, and the button lets the visitor play it.
 {
   const reel = document.querySelector("[data-reel]");
-  const still = matchMedia("(prefers-reduced-motion: reduce)");
-  if (reel && !still.matches) {
-    let paused = false;
+  if (reel) {
+    let paused = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "reel-toggle";

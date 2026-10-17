@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Courier+Prime:wght@400;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=19">
+<link rel="stylesheet" href="/assets/site.css?v=20">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "VideoObject", "name": "LTX 2.5 Official LoRAs: All 14 LoRAs tested", "description": "Lightricks has released a set of official LoRAs for LTX 2.5 that add things the base model does not do on its own, from building a shot out of a reference sheet to colouring a black-and-white film. I ran 14 of them in ComfyUI on my own desktop, plus three tests that chain two LoRAs in one generation. Each test has a frame from every clip in it, the exact prompt, the workflow that ran and the inputs it was given. 25 of the 31 tests worked, and the other 6 show where a LoRA reached its limit.", "uploadDate": "2026-10-09", "thumbnailUrl": "https://loopforge.cc/assets/img/video/ZE9kvCCHlNk.jpg", "url": "https://www.youtube.com/watch?v=ZE9kvCCHlNk", "embedUrl": "https://www.youtube.com/embed/ZE9kvCCHlNk", "publisher": {"@type": "Organization", "name": "Loop Forge", "url": "https://loopforge.cc/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which of the LTX 2.5 LoRAs are worth using on a 12GB card?", "acceptedAnswer": {"@type": "Answer", "text": "The video to video LoRAs were the most dependable. Clean Plate, Colorization, Decompression, Deblur, Restore and Alpha Gen worked on every clip I gave them, including real archive footage, and Day-to-Night worked once I raised its strength to 1.5 at 1152×640. The ones that generate new motion needed more care. Cinemagraph worked on the two people I tried, but a tree full of leaves drifted across the whole frame. Ingredients kept one character from a reference sheet and lost the faces when I gave it two, and Layout to Render followed the layout but turned the character's back to the camera. Chaining two LoRAs in one generation worked for Clean Plate with Day-to-Night and for Colorization with Decompression. Ingredients with Slow Motion failed on all three seeds I tried."}}]}]}</script>
 </head>
 <body>
@@ -70,7 +70,7 @@
     <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="/apps/">Apps</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
   </div>
 </footer>
-<script src="/assets/site.js?v=19" defer></script>
+<script src="/assets/site.js?v=20" defer></script>
 <!-- Cloudflare Web Analytics: cookieless, stores nothing on the visitor's device and does not fingerprint,
      so no consent banner is required. The same token goes on every page under loopforge.cc. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1315e25973424cb396840b167fdcc1da"}'></script>
