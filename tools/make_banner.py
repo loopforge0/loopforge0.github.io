@@ -14,18 +14,19 @@ ROOT = Path(__file__).resolve().parent.parent
 REPOS = ROOT.parent
 OUT = ROOT / "assets" / "banner"
 SHOTS = REPOS / "ytideas" / "h3-shot-library" / "tests" / "results" / "runpod"
+PART2 = REPOS / "h3-shots-2" / "assets" / "clips"   # camera shots, Part 2 (October 2026)
 
-# (clip, start seconds). Every piece runs SEGMENT seconds.
+# (clip, start seconds). Every piece runs SEGMENT seconds. Since Part 2 the reel is all camera shots,
+# each cut at the point its move happens; the earlier mix of projects is in git history.
 SEGMENTS = [
-    (SHOTS / "C-02.mp4", 0.0),                                                  # camera shots: whip pan
-    (REPOS / "h3-walking" / "runpod" / "out" / "shot-07.mp4", 7.0),             # chained renders: clock tower
-    (REPOS / "ltxminimaxcomparison" / "clips-manual" / "MiniMax_clip3_.mp4", 1.0),  # H3 vs LTX: waterfall
-    (SHOTS / "C-08.mp4", 3.0),                                                  # camera shots: yo-yo zoom
-    (REPOS / "local-director" / "firstdate-video" / "share" / "clips" / "s2_00_c1.mp4", 1.5),  # First Date
-    (REPOS / "ltxminimaxcomparison" / "clips-manual" / "LTX-clip5_.mp4", 1.5),  # H3 vs LTX: truck
-    (SHOTS / "K-06n.mp4", 1.0),                                                 # camera shots: stage
-    (REPOS / "ltxminimaxcomparison" / "clips-manual" / "MiniMax_clip4_.mp4", 2.5),  # H3 vs LTX: dog
-    (REPOS / "h3-walking" / "runpod" / "out" / "shot-04.mp4", 5.5),             # chained renders: selfie
+    (PART2 / "rooftop-swing.mp4", 0.3),      # the swing off the ledge
+    (PART2 / "fisheye.mp4", 2.6),            # the push into the fisheye
+    (PART2 / "jib-up.mp4", 2.5),             # rising over her in the temple
+    (PART2 / "hero-spin.mp4", 1.5),          # the low orbit on Mars
+    (PART2 / "slow-pan-reveal.mp4", 2.6),    # the pan finding her in the loft
+    (PART2 / "fpv-drone.mp4", 2.5),          # the dive onto the pier
+    (PART2 / "tilt-up-reveal.mp4", 2.6),     # the tilt up to her face
+    (PART2 / "time-lapse.mp4", 1.0),         # the street in time-lapse
 ]
 SEGMENT = 2.5
 FADE = 0.4

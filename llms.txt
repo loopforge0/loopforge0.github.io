@@ -30,7 +30,7 @@ Published 23 September 2026. 26 prompts. Qwen-Image 2.1 generates and edits with
 
 ### [MiniMax H3 camera shots](https://loopforge.cc/projects/h3-camera-shots/)
 
-Published 13 September 2026. 14 prompts. MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do. Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here.
+Published 13 September 2026. 30 prompts. MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do. Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here. Part 2 adds fifteen more, from POV and time-lapse to an FPV drone and a Spider-Man swing, and goes back to Part 1's crash zoom: H3 picks its own pace for a zoom, so the fix is a small script that speeds the zoom up after the render.
 
 **How do you get real camera moves out of MiniMax H3?**
 

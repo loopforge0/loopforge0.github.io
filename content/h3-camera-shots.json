@@ -1,18 +1,40 @@
 {
  "slug": "h3-camera-shots",
  "title": "MiniMax H3 camera shots",
- "short": "Fourteen named camera shots",
+ "short": "Thirty named camera shots, in two parts",
  "published": "2026-09-13",
+ "updated": "2026-10-28",
+ "update_note": "Part 2 added: fifteen more shots, and a fix for the crash zoom",
  "video": {
   "id": "GCdKh_KaQVs",
   "title": "MiniMax H3: 14 Camera Techniques"
  },
+ "parts": [
+  {
+   "id": "1",
+   "title": "Part 1",
+   "published": "2026-09-13",
+   "video": {
+    "id": "GCdKh_KaQVs",
+    "title": "MiniMax H3: 14 Camera Techniques"
+   },
+   "blurb": "Fourteen shots built from H3's twelve documented camera motions."
+  },
+  {
+   "id": "2",
+   "title": "Part 2",
+   "published": "2026-10-28",
+   "video": null,
+   "blurb": "Fifteen more, many of them asked for in the comments, and a fix for Part 1's crash zoom."
+  }
+ ],
  "models": [
   "MiniMax H3"
  ],
  "summary": [
   "MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no crash zoom button, so every named film shot has to be written as a sentence built out of those twelve. Most ways of doing that do not work. These fourteen do.",
-  "Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here."
+  "Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera clause marked. More than a hundred generations went into getting here.",
+  "Part 2 adds fifteen more, from POV and time-lapse to an FPV drone and a Spider-Man swing, and goes back to Part 1's crash zoom: H3 picks its own pace for a zoom, so the fix is a small script that speeds the zoom up after the render."
  ],
  "facts": [
   [
@@ -21,11 +43,11 @@
   ],
   [
    "Resolution",
-   "1344×768 on a rented RTX 5090, except the snorricam at 864×480 on an RTX 3060"
+   "1344×768. Part 1 on a rented RTX 5090, except the snorricam at 864×480 on an RTX 3060. Part 2 partly on the rented 5090 and partly on the 3060, about 21 minutes a clip"
   ],
   [
    "Sampling",
-   "20 steps, res_multistep / simple, turbo LoRA off, seed 552013742"
+   "20 steps, res_multistep / simple, turbo LoRA off. Seed 552013742 in Part 1, 7 in Part 2 (11 for the fisheye)"
   ],
   [
    "Prompt format",
@@ -35,19 +57,43 @@
  "groups": [
   {
    "id": "zoom",
-   "title": "Zooms"
+   "title": "Zooms",
+   "part": "1"
   },
   {
    "id": "specialty",
-   "title": "Specialty shots"
+   "title": "Specialty shots",
+   "part": "1"
   },
   {
    "id": "pan and roll",
-   "title": "Pans and rolls"
+   "title": "Pans and rolls",
+   "part": "1"
   },
   {
    "id": "tracking",
-   "title": "Tracking shots"
+   "title": "Tracking shots",
+   "part": "1"
+  },
+  {
+   "id": "p2-specialty",
+   "title": "Specialty shots",
+   "part": "2"
+  },
+  {
+   "id": "p2-crash",
+   "title": "Crash zooms, and the fix",
+   "part": "2"
+  },
+  {
+   "id": "p2-big",
+   "title": "Big moves",
+   "part": "2"
+  },
+  {
+   "id": "p2-updown",
+   "title": "Up and down",
+   "part": "2"
   }
  ],
  "refs": [
@@ -94,12 +140,115 @@
     "h": 832
    },
    "note": "Character reference plate"
+  },
+  {
+   "id": "mei",
+   "label": "Mei",
+   "image": {
+    "src": "img/h3-camera-shots/ref-mei.jpg",
+    "thumb": "img/h3-camera-shots/ref-mei-t.jpg",
+    "w": 1536,
+    "h": 858
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "kate-p2",
+   "label": "Kate",
+   "image": {
+    "src": "img/h3-camera-shots/ref-kate-p2.jpg",
+    "thumb": "img/h3-camera-shots/ref-kate-p2-t.jpg",
+    "w": 1792,
+    "h": 2400
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "lena",
+   "label": "Lena",
+   "image": {
+    "src": "img/h3-camera-shots/ref-lena.jpg",
+    "thumb": "img/h3-camera-shots/ref-lena-t.jpg",
+    "w": 1536,
+    "h": 1030
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "sofia-p2",
+   "label": "Sofia",
+   "image": {
+    "src": "img/h3-camera-shots/ref-sofia-p2.jpg",
+    "thumb": "img/h3-camera-shots/ref-sofia-p2-t.jpg",
+    "w": 480,
+    "h": 832
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "claire",
+   "label": "Claire",
+   "image": {
+    "src": "img/h3-camera-shots/ref-claire.jpg",
+    "thumb": "img/h3-camera-shots/ref-claire-t.jpg",
+    "w": 1536,
+    "h": 858
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "jin",
+   "label": "Jin",
+   "image": {
+    "src": "img/h3-camera-shots/ref-jin.jpg",
+    "thumb": "img/h3-camera-shots/ref-jin-t.jpg",
+    "w": 864,
+    "h": 1152
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "marcus",
+   "label": "Marcus",
+   "image": {
+    "src": "img/h3-camera-shots/ref-marcus.jpg",
+    "thumb": "img/h3-camera-shots/ref-marcus-t.jpg",
+    "w": 864,
+    "h": 1152
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "freya",
+   "label": "Freya",
+   "image": {
+    "src": "img/h3-camera-shots/ref-freya.jpg",
+    "thumb": "img/h3-camera-shots/ref-freya-t.jpg",
+    "w": 864,
+    "h": 1152
+   },
+   "note": "Character reference plate"
+  },
+  {
+   "id": "raven",
+   "label": "Raven",
+   "image": {
+    "src": "img/h3-camera-shots/ref-raven.jpg",
+    "thumb": "img/h3-camera-shots/ref-raven-t.jpg",
+    "w": 864,
+    "h": 1152
+   },
+   "note": "Character reference plate"
   }
  ],
  "links": [
   {
    "label": "Repository with agent skills that write these for your own scene",
    "url": "https://github.com/loopforge0/minimaxh3-shots-skills"
+  },
+  {
+   "label": "snap.py, the crash zoom fix from Part 2 (Python and ffmpeg)",
+   "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/scripts/snap.py"
   },
   {
    "label": "ComfyUI workflow (json)",
@@ -115,6 +264,7 @@
    "slug": "crash-zoom-in",
    "title": "Crash zoom in",
    "group": "zoom",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/crash-zoom-in.jpg",
     "thumb": "img/h3-camera-shots/crash-zoom-in-t.jpg",
@@ -191,6 +341,7 @@
    "slug": "yoyo-zoom",
    "title": "Yo-yo zoom",
    "group": "zoom",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/yoyo-zoom.jpg",
     "thumb": "img/h3-camera-shots/yoyo-zoom-t.jpg",
@@ -265,6 +416,7 @@
    "slug": "dolly-zoom",
    "title": "Dolly zoom",
    "group": "specialty",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/dolly-zoom.jpg",
     "thumb": "img/h3-camera-shots/dolly-zoom-t.jpg",
@@ -341,6 +493,7 @@
    "slug": "snorricam",
    "title": "Snorricam",
    "group": "specialty",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/snorricam.jpg",
     "thumb": "img/h3-camera-shots/snorricam-t.jpg",
@@ -415,6 +568,7 @@
    "slug": "rack-focus",
    "title": "Rack focus",
    "group": "specialty",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/rack-focus.jpg",
     "thumb": "img/h3-camera-shots/rack-focus-t.jpg",
@@ -497,6 +651,7 @@
    "slug": "split-screen",
    "title": "Split screen",
    "group": "specialty",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/split-screen.jpg",
     "thumb": "img/h3-camera-shots/split-screen-t.jpg",
@@ -573,6 +728,7 @@
    "slug": "whip-pan",
    "title": "Whip pan",
    "group": "pan and roll",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/whip-pan.jpg",
     "thumb": "img/h3-camera-shots/whip-pan-t.jpg",
@@ -651,6 +807,7 @@
    "slug": "dutch-angle",
    "title": "Dutch angle",
    "group": "pan and roll",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/dutch-angle.jpg",
     "thumb": "img/h3-camera-shots/dutch-angle-t.jpg",
@@ -725,6 +882,7 @@
    "slug": "super-dolly-in",
    "title": "Super dolly in",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/super-dolly-in.jpg",
     "thumb": "img/h3-camera-shots/super-dolly-in-t.jpg",
@@ -799,6 +957,7 @@
    "slug": "eyes-in",
    "title": "Eyes in",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/eyes-in.jpg",
     "thumb": "img/h3-camera-shots/eyes-in-t.jpg",
@@ -873,6 +1032,7 @@
    "slug": "aerial-pullback",
    "title": "Aerial pullback",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/aerial-pullback.jpg",
     "thumb": "img/h3-camera-shots/aerial-pullback-t.jpg",
@@ -947,6 +1107,7 @@
    "slug": "handheld",
    "title": "Handheld",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/handheld.jpg",
     "thumb": "img/h3-camera-shots/handheld-t.jpg",
@@ -1021,6 +1182,7 @@
    "slug": "orbit-360",
    "title": "360 orbit",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/orbit-360.jpg",
     "thumb": "img/h3-camera-shots/orbit-360-t.jpg",
@@ -1095,6 +1257,7 @@
    "slug": "crane-rise",
    "title": "Crane rise",
    "group": "tracking",
+   "part": "1",
    "still": {
     "src": "img/h3-camera-shots/crane-rise.jpg",
     "thumb": "img/h3-camera-shots/crane-rise-t.jpg",
@@ -1166,6 +1329,1948 @@
      "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crane-rise.md"
     }
    ]
+  },
+  {
+   "slug": "pov",
+   "title": "POV",
+   "group": "p2-specialty",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-pov.jpg",
+    "thumb": "img/h3-camera-shots/p2-pov-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 49,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Halloween, Hardcore Henry"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "192 frames, 8.00s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mei"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with a straight dark brown shoulder-length bob and a beige crew-neck sweater.\n\nsummary:\n[reference generation] The target video shows <Subject 1> on an empty desert highway at golden hour, seen in a first-person POV shot: the viewer walks up behind her and calls her name, and she turns with a smile to shake the viewer's hand.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (a straight dark brown shoulder-length bob and a beige crew-neck sweater) are held identical to <Picture 1>; her hair and clothes from behind at first, and her face from the moment she turns around.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A first-person POV shot on the centre line of the highway: the camera is the eyes of someone taking a few slow steps forward toward <Subject 1>, who stands just ahead with her back to the camera, bent over the engine under the propped-up hood of an old dusty car at the roadside, tightening something with a spanner, busy at it and moving the whole time, with red sandstone mesas, wooden telephone poles along the shoulder, a faded road sign and the road running to the horizon around. The camera stops a couple of steps behind her, and the unseen viewer (S1), in a warm voice, slightly surprised and questioning, calls out: <d>[English] Mei?</d> <Subject 1> hears her name, stops what she is doing, turns around to face the camera, recognises the viewer and breaks into a warm smile. Then she steps closer and holds out her hand toward the lens, and one hand reaches in from the bottom right of the frame to take her hand, and they shake hands.\n\noverall_soundscape: A dry desert wind continues throughout, with the faint hum of the telephone wires, with soft footsteps approaching and a warm, surprised laugh\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 775,
+       "end": 1306
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/pov.json",
+    "bytes": 40946,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/pov.zip",
+     "bytes": 1622973
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/pov.md"
+    }
+   ]
+  },
+  {
+   "slug": "slow-pan-reveal",
+   "title": "Slow pan reveal",
+   "group": "p2-specialty",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-slow-pan-reveal.jpg",
+    "thumb": "img/h3-camera-shots/p2-slow-pan-reveal-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 90,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "jin"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with long sleek straight pastel-pink hair with a soft fringe, small silver ear cuffs, a fitted pink cropped tank top and a pleated black mini skirt.\n\nsummary:\n[reference generation] The target video shows <Subject 1> lying sideways across a velvet armchair in a stylish loft apartment at night, in a wide shot of the place, as the camera performs a slow pan reveal.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (long sleek straight pastel-pink hair with a soft fringe, small silver ear cuffs, a fitted pink cropped tank top and a pleated black mini skirt) are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A wide shot looks across floor-to-ceiling windows over the city lights, shelves of vinyl records, a pink neon sign on the wall that reads \"loopforge\" in lowercase letters, and tall potted plants in the living room, with no one in view. The camera stays in one place and pans right at slow speed across the place, and comes to rest on <Subject 1> lying sideways across a wide velvet armchair at the right, her back propped against one arm of the armchair and her legs draped over the other arm, her lower legs hanging in the air off the side of the armchair and not resting on anything, scrolling on her phone, framing her in a medium shot as the screen lights her face.\n\noverall_soundscape: The quiet hum of the city outside and the soft tap of a thumb on a phone screen\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 825,
+       "end": 1494
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/slow-pan-reveal.json",
+    "bytes": 40564,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/slow-pan-reveal.zip",
+     "bytes": 1225126
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/slow-pan-reveal.md"
+    }
+   ]
+  },
+  {
+   "slug": "time-lapse",
+   "title": "Time-lapse",
+   "group": "p2-specialty",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-time-lapse.jpg",
+    "thumb": "img/h3-camera-shots/p2-time-lapse-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 116,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Lucy"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-p2"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with shoulder-length dark brown wavy hair, blue-grey eyes and an oatmeal cable-knit sweater.\n\nsummary:\n[reference generation] The target video shows <Subject 1> in a narrow city street at night in heavy rain, standing still at normal speed while the world around rushes past in time-lapse.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (shoulder-length dark brown wavy hair, blue-grey eyes and an oatmeal cable-knit sweater) are held identical to <Picture 1> in every frame.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A static medium-wide shot, locked off on a tripod, frames <Subject 1> standing still and centred in the middle of the wet street, with glowing shop signs, parked cars beaded with rain, puddles reflecting neon, and steam rising from a grate around her. Everything around her plays as a fast time-lapse: crowds of people stream past on both sides as soft blurred streaks, cars and lights race by, clouds rush across the sky and the light shifts and flickers as the hours pass. Only <Subject 1> moves at normal speed, breathing slowly, blinking, and turning her head a little, perfectly sharp in the middle of the rushing blur.\n\noverall_soundscape: Steady heavy rain on the street and on car roofs throughout, with a distant siren passing, sped up into a rushing, washing blur of footsteps, voices and traffic\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 677,
+       "end": 1301
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/time-lapse.json",
+    "bytes": 40152,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/time-lapse.zip",
+     "bytes": 7234643
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/time-lapse.md"
+    }
+   ]
+  },
+  {
+   "slug": "fisheye",
+   "title": "Fisheye",
+   "group": "p2-specialty",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-fisheye.jpg",
+    "thumb": "img/h3-camera-shots/p2-fisheye-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 145,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "The Favourite"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "11"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "lena"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a cyberpunk megacity street at night, in a warped, bulging fisheye close-up, as the camera performs a fisheye close-up.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A warped, bulging close-up with the camera almost touching <Subject 1>'s face: the whole picture is curved like the inside of a glass ball, the middle swelling toward the viewer and the edges bending round into a dark rounded border, standing in place on the rain-slicked street, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with towers covered in holographic adverts, an elevated train track, flying cars and neon stalls behind her. The camera pushes in toward her as she leans into the lens, and the warp grows stronger the closer it gets: her nose and the middle of her face balloon toward the viewer while her ears and the setting behind her shrink away and curve around the rim of the frame, and every straight line in the background bends into an arc.\n\noverall_soundscape: A dense city hum, an overhead train rattling past and distant electronic announcements\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1032,
+       "end": 1355
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/fisheye.json",
+    "bytes": 40110,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/fisheye.zip",
+     "bytes": 2431026
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/fisheye.md"
+    }
+   ]
+  },
+  {
+   "slug": "cutaway-montage",
+   "title": "Cutaway montage",
+   "group": "p2-specialty",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-cutaway-montage.jpg",
+    "thumb": "img/h3-camera-shots/p2-cutaway-montage-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 178,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Requiem for a Dream, Hot Fuzz"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "claire"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with straight shoulder-length auburn hair, light freckles and a burgundy knit jumper.\n\nsummary:\n[reference generation] The target video shows <Subject 1> on an empty desert highway at golden hour, getting ready in a rapid, rhythmic cut-away montage of quick inserts.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1] to [Shot 7]): fully_preserved - her face, identity and clothing (straight shoulder-length auburn hair, light freckles and a burgundy knit jumper) are held identical to <Picture 1> in every shot, and the hands in the inserts are her own.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A tight close-up frames her face on the centre line of the highway, with red sandstone mesas, wooden telephone poles along the shoulder, a faded road sign and the road running to the horizon soft behind her; her eyes narrow with focus as she decides. [Shot 2] At 00:01.300, the shot cuts to an extreme close-up insert, close on the action as she reaches to snatch a set of car keys off a dusty bonnet with the right hand. [Shot 3] At 00:01.700, the shot cuts to an extreme close-up insert, as she pulls the seatbelt and clicks it into place. [Shot 4] At 00:02.100, the shot cuts to an extreme close-up insert, close on the action as she reaches to slide on a pair of dark sunglasses with both hands, sitting in the driver's seat. [Shot 5] At 00:02.500, the shot cuts to an extreme close-up insert, close on the action as she reaches to shove the gear stick forward with the right hand, the left hand staying on the steering wheel. [Shot 6] At 00:02.900, the shot cuts to an extreme close-up on her face, now in the driver's seat of the car, with the steering wheel, dashboard and windscreen all around, the desert highway beyond and the dark sunglasses on, as her gaze snaps up, sharp and ready. [Shot 7] At 00:03.300, the shot cuts to a tight close-up of her face, still in the driver's seat of the car, with the steering wheel, dashboard and windscreen all around, the desert highway beyond and the dark sunglasses on, now still and ready, and she looks up into the lens with a small, sure smile.\n\noverall_soundscape: A dry desert wind continues throughout, with the faint hum of the telephone wires, cut into a tight rhythm: a sharp click, snap, whoosh or thud on every insert, then a beat of quiet\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 951,
+       "end": 1964
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/cutaway-montage.json",
+    "bytes": 41995,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/cutaway-montage.zip",
+     "bytes": 1749936
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/cutaway-montage.md"
+    }
+   ]
+  },
+  {
+   "slug": "crash-zoom-in-part-2",
+   "title": "Crash zoom in, fixed",
+   "group": "p2-crash",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-crash-zoom-in.jpg",
+    "thumb": "img/h3-camera-shots/p2-crash-zoom-in-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 214,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a snow-covered arctic coastline, in a wide shot, as the camera performs a crash zoom in.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A wide shot places <Subject 1> small and complete in frame on the snowy rocky shore, standing in place on the snowy rocky shore, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with dark rocky cliffs, patches of green aurora borealis in the sky, still water, and an old wooden sailing ship with tall masts behind her. The camera is locked off on a tripod and holds the wide shot completely still for the first two seconds; only the zoom lens changes and the camera body never moves. Between one frame and the next the lens crash zooms in to a tight close-up of her face: the whole change takes only two or three frames, as abrupt as a cut, with a streak of zoom blur on those few frames only, and nothing shifts against anything else, the background simply magnifies flat together with her. After it lands the close-up is locked and does not change. As the shot plays out, <Subject 1>'s expression shifts from blank and neutral into dawning realization and slight shock.\n\noverall_soundscape: A faint cold wind continues throughout, with distant creaking from the ship's rigging\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 882,
+       "end": 1413
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "The prompt asks for the zoom to take about 200ms. H3 took about 2.6 seconds. The still and the video show the clip after snap.py, which finds the zoom and speeds it up to three frames. The prompt is kept exactly as it ran."
+   ],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/crash-zoom-in-part-2.json",
+    "bytes": 40664,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/crash-zoom-in-part-2.zip",
+     "bytes": 603700
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crash-zoom-in.md"
+    }
+   ]
+  },
+  {
+   "slug": "crash-zoom-out",
+   "title": "Crash zoom out",
+   "group": "p2-crash",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-crash-zoom-out.jpg",
+    "thumb": "img/h3-camera-shots/p2-crash-zoom-out-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 214,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "mei"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a narrow Tokyo alley at night, in a tight close-up, as the camera performs a crash zoom out.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A tight close-up fills the frame with <Subject 1>'s face. <Subject 1> is standing in place in the middle of the lantern-lit alley, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with red paper lanterns, izakaya fronts, lit vending machines, parked bicycles and wet paving stones behind her. The camera is locked off on a tripod and holds the tight close-up completely still for the first two seconds; only the zoom lens changes and the camera body never moves. Between one frame and the next the lens crash zooms out to a wide shot with <Subject 1> small and complete in frame in the middle of the lantern-lit alley: the whole change takes only two or three frames, as abrupt as a cut, with a streak of zoom blur on those few frames only, and nothing shifts against anything else, the background simply shrinks flat together with her. After it lands the wide framing is locked and does not change. As the shot plays out, <Subject 1> holds a calm, neutral expression through the close-up, then her eyes flick wide in alarm as the zoom snaps out, lips closed.\n\noverall_soundscape: Muffled chatter and clinking glasses from the bars, the hum of the vending machines and a light drizzle\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 860,
+       "end": 1466
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "The same as the crash zoom in: H3 took about 1.7 seconds for a zoom the prompt asks to be near instant, so the clip was sped up afterwards with snap.py. The prompt is kept exactly as it ran."
+   ],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/crash-zoom-out.json",
+    "bytes": 40691,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/crash-zoom-out.zip",
+     "bytes": 1623121
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crash-zoom-out.md"
+    }
+   ]
+  },
+  {
+   "slug": "hero-spin",
+   "title": "Hero spin",
+   "group": "p2-big",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-hero-spin.jpg",
+    "thumb": "img/h3-camera-shots/p2-hero-spin-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 295,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Bad Boys, The Rock"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "amber-main"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with long wavy ginger-red hair, freckles, a cream short-sleeve t-shirt, a dark cord necklace with a metal cross, and high-waisted blue jeans with a brown belt.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on the surface of Mars, in a low-angle medium shot, as the camera performs a hero spin.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (long wavy ginger-red hair, freckles, a cream short-sleeve t-shirt, a dark cord necklace with a metal cross, and high-waisted blue jeans with a brown belt) are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A low-angle medium shot looks up at <Subject 1>, crouched low, standing in place on the red rocky plain, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with rust-red boulders, jagged cliffs, a white landing module and a butterscotch sky behind her. The camera sits low near the ground and performs an arc shot around her with large amplitude at fast speed, circling her while looking up, as she slowly rises from the crouch to full height, the sky wheeling behind her. As the shot plays out, <Subject 1>'s face moves from strain to fierce resolve as she rises.\n\noverall_soundscape: A thin, faint wind and fine dust hissing over the rocks\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1126,
+       "end": 1345
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/hero-spin.json",
+    "bytes": 40219,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/hero-spin.zip",
+     "bytes": 603316
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/hero-spin.md"
+    }
+   ]
+  },
+  {
+   "slug": "rooftop-swing",
+   "title": "Rooftop swing",
+   "group": "p2-big",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-rooftop-swing.jpg",
+    "thumb": "img/h3-camera-shots/p2-rooftop-swing-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 320,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Spider-Man"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "lena"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> on a cyberpunk megacity street at night, leaping from a rooftop and swinging on a line in a huge arc across the gap between two tall buildings.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A wide shot frames <Subject 1> crouched on the edge of a high rooftop on the rain-slicked street, with towers covered in holographic adverts, an elevated train track, flying cars and neon stalls far below and around her, gripping a thin silver line that runs up to the top of a taller building across the street. She leaps off the edge and swings down on the line in one huge arc across the gap between the buildings, the street rushing past far below her, her hair and clothes streaming with the speed. The camera performs a tracking shot behind and slightly to one side of her through the air with large amplitude at fast speed, following the whole swing, so through the swing she faces away from the camera toward the next building, her back to the lens. At the bottom of the arc she sweeps up toward the next building, lets go at the top of the swing, sails through the air and lands crouched on its rooftop ledge, still facing away from the camera. Then she stands up and turns around on the spot, stepping and pivoting her whole body through a half turn so that she ends facing the camera, and looks back across the gap with a breathless grin. As the shot plays out, <Subject 1> grins with breathless exhilaration as she lands.\n\noverall_soundscape: A dense city hum, an overhead train rattling past and distant electronic announcements, then wind roaring past as she swings, the creak of the taut line, and a solid thud as she lands\n\nnon_diegetic_music: A driving, heroic orchestral theme with pounding drums\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 526,
+       "end": 1675
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/rooftop-swing.json",
+    "bytes": 41219,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/rooftop-swing.zip",
+     "bytes": 2431250
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/rooftop-swing.md"
+    }
+   ]
+  },
+  {
+   "slug": "fpv-drone",
+   "title": "FPV drone",
+   "group": "p2-big",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-fpv-drone.jpg",
+    "thumb": "img/h3-camera-shots/p2-fpv-drone-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 352,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "Ambulance"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "marcus"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with a short tapered fade, a neatly trimmed beard, a white linen shirt with the sleeves rolled up and beige chinos.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on an alpine lake at dawn, in a high aerial wide shot, as the camera performs a racing-drone dive.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - his face, identity and clothing (a short tapered fade, a neatly trimmed beard, a white linen shirt with the sleeves rolled up and beige chinos) are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] An aerial wide shot from high above an alpine lake at dawn looks down on <Subject 1>, a tiny figure far below, standing in place at the end of the jetty, breathing softly, hair and clothing stirring in the air, blinking and shifting his weight a little as people naturally do, with a wooden jetty, a red rowing boat, shoreline pines and snow-capped peaks behind him. The camera flies like a racing FPV drone: it dives steeply at fast speed, rolls and banks through the air, skims low and fast over the ground toward him, then pulls up and slows to a stop in a medium shot of <Subject 1>, his face sharp in frame.\n\noverall_soundscape: Still morning air, water lapping at the jetty and a bird calling across the lake\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1091,
+       "end": 1336
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/fpv-drone.json",
+    "bytes": 40243,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/fpv-drone.zip",
+     "bytes": 1295716
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/fpv-drone.md"
+    }
+   ]
+  },
+  {
+   "slug": "overhead-swing",
+   "title": "Overhead swing",
+   "group": "p2-big",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-overhead-swing.jpg",
+    "thumb": "img/h3-camera-shots/p2-overhead-swing-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 380,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "allie"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still on a wide beach at sunset, in a top-down overhead shot, as the camera performs a swing down from overhead.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A top-down overhead shot, the camera a few metres directly above <Subject 1> with its lens pointing straight down, a bird's-eye view of <Subject 1> from head to toe with the ground around and looking up into the lens, standing in place on the wet sand, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with a lifeguard tower, wooden groynes, gentle waves and a distant pier behind her. The camera swings down in front of her in a smooth quarter-circle arc at slow speed, keeping the same distance from her the whole way: it travels from straight above her head down to her eye level on the side she is facing, tilting from pointing straight down to pointing level as it goes so her face stays centred, and ends face-on to her in a medium shot with the horizon level behind her. It never passes behind her, and it does not dive, fly forward or drop straight down. As the shot plays out, <Subject 1> looks up into the lens with a small, curious smile, tucks a strand of hair behind her ear as the breeze lifts it, and lowers her chin to follow the camera down.\n\noverall_soundscape: Gentle waves breaking and gulls calling in the distance\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 964,
+       "end": 1440
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/overhead-swing.json",
+    "bytes": 40617,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/overhead-swing.zip",
+     "bytes": 516545
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/overhead-swing.md"
+    }
+   ]
+  },
+  {
+   "slug": "walk-past-camera",
+   "title": "Walk past camera",
+   "group": "p2-big",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-walk-past-camera.jpg",
+    "thumb": "img/h3-camera-shots/p2-walk-past-camera-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 420,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "kate-p2"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> walking steadily forward in a pine forest in late autumn, in a wide shot, as the camera performs a walk-past shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A wide shot frames <Subject 1>, walking steadily forward on the forest track, hair flying and clothing snapping with the movement, with tall straight pine trunks, a carpet of orange needles, low mist between the trees, and shafts of sunlight behind her. She walks straight toward the lens, growing from a full figure to a close-up, and passes right beside the camera; the camera pans right at fast speed as she goes by, and follows her from behind as she walks on into the distance, her back to the camera.\n\noverall_soundscape: Birdsong and a light breeze through the pines throughout, with needles crunching underfoot\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 488,
+       "end": 1003
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/walk-past-camera.json",
+    "bytes": 39422,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/walk-past-camera.zip",
+     "bytes": 7234477
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/walk-past-camera.md"
+    }
+   ]
+  },
+  {
+   "slug": "crane-down",
+   "title": "Crane down",
+   "group": "p2-updown",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-crane-down.jpg",
+    "thumb": "img/h3-camera-shots/p2-crane-down-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 445,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia-p2"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a Wild West frontier town, in a high wide shot from above, as the camera performs a crane down.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A high wide shot from well above looks down on <Subject 1>, standing in place in the middle of the dusty main street, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with a saloon, a general store, hitching posts with horses and a wooden boardwalk behind her. The camera cranes down at slow speed, pedestalling down and tilting up as it descends, and comes to rest at eye level in a medium close-up of her face.\n\noverall_soundscape: A hot dry wind, a horse snorting and a saloon door creaking\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 831,
+       "end": 982
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/crane-down.json",
+    "bytes": 39313,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/crane-down.zip",
+     "bytes": 332735
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/crane-down.md"
+    }
+   ]
+  },
+  {
+   "slug": "jib-up",
+   "title": "Jib up",
+   "group": "p2-updown",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-jib-up.jpg",
+    "thumb": "img/h3-camera-shots/p2-jib-up-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 472,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "freya"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with long straight platinum-blonde hair, light blue eyes, a sage-green ribbed tank top and white jeans with a tan leather belt.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still among ancient temple ruins in the jungle, in a waist-up medium close-up, as the camera performs a jib up.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (long straight platinum-blonde hair, light blue eyes, a sage-green ribbed tank top and white jeans with a tan leather belt) are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A waist-up medium close-up frames <Subject 1>, standing in place on the mossy temple steps, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with a mossy stepped pyramid, carved pillars, giant tree roots and a broken stone idol behind her. The camera jibs up at slow speed in one sweeping arc, rising from her chest height up and over her while tilting down to keep her in frame, and ends in a high angle looking down on her with ancient temple ruins in the jungle spread out around her. As the shot plays out, <Subject 1> turns her face up toward the rising camera, her expression opening from wariness into awe.\n\noverall_soundscape: Dense jungle sound, birds calling, insects buzzing and water trickling over stone\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1069,
+       "end": 1316
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/jib-up.json",
+    "bytes": 40273,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/jib-up.zip",
+     "bytes": 1344876
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/jib-up.md"
+    }
+   ]
+  },
+  {
+   "slug": "low-angle-hero",
+   "title": "Low-angle hero",
+   "group": "p2-updown",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-low-angle-hero.jpg",
+    "thumb": "img/h3-camera-shots/p2-low-angle-hero-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 496,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Known from",
+     "The Avengers, The Dark Knight"
+    ],
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 3060, 12GB (local)"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "raven"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>, with long straight jet-black hair with a blunt fringe, dark winged eyeliner, plum lipstick, a small nose ring, grey line tattoos down both arms and across her collarbone, a black lace corset and a dark plaid pleated skirt.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in an old gothic cemetery at dusk, in a low-angle medium close-up from the waist up, looking up, as the camera performs a low-angle hero shot.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing (long straight jet-black hair with a blunt fringe, dark winged eyeliner, plum lipstick, a small nose ring, grey line tattoos down both arms and across her collarbone, a black lace corset and a dark plaid pleated skirt) are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A low-angle medium close-up from the waist up, the lens just above the ground and tilted up, looks up at <Subject 1> against the sky, standing in place on the path between the graves, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with weathered stone angels, leaning headstones, a wrought-iron gate and bare twisted trees behind her. The camera stays low near the ground and tilted up at her the whole time, and pushes in at slow speed until she towers over the frame, her face high in the shot, looking down past the lens.\n\noverall_soundscape: Wind through bare branches and a distant crow\n\nnon_diegetic_music: A single sustained low string note swells partway through the shot, then fades toward the end\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 1393,
+       "end": 1582
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/low-angle-hero.json",
+    "bytes": 40669,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/low-angle-hero.zip",
+     "bytes": 1490916
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/low-angle-hero.md"
+    }
+   ]
+  },
+  {
+   "slug": "tilt-up-reveal",
+   "title": "Tilt up reveal",
+   "group": "p2-updown",
+   "part": "2",
+   "still": {
+    "src": "img/h3-camera-shots/p2-tilt-up-reveal.jpg",
+    "thumb": "img/h3-camera-shots/p2-tilt-up-reveal-t.jpg",
+    "w": 1344,
+    "h": 768
+   },
+   "time": 527,
+   "models": [
+    "MiniMax H3"
+   ],
+   "techniques": [
+    "Camera movement",
+    "Reference to video"
+   ],
+   "facts": [
+    [
+     "Resolution",
+     "1344×768"
+    ],
+    [
+     "Length",
+     "124 frames, 5.17s"
+    ],
+    [
+     "Steps",
+     "20, res_multistep / simple, turbo LoRA off"
+    ],
+    [
+     "Seed",
+     "7"
+    ],
+    [
+     "Ran on",
+     "RTX 5090 on RunPod"
+    ]
+   ],
+   "refs": [
+    {
+     "tag": "<Picture 1>",
+     "ref": "sofia-p2"
+    }
+   ],
+   "variants": [
+    {
+     "label": "Prompt",
+     "text": "subject_definitions:\n<Subject 1> is the person in <Picture 1>.\n\nsummary:\n[reference generation] The target video shows <Subject 1> standing still in a narrow city street at night in heavy rain, in a close shot of her feet, as the camera performs a tilt up reveal.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): fully_preserved - her face, identity and clothing are held identical to <Picture 1> in every frame with zero drift.\n\ndetailed_description:\nThe target video is live-action and cinematic.\n[Shot 1] A chest-height camera angled down frames only <Subject 1>'s feet and lower legs, her face out of frame, standing in place in the middle of the wet street, breathing softly, hair and clothing stirring in the air, blinking and shifting her weight a little as people naturally do, with glowing shop signs, parked cars beaded with rain, puddles reflecting neon, and steam rising from a grate behind her. The camera stays in one place and tilts up at slow speed, travelling up her legs, body and shoulders, and comes to rest on her face in a medium close-up, so she is only revealed at the end.\n\noverall_soundscape: Steady heavy rain on the street and on car roofs throughout, with a distant siren passing\n\nnon_diegetic_music: N/A\n",
+     "highlights": [
+      {
+       "kind": "clause",
+       "label": "Camera clause",
+       "start": 915,
+       "end": 1104
+      }
+     ]
+    }
+   ],
+   "notes": [],
+   "workflow": {
+    "url": "/assets/workflows/h3-camera-shots/tilt-up-reveal.json",
+    "bytes": 39621,
+    "format": "ui"
+   },
+   "run_it": {
+    "bundle": {
+     "url": "/assets/workflows/h3-camera-shots/bundles/tilt-up-reveal.zip",
+     "bytes": 332841
+    },
+    "models": [
+     {
+      "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "bytes": 20970379616,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "folder": "text_encoders",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "bytes": 15687142551,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_video_vae_fp16.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "gated": false
+     },
+     {
+      "file": "minimax_h3_audio_vae_fp32.safetensors",
+      "folder": "vae",
+      "repo": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "gated": false
+     }
+    ],
+    "pack": null,
+    "comfy": "ComfyUI 0.41.0"
+   },
+   "links": [
+    {
+     "label": "Shot recipe, with what the earlier attempts got wrong",
+     "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/tilt-up-reveal.md"
+    }
+   ]
   }
- ]
+ ],
+ "run_it": {
+  "paragraphs": [
+   "Every Part 2 shot page has a zip with the exact graph that produced it, the character plate it loads and a README. Copy the plate into ComfyUI/input, put the four models below in place and drag the workflow onto ComfyUI. With the same model files you should get the same shot or a very close one.",
+   "Every node is part of ComfyUI itself, no custom nodes. Part 1's shots use the same graph; their prompts and plates are on each shot's page, with the single workflow file in the links below."
+  ],
+  "software": [
+   {
+    "label": "ComfyUI 0.41.0 or newer",
+    "url": "https://github.com/comfyanonymous/ComfyUI"
+   }
+  ],
+  "models": [
+   {
+    "file": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+    "folder": "diffusion_models",
+    "repo": "Comfy-Org/MiniMax-H3",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+    "bytes": 20970379616,
+    "gated": false,
+    "used": "Every shot"
+   },
+   {
+    "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "folder": "text_encoders",
+    "repo": "Comfy-Org/MiniMax-H3",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "bytes": 15687142551,
+    "gated": false,
+    "used": "Every shot"
+   },
+   {
+    "file": "minimax_h3_video_vae_fp16.safetensors",
+    "folder": "vae",
+    "repo": "Comfy-Org/MiniMax-H3",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+    "bytes": 5207808496,
+    "gated": false,
+    "used": "Every shot"
+   },
+   {
+    "file": "minimax_h3_audio_vae_fp32.safetensors",
+    "folder": "vae",
+    "repo": "Comfy-Org/MiniMax-H3",
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+    "bytes": 605254808,
+    "gated": false,
+    "used": "Every shot"
+   }
+  ]
+ }
 }

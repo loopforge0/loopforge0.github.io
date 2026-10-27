@@ -4,8 +4,8 @@
     "poster": "banner/reel-poster.jpg",
     "w": 1280,
     "h": 720,
-    "credit": "Every frame here was generated. See the projects they came from",
-    "credit_url": "/projects/"
+    "credit": "Every frame here was generated. See the camera shots they came from",
+    "credit_url": "/projects/h3-camera-shots/"
   },
   "headline": "Open models, tested in the open",
   "lede": "Prompts, ComfyUI workflows and findings from hands-on projects with AI models you can run yourself, published exactly as they ran, with the failures left in.",

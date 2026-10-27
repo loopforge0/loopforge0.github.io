@@ -316,3 +316,21 @@ document.querySelectorAll(".script").forEach((script) => {
     if (e.key === "Escape" && box && !box.hidden) close();
   });
 })();
+
+// A project in parts (the camera shots) shows every part by default. The filter narrows the
+// prompts and the contents list to one part; #part-2 in the address opens it filtered.
+document.querySelectorAll("[data-part-filter]").forEach((bar) => {
+  const page = bar.closest("main") || document;
+  const buttons = bar.querySelectorAll("button[data-part]");
+  const set = (id, push) => {
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.part === id)));
+    page.querySelectorAll("section.part[data-part], .toc li[data-part]").forEach((el) => {
+      el.hidden = id !== "all" && el.dataset.part !== id;
+    });
+    if (push) history.replaceState(null, "", id === "all" ? location.pathname : `#part-${id}`);
+  };
+  buttons.forEach((b) => b.addEventListener("click", () => set(b.dataset.part, true)));
+  bar.hidden = false;
+  const m = location.hash.match(/^#part-(\w+)$/);
+  if (m && bar.querySelector(`button[data-part="${m[1]}"]`)) set(m[1], false);
+});

@@ -677,3 +677,24 @@ table.data th:first-child, table.data td:first-child { text-align: left; padding
 .app-example figcaption { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
 .app-example figcaption span { color: var(--ink-2); }
 @media (max-width: 860px) { .app-hero { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Projects in parts: a filter above the prompts, a header per part, the "Updated" badge. */
+.new.updated { background: var(--p3); color: #fff; }
+.update-note { margin: 4px 0 8px; font-weight: 600; color: var(--p3); }
+.part-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 28px; }
+.part-filter button {
+  font: inherit; font-size: 15px; font-weight: 600; padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  border: 0; background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule);
+}
+.part-filter button:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.part-filter button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+.part + .part { margin-top: 56px; }
+.part-head {
+  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px;
+  padding-bottom: 14px; margin-bottom: 22px; border-bottom: 2px solid var(--ink);
+}
+.part-head p { margin: 4px 0 0; max-width: 60ch; }
+.part-title { font-family: var(--display); font-size: clamp(26px, 3vw, 34px); margin: 0; }
+.part-title span { margin-left: 12px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--ink-2); }
+.toc li.toc-part a { font-weight: 700; }
+.toc li[data-part]:not(.toc-part) a { padding-left: 14px; }

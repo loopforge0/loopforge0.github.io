@@ -131,6 +131,223 @@ SHOT_GROUP_TITLES = {"zoom": "Zooms", "specialty": "Specialty shots", "pan and r
                      "tracking": "Tracking shots"}
 
 
+# ---------------------------------------------------------------------------- camera shots, part 2
+
+PART2 = REPOS / "h3-shots-2"
+PART2_NATIVE = REPOS / "video-next" / "outputs" / "native"
+SAMPLE_REFS = REPOS / "video-next" / "shotstudio" / "static" / "refs"
+CHARACTERS = REPOS / "assets" / "characters"
+PART2_VIDEO = None   # {"id": "<youtube id>", "title": "MiniMax H3: 15 More Camera Techniques"} once it is up
+
+# (slug, title, group, known from, character plate), in the video's running order
+PART2_SHOTS = [
+    ("pov", "POV", "p2-specialty", "Halloween, Hardcore Henry", "mei"),
+    ("slow-pan-reveal", "Slow pan reveal", "p2-specialty", "", "jin"),
+    ("time-lapse", "Time-lapse", "p2-specialty", "Lucy", "kate-p2"),
+    ("fisheye", "Fisheye", "p2-specialty", "The Favourite", "lena"),
+    ("cutaway-montage", "Cutaway montage", "p2-specialty", "Requiem for a Dream, Hot Fuzz", "claire"),
+    ("crash-zoom-in", "Crash zoom in, fixed", "p2-crash", "", "amber-main"),
+    ("crash-zoom-out", "Crash zoom out", "p2-crash", "", "mei"),
+    ("hero-spin", "Hero spin", "p2-big", "Bad Boys, The Rock", "amber-main"),
+    ("rooftop-swing", "Rooftop swing", "p2-big", "Spider-Man", "lena"),
+    ("fpv-drone", "FPV drone", "p2-big", "Ambulance", "marcus"),
+    ("overhead-swing", "Overhead swing", "p2-big", "", "allie"),
+    ("walk-past-camera", "Walk past camera", "p2-big", "", "kate-p2"),
+    ("crane-down", "Crane down", "p2-updown", "", "sofia-p2"),
+    ("jib-up", "Jib up", "p2-updown", "", "freya"),
+    ("low-angle-hero", "Low-angle hero", "p2-updown", "The Avengers, The Dark Knight", "raven"),
+    ("tilt-up-reveal", "Tilt up reveal", "p2-updown", "", "sofia-p2"),
+]
+PART2_GROUPS = [("p2-specialty", "Specialty shots"), ("p2-crash", "Crash zooms, and the fix"),
+                ("p2-big", "Big moves"), ("p2-updown", "Up and down")]
+# id -> (file, label). Kate's and Sofia's plates are newer than the ones Part 1 used, so they are separate refs.
+PART2_REFS = {
+    "mei": (SAMPLE_REFS / "mei.png", "Mei"), "kate-p2": (SAMPLE_REFS / "kate.png", "Kate"),
+    "lena": (SAMPLE_REFS / "lena.png", "Lena"), "sofia-p2": (SAMPLE_REFS / "sofia.png", "Sofia"),
+    "claire": (SAMPLE_REFS / "claire.png", "Claire"), "jin": (CHARACTERS / "jin.png", "Jin"),
+    "marcus": (CHARACTERS / "marcus.png", "Marcus"), "freya": (CHARACTERS / "freya.png", "Freya"),
+    "raven": (CHARACTERS / "raven.png", "Raven"),
+}
+# where in the clip the still is taken: most of these end on the subject, the walk past ends on her back
+PART2_STILL_AT = {"walk-past-camera": 0.4, "overhead-swing": 0.85}
+PART2_LOCAL = {"crash-zoom-in", "crash-zoom-out", "slow-pan-reveal", "fpv-drone", "jib-up", "low-angle-hero"}
+H3_REPO = "Comfy-Org/MiniMax-H3"
+H3_MODELS = [   # what every Part 2 graph loads, with sizes from the files it ran with
+    ("diffusion_models", "minimax_h3_ref2va_pruned_int8_convrot.safetensors", 20970379616),
+    ("text_encoders", "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors", 15687142551),
+    ("vae", "minimax_h3_video_vae_fp16.safetensors", 5207808496),
+    ("vae", "minimax_h3_audio_vae_fp32.safetensors", 605254808),
+]
+H3_COMFY = "ComfyUI 0.41.0"
+WORKFLOWS = ROOT / "assets" / "workflows"
+
+
+# ComfyUI's own MiniMax H3 reference-to-video template (comfyui_workflow_templates 0.1.115), copied in so
+# the import does not depend on what is installed. The downloads are this template with a shot's settings in.
+H3_TEMPLATE = ROOT / "tools" / "templates" / "video_minimax_h3_r2v.json"
+INT8_VAE_NOTE = ("- [minimax_h3_video_vae_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/"
+                 "vae/minimax_h3_video_vae_int8_convrot.safetensors) (2.62 GB)")
+FP16_VAE_NOTE = ("- [minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/"
+                 "vae/minimax_h3_video_vae_fp16.safetensors) (4.85 GB). These shots ran with the fp16 VAE; the "
+                 "template's int8 one is smaller and decodes almost the same")
+
+
+def h3_template(api, plate_name, prefix):
+    """The official template, filled in from the API graph that actually ran: its prompt, seed, size, length,
+    ref_image_size and VAE, one reference image (the template's second example input is removed), turbo off."""
+    w = json.loads(read_text(H3_TEMPLATE))
+    nodes = {n["id"]: n for n in w["nodes"]}
+    ran = nodes_of(api, "MiniMaxH3ReferenceToVideo")[0]["inputs"]
+    seed = nodes_of(api, "RandomNoise")[0]["inputs"]["noise_seed"]
+    steps = nodes_of(api, "BasicScheduler")[0]["inputs"]["steps"]
+    vae = nodes_of(api, "VAELoader")
+    if (ran["width"], ran["height"]) != (1344, 768) or steps != 20 or nodes_of(api, "LoraLoaderModelOnly"):
+        sys.exit("part 2: a graph ran with settings the template fill does not cover")
+    # Duration feeds the template's length formula, max(5, round(a*24)) + (5 - that % 17) % 17
+    duration = {124: 5, 192: 8}[ran["length"]]
+    nodes[138]["widgets_values"][0] = ran["prompt"]                       # Input Text (Prompt)
+    nodes[129]["widgets_values"] = [seed, "fixed"]                        # RandomNoise
+    nodes[132]["widgets_values"] = [duration]                             # Float (Duration)
+    nodes[115]["widgets_values"] = ["16:9 (Widescreen)", 0.98, 32]        # 1344x768 exactly
+    nodes[136]["widgets_values"] = [ran["prompt"], 1344, 768, ran["length"], ran["ref_image_size"]]
+    nodes[137]["widgets_values"] = [plate_name, "image"]
+    nodes[92]["widgets_values"][0] = prefix
+    video_vae = next(v["inputs"]["vae_name"] for v in vae if "video" in v["inputs"]["vae_name"])
+    nodes[119]["widgets_values"] = [video_vae]
+    note = nodes[117]["widgets_values"][0]
+    if video_vae.endswith("fp16.safetensors"):
+        if INT8_VAE_NOTE not in note:
+            sys.exit("part 2: the template's model note changed; update INT8_VAE_NOTE")
+        nodes[117]["widgets_values"][0] = note.replace(INT8_VAE_NOTE, FP16_VAE_NOTE)
+    # one reference image: drop the template's second example input and its link
+    gone = [l for l in w["links"] if l[1] == 139]
+    w["links"] = [l for l in w["links"] if l[1] != 139]
+    for i in nodes[136]["inputs"]:
+        if i.get("link") in {l[0] for l in gone}:
+            i["link"] = None
+    w["nodes"] = [n for n in w["nodes"] if n["id"] != 139]
+    return w
+
+
+def h3_models(used=None):
+    return [{"file": f, "folder": d, "repo": H3_REPO, "url": f"https://huggingface.co/{H3_REPO}/resolve/main/{d}/{f}",
+             "bytes": n, "gated": False, **({"used": used} if used else {})} for d, f, n in H3_MODELS]
+
+
+def shots_readme(title, page_url, wf_name, plate_name, ran, snap=False):
+    lines = [title, "From MiniMax H3 camera shots, Part 2", page_url, "", "IN THIS ZIP", "",
+             f"  {wf_name}  the ComfyUI workflow for this shot, with the prompt, seed and settings it ran with",
+             f"  {plate_name}  the character reference plate it loads as <Picture 1>", "",
+             "HOW TO RUN IT", "",
+             f"  1. Copy {plate_name} into ComfyUI/input, keeping its name.",
+             "  2. Download the models below into the ComfyUI/models subfolders shown.",
+             f"  3. Drag {wf_name} onto the ComfyUI window, or open it from the Workflow menu.",
+             "  4. Queue it. The result is saved under ComfyUI/output/video/h3-camera-shots/.",
+             "     With the same model files you should get the same shot or a very close one; different GPUs can drift a little.", ""]
+    if snap:
+        lines += ["  H3 takes a couple of seconds over this zoom whatever the prompt says. To get the crash zoom in",
+                  "  the video, run snap.py on the result afterwards (Python and ffmpeg only):",
+                  "    https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/scripts/snap.py", ""]
+    lines += ["MODELS", "", f"  From https://huggingface.co/{H3_REPO}", ""]
+    for d, f, n in H3_MODELS:
+        lines += [f"  models/{d}/{f}  ({n / 1e9:.1f} GB)"]
+    lines += ["", "  The workflow is ComfyUI's own MiniMax H3 reference-to-video template with this shot's settings",
+              "  filled in. It ran with the fp16 video VAE; the template normally uses the smaller int8 one."]
+    lines += ["", "SOFTWARE", "", f"  {H3_COMFY} or newer. No custom nodes: every node in this graph is part of ComfyUI.",
+              "", "WHAT I RAN IT ON", "", f"  {ran}, 20 steps" + (", about 21 minutes for this clip." if "3060" in ran else "."), ""]
+    return "\r\n".join(lines)
+
+
+PART2_NOTES = {
+    "crash-zoom-in": "The prompt asks for the zoom to take about 200ms. H3 took about 2.6 seconds. The still and the "
+                     "video show the clip after snap.py, which finds the zoom and speeds it up to three frames. "
+                     "The prompt is kept exactly as it ran.",
+    "crash-zoom-out": "The same as the crash zoom in: H3 took about 1.7 seconds for a zoom the prompt asks to be "
+                      "near instant, so the clip was sped up afterwards with snap.py. The prompt is kept exactly "
+                      "as it ran.",
+}
+
+
+def part2_chapters():
+    """Where each shot starts in the Part 2 video, read from the built timeline."""
+    html = read_text(PART2 / "index.html")
+    starts = {m.group(1): round(float(m.group(2))) for m in
+              re.finditer(r'id="s-(?:u\d\d-)?([a-z0-9-]+)"[^>]*data-start="([\d.]+)"', html)}
+    starts["crash-zoom-in"] = starts["crash-zoom-out"] = starts["c-crash"]
+    return starts
+
+
+def import_shots_part2(slug):
+    cmap = json.loads(read_text(PART2 / "assets" / "clause-map.json"))
+    chapters = part2_chapters()
+    refs = {}
+    for rid, (src, label) in PART2_REFS.items():
+        refs[rid] = {"id": rid, "label": label, "image": save_image(src, f"ref-{rid}", slug),
+                     "note": "Character reference plate"}
+    prompts = []
+    for s, title, group, known, ref in PART2_SHOTS:
+        e = cmap[s]
+        text = read_text(PART2 / "assets" / "prompts" / f"{s}.txt")
+        if text != e["a"] + e["clause"] + e["c"]:
+            sys.exit(f"part 2 {s}: prompt file and clause map disagree")
+        wf = json.loads(read_text(PART2_NATIVE / f"{e['take']}.workflow.json"))
+        node = nodes_of(wf, "MiniMaxH3ReferenceToVideo")[0]["inputs"]
+        seed = nodes_of(wf, "RandomNoise")[0]["inputs"]["noise_seed"]
+        steps = nodes_of(wf, "BasicScheduler")[0]["inputs"]["steps"]
+        still, _ = mid_frame(PART2 / "assets" / "clips" / f"{s}.mp4", PART2_STILL_AT.get(s, 0.97))
+        facts = [
+            ["Resolution", f"{node['width']}×{node['height']}"],
+            ["Length", f"{node['length']} frames, {node['length'] / 24:.2f}s"],
+            ["Steps", f"{steps}, res_multistep / simple, turbo LoRA off"],
+            ["Seed", str(seed)],
+            ["Ran on", "RTX 3060, 12GB (local)" if s in PART2_LOCAL else "RTX 5090 on RunPod"],
+        ]
+        if known:
+            facts.insert(0, ["Known from", known])
+        # The graph that ran, wired to the plate by its file name, and a zip that reruns it
+        page_slug = f"{s}-part-2" if s == "crash-zoom-in" else s
+        plate_src, plate_label = PART2_REFS.get(ref, (None, None))
+        if plate_src is None:
+            plate_src = SHOTS_REPO / "docs" / "assets" / "refs" / f"{ref}.png"
+        plate_name = f"{(plate_label or ref).lower()}.png"
+        if node["prompt"] != text:
+            sys.exit(f"part 2 {s}: the graph's prompt is not the published prompt")
+        if len(nodes_of(wf, "LoadImage")) != 1:
+            sys.exit(f"part 2 {s}: expected one image input")
+        ui = h3_template(wf, plate_name, f"video/h3-camera-shots/{page_slug}")
+        wf_name = f"{page_slug}.json"
+        wf_bytes = (json.dumps(ui, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
+        (WORKFLOWS / slug).mkdir(parents=True, exist_ok=True)
+        (WORKFLOWS / slug / wf_name).write_bytes(wf_bytes)
+        ran = "RTX 3060, 12GB (local)" if s in PART2_LOCAL else "RTX 5090 on RunPod"
+        readme = shots_readme(title, f"https://loopforge.cc/projects/{slug}/{page_slug}/", wf_name, plate_name, ran,
+                              snap=s in PART2_NOTES)
+        bundle = WORKFLOWS / slug / "bundles" / f"{page_slug}.zip"
+        write_zip(bundle, [(wf_name, wf_bytes), (plate_name, Path(plate_src).read_bytes()),
+                           ("README.txt", readme.encode("utf-8"))])
+        prompts.append({
+            "slug": page_slug,   # Part 1 already has a crash-zoom-in page
+            "title": title,
+            "group": group,
+            "part": "2",
+            "still": save_image(still, f"p2-{s}", slug),
+            "time": chapters.get(s),
+            "models": ["MiniMax H3"],
+            "techniques": ["Camera movement", "Reference to video"],
+            "facts": facts,
+            "refs": [{"tag": "<Picture 1>", "ref": ref}],
+            "variants": [{"label": "Prompt", "text": text, "highlights": [
+                {"kind": "clause", "label": "Camera clause", "start": len(e["a"]), "end": len(e["a"]) + len(e["clause"])}]}],
+            "notes": [PART2_NOTES[s]] if s in PART2_NOTES else [],
+            "workflow": {"url": f"/assets/workflows/{slug}/{wf_name}", "bytes": len(wf_bytes), "format": "ui"},
+            "run_it": {"bundle": {"url": f"/assets/workflows/{slug}/bundles/{page_slug}.zip", "bytes": bundle.stat().st_size},
+                       "models": h3_models(), "pack": None, "comfy": H3_COMFY},
+            "links": [{"label": "Shot recipe, with what the earlier attempts got wrong",
+                       "url": f"https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/{s}.md"}],
+        })
+    return prompts, [{"id": g, "title": t, "part": "2"} for g, t in PART2_GROUPS], refs
+
+
 def import_shots():
     slug = "h3-camera-shots"
     shots = json.loads(read_text(SHOTS_REPO / "docs" / "data" / "shots.json"))
@@ -156,6 +373,7 @@ def import_shots():
             "slug": s["slug"],
             "title": s["name"],
             "group": s["group"],
+            "part": "1",
             "still": save_image(SHOTS_REPO / "docs" / "assets" / "stills" / f"{s['id']}.jpg", s["slug"], slug),
             "time": SHOT_CHAPTERS.get(s["slug"]),
             "models": ["MiniMax H3"],
@@ -174,12 +392,24 @@ def import_shots():
                        "url": f"https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/.claude/skills/h3-camera-shots/shots/{s['slug']}.md"}],
         })
 
+    p2_prompts, p2_groups, p2_refs = import_shots_part2(slug)
+    refs.update(p2_refs)
     write({
         "slug": slug,
         "title": "MiniMax H3 camera shots",
-        "short": "Fourteen named camera shots",
+        "short": "Thirty named camera shots, in two parts",
         "published": "2026-09-13",
+        "updated": "2026-10-28",
+        "update_note": "Part 2 added: fifteen more shots, and a fix for the crash zoom",
         "video": {"id": "GCdKh_KaQVs", "title": "MiniMax H3: 14 Camera Techniques"},
+        # Each part is a video with its own shots; the page shows both and can filter to one.
+        "parts": [
+            {"id": "1", "title": "Part 1", "published": "2026-09-13",
+             "video": {"id": "GCdKh_KaQVs", "title": "MiniMax H3: 14 Camera Techniques"},
+             "blurb": "Fourteen shots built from H3's twelve documented camera motions."},
+            {"id": "2", "title": "Part 2", "published": "2026-10-28", "video": PART2_VIDEO,
+             "blurb": "Fifteen more, many of them asked for in the comments, and a fix for Part 1's crash zoom."},
+        ],
         "models": ["MiniMax H3"],
         "summary": [
             "MiniMax H3 documents twelve camera motions and no named shots. There is no dolly zoom button and no "
@@ -187,24 +417,42 @@ def import_shots():
             "Most ways of doing that do not work. These fourteen do.",
             "Each prompt is the exact file that produced the shot, with the camera and lens phrase and the camera "
             "clause marked. More than a hundred generations went into getting here.",
+            "Part 2 adds fifteen more, from POV and time-lapse to an FPV drone and a Spider-Man swing, and goes back "
+            "to Part 1's crash zoom: H3 picks its own pace for a zoom, so the fix is a small script that speeds the "
+            "zoom up after the render.",
         ],
         "facts": [
             ["Workflow", "MiniMaxH3ReferenceToVideo, ref_image_size max, no background plate"],
-            ["Resolution", "1344×768 on a rented RTX 5090, except the snorricam at 864×480 on an RTX 3060"],
-            ["Sampling", "20 steps, res_multistep / simple, turbo LoRA off, seed 552013742"],
+            ["Resolution", "1344×768. Part 1 on a rented RTX 5090, except the snorricam at 864×480 on an RTX 3060. "
+                           "Part 2 partly on the rented 5090 and partly on the 3060, about 21 minutes a clip"],
+            ["Sampling", "20 steps, res_multistep / simple, turbo LoRA off. Seed 552013742 in Part 1, 7 in Part 2 "
+                         "(11 for the fisheye)"],
             ["Prompt format", "The six-section reference format from MiniMax's official guide"],
         ],
-        "groups": [{"id": g, "title": t} for g, t in SHOT_GROUP_TITLES.items()],
+        "groups": [{"id": g, "title": t, "part": "1"} for g, t in SHOT_GROUP_TITLES.items()] + p2_groups,
         "refs": list(refs.values()),
         "links": [
             {"label": "Repository with agent skills that write these for your own scene",
              "url": "https://github.com/loopforge0/minimaxh3-shots-skills"},
+            {"label": "snap.py, the crash zoom fix from Part 2 (Python and ffmpeg)",
+             "url": "https://github.com/loopforge0/minimaxh3-shots-skills/blob/main/scripts/snap.py"},
             {"label": "ComfyUI workflow (json)",
              "url": "/assets/workflows/h3-camera-shots.json"},
             {"label": "MiniMax's official prompt writing guide",
              "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"},
         ],
-        "prompts": prompts,
+        "prompts": prompts + p2_prompts,
+        "run_it": {
+            "paragraphs": [
+                "Every Part 2 shot page has a zip with the exact graph that produced it, the character plate it loads "
+                "and a README. Copy the plate into ComfyUI/input, put the four models below in place and drag the "
+                "workflow onto ComfyUI. With the same model files you should get the same shot or a very close one.",
+                "Every node is part of ComfyUI itself, no custom nodes. Part 1's shots use the same graph; their "
+                "prompts and plates are on each shot's page, with the single workflow file in the links below.",
+            ],
+            "software": [{"label": f"{H3_COMFY} or newer", "url": "https://github.com/comfyanonymous/ComfyUI"}],
+            "models": h3_models("Every shot"),
+        },
     })
 
 
