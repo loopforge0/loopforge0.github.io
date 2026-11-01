@@ -1,0 +1,869 @@
+{
+ "id": "12e9b1b5-3290-4be5-a15d-5add60ce7de5",
+ "revision": 0,
+ "last_node_id": 14,
+ "last_link_id": 16,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    15,
+    571
+   ],
+   "size": [
+    380,
+    460
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": null
+    }
+   ],
+   "title": "Picture 1 (character reference)",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "moss_anime_ref_freya.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "moss_anime_ref_freya.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 2,
+   "type": "FluxKontextImageScale",
+   "pos": [
+    15,
+    1087
+   ],
+   "size": [
+    300,
+    30
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      6,
+      9
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "FluxKontextImageScale"
+   }
+  },
+  {
+   "id": 3,
+   "type": "UNETLoader",
+   "pos": [
+    15,
+    76
+   ],
+   "size": [
+    430,
+    82
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "moss_image_base_int8_convrot.safetensors",
+    "default"
+   ],
+   "widgets_values_named": {
+    "unet_name": "moss_image_base_int8_convrot.safetensors",
+    "weight_dtype": "default"
+   }
+  },
+  {
+   "id": 4,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    545,
+    76
+   ],
+   "size": [
+    520,
+    90
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 2
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      3
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "moss_image_charref_v2.safetensors",
+    1
+   ],
+   "widgets_values_named": {
+    "lora_name": "moss\\moss_image_charref_v2.safetensors",
+    "strength_model": 1
+   }
+  },
+  {
+   "id": 5,
+   "type": "SkipLayerGuidanceDiTSimple",
+   "pos": [
+    545,
+    222
+   ],
+   "size": [
+    360,
+    140
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      10
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SkipLayerGuidanceDiTSimple"
+   },
+   "widgets_values": [
+    "",
+    "22",
+    0,
+    1
+   ],
+   "widgets_values_named": {
+    "double_layers": "",
+    "single_layers": "22",
+    "start_percent": 0,
+    "end_percent": 1
+   }
+  },
+  {
+   "id": 6,
+   "type": "CLIPLoader",
+   "pos": [
+    15,
+    214
+   ],
+   "size": [
+    430,
+    106
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      4,
+      7
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3.5_9b_w4a8_gptq.safetensors",
+    "moss_image",
+    "default"
+   ],
+   "widgets_values_named": {
+    "clip_name": "qwen3.5_9b_w4a8_gptq.safetensors",
+    "type": "moss_image",
+    "device": "default"
+   }
+  },
+  {
+   "id": 7,
+   "type": "VAELoader",
+   "pos": [
+    15,
+    376
+   ],
+   "size": [
+    380,
+    58
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      5,
+      8,
+      15
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "flux2-vae_small.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "flux2-vae_small.safetensors"
+   }
+  },
+  {
+   "id": 8,
+   "type": "TextEncodeMOSSImageEdit",
+   "pos": [
+    1165,
+    76
+   ],
+   "size": [
+    440,
+    230
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 4
+    },
+    {
+     "name": "images.image_0",
+     "type": "IMAGE",
+     "link": 6
+    },
+    {
+     "name": "images.image_1",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "shape": 7,
+     "type": "VAE",
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      11
+     ]
+    }
+   ],
+   "title": "Positive",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "TextEncodeMOSSImageEdit"
+   },
+   "widgets_values": [
+    "Same character and art style as Picture 1. She is curled up in a leather armchair in a cozy old library reading a book, warm lamp light, bookshelves behind her. Long straight blonde hair, blue eyes, sage green tank top, white jeans.",
+    "ai-toolkit",
+    1
+   ],
+   "widgets_values_named": {
+    "prompt": "Same character and art style as Picture 1. She is curled up in a leather armchair in a cozy old library reading a book, warm lamp light, bookshelves behind her. Long straight blonde hair, blue eyes, sage green tank top, white jeans.",
+    "edit_format": "ai-toolkit",
+    "image_strength": 1
+   }
+  },
+  {
+   "id": 9,
+   "type": "TextEncodeMOSSImageEdit",
+   "pos": [
+    1165,
+    362
+   ],
+   "size": [
+    440,
+    230
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 7
+    },
+    {
+     "name": "images.image_0",
+     "type": "IMAGE",
+     "link": 9
+    },
+    {
+     "name": "images.image_1",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "shape": 7,
+     "type": "VAE",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      12
+     ]
+    }
+   ],
+   "title": "Negative (empty)",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "TextEncodeMOSSImageEdit"
+   },
+   "widgets_values": [
+    "",
+    "ai-toolkit",
+    1
+   ],
+   "widgets_values_named": {
+    "prompt": "",
+    "edit_format": "ai-toolkit",
+    "image_strength": 1
+   }
+  },
+  {
+   "id": 10,
+   "type": "EmptyFlux2LatentImage",
+   "pos": [
+    1705,
+    76
+   ],
+   "size": [
+    270,
+    106
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      13
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "EmptyFlux2LatentImage"
+   },
+   "widgets_values": [
+    832,
+    1216,
+    1
+   ],
+   "widgets_values_named": {
+    "width": 832,
+    "height": 1216,
+    "batch_size": 1
+   }
+  },
+  {
+   "id": 11,
+   "type": "KSampler",
+   "pos": [
+    1705,
+    238
+   ],
+   "size": [
+    330,
+    270
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 10
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 11
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 12
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 13
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      14
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "KSampler"
+   },
+   "widgets_values": [
+    42,
+    "fixed",
+    50,
+    3,
+    "euler",
+    "sgm_uniform",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 42,
+    "control_after_generate": "fixed",
+    "steps": 50,
+    "cfg": 3,
+    "sampler_name": "euler",
+    "scheduler": "sgm_uniform",
+    "denoise": 1
+   }
+  },
+  {
+   "id": 12,
+   "type": "VAEDecode",
+   "pos": [
+    2135,
+    76
+   ],
+   "size": [
+    140,
+    46
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 14
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 15
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      16
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAEDecode"
+   }
+  },
+  {
+   "id": 13,
+   "type": "SaveImage",
+   "pos": [
+    2135,
+    178
+   ],
+   "size": [
+    380,
+    420
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 16
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "moss-image/charref-anime-freya-card-prompt"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "charref_anime_charref"
+   }
+  },
+  {
+   "id": 14,
+   "type": "MarkdownNote",
+   "pos": [
+    0,
+    1218
+   ],
+   "size": [
+    2500,
+    90
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "What this test changes",
+   "properties": {},
+   "widgets_values": [
+    "Not a template: CharRef wired as its card documents it. MOSS Base, CharRef v2 at 1.0, Text Encode MOSS-Image Edit in ai-toolkit format, 50 steps, CFG 3, euler / sgm_uniform, layer 22 skipped on the negative, 832×1216. Picture 1 is an anime character drawn from a cast photo with Qwen-Image 2.1. The prompt follows the card: it starts with \"Same character and art style as Picture 1.\""
+   ],
+   "widgets_values_named": {
+    "text": "Not a template: CharRef as its card documents it (native ai-toolkit edit encoder = kv cache on, Base, 50 steps, CFG 3, euler / sgm_uniform, SLG 22, 832x1216), anime reference of the freya plate made with Qwen-Image 2.1. 7err4 CharRef v2 at 1.0."
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   2,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   3,
+   0,
+   4,
+   0,
+   "MODEL"
+  ],
+  [
+   3,
+   4,
+   0,
+   5,
+   0,
+   "MODEL"
+  ],
+  [
+   4,
+   6,
+   0,
+   8,
+   0,
+   "CLIP"
+  ],
+  [
+   5,
+   7,
+   0,
+   8,
+   3,
+   "VAE"
+  ],
+  [
+   6,
+   2,
+   0,
+   8,
+   1,
+   "IMAGE"
+  ],
+  [
+   7,
+   6,
+   0,
+   9,
+   0,
+   "CLIP"
+  ],
+  [
+   8,
+   7,
+   0,
+   9,
+   3,
+   "VAE"
+  ],
+  [
+   9,
+   2,
+   0,
+   9,
+   1,
+   "IMAGE"
+  ],
+  [
+   10,
+   5,
+   0,
+   11,
+   0,
+   "MODEL"
+  ],
+  [
+   11,
+   8,
+   0,
+   11,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   12,
+   9,
+   0,
+   11,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   13,
+   10,
+   0,
+   11,
+   3,
+   "LATENT"
+  ],
+  [
+   14,
+   11,
+   0,
+   12,
+   0,
+   "LATENT"
+  ],
+  [
+   15,
+   7,
+   0,
+   12,
+   1,
+   "VAE"
+  ],
+  [
+   16,
+   12,
+   0,
+   13,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [
+  {
+   "id": 1,
+   "title": "Load models",
+   "bounding": [
+    0,
+    0,
+    460,
+    455
+   ],
+   "color": "#3f789e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 2,
+   "title": "Picture 1: the character",
+   "bounding": [
+    0,
+    495,
+    460,
+    643
+   ],
+   "color": "#8a6d3b",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 3,
+   "title": "CharRef LoRA (Base)",
+   "bounding": [
+    530,
+    0,
+    550,
+    383
+   ],
+   "color": "#6a4f8f",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 4,
+   "title": "Prompt (edit encoder, ai-toolkit format)",
+   "bounding": [
+    1150,
+    0,
+    470,
+    613
+   ],
+   "color": "#3f6d4e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 5,
+   "title": "Sample",
+   "bounding": [
+    1690,
+    0,
+    360,
+    529
+   ],
+   "color": "#7a4a3a",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 6,
+   "title": "Decode and save",
+   "bounding": [
+    2120,
+    0,
+    410,
+    619
+   ],
+   "color": "#4a5560",
+   "font_size": 22,
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.6,
+   "offset": [
+    60,
+    60
+   ]
+  },
+  "frontendVersion": "1.57.6",
+  "VHS_latentpreview": false,
+  "VHS_latentpreviewrate": 0,
+  "VHS_MetadataImage": true,
+  "VHS_KeepIntermediate": true
+ },
+ "version": 0.4
+}

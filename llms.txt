@@ -6,6 +6,10 @@ Loop Forge is a hobby project testing open-weight AI models in ComfyUI, by someo
 
 ## Projects
 
+### [MOSS-Image add-ons, tested locally](https://loopforge.cc/projects/moss-image/)
+
+Published 4 November 2026. 47 prompts. MOSS-Image is OpenMOSS's open image model, released in October under Apache 2.0. Most of the interest is in its text: it spells long lines and follows a layout prompt that says where everything goes. I ran it in ComfyUI on my RTX 3060 with the official templates, then tried the add-ons people are downloading: layout boxes, chinoll's edit LoRA, two Anime2Real LoRAs, CharRef, depth control, three comic page LoRAs, two transparency LoRAs, the DMD 8-step LoRA, Spectrum, a hi-res LoHa and Scale ROPE and three smaller text encoders. Each test has the images, the exact prompt, the ComfyUI workflow that ran and the inputs it loaded. Where an add-on goes on top of the template, the same prompt and seed without it sits next to it. What I'd actually install: the smaller text encoder and the DMD LoRA for speed, chinoll's edit LoRA, and the depth control LoRA. The rest depends on what you make.
+
 ### [Qwen-Image 2.1 Turbo, run locally](https://loopforge.cc/projects/qwen-image-2-1-turbo/)
 
 Published 11 October 2026. 23 prompts. Qwen's 8-step version of Qwen-Image 2.1, next to the regular model on the same prompts. Each test shows both images, the prompt and the time on my RTX 3060.

@@ -5,6 +5,7 @@
   <url><loc>https://loopforge.cc/apps/</loc></url>
   <url><loc>https://loopforge.cc/apps/qwen-image-editor/</loc></url>
   <url><loc>https://loopforge.cc/projects/video-upscaler/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/</loc></url>
   <url><loc>https://loopforge.cc/projects/qwen-image-2-1-turbo/</loc></url>
   <url><loc>https://loopforge.cc/projects/ltx-2-5-loras/</loc></url>
   <url><loc>https://loopforge.cc/projects/higgsfield-vs-h3/</loc></url>
@@ -14,6 +15,53 @@
   <url><loc>https://loopforge.cc/projects/h3-first-date/</loc></url>
   <url><loc>https://loopforge.cc/projects/h3-vs-ltx-2-5/</loc></url>
   <url><loc>https://loopforge.cc/projects/h3-turbo-lora/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/template-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/template-poster/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/template-dunes/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-halloween/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-website/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-knight/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-knight-fixed/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-palette/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-red-sweater/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-short-bob/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-auburn-hair/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-sunglasses/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-laughing/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/edit-sitting/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/anime2real-freya/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/anime2real-mateo/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/anime2real-raven/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/charref-photo/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/charref-anime-freya/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/charref-anime-mateo/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-charref-base/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/layout-charref-sft/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/depth-knight/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/depth-ballet/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/depth-astronaut/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/swap-mateo/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/swap-raven/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/swap-kate/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/sanitize-jin/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/sanitize-marcus/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/sanitize-sofia/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/colorize-freya/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/colorize-marcus/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/colorize-jin/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/alpha-curly/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/alpha-icedcoffee/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/alpha-monstera/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/dmd-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/dmd-poster/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/spectrum-50-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/spectrum-50-poster/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/spectrum-25-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/hires-canyon/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/hires-cafe/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/encoders-poster/</loc></url>
+  <url><loc>https://loopforge.cc/projects/moss-image/encoders-cafe/</loc></url>
   <url><loc>https://loopforge.cc/projects/qwen-image-2-1-turbo/portrait/</loc></url>
   <url><loc>https://loopforge.cc/projects/qwen-image-2-1-turbo/texture/</loc></url>
   <url><loc>https://loopforge.cc/projects/qwen-image-2-1-turbo/hands/</loc></url>

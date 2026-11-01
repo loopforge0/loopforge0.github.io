@@ -298,6 +298,8 @@ document.querySelectorAll(".script").forEach((script) => {
     box = box || build();
     opener = im;
     box.querySelector("img").src = im.dataset.full;
+    // A cut-out is shown over the blurred page rather than a checkerboard, so the transparency reads as real.
+    box.classList.toggle("lb-alpha", im.dataset.alpha === "1");
     box.querySelector("img").alt = im.alt || "";
     box.querySelector("figcaption span").textContent = im.dataset.cap || im.alt || "";
     const a = box.querySelector(".lb-dl");

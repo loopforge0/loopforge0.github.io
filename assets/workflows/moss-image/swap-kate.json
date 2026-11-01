@@ -1,0 +1,749 @@
+{
+ "id": "906c1180-e97f-4102-be05-a4e1eae44d8d",
+ "revision": 0,
+ "last_node_id": 12,
+ "last_link_id": 13,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "UNETLoader",
+   "pos": [
+    15,
+    76
+   ],
+   "size": [
+    430,
+    82
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      1
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "moss_image_base_int8_convrot.safetensors",
+    "default"
+   ],
+   "widgets_values_named": {
+    "unet_name": "moss_image_base_int8_convrot.safetensors",
+    "weight_dtype": "default"
+   }
+  },
+  {
+   "id": 2,
+   "type": "CLIPLoader",
+   "pos": [
+    15,
+    214
+   ],
+   "size": [
+    430,
+    106
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      4,
+      5
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3.5_9b_w4a8_gptq.safetensors",
+    "moss_image",
+    "default"
+   ],
+   "widgets_values_named": {
+    "clip_name": "qwen3.5_9b_w4a8_gptq.safetensors",
+    "type": "moss_image",
+    "device": "default"
+   }
+  },
+  {
+   "id": 3,
+   "type": "VAELoader",
+   "pos": [
+    15,
+    376
+   ],
+   "size": [
+    380,
+    58
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      2,
+      12
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "flux2-vae_small.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "flux2-vae_small.safetensors"
+   }
+  },
+  {
+   "id": 4,
+   "type": "LoadImage",
+   "pos": [
+    15,
+    571
+   ],
+   "size": [
+    380,
+    460
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      3
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": null
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "moss_i2i_swaptext_kate.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "moss_i2i_swaptext_kate.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 5,
+   "type": "MOSSi2iReference",
+   "pos": [
+    545,
+    76
+   ],
+   "size": [
+    420,
+    230
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 1
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 2
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      6
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      10
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfyui-moss-toolkit",
+    "ver": "53ee3b30f97b592ca2c91acc582605d73af8f74e",
+    "Node name for S&R": "MOSSi2iReference"
+   },
+   "widgets_values": [
+    "moss_i2i_swap_text.safetensors",
+    1,
+    1024,
+    1,
+    "auto",
+    "gpu"
+   ],
+   "widgets_values_named": {
+    "lora_name": "moss\\moss_i2i_swap_text.safetensors",
+    "strength": 1,
+    "resolution": 1024,
+    "ref_scale": 1,
+    "task": "auto",
+    "ref_cache": "gpu"
+   }
+  },
+  {
+   "id": 6,
+   "type": "CLIPTextEncode",
+   "pos": [
+    1065,
+    76
+   ],
+   "size": [
+    460,
+    240
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      8
+     ]
+    }
+   ],
+   "title": "Positive (typed: Caption Helper output)",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CLIPTextEncode"
+   },
+   "widgets_values": [
+    "{\"summary\":{\"caption\":\"comic, english text\"},\"items\":[{\"label\":\"text\",\"caption\":\"text\",\"text\":\"REALLY?\",\"bbox\":[-500,255,-190,410]}],\"bbox_coord_space\":\"abs_centralized\",\"bbox_format\":\"yxyx\"}"
+   ],
+   "widgets_values_named": {
+    "text": "{\"summary\":{\"caption\":\"comic, english text\"},\"items\":[{\"label\":\"text\",\"caption\":\"text\",\"text\":\"REALLY?\",\"bbox\":[-500,255,-190,410]}],\"bbox_coord_space\":\"abs_centralized\",\"bbox_format\":\"yxyx\"}"
+   }
+  },
+  {
+   "id": 7,
+   "type": "CLIPTextEncode",
+   "pos": [
+    1065,
+    372
+   ],
+   "size": [
+    460,
+    240
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      9
+     ]
+    }
+   ],
+   "title": "Negative",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CLIPTextEncode"
+   },
+   "widgets_values": [
+    ""
+   ],
+   "widgets_values_named": {
+    "text": ""
+   }
+  },
+  {
+   "id": 8,
+   "type": "SkipLayerGuidanceDiTSimple",
+   "pos": [
+    545,
+    362
+   ],
+   "size": [
+    360,
+    140
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 6
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      7
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SkipLayerGuidanceDiTSimple"
+   },
+   "widgets_values": [
+    "",
+    "22",
+    0,
+    1
+   ],
+   "widgets_values_named": {
+    "double_layers": "",
+    "single_layers": "22",
+    "start_percent": 0,
+    "end_percent": 1
+   }
+  },
+  {
+   "id": 9,
+   "type": "KSampler",
+   "pos": [
+    1625,
+    76
+   ],
+   "size": [
+    330,
+    270
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 7
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 8
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 9
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 10
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      11
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "KSampler"
+   },
+   "widgets_values": [
+    0,
+    "fixed",
+    50,
+    3,
+    "er_sde",
+    "normal",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 0,
+    "control_after_generate": "fixed",
+    "steps": 50,
+    "cfg": 3,
+    "sampler_name": "er_sde",
+    "scheduler": "normal",
+    "denoise": 1
+   }
+  },
+  {
+   "id": 10,
+   "type": "VAEDecode",
+   "pos": [
+    2055,
+    76
+   ],
+   "size": [
+    140,
+    46
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 11
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 12
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      13
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAEDecode"
+   }
+  },
+  {
+   "id": 11,
+   "type": "SaveImage",
+   "pos": [
+    2055,
+    178
+   ],
+   "size": [
+    380,
+    420
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 13
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "moss-image/swap-kate"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "i2i_swaptext_kate"
+   }
+  },
+  {
+   "id": 12,
+   "type": "MarkdownNote",
+   "pos": [
+    0,
+    1132
+   ],
+   "size": [
+    2420,
+    90
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "What this test changes",
+   "properties": {},
+   "widgets_values": [
+    "Not a template: sorryhyun's moss_i2i_swap_text workflow rebuilt on ComfyUI's own loaders (MOSS Base int8, w4a8 text encoder, small VAE), because his loader wants his bf16 files. His Spectrum sampler does not accept ComfyUI's model, so a KSampler with the same sampler, steps and CFG runs instead, with layer 22 skipped on the negative. His Caption Helper needs packages that would not install here, so its output is typed into the prompt. With moss_i2i_swap_text at 1.0."
+   ],
+   "widgets_values_named": {
+    "text": "As the i2i test, a further page. Caption: layout JSON typed by hand (the helper passes layout JSON through). As shipped."
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   5,
+   0,
+   "MODEL"
+  ],
+  [
+   2,
+   3,
+   0,
+   5,
+   1,
+   "VAE"
+  ],
+  [
+   3,
+   4,
+   0,
+   5,
+   2,
+   "IMAGE"
+  ],
+  [
+   4,
+   2,
+   0,
+   6,
+   0,
+   "CLIP"
+  ],
+  [
+   5,
+   2,
+   0,
+   7,
+   0,
+   "CLIP"
+  ],
+  [
+   6,
+   5,
+   0,
+   8,
+   0,
+   "MODEL"
+  ],
+  [
+   7,
+   8,
+   0,
+   9,
+   0,
+   "MODEL"
+  ],
+  [
+   8,
+   6,
+   0,
+   9,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   9,
+   7,
+   0,
+   9,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   10,
+   5,
+   1,
+   9,
+   3,
+   "LATENT"
+  ],
+  [
+   11,
+   9,
+   0,
+   10,
+   0,
+   "LATENT"
+  ],
+  [
+   12,
+   3,
+   0,
+   10,
+   1,
+   "VAE"
+  ],
+  [
+   13,
+   10,
+   0,
+   11,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [
+  {
+   "id": 1,
+   "title": "Load models (MOSS Base)",
+   "bounding": [
+    0,
+    0,
+    460,
+    455
+   ],
+   "color": "#3f789e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 2,
+   "title": "Input page",
+   "bounding": [
+    0,
+    495,
+    460,
+    557
+   ],
+   "color": "#8a6d3b",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 3,
+   "title": "i2i LoRA + reference page",
+   "bounding": [
+    530,
+    0,
+    450,
+    523
+   ],
+   "color": "#6a4f8f",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 4,
+   "title": "Caption (as the Caption Helper writes it) and negative",
+   "bounding": [
+    1050,
+    0,
+    490,
+    633
+   ],
+   "color": "#3f6d4e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 5,
+   "title": "Sample",
+   "bounding": [
+    1610,
+    0,
+    360,
+    367
+   ],
+   "color": "#7a4a3a",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 6,
+   "title": "Decode and save",
+   "bounding": [
+    2040,
+    0,
+    410,
+    619
+   ],
+   "color": "#4a5560",
+   "font_size": 22,
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.6,
+   "offset": [
+    60,
+    60
+   ]
+  },
+  "frontendVersion": "1.57.6",
+  "VHS_latentpreview": false,
+  "VHS_latentpreviewrate": 0,
+  "VHS_MetadataImage": true,
+  "VHS_KeepIntermediate": true
+ },
+ "version": 0.4
+}

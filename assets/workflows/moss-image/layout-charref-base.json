@@ -1,0 +1,1175 @@
+{
+ "id": "44a6ab26-45de-4686-a07f-a13acc6022d8",
+ "revision": 0,
+ "last_node_id": 17,
+ "last_link_id": 19,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    15,
+    571
+   ],
+   "size": [
+    380,
+    460
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": null
+    }
+   ],
+   "title": "Picture 1 (character reference)",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "moss_anime_ref_freya.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "moss_anime_ref_freya.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 2,
+   "type": "FluxKontextImageScale",
+   "pos": [
+    15,
+    1087
+   ],
+   "size": [
+    300,
+    30
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      8,
+      12
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "FluxKontextImageScale"
+   }
+  },
+  {
+   "id": 3,
+   "type": "UNETLoader",
+   "pos": [
+    15,
+    76
+   ],
+   "size": [
+    430,
+    82
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "moss_image_base_int8_convrot.safetensors",
+    "default"
+   ],
+   "widgets_values_named": {
+    "unet_name": "moss_image_base_int8_convrot.safetensors",
+    "weight_dtype": "default"
+   }
+  },
+  {
+   "id": 4,
+   "type": "LoraLoaderModelOnly",
+   "pos": [
+    545,
+    76
+   ],
+   "size": [
+    520,
+    90
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 2
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      3
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "LoraLoaderModelOnly"
+   },
+   "widgets_values": [
+    "moss_image_charref_v2.safetensors",
+    1
+   ],
+   "widgets_values_named": {
+    "lora_name": "moss\\moss_image_charref_v2.safetensors",
+    "strength_model": 1
+   }
+  },
+  {
+   "id": 5,
+   "type": "SkipLayerGuidanceDiTSimple",
+   "pos": [
+    545,
+    222
+   ],
+   "size": [
+    360,
+    140
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      13
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SkipLayerGuidanceDiTSimple"
+   },
+   "widgets_values": [
+    "",
+    "22",
+    0,
+    0.5
+   ],
+   "widgets_values_named": {
+    "double_layers": "",
+    "single_layers": "22",
+    "start_percent": 0,
+    "end_percent": 0.5
+   }
+  },
+  {
+   "id": 6,
+   "type": "CLIPLoader",
+   "pos": [
+    15,
+    214
+   ],
+   "size": [
+    430,
+    106
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      6,
+      10
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3.5_9b_w4a8_gptq.safetensors",
+    "moss_image",
+    "default"
+   ],
+   "widgets_values_named": {
+    "clip_name": "qwen3.5_9b_w4a8_gptq.safetensors",
+    "type": "moss_image",
+    "device": "default"
+   }
+  },
+  {
+   "id": 7,
+   "type": "VAELoader",
+   "pos": [
+    15,
+    376
+   ],
+   "size": [
+    380,
+    58
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      7,
+      11,
+      18
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "flux2-vae_small.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "flux2-vae_small.safetensors"
+   }
+  },
+  {
+   "id": 8,
+   "type": "CreateBoundingBoxes",
+   "pos": [
+    545,
+    499
+   ],
+   "size": [
+    460,
+    720
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "background",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "bboxes",
+     "shape": 7,
+     "type": "BOUNDING_BOX,ARRAY,STRING",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "preview",
+     "type": "IMAGE",
+     "links": null
+    },
+    {
+     "name": "bboxes",
+     "type": "BOUNDING_BOX",
+     "links": null
+    },
+    {
+     "name": "elements",
+     "type": "ARRAY",
+     "links": [
+      4
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "CreateBoundingBoxes"
+   },
+   "widgets_values": [
+    1024,
+    1024,
+    [
+     {
+      "x": 40,
+      "y": 30,
+      "width": 560,
+      "height": 110,
+      "metadata": {
+       "type": "text",
+       "text": "NEXT BUS 4 MIN",
+       "desc": "Glowing orange LED dot-matrix capitals on a black panel",
+       "palette": []
+      }
+     },
+     {
+      "x": 680,
+      "y": 30,
+      "width": 300,
+      "height": 210,
+      "metadata": {
+       "type": "text",
+       "text": "ROUTE 42\nHARBOUR ST",
+       "desc": "White capitals on a round blue sign, the number large and the street name smaller below it",
+       "palette": []
+      }
+     },
+     {
+      "x": 40,
+      "y": 250,
+      "width": 360,
+      "height": 760,
+      "metadata": {
+       "type": "obj",
+       "text": "",
+       "desc": "The woman from Picture 1, arms folded, looking at the camera. Long straight blonde hair, blue eyes, sage green tank top, white jeans",
+       "palette": []
+      }
+     },
+     {
+      "x": 420,
+      "y": 330,
+      "width": 184,
+      "height": 300,
+      "metadata": {
+       "type": "text",
+       "text": "LATE\nSHOW\nTONIGHT",
+       "desc": "Bold red capitals on a white paper poster, one word per line",
+       "palette": []
+      }
+     }
+    ],
+    []
+   ],
+   "widgets_values_named": {
+    "width": 1024,
+    "height": 1024,
+    "editor_state": [
+     {
+      "x": 40,
+      "y": 30,
+      "width": 560,
+      "height": 110,
+      "metadata": {
+       "type": "text",
+       "text": "NEXT BUS 4 MIN",
+       "desc": "Glowing orange LED dot-matrix capitals on a black panel",
+       "palette": []
+      }
+     },
+     {
+      "x": 680,
+      "y": 30,
+      "width": 300,
+      "height": 210,
+      "metadata": {
+       "type": "text",
+       "text": "ROUTE 42\nHARBOUR ST",
+       "desc": "White capitals on a round blue sign, the number large and the street name smaller below it",
+       "palette": []
+      }
+     },
+     {
+      "x": 40,
+      "y": 250,
+      "width": 360,
+      "height": 760,
+      "metadata": {
+       "type": "obj",
+       "text": "",
+       "desc": "The woman from Picture 1, arms folded, looking at the camera. Long straight blonde hair, blue eyes, sage green tank top, white jeans",
+       "palette": []
+      }
+     },
+     {
+      "x": 420,
+      "y": 330,
+      "width": 184,
+      "height": 300,
+      "metadata": {
+       "type": "text",
+       "text": "LATE\nSHOW\nTONIGHT",
+       "desc": "Bold red capitals on a white paper poster, one word per line",
+       "palette": []
+      }
+     }
+    ],
+    "last_incoming": []
+   }
+  },
+  {
+   "id": 9,
+   "type": "MOSSImageLayoutPrompt",
+   "pos": [
+    545,
+    1275
+   ],
+   "size": [
+    440,
+    260
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "element",
+     "type": "ARRAY",
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "links": [
+      5
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "MOSSImageLayoutPrompt"
+   },
+   "widgets_values": [
+    "Anime illustration of a city bus stop on a rainy night. An orange LED arrival board hangs from the shelter roof at the top left. A round blue route sign on a pole stands at the top right. Under the glass shelter the woman from Picture 1 stands on the left, and beside her a small paper poster is taped to the glass at chest height. Wet pavement reflecting red and blue neon, rain streaks in the light of the street lamps. Cel shading, clean line art.",
+    1024,
+    1024,
+    "3"
+   ],
+   "widgets_values_named": {
+    "prompt": "Anime illustration of a city bus stop on a rainy night. An orange LED arrival board hangs from the shelter roof at the top left. A round blue route sign on a pole stands at the top right. Under the glass shelter the woman from Picture 1 stands on the left, and beside her a small paper poster is taped to the glass at chest height. Wet pavement reflecting red and blue neon, rain streaks in the light of the street lamps. Cel shading, clean line art.",
+    "width": 1024,
+    "height": 1024,
+    "character_boxes": "3"
+   }
+  },
+  {
+   "id": 10,
+   "type": "StringConcatenate",
+   "pos": [
+    545,
+    1591
+   ],
+   "size": [
+    440,
+    200
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "string_b",
+     "type": "STRING",
+     "widget": {
+      "name": "string_b"
+     },
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      9
+     ]
+    }
+   ],
+   "title": "Card prefix + layout JSON",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "StringConcatenate"
+   },
+   "widgets_values": [
+    "Same character and art style as Picture 1.",
+    "",
+    " "
+   ],
+   "widgets_values_named": {
+    "string_a": "Same character and art style as Picture 1.",
+    "string_b": "",
+    "delimiter": " "
+   }
+  },
+  {
+   "id": 11,
+   "type": "TextEncodeMOSSImageEdit",
+   "pos": [
+    1165,
+    76
+   ],
+   "size": [
+    440,
+    230
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 6
+    },
+    {
+     "name": "images.image_0",
+     "type": "IMAGE",
+     "link": 8
+    },
+    {
+     "name": "images.image_1",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "shape": 7,
+     "type": "VAE",
+     "link": 7
+    },
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "widget": {
+      "name": "prompt"
+     },
+     "link": 9
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      14
+     ]
+    }
+   ],
+   "title": "Positive",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "TextEncodeMOSSImageEdit"
+   },
+   "widgets_values": [
+    "",
+    "ai-toolkit",
+    1
+   ],
+   "widgets_values_named": {
+    "prompt": "",
+    "edit_format": "ai-toolkit",
+    "image_strength": 1
+   }
+  },
+  {
+   "id": 12,
+   "type": "TextEncodeMOSSImageEdit",
+   "pos": [
+    1165,
+    362
+   ],
+   "size": [
+    440,
+    230
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 10
+    },
+    {
+     "name": "images.image_0",
+     "type": "IMAGE",
+     "link": 12
+    },
+    {
+     "name": "images.image_1",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "shape": 7,
+     "type": "VAE",
+     "link": 11
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CONDITIONING",
+     "type": "CONDITIONING",
+     "links": [
+      15
+     ]
+    }
+   ],
+   "title": "Negative (empty)",
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "TextEncodeMOSSImageEdit"
+   },
+   "widgets_values": [
+    "",
+    "ai-toolkit",
+    1
+   ],
+   "widgets_values_named": {
+    "prompt": "",
+    "edit_format": "ai-toolkit",
+    "image_strength": 1
+   }
+  },
+  {
+   "id": 13,
+   "type": "EmptyFlux2LatentImage",
+   "pos": [
+    1705,
+    76
+   ],
+   "size": [
+    270,
+    106
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      16
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "EmptyFlux2LatentImage"
+   },
+   "widgets_values": [
+    1024,
+    1024,
+    1
+   ],
+   "widgets_values_named": {
+    "width": 1024,
+    "height": 1024,
+    "batch_size": 1
+   }
+  },
+  {
+   "id": 14,
+   "type": "KSampler",
+   "pos": [
+    1705,
+    238
+   ],
+   "size": [
+    330,
+    270
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 13
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 14
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 15
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 16
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      17
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "KSampler"
+   },
+   "widgets_values": [
+    7,
+    "fixed",
+    25,
+    2.5,
+    "er_sde",
+    "simple",
+    1
+   ],
+   "widgets_values_named": {
+    "seed": 7,
+    "control_after_generate": "fixed",
+    "steps": 25,
+    "cfg": 2.5,
+    "sampler_name": "er_sde",
+    "scheduler": "simple",
+    "denoise": 1
+   }
+  },
+  {
+   "id": 15,
+   "type": "VAEDecode",
+   "pos": [
+    2135,
+    76
+   ],
+   "size": [
+    140,
+    46
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 17
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 18
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      19
+     ]
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "VAEDecode"
+   }
+  },
+  {
+   "id": 16,
+   "type": "SaveImage",
+   "pos": [
+    2135,
+    178
+   ],
+   "size": [
+    380,
+    420
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 19
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "properties": {
+    "cnr_id": "comfy-core",
+    "ver": "0.43.1",
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "moss-image/layout-charref-base"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "layout_anime_diag_charref_bbox"
+   }
+  },
+  {
+   "id": 17,
+   "type": "MarkdownNote",
+   "pos": [
+    0,
+    1892
+   ],
+   "size": [
+    2500,
+    90
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "What this test changes",
+   "properties": {},
+   "widgets_values": [
+    "Not a template: CharRef v2 on MOSS Base with the layout boxes. Create Bounding Boxes and MOSS-Image Layout Prompt build the layout prompt, the CharRef card's prefix \"Same character and art style as Picture 1.\" goes in front, and Text Encode MOSS-Image Edit (ai-toolkit) reads it with Picture 1. Sampling follows the layout template: 25 steps, CFG 2.5, er_sde / simple, layer 22 skipped for the first half. Box 03 is the character box."
+   ],
+   "widgets_values_named": {
+    "text": "CharRef with the anime bus stop's layout, sampler recipe {'steps': 25, 'cfg': 2.5, 'sampler': 'er_sde', 'scheduler': 'simple', 'slg_end': 0.5}."
+   },
+   "color": "#432",
+   "bgcolor": "#653"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   2,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   3,
+   0,
+   4,
+   0,
+   "MODEL"
+  ],
+  [
+   3,
+   4,
+   0,
+   5,
+   0,
+   "MODEL"
+  ],
+  [
+   4,
+   8,
+   2,
+   9,
+   0,
+   "ARRAY"
+  ],
+  [
+   5,
+   9,
+   0,
+   10,
+   0,
+   "STRING"
+  ],
+  [
+   6,
+   6,
+   0,
+   11,
+   0,
+   "CLIP"
+  ],
+  [
+   7,
+   7,
+   0,
+   11,
+   3,
+   "VAE"
+  ],
+  [
+   8,
+   2,
+   0,
+   11,
+   1,
+   "IMAGE"
+  ],
+  [
+   9,
+   10,
+   0,
+   11,
+   4,
+   "STRING"
+  ],
+  [
+   10,
+   6,
+   0,
+   12,
+   0,
+   "CLIP"
+  ],
+  [
+   11,
+   7,
+   0,
+   12,
+   3,
+   "VAE"
+  ],
+  [
+   12,
+   2,
+   0,
+   12,
+   1,
+   "IMAGE"
+  ],
+  [
+   13,
+   5,
+   0,
+   14,
+   0,
+   "MODEL"
+  ],
+  [
+   14,
+   11,
+   0,
+   14,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   15,
+   12,
+   0,
+   14,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   16,
+   13,
+   0,
+   14,
+   3,
+   "LATENT"
+  ],
+  [
+   17,
+   14,
+   0,
+   15,
+   0,
+   "LATENT"
+  ],
+  [
+   18,
+   7,
+   0,
+   15,
+   1,
+   "VAE"
+  ],
+  [
+   19,
+   15,
+   0,
+   16,
+   0,
+   "IMAGE"
+  ]
+ ],
+ "groups": [
+  {
+   "id": 1,
+   "title": "Load models",
+   "bounding": [
+    0,
+    0,
+    460,
+    455
+   ],
+   "color": "#3f789e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 2,
+   "title": "Picture 1: the character",
+   "bounding": [
+    0,
+    495,
+    460,
+    643
+   ],
+   "color": "#8a6d3b",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 3,
+   "title": "CharRef LoRA (Base)",
+   "bounding": [
+    530,
+    0,
+    550,
+    383
+   ],
+   "color": "#6a4f8f",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 4,
+   "title": "Layout boxes",
+   "bounding": [
+    530,
+    423,
+    550,
+    1389
+   ],
+   "color": "#2f7a5a",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 5,
+   "title": "Prompt (edit encoder, ai-toolkit format)",
+   "bounding": [
+    1150,
+    0,
+    470,
+    613
+   ],
+   "color": "#3f6d4e",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 6,
+   "title": "Sample",
+   "bounding": [
+    1690,
+    0,
+    360,
+    529
+   ],
+   "color": "#7a4a3a",
+   "font_size": 22,
+   "flags": {}
+  },
+  {
+   "id": 7,
+   "title": "Decode and save",
+   "bounding": [
+    2120,
+    0,
+    410,
+    619
+   ],
+   "color": "#4a5560",
+   "font_size": 22,
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.6,
+   "offset": [
+    60,
+    60
+   ]
+  },
+  "frontendVersion": "1.57.6",
+  "VHS_latentpreview": false,
+  "VHS_latentpreviewrate": 0,
+  "VHS_MetadataImage": true,
+  "VHS_KeepIntermediate": true
+ },
+ "version": 0.4
+}

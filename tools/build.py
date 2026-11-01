@@ -29,7 +29,7 @@ GITHUB = "https://github.com/loopforge0"
 BEACON = '{"token": "1315e25973424cb396840b167fdcc1da"}'
 FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800"
          "&family=Courier+Prime:wght@400;700&display=swap")
-VERSION = "20"  # bump when site.css or site.js change, so browsers fetch the new files
+VERSION = "21"  # bump when site.css or site.js change, so browsers fetch the new files
 NEW_DAYS = 14   # a project or app carries the "New" badge for this long after its published date
 UPDATED_DAYS = 30   # and the "Updated" badge this long after its updated date (a new part, say)
 
@@ -162,7 +162,8 @@ def img(image, alt, thumb=True, eager=False, cls=""):
     load = "eager" if eager else "lazy"
     cls_attr = f' class="{cls}"' if cls else ""
     # site.js opens these larger, with the download, rather than leaving a dead image.
-    full = f' data-full="{asset(image["src"])}"'
+    # a transparent image opens as the real cut-out ("full", a transparent WebP) over the blurred page
+    full = f' data-full="{asset(image.get("full") or image["src"])}"' + (' data-alpha="1"' if image.get("alpha") else "")
     dl = f' data-dl="{asset(image["dl"])}"' if image.get("dl") else ""
     cap = f' data-cap="{e(alt)}"' if alt else ""
     return (f'<img{cls_attr} src="{src}" alt="{e(alt)}" width="{image["w"]}" height="{image["h"]}" '
@@ -514,20 +515,32 @@ def run_it_project(col):
             f'<h3 class="group-title">Models</h3>{models_table(r["models"], used=True)}</div></section>')
 
 
+def pack_link(pk):
+    """A custom node pack: its link, then the commit it was tested at, or its version when no commit is known."""
+    at = (f' at commit {e(pk["commit"])}' if pk.get("commit") else
+          f' version {e(pk["version"])}' if pk.get("version") else "")
+    return f'<a href="{e(pk["url"])}">{e(pk["name"])}</a>{at}'
+
+
 def run_it_prompt(p):
     r = p.get("run_it")
     if not r:
         return ""
-    pack = (f'<p>Custom nodes: <a href="{e(r["pack"]["url"])}">{e(r["pack"]["name"])}</a> at commit '
-            f'{e(r["pack"]["commit"])}. Everything else is part of {e(r["comfy"])}.</p>' if r["pack"] else
+    # "pack" is one pack, a list of packs (a test that needs two), or empty.
+    packs = r["pack"] if isinstance(r["pack"], list) else [r["pack"]] if r["pack"] else []
+    pack = (f'<p>Custom nodes: {", ".join(pack_link(pk) for pk in packs)}. Everything else is part of '
+            f'{e(r["comfy"])}.</p>' if packs else
             f'<p>No custom nodes. Every node is part of {e(r["comfy"])}.</p>')
     gated = ("<p>The Lightricks repositories (the LTX 2.5 base model and the LoRAs) are gated. Log in to Hugging Face and accept the terms on each "
              "repository page before downloading.</p>" if any(m["gated"] for m in r["models"]) else "")
+    # no zip when the test loads no inputs: it would hold only the workflow, which the page already offers
+    get = (f'<p><a href="{e(r["bundle"]["url"])}" download>Download everything for this test (.zip, '
+           f'{size_label(r["bundle"]["bytes"])})</a>. It holds the workflow, every input it loads and a README. '
+           f'Copy the inputs into ComfyUI/input, put the models below in place and drag the workflow onto ComfyUI.</p>'
+           if r.get("bundle") else
+           '<p>This test loads no input files. Put the models below in place and drag the workflow onto ComfyUI.</p>')
     return (f'<section class="plain"><div class="notes run-it"><h2 class="aside-title">Run it yourself</h2>'
-            f'<p><a href="{e(r["bundle"]["url"])}" download>Download everything for this test (.zip, '
-            f'{size_label(r["bundle"]["bytes"])})</a>. It holds the workflow, every input it loads and a README. '
-            f'Copy the inputs into ComfyUI/input, put the models below in place and drag the workflow onto ComfyUI.</p>'
-            f'{models_table(r["models"])}{gated}{pack}</div></section>')
+            f'{get}{models_table(r["models"])}{gated}{pack}</div></section>')
 
 
 # ---------------------------------------------------------------------------- pages
