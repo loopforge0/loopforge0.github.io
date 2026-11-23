@@ -1,6 +1,248 @@
 {
  "apps": [
   {
+   "slug": "comicgen",
+   "name": "comicgen",
+   "published": "2026-11-23",
+   "version": null,
+   "page_title": "comicgen: turn a short story into a comic book on your own PC | Loop Forge",
+   "os": "Windows, Linux (Python and ComfyUI)",
+   "tagline": "Give it a short story and get back a lettered comic book. An LLM writes the script, ComfyUI image models draw the cast and every panel, and code letters the balloons, all on your own PC.",
+   "icon": "img/apps/comicgen/icon.png",
+   "hero": {
+    "src": "img/apps/comicgen/hero.jpg",
+    "thumb": "img/apps/comicgen/hero-t.jpg",
+    "w": 1600,
+    "h": 900,
+    "alt": "Three finished comic pages made with comicgen"
+   },
+   "card": {
+    "src": "img/apps/comicgen/card.jpg",
+    "thumb": "img/apps/comicgen/card-t.jpg",
+    "w": 1600,
+    "h": 900
+   },
+   "github": "https://github.com/loopforge0/comicgen",
+   "releases": null,
+   "video": null,
+   "downloads": [],
+   "note": "comicgen is a Python program that drives your own ComfyUI. The model files aren't included: the table under Set it up links each one, about 32 GB in all.",
+   "setup": {
+    "needs": [
+     "NVIDIA graphics card with 12 GB (made on an RTX 3060 12 GB with 32 GB RAM)",
+     "Python 3.12 and ComfyUI (tested with 0.46.0)"
+    ],
+    "models": [
+     {
+      "file": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "bytes": 7256787829,
+      "gated": false
+     },
+     {
+      "file": "qwen_image_2.1_vae_bf16.safetensors",
+      "folder": "vae",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
+      "bytes": 675509688,
+      "gated": false
+     },
+     {
+      "file": "qwen3vl_8b_int8_convrot.safetensors",
+      "folder": "text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
+      "bytes": 9350798360,
+      "gated": false
+     },
+     {
+      "file": "moss_image_sft_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/diffusion_models/moss_image_sft_int8_convrot.safetensors",
+      "bytes": 5413698958,
+      "gated": false
+     },
+     {
+      "file": "flux2-vae_small.safetensors",
+      "folder": "vae",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/vae/flux2-vae_small.safetensors",
+      "bytes": 249521340,
+      "gated": false
+     },
+     {
+      "file": "qwen3.5_9b_w4a8_gptq.safetensors",
+      "folder": "text_encoders",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_w4a8_gptq.safetensors",
+      "bytes": 7343591088,
+      "gated": false
+     },
+     {
+      "file": "sam3.1_multiplex_fp16.safetensors",
+      "folder": "checkpoints",
+      "url": "https://huggingface.co/Comfy-Org/sam3/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors",
+      "bytes": 1745546848,
+      "gated": false
+     }
+    ],
+    "steps": [
+     {
+      "title": "Get the code",
+      "text": "Clone the repository and install its Python packages.",
+      "code": "git clone https://github.com/loopforge0/comicgen.git\ncd comicgen\npip install -r requirements.txt"
+     },
+     {
+      "title": "Add the models to ComfyUI",
+      "text": "Download each file into the ComfyUI models folder shown, then start ComfyUI. It has to be listening on 127.0.0.1:8188.",
+      "models": true
+     },
+     {
+      "title": "Check that everything is in place",
+      "text": "This asks ComfyUI which nodes and model files it has, and lists anything missing with the folder it goes in.",
+      "code": "python -m comicgen check"
+     },
+     {
+      "title": "Make a comic",
+      "text": "Create a project from a story, then run, review and approve it in the tracker at http://127.0.0.1:8765. Four public-domain stories come with the code.",
+      "code": "python -m comicgen new elves --story stories/elves_and_the_shoemaker.txt --style teen_humour\npython -m comicgen ui"
+     },
+     {
+      "title": "Or go straight through",
+      "text": "One command from story to finished pages, with no stops and no LLM call leaving your PC. The pages land in projects/elves/pages/.",
+      "code": "python -m comicgen new elves --story stories/elves_and_the_shoemaker.txt --auto-approve --local-only"
+     }
+    ]
+   },
+   "features": [
+    {
+     "title": "The same cast in every panel",
+     "text": "Every character gets a turn-around sheet first, and every panel is drawn with those sheets as references. A change of clothes is drawn as an edit of the original, so the face carries over.",
+     "image": {
+      "src": "img/apps/comicgen/cast.jpg",
+      "thumb": "img/apps/comicgen/cast-t.jpg",
+      "w": 1798,
+      "h": 700
+     }
+    },
+    {
+     "title": "Lettering by code",
+     "text": "The model draws each panel with balloons so the picture leaves room for them. SAM finds them, an edit removes them, and code letters the script's exact words back in.",
+     "image": {
+      "src": "img/apps/comicgen/lettering.jpg",
+      "thumb": "img/apps/comicgen/lettering-t.jpg",
+      "w": 1671,
+      "h": 560
+     }
+    },
+    {
+     "title": "You approve the cast",
+     "text": "Every character, version and view in one place. Try a different look in plain words before any panel is drawn.",
+     "image": {
+      "src": "img/apps/comicgen/tracker-assets.jpg",
+      "thumb": "img/apps/comicgen/tracker-assets-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "Change the story bible",
+     "text": "Ask the LLM to change the cast, or edit it by hand. Only the pictures whose look changed are drawn again.",
+     "image": {
+      "src": "img/apps/comicgen/tracker-writer.jpg",
+      "thumb": "img/apps/comicgen/tracker-writer-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "Edit the script",
+     "text": "The script audit lists open problems. Fix them yourself or ask the LLM, panel by panel, then approve the script.",
+     "image": {
+      "src": "img/apps/comicgen/tracker-editor.jpg",
+      "thumb": "img/apps/comicgen/tracker-editor-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "A reader for the finished comic",
+     "text": "Read it page by page or panel by panel. It's written as a folder that opens offline in any browser.",
+     "image": {
+      "src": "img/apps/comicgen/reader.gif",
+      "thumb": "img/apps/comicgen/reader.gif",
+      "w": 720,
+      "h": 405
+     }
+    }
+   ],
+   "examples": [
+    {
+     "title": "The Elves and the Shoemaker",
+     "text": "3 pages, teen_humour. Every page of the run.",
+     "image": {
+      "src": "img/apps/comicgen/ex-elves.jpg",
+      "thumb": "img/apps/comicgen/ex-elves-t.jpg",
+      "w": 1600,
+      "h": 900
+     }
+    },
+    {
+     "title": "The Gift of the Magi",
+     "text": "5 pages, teen_humour. Every page of the run.",
+     "image": {
+      "src": "img/apps/comicgen/ex-magi.jpg",
+      "thumb": "img/apps/comicgen/ex-magi-t.jpg",
+      "w": 1600,
+      "h": 560
+     }
+    },
+    {
+     "title": "The Time Machine",
+     "text": "13 pages, silver_age. Pages 1, 4, 8, 12 and 13.",
+     "image": {
+      "src": "img/apps/comicgen/ex-time-machine.jpg",
+      "thumb": "img/apps/comicgen/ex-time-machine-t.jpg",
+      "w": 1600,
+      "h": 560
+     }
+    },
+    {
+     "title": "The Monkey's Paw",
+     "text": "12 pages, noir. Pages 1, 5, 8, 10 and 12.",
+     "image": {
+      "src": "img/apps/comicgen/ex-monkeys-paw.jpg",
+      "thumb": "img/apps/comicgen/ex-monkeys-paw-t.jpg",
+      "w": 1600,
+      "h": 560
+     }
+    }
+   ],
+   "facts": [
+    [
+     "Models",
+     "Qwen3.5-9B (the LLM), Qwen Image 2.1 Turbo, MOSS Image, SAM 3.1 and Qwen3-VL 8B, all in ComfyUI"
+    ],
+    [
+     "Made on",
+     "RTX 3060 12 GB, 32 GB RAM, with the LLM running locally for all four example comics"
+    ],
+    [
+     "Other LLMs",
+     "LM Studio or any OpenAI-compatible server, or OpenRouter"
+    ],
+    [
+     "Stories",
+     "plain text or a PDF with a text layer"
+    ],
+    [
+     "Styles",
+     "teen_humour, silver_age, noir, modern_widescreen, romance_50s"
+    ],
+    [
+     "Source",
+     "MIT on GitHub. The model weights come under their own licences."
+    ]
+   ]
+  },
+  {
    "slug": "qwen-image-editor",
    "name": "Qwen Image Editor",
    "published": "2026-10-18",
@@ -11,7 +253,8 @@
     "src": "img/apps/qwen-image-editor/chat.jpg",
     "thumb": "img/apps/qwen-image-editor/chat-t.jpg",
     "w": 1600,
-    "h": 900
+    "h": 900,
+    "alt": "Qwen Image Editor inside a chat app"
    },
    "card": {
     "src": "img/apps/qwen-image-editor/editor.jpg",

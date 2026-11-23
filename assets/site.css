@@ -702,3 +702,13 @@ table.data th:first-child, table.data td:first-child { text-align: left; padding
 .part-title span { margin-left: 12px; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--ink-2); }
 .toc li.toc-part a { font-weight: 700; }
 .toc li[data-part]:not(.toc-part) a { padding-left: 14px; }
+
+/* An app run from source: numbered set-up steps with commands to copy */
+.app-steps { list-style: none; counter-reset: step; padding: 0; margin: 0; display: grid; gap: 30px; max-width: 900px; }
+.app-steps > li { counter-increment: step; position: relative; padding-left: 56px; min-width: 0; }
+.app-steps > li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 700; background: var(--accent); color: var(--accent-ink); }
+.app-steps h3 { margin: 4px 0 6px; font-size: 20px; }
+.app-steps p { margin: 0 0 12px; color: var(--ink-2); max-width: 70ch; }
+.app-code { margin: 0 0 8px; padding: 14px 18px; border-radius: 12px; background: var(--paper-2); overflow-x: auto;
+  font-family: "Courier Prime", monospace; font-size: 14.5px; line-height: 1.5; box-shadow: 0 0 0 1px var(--rule); }

@@ -53,6 +53,7 @@ REPOS = [
     ("ComfyUI-H3-Continuous", "Chain MiniMax H3 renders into one unbroken take"),
     ("minimaxh3-shots-skills", "Agent skills that write H3 camera shot prompts for your own scene"),
     ("comfyui-wan-loop", "Iterative ComfyUI nodes for longer Wan videos"),
+    ("comicgen", "Turn a short story into a comic book, run locally"),
 ]
 
 e = html.escape
@@ -1004,7 +1005,13 @@ def featured_app_card(a):
             f'<img class="app-icon" src="{asset(a["icon"])}" alt="" width="48" height="48"></div>'
             f'<p class="when"><span class="kind">App</span>{long_date(a["published"])}</p>'
             f'<h3>{new_badge(a["published"])}{e(a["name"])}</h3><p>{e(a["tagline"])}</p>'
-            f'<p class="count">Free app for {" and ".join(e(d["os"]) for d in a["downloads"])}</p></a>')
+            f'<p class="count">{app_count(a)}</p></a>')
+
+
+def app_count(a):
+    if a["downloads"]:
+        return "Free app for " + " and ".join(e(d["os"]) for d in a["downloads"])
+    return "Free and open source, runs on your own PC"
 
 
 def apps_block(apps):
@@ -1015,9 +1022,26 @@ def apps_block(apps):
 
 
 def downloads_html(a):
+    if not a["downloads"]:   # run from source: the set-up steps further down the page take the place of installers
+        needs = "".join(f"<li>{e(x)}</li>" for x in a["setup"]["needs"])
+        return (f'<div class="app-dls"><a class="button" href="#setup">Set it up</a>'
+                f'<a class="button quiet" href="{e(a["github"])}">Source on GitHub</a></div><ul class="app-needs">{needs}</ul>')
     buttons = "".join(f'<a class="button" href="{e(d["url"])}">Download for {e(d["os"])}</a>' for d in a["downloads"])
     needs = "".join(f"<li><b>{e(d['os'])}</b> {e(d['needs'])}</li>" for d in a["downloads"])
     return f'<div class="app-dls">{buttons}</div><ul class="app-needs">{needs}</ul>'
+
+
+def setup_html(a):
+    """Set-up steps for an app run from source: commands to copy, and the model files with their links."""
+    st = a.get("setup")
+    if not st:
+        return ""
+    steps = []
+    for x in st["steps"]:
+        code = f'<pre class="app-code"><code>{e(x["code"])}</code></pre>' if x.get("code") else ""
+        models = models_table(st["models"]) if x.get("models") else ""
+        steps.append(f'<li><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p>{code}{models}</li>')
+    return f'<section class="block" id="setup"><h2 class="section">Set it up</h2><ol class="app-steps">{"".join(steps)}</ol></section>'
 
 
 def build_apps_index(apps):
@@ -1052,6 +1076,8 @@ def build_app(a):
     video_block = (f'<section class="block"><h2 class="section">The video</h2><a class="yt" href="{watch_url(video)}" target="_blank" '
                    f'rel="noopener"><img src="{video_thumb(video)}" alt="" width="1280" height="720"><span class="play">Watch on YouTube</span>'
                    f'</a></section>') if video else ""
+    source = (f'<a class="button quiet" href="{e(a["github"])}">Source on GitHub</a>' if a["downloads"] else "")
+    releases = (f'<a class="button quiet" href="{e(a["releases"])}">All releases</a>' if a.get("releases") else "")
     body = f"""
 <div class="wrap">
   <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/apps/">Apps</a></div>
@@ -1061,23 +1087,29 @@ def build_app(a):
       <h1 class="display page-title">{e(a["name"])}</h1>
       <p class="lede">{e(a["tagline"])}</p>
       {downloads_html(a)}
-      <div class="hero-actions"><a class="button quiet" href="{e(a["github"])}">Source on GitHub</a>{watch}<a class="button quiet" href="{e(a["releases"])}">All releases</a></div>
+      <div class="hero-actions">{source}{watch}{releases}</div>
     </div>
-    <div class="app-hero-media">{img(a["hero"], a["name"] + " inside a chat app", thumb=False, eager=True)}</div>
+    <div class="app-hero-media">{img(a["hero"], a["hero"].get("alt", a["name"]), thumb=False, eager=True)}</div>
   </section>
   <p class="notice">{e(a["note"])}</p>
   <section class="block"><h2 class="section">What it can do</h2><div class="app-features">{"".join(feats)}</div></section>
   <section class="block"><h2 class="section">Examples</h2><div class="app-examples">{exs}</div></section>
+  {setup_html(a)}
   {video_block}
   <section class="block"><h2 class="section">Details</h2>{facts_html(a["facts"])}</section>
   <div style="height:64px"></div>
 </div>"""
     ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": a["name"], "description": a["tagline"],
-          "applicationCategory": "MultimediaApplication", "operatingSystem": "Windows, macOS",
-          "softwareVersion": a["version"], "url": SITE + app_url(a), "downloadUrl": [d["url"] for d in a["downloads"]],
-          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+          "applicationCategory": "MultimediaApplication", "operatingSystem": a.get("os", "Windows, macOS"),
+          "url": SITE + app_url(a), "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    if a.get("version"):
+        ld["softwareVersion"] = a["version"]
+    if a["downloads"]:
+        ld["downloadUrl"] = [d["url"] for d in a["downloads"]]
+    else:
+        ld["codeRepository"] = a["github"]
     out(f"apps/{a['slug']}/index.html", page(
-        path=app_url(a), title=f"{a['name']}: free download for Windows and macOS | Loop Forge",
+        path=app_url(a), title=a.get("page_title") or f"{a['name']}: free download for Windows and macOS | Loop Forge",
         description=a["tagline"], body=body, image=a["card"]["src"], current="Apps", extra_head=json_ld(ld)))
 
 
@@ -1110,7 +1142,7 @@ def build_search_index(cols, findings, apps=()):
     for a in apps:
         docs.append({"id": f"app-{a['slug']}", "kind": "App", "title": a["name"],
                      "body": " ".join([a["tagline"]] + [f["title"] + " " + f["text"] for f in a["features"]]),
-                     "tags": "app download windows macos", "video": "", "url": app_url(a), "thumb": asset(a["card"]["thumb"])})
+                     "tags": "app download windows macos" if a["downloads"] else "app open source python comfyui", "video": "", "url": app_url(a), "thumb": asset(a["card"]["thumb"])})
     out("assets/search-index.json", json.dumps(docs, ensure_ascii=False, separators=(",", ":")))
 
 
