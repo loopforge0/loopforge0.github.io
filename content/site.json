@@ -10,7 +10,7 @@
   "headline": "Open models, tested in the open",
   "lede": "Prompts, ComfyUI workflows and findings from hands-on projects with AI models you can run yourself, published exactly as they ran, with the failures left in.",
   "featured": [
-    "app:qwen-image-editor",
+    "app:comicgen",
     "ltx-2-5-loras",
     "higgsfield-vs-h3"
   ],
