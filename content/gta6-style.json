@@ -3,7 +3,7 @@
  "published": "2026-11-24",
  "lede": "Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.",
  "hero": "14_kate_swamp_ultrawide",
- "video": null,
+ "video": "https://youtu.be/knJ1IicUxMs",
  "github": "https://github.com/loopforge0/comfyui-gta6-style",
  "photos": [
   "amara",
