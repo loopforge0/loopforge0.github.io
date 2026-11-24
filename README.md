@@ -7,6 +7,7 @@ The Loop Forge hub site, served at **https://loopforge.cc** from GitHub Pages.
 ```sh
 python tools/build.py           # index, projects/**, 404, sitemap, robots, llms.txt
 python tools/build_shootout.py  # /projects/video-upscaler/ (must run after build.py)
+python tools/build_gta6.py      # /projects/gta6-style/ (must run after build.py)
 python tools/check.py           # every prompt reads back exactly, every local link resolves
 ```
 
@@ -19,6 +20,13 @@ go second. Running `build.py` alone leaves the projects index pointing at nothin
 `tools/check.py` reports that as a broken link rather than letting it ship.
 
 ## Standalone pages
+
+`/projects/gta6-style/` is a prompt builder plus a 37-image showcase. Its content, images and
+`assets/gta6-style/gta6_prompt.js` (a port of the ComfyUI nodes, parity-tested) come from
+`next-video-research/gta6-tests/build_site_content.py`; the page's own `gta6.js`/`gta6.css` live here.
+
+If `../h3-upscaling` isn't on the machine, `build.py` still wipes `projects/video-upscaler/workflows/`;
+restore it with `git checkout -- projects/video-upscaler/workflows` before committing.
 
 `/projects/video-upscaler/` is not a prompt collection, so it does not fit build.py's
 project generator. It is a comparison player over 83 video clips with the

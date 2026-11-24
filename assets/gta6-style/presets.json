@@ -1,0 +1,1075 @@
+{
+ "_about": "GTA VI artwork style presets for Qwen-Image 2.1. Every option was written by studying Rockstar's official GTA VI artwork wallpapers (rockstargames.com/VI/media). Style options describe traits of the artwork only; locations borrow scene ideas from the screenshots and postcards. 'ref' describes the official artwork each option was taken from. Edit or add options freely: the nodes read this file at ComfyUI start. Text fragments follow Qwen's PE-I2I prompt spec: affirmative phrasing only, no 'no X'. Tokens: {fig} = the figure / the figures, {pos} = her / his / their, {text} = the sign text.",
+ "style_variant": [
+  {
+   "name": "Key art (default)",
+   "ref": "couple key art",
+   "medium": "a stylised 2D digital illustration in the look of modern crime-game key art and animated film keyframes, with crisp detailed figures set against a flatter, simplified background",
+   "line_art": "thin, slightly uneven dark brown-black ink lines that are heavier on the outer silhouette and fine inside, tracing contours, clothing seams and folds",
+   "shading": "cel shading in two to three hard-edged tone steps and flat graphic shadow shapes tinted cool violet-blue",
+   "detail": "hair drawn as chunky clumped locks picked out with fine ink strands, and faces with mature, realistic adult proportions and defined angular planes at the cheekbones, brows and jaw"
+  },
+  {
+   "name": "Character loading screen (gritty)",
+   "ref": "character art (boatyard veteran), character art (man on a boat), character art (man in a linen suit)",
+   "medium": "a stylised 2D digital character portrait in the look of open-world crime-game loading-screen art, with crisp detailed figures dominating the frame against a flatter, simplified background",
+   "line_art": "thin dark ink contour lines plus delicate hatched pen strokes that pick out hair strands, stubble, arm hair, wrinkles and fabric texture",
+   "shading": "cel shading in two to three hard-edged tone steps and flat graphic shadow shapes tinted cool violet-blue",
+   "detail": "weathered skin with wrinkles, pores and hair drawn in fine hatching, sun-faded fabric and visible tattoo linework"
+  },
+  {
+   "name": "Glam (cover art)",
+   "ref": "cover art, character art (rap duo)",
+   "medium": "a stylised 2D digital illustration in the look of one panel from a crime-game cover art grid, dense with detail and punchy colour, cropped tightly around the action",
+   "line_art": "thin, slightly uneven dark brown-black ink lines that are heavier on the outer silhouette and fine inside, tracing contours, clothing seams and folds",
+   "shading": "bold two-tone graphic shading with crisp, angular shadow shapes tinted deep violet",
+   "detail": "glossy lips, sculpted eyebrows, long lashes and bright specular highlights on skin, nails and jewellery"
+  },
+  {
+   "name": "Sketchy ink",
+   "ref": "couple key art close-ups",
+   "medium": "a stylised 2D digital illustration in the look of modern crime-game key art and animated film keyframes, with crisp detailed figures set against a flatter, simplified background",
+   "line_art": "loose, sketchy pencil-and-ink linework with slightly broken contour lines and quick hatched strokes left visible in the shadows",
+   "shading": "hard-edged cel shadow shapes combined with soft airbrushed gradients across skin and sky, shadows tinted lilac and blue",
+   "detail": "hair drawn as chunky clumped locks picked out with fine ink strands, and faces with mature, realistic adult proportions and defined angular planes at the cheekbones, brows and jaw"
+  },
+  {
+   "name": "Synthwave album (flat)",
+   "ref": "album cover art",
+   "medium": "a stylised 2D digital poster illustration in the look of a retro synthwave album cover, with soft glowing colour and a dreamy, nostalgic mood",
+   "line_art": "very sparse, soft ink lines only on key contours, letting painted colour shapes define most of the forms",
+   "shading": "posterised flat colour areas with gentle gradients and shadows washed in a single lavender tone",
+   "detail": "simplified faces and hands built from a few clean graphic shapes with minimal interior detail"
+  }
+ ],
+ "palette": [
+  {
+   "name": "Sunset peach > lavender (default)",
+   "ref": "couple key art (car hood), Beach, Album",
+   "text": "a muted sunset palette of peach-orange glow at the horizon fading into lavender and violet sky, with violet palm silhouettes and warm skin tones"
+  },
+  {
+   "name": "Dusk violet + pink band",
+   "ref": "Robbery, Rooftop, character art (man on an SUV)",
+   "text": "a dusk palette of deep periwinkle and violet sky with a pink band on the horizon, pale blue city lights and warm-lit skin"
+  },
+  {
+   "name": "Daytime teal + pastel pink",
+   "ref": "couple key art (marina), character art (man on a boat)",
+   "text": "a bright daytime palette of pale cyan sky, mint and aqua water, pastel pink and lilac buildings and warm sandy highlights"
+  },
+  {
+   "name": "Club teal + lilac + lime",
+   "ref": "character art (nightclub owner)",
+   "text": "a muted nightclub palette of dusty teal, lilac and slate with small lime-green accents and rich red and gold on the figure"
+  },
+  {
+   "name": "Workshop periwinkle + cream",
+   "ref": "character art (boatyard veteran)",
+   "text": "a palette of periwinkle-blue steel and shade, warm cream and peach light, sage green and faded coral"
+  },
+  {
+   "name": "Hazy lime + sand",
+   "ref": "character art (man in a linen suit)",
+   "text": "a hazy palette of pale lime-green sky, warm sand and beige ground, mauve shadows and off-white highlights"
+  },
+  {
+   "name": "Interior lavender + amber",
+   "ref": "couple key art (motel)",
+   "text": "an interior palette of dusty lavender walls and bedding, warm amber light and deep plum shadows"
+  },
+  {
+   "name": "Neon night violet + teal",
+   "ref": "character art (rap duo)",
+   "text": "a night palette of violet sky, teal-green buildings and hot pink neon accents"
+  },
+  {
+   "name": "Swamp green + gold",
+   "ref": "swamp postcard",
+   "text": "a palette of olive and sage marsh greens, warm gold reeds, pale teal sky and soft peach haze"
+  },
+  {
+   "name": "Smog orange + ember",
+   "ref": "refinery town postcard",
+   "text": "a smoggy industrial palette of burnt orange sky, ember-red sun, charcoal-violet silhouettes and amber lights"
+  }
+ ],
+ "lighting": [
+  {
+   "name": "Warm rim light, cool shadow (default)",
+   "ref": "couple key art (car hood), Rooftop",
+   "text": "warm bleached highlights and a thin golden rim light tracing the lit edge, against cool violet shadow sides"
+  },
+  {
+   "name": "Low sunset backlight",
+   "ref": "couple key art (red coupe)",
+   "text": "a low sun glowing behind {fig}, edging hair and shoulders with peach light and casting long violet shadows toward the viewer"
+  },
+  {
+   "name": "Crisp midday sun",
+   "ref": "couple key art (marina), character art (man on a boat)",
+   "text": "crisp high sunlight with pale cream highlights, short hard shadows and lilac reflected light from below"
+  },
+  {
+   "name": "Neon dual-tone rim",
+   "ref": "character art (man on an SUV), character art (rap duo)",
+   "text": "dual rim lighting with pink neon glow on one side and cyan glow on the other, and bright specular glints on jewellery"
+  },
+  {
+   "name": "Club lights + gold glints",
+   "ref": "character art (nightclub owner)",
+   "text": "dim teal and magenta club lighting with a soft spotlight from above and sharp highlights glinting off gold jewellery"
+  },
+  {
+   "name": "Window light + palm shadows",
+   "ref": "couple key art (motel)",
+   "text": "warm amber light shafts from a window falling across {fig}, with soft shadows of palm fronds patterned over skin and fabric"
+  },
+  {
+   "name": "Searchlight at dusk",
+   "ref": "couple key art (rooftop)",
+   "text": "dusk ambient light with a cold white helicopter searchlight beam cutting through the haze behind {fig}"
+  }
+ ],
+ "background_treatment": [
+  {
+   "name": "Screen-print posterised (default)",
+   "ref": "couple key art (marina), Robbery",
+   "text": "a screen-print style illustration built from flat posterised colour shapes, simplified buildings with flat window grids, single-colour palm tree silhouettes and layered atmospheric haze"
+  },
+  {
+   "name": "Painterly sky + palm silhouettes",
+   "ref": "couple key art (beach close-up), Album",
+   "text": "a soft painterly gradient sky with flat single-colour palm frond silhouettes and a few distant birds in the corners"
+  },
+  {
+   "name": "Detailed illustrated set",
+   "ref": "character art (boatyard veteran), character art (nightclub owner)",
+   "text": "a detailed illustrated environment drawn with thinner lines than {fig}, pushed back with lighter values and atmospheric haze"
+  },
+  {
+   "name": "Soft-focus graphic city",
+   "ref": "character art (man on an SUV)",
+   "text": "a softly blurred, simplified city backdrop of flat colour blocks and glowing neon tube shapes"
+  }
+ ],
+ "location": [
+  {
+   "name": "Beach art-deco strip",
+   "ref": "couple key art (car hood)",
+   "text": "on a beachfront boulevard in a Miami-style beach city, in front of pastel art-deco hotels with rounded corners, porthole windows and racing-stripe trim, with palm trees along the street",
+   "sign": "the tall vertical neon sign on the nearest hotel reads \"{text}\" in pink neon art-deco capitals"
+  },
+  {
+   "name": "Downtown waterfront marina",
+   "ref": "couple key art (marina)",
+   "text": "on a wooden marina dock with a downtown skyline of glass towers rising across the bay, palm trees on the shore and a police boat on the water"
+  },
+  {
+   "name": "Roadside gas station",
+   "ref": "couple key art (gas station)",
+   "text": "in the forecourt of a roadside gas station with a flat canopy, fuel pumps and a convenience store, with palm trees and power lines along the highway",
+   "sign": "the canopy sign reads \"{text}\" in bold red capitals"
+  },
+  {
+   "name": "Rooftop over the city",
+   "ref": "couple key art (rooftop)",
+   "text": "on a high rooftop edged with a glowing blue LED strip, overlooking a sprawling waterfront city of lit towers and causeways"
+  },
+  {
+   "name": "Motel room",
+   "ref": "couple key art (motel)",
+   "text": "inside a cheap motel room with wood-panelled walls, a framed seascape print above the bed and rumpled sheets"
+  },
+  {
+   "name": "Nightclub VIP",
+   "ref": "character art (nightclub owner)",
+   "text": "in a nightclub VIP area with a grid lighting rig overhead, a giant projected close-up of a woman's eye on the back wall and dancers on a raised stage",
+   "sign": "a neon sign above the stage reads \"{text}\" in glowing violet capitals"
+  },
+  {
+   "name": "Boatyard workshop",
+   "ref": "character art (boatyard veteran)",
+   "text": "inside an open-sided boatyard workshop with steel roof trusses, a white cabin cruiser on a dry-dock stand and ladders and scaffolding"
+  },
+  {
+   "name": "Keys bridge over the bay",
+   "ref": "character art (man on a boat)",
+   "text": "out on calm open water beside a long concrete causeway bridge with a truck crossing it, mangrove islands and a seaplane overhead"
+  },
+  {
+   "name": "Graffiti industrial lot",
+   "ref": "character art (man in a linen suit)",
+   "text": "in a sunbaked industrial lot with power lines overhead and shipping containers covered in cartoon-face graffiti murals"
+  },
+  {
+   "name": "Neon boutique strip",
+   "ref": "character art (man on an SUV)",
+   "text": "outside a luxury boutique strip at night with pink neon script signs and striped awnings",
+   "sign": "the boutique sign reads \"{text}\" in flowing pink neon script"
+  },
+  {
+   "name": "Neon street block",
+   "ref": "character art (rap duo)",
+   "text": "on a city rooftop at night with teal apartment blocks, vertical neon signs and palm silhouettes behind",
+   "sign": "a vertical neon sign on the apartment block reads \"{text}\" in glowing pink capitals"
+  },
+  {
+   "name": "Swamp airboat dock",
+   "ref": "swamp postcard",
+   "text": "at a wooden airboat dock in sawgrass marshes with tall golden reeds, still water, cypress trees and an alligator gliding past"
+  },
+  {
+   "name": "Island keys shoreline",
+   "ref": "island keys postcard",
+   "text": "on a sunny island shoreline of turquoise shallows, a coastal highway, mangroves and small boats moored offshore"
+  },
+  {
+   "name": "Port town at night",
+   "ref": "port town postcard",
+   "text": "on a run-down port-town street at night beside a rail line, with a water tower, sodium streetlights and a roadside motel sign",
+   "sign": "the roadside motel sign reads \"{text}\" in faded red neon script"
+  },
+  {
+   "name": "Refinery town",
+   "ref": "refinery town postcard",
+   "text": "on the edge of an industrial refinery town with smokestacks venting plumes, a stars-and-stripes painted water tank and rows of palm trees"
+  },
+  {
+   "name": "Forest river",
+   "ref": "national park postcard",
+   "text": "beside a rocky forest river with sunbeams slanting through tall trees and mist over the water"
+  },
+  {
+   "name": "Beach + lifeguard tower",
+   "ref": "city postcard",
+   "text": "on a wide white-sand beach with a pastel lifeguard tower, turquoise surf and a distant skyline"
+  },
+  {
+   "name": "Hotel pool party",
+   "ref": "cover art",
+   "text": "beside a hotel pool with sun loungers, cabanas and a crowd partying under palm trees",
+   "sign": "a neon sign above the pool bar reads \"{text}\" in pink script"
+  },
+  {
+   "name": "Bank exterior",
+   "ref": "cover art",
+   "text": "on the steps outside an art-deco bank building with tall columns",
+   "sign": "the stone lettering above the columns reads \"{text}\""
+  },
+  {
+   "name": "Plain gradient backdrop",
+   "ref": "couple key art (beach close-up)",
+   "text": "against a simple gradient sky backdrop framed by palm silhouettes"
+  }
+ ],
+ "vehicle": [
+  {
+   "name": "Black 70s muscle car",
+   "ref": "couple key art (car hood)",
+   "place": "behind",
+   "text": "a black 1970s American muscle car with round headlights and a chrome grille"
+  },
+  {
+   "name": "Black fastback, red tail lights",
+   "ref": "couple key art (gas station)",
+   "place": "behind",
+   "text": "a black muscle fastback with glowing red tail lights"
+  },
+  {
+   "name": "Red 70s sports coupe",
+   "ref": "couple key art (red coupe)",
+   "place": "behind",
+   "text": "a red 1970s sports coupe with a long sloping nose"
+  },
+  {
+   "name": "Black luxury box SUV",
+   "ref": "character art (man on an SUV)",
+   "place": "behind",
+   "text": "a black luxury off-road SUV with a boxy body and a wide chrome grille"
+  },
+  {
+   "name": "Yellow supercar, scissor doors",
+   "ref": "cover art",
+   "place": "behind",
+   "text": "a yellow mid-engine supercar with its scissor doors raised"
+  },
+  {
+   "name": "Open-top convertible",
+   "ref": "screenshots",
+   "place": "behind",
+   "text": "a pastel pink open-top convertible with white leather seats"
+  },
+  {
+   "name": "Pink sportbike",
+   "ref": "cover art",
+   "place": "behind",
+   "text": "a magenta and white sportbike"
+  },
+  {
+   "name": "Police cruiser, lights on",
+   "ref": "cover art",
+   "place": "behind",
+   "text": "a white and green police cruiser with its light bar flashing red and blue"
+  },
+  {
+   "name": "Speedboat",
+   "ref": "cover art",
+   "place": "aboard",
+   "text": "a long purple and white offshore speedboat cutting a spray of wake"
+  },
+  {
+   "name": "Small fishing boat",
+   "ref": "character art (man on a boat)",
+   "place": "aboard",
+   "text": "a small teal fishing boat"
+  },
+  {
+   "name": "Airboat",
+   "ref": "swamp postcard",
+   "place": "behind",
+   "text": "a swamp airboat with a big caged fan"
+  },
+  {
+   "name": "Police helicopter + searchlight",
+   "ref": "couple key art (rooftop)",
+   "place": "sky",
+   "text": "a police helicopter shining a white searchlight down"
+  },
+  {
+   "name": "News helicopter",
+   "ref": "couple key art (marina)",
+   "place": "sky",
+   "text": "a small helicopter"
+  },
+  {
+   "name": "Seaplane",
+   "ref": "character art (man on a boat)",
+   "place": "sky",
+   "text": "a white seaplane"
+  },
+  {
+   "name": "Float helicopter",
+   "ref": "cover art",
+   "place": "sky",
+   "text": "a blue-canopy helicopter on pontoon floats"
+  }
+ ],
+ "theme": [
+  {
+   "name": "Sunset key art",
+   "ref": "couple key art (car hood)",
+   "palette": "Sunset peach > lavender (default)",
+   "lighting": "Warm rim light, cool shadow (default)",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Beach art-deco strip"
+  },
+  {
+   "name": "Dusk heist",
+   "ref": "couple key art (gas station)",
+   "palette": "Dusk violet + pink band",
+   "lighting": "Warm rim light, cool shadow (default)",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Roadside gas station"
+  },
+  {
+   "name": "Daytime marina",
+   "ref": "couple key art (marina)",
+   "palette": "Daytime teal + pastel pink",
+   "lighting": "Crisp midday sun",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Downtown waterfront marina"
+  },
+  {
+   "name": "Rooftop searchlight",
+   "ref": "couple key art (rooftop)",
+   "palette": "Dusk violet + pink band",
+   "lighting": "Searchlight at dusk",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Rooftop over the city"
+  },
+  {
+   "name": "Golden hour backlight",
+   "ref": "couple key art (red coupe)",
+   "palette": "Sunset peach > lavender (default)",
+   "lighting": "Low sunset backlight",
+   "background_treatment": "Painterly sky + palm silhouettes",
+   "location": "Beach art-deco strip"
+  },
+  {
+   "name": "Romance close-up",
+   "ref": "couple key art (beach close-up)",
+   "palette": "Sunset peach > lavender (default)",
+   "lighting": "Warm rim light, cool shadow (default)",
+   "background_treatment": "Painterly sky + palm silhouettes",
+   "location": "Plain gradient backdrop",
+   "framing": "Close two-shot, chest up"
+  },
+  {
+   "name": "Motel hideout",
+   "ref": "couple key art (motel)",
+   "palette": "Interior lavender + amber",
+   "lighting": "Window light + palm shadows",
+   "background_treatment": "Detailed illustrated set",
+   "location": "Motel room",
+   "framing": "Close two-shot, chest up"
+  },
+  {
+   "name": "Nightclub",
+   "ref": "character art (nightclub owner)",
+   "palette": "Club teal + lilac + lime",
+   "lighting": "Club lights + gold glints",
+   "background_treatment": "Detailed illustrated set",
+   "location": "Nightclub VIP"
+  },
+  {
+   "name": "Boatyard",
+   "ref": "character art (boatyard veteran)",
+   "palette": "Workshop periwinkle + cream",
+   "lighting": "Warm rim light, cool shadow (default)",
+   "background_treatment": "Detailed illustrated set",
+   "location": "Boatyard workshop"
+  },
+  {
+   "name": "Day on the water",
+   "ref": "character art (man on a boat)",
+   "palette": "Daytime teal + pastel pink",
+   "lighting": "Crisp midday sun",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Keys bridge over the bay"
+  },
+  {
+   "name": "Neon night street",
+   "ref": "character art (man on an SUV), character art (rap duo)",
+   "palette": "Neon night violet + teal",
+   "lighting": "Neon dual-tone rim",
+   "background_treatment": "Soft-focus graphic city",
+   "location": "Neon boutique strip"
+  },
+  {
+   "name": "Industrial heat haze",
+   "ref": "character art (man in a linen suit)",
+   "palette": "Hazy lime + sand",
+   "lighting": "Warm rim light, cool shadow (default)",
+   "background_treatment": "Screen-print posterised (default)",
+   "location": "Graffiti industrial lot"
+  },
+  {
+   "name": "Synthwave beach",
+   "ref": "album cover art",
+   "palette": "Sunset peach > lavender (default)",
+   "lighting": "Low sunset backlight",
+   "background_treatment": "Painterly sky + palm silhouettes",
+   "location": "Beach + lifeguard tower"
+  },
+  {
+   "name": "Swamp run",
+   "ref": "swamp postcard",
+   "palette": "Swamp green + gold",
+   "lighting": "Low sunset backlight",
+   "background_treatment": "Detailed illustrated set",
+   "location": "Swamp airboat dock"
+  },
+  {
+   "name": "Pool party",
+   "ref": "cover art",
+   "palette": "Daytime teal + pastel pink",
+   "lighting": "Crisp midday sun",
+   "background_treatment": "Detailed illustrated set",
+   "location": "Hotel pool party"
+  }
+ ],
+ "female": {
+  "hair": [
+   {
+    "name": "High curly ponytail",
+    "ref": "couple key art (car hood), Beach",
+    "text": "a high ponytail of dark brown spiral curls with loose curls falling around her face"
+   },
+   {
+    "name": "Wind-swept ponytail",
+    "ref": "Rooftop, Robbery",
+    "text": "a dark brown ponytail whipped sideways by the wind with loose strands across her cheek"
+   },
+   {
+    "name": "Big shoulder-length curls",
+    "ref": "character art (rap duo)",
+    "text": "a voluminous shoulder-length cloud of tight dark curls"
+   },
+   {
+    "name": "Long spiral curls",
+    "ref": "cover art (influencer panel)",
+    "text": "long waist-length spiral curls in dark brown with honey highlights"
+   },
+   {
+    "name": "Braids + half-up buns",
+    "ref": "character art (rap duo)",
+    "text": "long braids gathered into two small half-up buns, with baby hair styled along her hairline"
+   },
+   {
+    "name": "Sleek straight",
+    "ref": "extrapolated",
+    "text": "sleek, straight dark hair falling past her shoulders with a centre part"
+   },
+   {
+    "name": "Messy beach waves",
+    "ref": "extrapolated",
+    "text": "messy sun-lightened beach waves pushed back from her face"
+   },
+   {
+    "name": "Natural afro",
+    "ref": "extrapolated",
+    "text": "a full, rounded natural afro"
+   },
+   {
+    "name": "Long locs",
+    "ref": "extrapolated",
+    "text": "long locs gathered half-up with a few gold cuffs"
+   },
+   {
+    "name": "Long box braids",
+    "ref": "character art (rap duo)",
+    "text": "long box braids falling past her shoulders"
+   },
+   {
+    "name": "Sleek black bob with bangs",
+    "ref": "extrapolated",
+    "text": "a sleek, glossy black bob with blunt bangs"
+   },
+   {
+    "name": "Space buns",
+    "ref": "extrapolated",
+    "text": "two high space buns with loose strands framing her face"
+   },
+   {
+    "name": "Silk headscarf",
+    "ref": "extrapolated",
+    "text": "a silk headscarf wrapped neatly around her hair"
+   }
+  ],
+  "outfit": [
+   {
+    "name": "Magenta crop top + camo leggings",
+    "ref": "couple key art (car hood)",
+    "text": "a cropped magenta long-sleeve top, high-waisted blue camouflage leggings and white canvas sneakers"
+   },
+   {
+    "name": "Black cami + denim cut-offs",
+    "ref": "couple key art (marina), Beach",
+    "text": "a charcoal spaghetti-strap crop camisole, a dark leather belt and faded blue denim cut-off shorts"
+   },
+   {
+    "name": "Cropped hoodie + frayed shorts",
+    "ref": "couple key art (gas station)",
+    "text": "a grey short-sleeve cropped hoodie with a large dark star emblem on the chest and frayed light-wash denim micro shorts"
+   },
+   {
+    "name": "Denim jacket + mini skirt",
+    "ref": "couple key art (rooftop)",
+    "text": "a washed grey denim jacket over a black crop top and a frayed grey denim mini skirt"
+   },
+   {
+    "name": "Palm-print shirt + white crop",
+    "ref": "couple key art (motel)",
+    "text": "an open mustard-yellow short-sleeve shirt with green palm leaf print over a white crop tank and blue denim shorts"
+   },
+   {
+    "name": "Black tee + cut-offs + high-tops",
+    "ref": "couple key art (red coupe)",
+    "text": "a cropped charcoal t-shirt, frayed light-wash denim cut-off shorts and dark canvas high-top sneakers"
+   },
+   {
+    "name": "Football jersey + bikini",
+    "ref": "cover art",
+    "text": "an oversized cropped mint-green football jersey with a large white number and a white string bikini bottom"
+   },
+   {
+    "name": "Fur jacket + leopard top",
+    "ref": "character art (rap duo)",
+    "text": "a shaggy lime-green faux-fur cropped jacket over a leopard-print bra top and zip-front denim corset, with high-waisted blue jeans"
+   },
+   {
+    "name": "Shredded jeans + fishnets",
+    "ref": "character art (rap duo)",
+    "text": "a distressed cropped long-sleeve top with a red tiger-stripe panel and heavily shredded light jeans over fishnet tights"
+   },
+   {
+    "name": "Bikini top + sarong",
+    "ref": "beach screenshots",
+    "text": "a coral bikini top and a sheer tropical-print sarong tied at the hip"
+   }
+  ],
+  "accessory": [
+   {
+    "name": "Large gold hoops",
+    "ref": "female lead artwork, character art (rap duo)",
+    "text": "large gold hoop earrings"
+   },
+   {
+    "name": "Thin gold pendant necklace",
+    "ref": "couple key art (marina)",
+    "text": "a thin gold chain necklace with a small pendant"
+   },
+   {
+    "name": "Layered gold body chains",
+    "ref": "cover art (influencer panel)",
+    "text": "layered gold necklaces, gold bangles and a gold belly chain"
+   },
+   {
+    "name": "Iced-out nameplate chains",
+    "ref": "character art (rap duo)",
+    "text": "chunky iced-out nameplate chains and long decorated acrylic nails"
+   },
+   {
+    "name": "Fingerless gloves",
+    "ref": "character art (rap duo)",
+    "text": "black fingerless gloves"
+   },
+   {
+    "name": "Ankle monitor",
+    "ref": "couple key art (car hood), couple key art (red coupe)",
+    "text": "a chunky black electronic ankle monitor"
+   },
+   {
+    "name": "Bandana mask",
+    "ref": "couple key art (gas station)",
+    "text": "a red paisley bandana pulled up over her nose and mouth"
+   },
+   {
+    "name": "Sunglasses on head",
+    "ref": "cover art (influencer panel)",
+    "text": "oversized sunglasses pushed up on top of her head"
+   }
+  ]
+ },
+ "male": {
+  "hair": [
+   {
+    "name": "Short crop",
+    "ref": "male lead artwork",
+    "text": "short dark brown hair cropped close at the sides"
+   },
+   {
+    "name": "Cornrow braids",
+    "ref": "character art (man on an SUV)",
+    "text": "neat cornrow braids ending in short braided tails at the neck"
+   },
+   {
+    "name": "Long slicked back",
+    "ref": "character art (man in a linen suit)",
+    "text": "long dark hair slicked back behind his ears and falling to his collar"
+   },
+   {
+    "name": "Messy under backwards cap",
+    "ref": "character art (man on a boat)",
+    "text": "shaggy shoulder-length brown hair under a backwards mustard trucker cap"
+   },
+   {
+    "name": "Swept-back grey",
+    "ref": "character art (boatyard veteran)",
+    "text": "thinning grey-white hair swept back to the collar"
+   },
+   {
+    "name": "Close buzz",
+    "ref": "character art (nightclub owner)",
+    "text": "a close-cropped buzz cut with a sharp line-up"
+   },
+   {
+    "name": "Short twists",
+    "ref": "extrapolated",
+    "text": "short twists with a tapered fade"
+   },
+   {
+    "name": "High-top fade",
+    "ref": "extrapolated",
+    "text": "a sharp high-top fade"
+   },
+   {
+    "name": "Slick undercut",
+    "ref": "extrapolated",
+    "text": "a slicked-back undercut"
+   },
+   {
+    "name": "Man bun",
+    "ref": "extrapolated",
+    "text": "long dark hair tied up in a man bun"
+   },
+   {
+    "name": "Shaved head",
+    "ref": "extrapolated",
+    "text": "a clean-shaven head"
+   }
+  ],
+  "facial_hair": [
+   {
+    "name": "Short stubble",
+    "ref": "male lead artwork",
+    "text": "short dark stubble along his jaw and upper lip"
+   },
+   {
+    "name": "Full trimmed beard",
+    "ref": "character art (nightclub owner)",
+    "text": "a full, neatly trimmed beard flecked with grey"
+   },
+   {
+    "name": "Grey goatee",
+    "ref": "character art (boatyard veteran)",
+    "text": "a thick grey-white goatee and moustache"
+   },
+   {
+    "name": "Thin goatee",
+    "ref": "character art (man in a linen suit)",
+    "text": "a thin, groomed goatee with a narrow moustache"
+   },
+   {
+    "name": "Scruffy moustache",
+    "ref": "character art (man on a boat)",
+    "text": "a scruffy moustache and patchy stubble"
+   },
+   {
+    "name": "Light chin strap",
+    "ref": "character art (man on an SUV)",
+    "text": "a thin moustache and a light chin beard"
+   }
+  ],
+  "outfit": [
+   {
+    "name": "White tank + camo cargo shorts",
+    "ref": "couple key art (red coupe)",
+    "text": "an off-white ribbed tank top, olive camouflage cargo shorts, striped white tube socks and grey canvas slip-on shoes"
+   },
+   {
+    "name": "White tank + olive cargos",
+    "ref": "couple key art (car hood)",
+    "text": "an off-white ribbed tank top and baggy olive-green cargo trousers"
+   },
+   {
+    "name": "Palm shirt over tee + khakis",
+    "ref": "couple key art (marina)",
+    "text": "an open blue short-sleeve shirt with a small palm tree print over a white t-shirt, with khaki cargo trousers"
+   },
+   {
+    "name": "Graphic tee + brown chinos",
+    "ref": "couple key art (gas station)",
+    "text": "a faded blue-grey graphic t-shirt with a cartoon surf print and brown chinos with a holster at the waist"
+   },
+   {
+    "name": "Army training tee + jeans",
+    "ref": "couple key art (rooftop)",
+    "text": "a vintage cream army training-school t-shirt with dark ringer trim and washed teal jeans"
+   },
+   {
+    "name": "Dark tank top",
+    "ref": "couple key art (motel)",
+    "text": "a charcoal ribbed tank top and a thin silver chain"
+   },
+   {
+    "name": "Baroque bomber + black tee",
+    "ref": "character art (nightclub owner)",
+    "text": "a red and gold baroque-print silk bomber jacket with Greek key borders over a black t-shirt and dark jeans"
+   },
+   {
+    "name": "Faded Hawaiian shirt",
+    "ref": "character art (boatyard veteran)",
+    "text": "a faded coral Hawaiian shirt with an olive fern and palm print, sleeves rolled to the elbow"
+   },
+   {
+    "name": "Floral shirt + board shorts",
+    "ref": "character art (man on a boat)",
+    "text": "an open red, orange and green hibiscus-print shirt over a white graphic tee, teal board shorts and black flip-flops"
+   },
+   {
+    "name": "Red oversized tee + ripped jeans",
+    "ref": "character art (man on an SUV)",
+    "text": "an oversized red t-shirt, light grey ripped jeans and red and white high-top basketball sneakers"
+   },
+   {
+    "name": "Cream linen suit",
+    "ref": "character art (man in a linen suit)",
+    "text": "a cream linen suit over an open-collar dark plum shirt with a brown leather belt"
+   },
+   {
+    "name": "White tee + jeans biker",
+    "ref": "cover art",
+    "text": "a plain white t-shirt, blue jeans and a matte full-face motorcycle helmet"
+   }
+  ],
+  "accessory": [
+   {
+    "name": "Thin silver chain",
+    "ref": "male lead artwork",
+    "text": "a thin silver ball chain necklace and a braided leather bracelet"
+   },
+   {
+    "name": "Cuban link chain + gold rings",
+    "ref": "character art (nightclub owner)",
+    "text": "a heavy gold Cuban link chain with a square pendant, chunky gold rings and a gold watch"
+   },
+   {
+    "name": "Gold chain + gold watch",
+    "ref": "character art (boatyard veteran)",
+    "text": "a thin gold rope chain and a gold dive watch"
+   },
+   {
+    "name": "Gold chain + rings + iced watch",
+    "ref": "character art (man on an SUV)",
+    "text": "a gold chain with a square pendant, gold rings, a gold bracelet and an iced-out watch"
+   },
+   {
+    "name": "Tinted sunglasses",
+    "ref": "character art (nightclub owner)",
+    "text": "rectangular sunglasses with violet-tinted lenses"
+   },
+   {
+    "name": "Aviators",
+    "ref": "character art (man on a boat)",
+    "text": "brown-tinted aviator sunglasses"
+   },
+   {
+    "name": "Sunglasses on head",
+    "ref": "character art (boatyard veteran)",
+    "text": "dark sunglasses pushed up on top of his head"
+   },
+   {
+    "name": "Browline glasses + gloves",
+    "ref": "character art (man in a linen suit)",
+    "text": "tinted browline glasses and dark leather driving gloves"
+   },
+   {
+    "name": "Fish tattoo sleeves",
+    "ref": "character art (man on a boat)",
+    "text": "faded fish and alligator tattoo sleeves on his arms and legs"
+   },
+   {
+    "name": "Forearm tattoos",
+    "ref": "character art (man on an SUV)",
+    "text": "dark ink tattoos covering his forearms and hands"
+   },
+   {
+    "name": "Bandana mask",
+    "ref": "couple key art (gas station)",
+    "text": "a navy paisley bandana pulled up over his nose and mouth"
+   }
+  ]
+ },
+ "group_setup": [
+  {
+   "name": "auto",
+   "solo": "",
+   "group": ""
+  },
+  {
+   "name": "Hero pose, facing viewer",
+   "solo": "{Sub} stands in a confident hero pose and looks straight at the viewer.",
+   "group": "{All} stand in confident hero poses and look straight at the viewer."
+  },
+  {
+   "name": "Key-art lineup",
+   "solo": "{Sub} stands in a confident hero pose and looks straight at the viewer.",
+   "group": "{All} stand in a staggered key-art lineup at slightly different depths, each in a distinct confident pose, all looking at the viewer."
+  },
+  {
+   "name": "Side by side",
+   "solo": "{Sub} stands with arms folded and looks at the viewer.",
+   "group": "{All} stand side by side facing the viewer."
+  },
+  {
+   "name": "Close together",
+   "solo": "{Sub} leans in close to the viewer.",
+   "group": "{All} stand close together, leaning into each other with arms around shoulders."
+  },
+  {
+   "name": "Walking toward viewer",
+   "solo": "{Sub} walks toward the viewer with long, purposeful strides.",
+   "group": "{All} walk toward the viewer side by side with purposeful strides."
+  },
+  {
+   "name": "Leaning on the car",
+   "solo": "{Sub} leans back against {car} and looks at the viewer.",
+   "group": "{All} lean against {car}, some sitting on the hood, all looking at the viewer.",
+   "car": true
+  },
+  {
+   "name": "Sitting on the car hood",
+   "solo": "{Sub} sits on the hood of {car} with {pos} feet on the bumper.",
+   "group": "{All} sit together on the hood of {car}.",
+   "car": true
+  },
+  {
+   "name": "Relaxed hangout",
+   "solo": "{Sub} relaxes casually, mid-conversation.",
+   "group": "{All} hang out casually, mid-conversation and laughing."
+  },
+  {
+   "name": "Action, mid-heist",
+   "solo": "{Sub} moves fast and alert, glancing over {pos} shoulder.",
+   "group": "{All} move fast and alert, mid-heist, glancing over their shoulders."
+  }
+ ],
+ "framing": [
+  {
+   "name": "Wide, figures on left third (default)",
+   "ref": "landscape wallpapers",
+   "text": "a wide landscape frame with {fig} shown from the knees up at mid-distance on the left third, and the scene filling the rest of the frame"
+  },
+  {
+   "name": "Low-angle hero, 3/4 body",
+   "ref": "character art (man in a linen suit), character art (nightclub owner)",
+   "text": "a low-angle three-quarter body shot looking slightly up at {fig}, filling most of the frame height"
+  },
+  {
+   "name": "Close two-shot, chest up",
+   "ref": "couple key art (beach close-up)",
+   "text": "a close shot framing {fig} from the chest up, faces large in frame"
+  },
+  {
+   "name": "Full body, centred",
+   "ref": "couple key art (red coupe)",
+   "text": "a full-body shot with {fig} centred and plenty of sky above them"
+  },
+  {
+   "name": "Vertical poster",
+   "ref": "phone wallpapers",
+   "text": "a tall vertical poster composition with {fig} in the lower two-thirds and open sky above for a title"
+  },
+  {
+   "name": "Wide group shot",
+   "ref": "cover art lineups",
+   "text": "a wide landscape frame showing {fig} from the knees up across the centre of the frame with the scene around them"
+  }
+ ],
+ "aspect": [
+  {
+   "name": "Landscape 3:2 (1248x832)",
+   "w": 1248,
+   "h": 832
+  },
+  {
+   "name": "Widescreen 16:9, YouTube / desktop (1344x768)",
+   "w": 1344,
+   "h": 768
+  },
+  {
+   "name": "Ultrawide 21:9 (1568x672)",
+   "w": 1568,
+   "h": 672
+  },
+  {
+   "name": "Tablet 4:3 (1184x896)",
+   "w": 1184,
+   "h": 896
+  },
+  {
+   "name": "Square 1:1 (1024x1024)",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "name": "Social portrait 4:5, Instagram (928x1152)",
+   "w": 928,
+   "h": 1152
+  },
+  {
+   "name": "Tablet portrait 3:4 (896x1184)",
+   "w": 896,
+   "h": 1184
+  },
+  {
+   "name": "Portrait 2:3, poster (832x1248)",
+   "w": 832,
+   "h": 1248
+  },
+  {
+   "name": "Phone 9:16, wallpaper / Shorts / Reels (768x1344)",
+   "w": 768,
+   "h": 1344
+  }
+ ],
+ "pose": [
+  {
+   "name": "Facing viewer, square-on",
+   "ref": "character art (nightclub owner)",
+   "text": "faces the viewer square-on with a steady stare"
+  },
+  {
+   "name": "Three-quarter view",
+   "ref": "couple key art (car hood)",
+   "text": "is turned three-quarters toward the viewer, eyes on the viewer"
+  },
+  {
+   "name": "Side profile",
+   "ref": "couple key art (rooftop)",
+   "text": "is shown in side profile, looking off to the side"
+  },
+  {
+   "name": "Looking back over shoulder",
+   "ref": "couple key art (red coupe)",
+   "text": "stands side-on and looks back over {pos} shoulder at the viewer"
+  },
+  {
+   "name": "Arms folded",
+   "ref": "general",
+   "text": "stands with {pos} arms folded"
+  },
+  {
+   "name": "Hands in pockets",
+   "ref": "character art (nightclub owner)",
+   "text": "stands relaxed with {pos} hands in {pos} pockets"
+  },
+  {
+   "name": "Leaning back",
+   "ref": "couple key art (car hood)",
+   "text": "leans back casually with {pos} weight on one leg"
+  },
+  {
+   "name": "Sitting",
+   "ref": "character art (man on a boat)",
+   "text": "sits casually, one knee raised"
+  },
+  {
+   "name": "Crouching",
+   "ref": "action convention",
+   "text": "crouches low, alert"
+  },
+  {
+   "name": "Walking toward viewer",
+   "ref": "couple key art (gas station)",
+   "text": "walks toward the viewer with long, purposeful strides"
+  },
+  {
+   "name": "Aiming a pistol",
+   "ref": "couple key art (marina)",
+   "text": "aims a pistol two-handed past the viewer"
+  },
+  {
+   "name": "Pistol held low",
+   "ref": "couple key art (car hood)",
+   "text": "holds a pistol low at {pos} side"
+  },
+  {
+   "name": "Raising a drink",
+   "ref": "character art (nightclub owner)",
+   "text": "raises a drink toward the viewer"
+  },
+  {
+   "name": "On the phone",
+   "ref": "character art (man on an SUV)",
+   "text": "holds a phone to {pos} ear mid-conversation"
+  },
+  {
+   "name": "Hand behind head",
+   "ref": "cover art",
+   "text": "poses with one arm raised behind {pos} head"
+  },
+  {
+   "name": "Pointing at temple",
+   "ref": "character art (rap duo)",
+   "text": "points a finger at {pos} temple with {pos} chin tilted up"
+  },
+  {
+   "name": "Checking watch",
+   "ref": "character art (man in a linen suit)",
+   "text": "adjusts a glove and checks {pos} watch"
+  }
+ ]
+}

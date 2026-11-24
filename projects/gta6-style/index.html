@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>GTA VI art style from your photos: free prompt builder and ComfyUI workflows | Loop Forge</title>
+<meta name="description" content="Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.">
+<link rel="canonical" href="https://loopforge.cc/projects/gta6-style/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loop Forge">
+<meta property="og:title" content="GTA VI art style from your photos: free prompt builder and ComfyUI workflows | Loop Forge">
+<meta property="og:description" content="Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.">
+<meta property="og:url" content="https://loopforge.cc/projects/gta6-style/">
+<meta property="og:image" content="https://loopforge.cc/assets/img/gta6-style/14_kate_swamp_ultrawide.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/loopforge-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v=21">
+<link rel="stylesheet" href="/assets/gta6-style/gta6.css?v=3">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "GTA VI art style from your photos: prompt builder", "description": "Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.", "url": "https://loopforge.cc/projects/gta6-style/", "applicationCategory": "DesignApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/loopforge-logo.png" alt="" width="38" height="38">Loop Forge</a>
+    <nav aria-label="Site"><a href="/projects/" aria-current="page">Projects</a><a href="/apps/">Apps</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme"><svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/></svg><svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></button>
+  </div>
+</header>
+<main id="main">
+
+<section class="col-hero">
+  <img class="col-hero-media" src="/assets/img/gta6-style/14_kate_swamp_ultrawide.jpg" alt="" width="1568" height="672" loading="eager" decoding="async">
+  <div class="wrap col-hero-body">
+    <div class="crumbs"><a href="/">Loop Forge</a> / <a href="/projects/">Projects</a></div>
+    <p class="when">24 November 2026</p>
+    <h1 class="display page-title">GTA VI art style from your photos</h1>
+    <div class="summary"><p>Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.</p></div>
+    <p class="col-hero-actions"><a class="button" href="#builder">Build a prompt</a> <a class="button quiet" href="https://github.com/loopforge0/comfyui-gta6-style">GitHub</a> <a class="button quiet" href="#use">Get the workflows</a></p>
+  </div>
+</section>
+<div class="wrap">
+  <section class="block g6-builder" id="builder" aria-labelledby="builder-h">
+  <div class="block-head"><h2 class="section" id="builder-h">Build a prompt</h2></div>
+  <p class="g6-intro">Pick a theme and describe each person, then copy the prompt into a Qwen-Image 2.1 workflow.
+  This page writes the same prompt the ComfyUI nodes write, word for word.</p>
+  <noscript><p class="notice">The prompt builder needs JavaScript.</p></noscript>
+  <div class="g6-layout">
+    <form class="g6-form" id="g6-form" autocomplete="off">
+      <fieldset class="g6-box">
+        <legend>Input</legend>
+        <div class="g6-seg" role="radiogroup" aria-label="Input" id="g6-mode"></div>
+        <p class="g6-hint" id="g6-mode-hint"></p>
+      </fieldset>
+      <fieldset class="g6-box">
+        <legend>Theme</legend>
+        <div class="g6-grid" id="g6-theme"></div>
+      </fieldset>
+      <fieldset class="g6-box">
+        <legend>People</legend>
+        <p class="g6-hint" id="g6-people-hint"></p>
+        <ol class="g6-people" id="g6-people"></ol>
+        <div class="g6-add" id="g6-add">
+          <button type="button" class="button quiet" data-add="female">Add a woman</button>
+          <button type="button" class="button quiet" data-add="male">Add a man</button>
+        </div>
+      </fieldset>
+      <fieldset class="g6-box">
+        <legend>Scene</legend>
+        <div class="g6-grid" id="g6-scene"></div>
+        <label class="g6-field g6-wide"><span>Your own specifics</span>
+          <textarea id="g6-your" rows="3" placeholder="Actions, props, extra scene details. Added after the people and before the background."></textarea></label>
+      </fieldset>
+    </form>
+    <aside class="g6-out" aria-live="polite">
+      <div class="g6-out-head"><h3>Prompt</h3><span class="g6-size" id="g6-size"></span></div>
+      <p class="g6-error" id="g6-error" hidden></p>
+      <textarea id="g6-prompt" readonly rows="14" aria-label="Generated prompt"></textarea>
+      <div class="g6-out-actions">
+        <button type="button" class="button" data-g6copy="g6-prompt">Copy prompt</button>
+        <span class="g6-count" id="g6-count"></span>
+      </div>
+      <p class="g6-hint" id="g6-images"></p>
+      <details class="g6-style-only">
+        <summary>Style sentences only</summary>
+        <p class="g6-hint">Just the style part, to add to a prompt you write yourself.</p>
+        <textarea id="g6-style" readonly rows="6" aria-label="Style sentences only"></textarea>
+        <button type="button" class="button quiet" data-g6copy="g6-style">Copy style sentences</button>
+      </details>
+    </aside>
+  </div>
+</section>
+  <section class="block g6-how" id="use">
+  <div class="block-head"><h2 class="section">Use it in ComfyUI</h2></div>
+  <div class="g6-cols">
+    <div>
+      <h3>With the prompt from this page</h3>
+      <ol class="g6-steps">
+        <li>Open any Qwen-Image 2.1 image workflow that uses <code>TextEncodeQwenImage21</code>.</li>
+        <li>Paste the prompt into its prompt box, and set the canvas to the width and height shown above the prompt.</li>
+        <li>For photos, connect them in the order of the people list: person 1 is image 1, person 2 is image 2. Text only needs no image.</li>
+        <li>Use the base model at 40 steps (euler, simple, cfg 1). Turbo gave softer, anime-leaning faces in testing.</li>
+      </ol>
+      <p class="g6-hint">Photos with busy backgrounds or dappled sunlight leak into the illustration. The workflows below
+      first redo each photo on a plain studio background with an 8-step Turbo pass. You can do the same with any
+      background-replacement edit before pasting the prompt.</p>
+    </div>
+    <div>
+      <h3>With the node pack</h3>
+      <p>The same choices as dropdowns, with the studio clean-up built in. In ComfyUI Manager choose
+      <em>Install via Git URL</em> and paste <code>https://github.com/loopforge0/comfyui-gta6-style</code>, or <code>git clone</code> it into <code>ComfyUI/custom_nodes/</code>.
+      Restart ComfyUI, then open a workflow. No extra Python packages.</p>
+      <p><a class="button" href="https://github.com/loopforge0/comfyui-gta6-style">Get the node pack on GitHub</a></p>
+      <ul class="g6-wfs"><li><a href="/assets/dl/gta6-style/GTA6_style_photo.json" download>One photo</a> <span>One person from one photo.</span></li><li><a href="/assets/dl/gta6-style/GTA6_style_two_photos.json" download>Two photos</a> <span>Two people, one photo each, in one scene.</span></li><li><a href="/assets/dl/gta6-style/GTA6_style_group_from_photos.json" download>Group from photos</a> <span>Up to four people, one photo each. For three, delete photo 4 and its nodes.</span></li><li><a href="/assets/dl/gta6-style/GTA6_style_text_only.json" download>Text only</a> <span>No photo. Describe each person in their details field.</span></li></ul>
+      <p class="g6-hint">Every PNG in the showcase also carries its workflow: drop it onto ComfyUI to get the exact settings.</p>
+    </div>
+    <div>
+      <h3>Time on an RTX 3060 12 GB</h3>
+      <dl class="facts"><dt>Text only</dt><dd>about 50 s</dd><dt>One photo</dt><dd>95 to 145 s, including the clean-up pass and model swaps</dd><dt>Two photos</dt><dd>about 185 s</dd><dt>Three photos</dt><dd>about 205 s</dd><dt>Four photos</dt><dd>450 to 490 s</dd></dl>
+      <p class="g6-hint">Base 2.1 int8, 40 steps, 1248x832, measured end to end on my desktop. A faster card should do better.</p>
+    </div>
+  </div>
+</section>
+  <section class="block" id="showcase">
+    <div class="block-head"><h2 class="section">37 tests</h2></div>
+    <p class="g6-intro">Every theme, background, style, hue and aspect ratio, with one person, two, three and four, and
+    from text alone. The people in the photos are AI-generated. Load any test's settings into the builder above.</p>
+    <div class="g6-gallery"><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/02_marco_dusk_heist-t.jpg" alt="" width="1344" height="768" loading="eager" decoding="async"
+    data-full="/assets/img/gta6-style/02_marco_dusk_heist.jpg" data-dl="/assets/dl/gta6-style/02_marco_dusk_heist.png" data-cap="Dusk heist · Black fastback, red tail lights"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Dusk heist · Black fastback, red tail lights</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="0">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/02_marco_dusk_heist.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/03_amara_daytime_marina-t.jpg" alt="" width="928" height="1152" loading="eager" decoding="async"
+    data-full="/assets/img/gta6-style/03_amara_daytime_marina.jpg" data-dl="/assets/dl/gta6-style/03_amara_daytime_marina.png" data-cap="Daytime marina"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Daytime marina</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="1">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/03_amara_daytime_marina.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/04_kenji_rooftop_searchlight-t.jpg" alt="" width="1248" height="832" loading="eager" decoding="async"
+    data-full="/assets/img/gta6-style/04_kenji_rooftop_searchlight.jpg" data-dl="/assets/dl/gta6-style/04_kenji_rooftop_searchlight.png" data-cap="Rooftop searchlight · Police helicopter + searchlight"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Rooftop searchlight · Police helicopter + searchlight</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="2">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/04_kenji_rooftop_searchlight.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/05_priya_golden_hour_coupe-t.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/05_priya_golden_hour_coupe.jpg" data-dl="/assets/dl/gta6-style/05_priya_golden_hour_coupe.png" data-cap="Golden hour backlight · Red 70s sports coupe"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Golden hour backlight · Red 70s sports coupe</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="3">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/05_priya_golden_hour_coupe.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/06_kate_romance_sketchy-t.jpg" alt="" width="1024" height="1024" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/06_kate_romance_sketchy.jpg" data-dl="/assets/dl/gta6-style/06_kate_romance_sketchy.png" data-cap="Romance close-up · Sketchy ink"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Romance close-up · Sketchy ink</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="4">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/06_kate_romance_sketchy.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/07_amara_motel-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/07_amara_motel.jpg" data-dl="/assets/dl/gta6-style/07_amara_motel.png" data-cap="Motel hideout"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Motel hideout</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="5">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/07_amara_motel.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/08_marco_nightclub_gritty-t.jpg" alt="" width="832" height="1248" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/08_marco_nightclub_gritty.jpg" data-dl="/assets/dl/gta6-style/08_marco_nightclub_gritty.png" data-cap="Nightclub · Character loading screen (gritty)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Nightclub · Character loading screen (gritty)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="6">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/08_marco_nightclub_gritty.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/09_kenji_boatyard_gritty-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/09_kenji_boatyard_gritty.jpg" data-dl="/assets/dl/gta6-style/09_kenji_boatyard_gritty.png" data-cap="Boatyard · Character loading screen (gritty)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Boatyard · Character loading screen (gritty)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="7">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/09_kenji_boatyard_gritty.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/10_marco_day_on_the_water-t.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/10_marco_day_on_the_water.jpg" data-dl="/assets/dl/gta6-style/10_marco_day_on_the_water.png" data-cap="Day on the water · Small fishing boat"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Day on the water · Small fishing boat</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="8">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/10_marco_day_on_the_water.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/11_amara_neon_glam_phone-t.jpg" alt="" width="768" height="1344" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/11_amara_neon_glam_phone.jpg" data-dl="/assets/dl/gta6-style/11_amara_neon_glam_phone.png" data-cap="Neon night street · Glam (cover art)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Neon night street · Glam (cover art)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="9">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/11_amara_neon_glam_phone.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/12_kenji_heat_haze_suit-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/12_kenji_heat_haze_suit.jpg" data-dl="/assets/dl/gta6-style/12_kenji_heat_haze_suit.png" data-cap="Industrial heat haze"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Industrial heat haze</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="10">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/12_kenji_heat_haze_suit.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/13_priya_synthwave_album-t.jpg" alt="" width="832" height="1248" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/13_priya_synthwave_album.jpg" data-dl="/assets/dl/gta6-style/13_priya_synthwave_album.png" data-cap="Synthwave beach · Synthwave album (flat)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Synthwave beach · Synthwave album (flat)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="11">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/13_priya_synthwave_album.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/14_kate_swamp_ultrawide-t.jpg" alt="" width="1568" height="672" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/14_kate_swamp_ultrawide.jpg" data-dl="/assets/dl/gta6-style/14_kate_swamp_ultrawide.png" data-cap="Swamp run · Airboat"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Swamp run · Airboat</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="12">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/14_kate_swamp_ultrawide.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/15_priya_pool_party_glam-t.jpg" alt="" width="896" height="1184" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/15_priya_pool_party_glam.jpg" data-dl="/assets/dl/gta6-style/15_priya_pool_party_glam.png" data-cap="Pool party · Glam (cover art)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Pool party · Glam (cover art)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="13">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/15_priya_pool_party_glam.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/16_marco_neon_street_block-t.jpg" alt="" width="1184" height="896" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/16_marco_neon_street_block.jpg" data-dl="/assets/dl/gta6-style/16_marco_neon_street_block.png" data-cap="Neon night street · Neon street block"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Neon night street · Neon street block</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="14">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/16_marco_neon_street_block.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/17_amara_island_keys-t.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/17_amara_island_keys.jpg" data-dl="/assets/dl/gta6-style/17_amara_island_keys.png" data-cap="Daytime marina · Island keys shoreline · Seaplane"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Daytime marina · Island keys shoreline · Seaplane</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="15">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/17_amara_island_keys.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/18_kenji_port_town_night-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/18_kenji_port_town_night.jpg" data-dl="/assets/dl/gta6-style/18_kenji_port_town_night.png" data-cap="Dusk heist · Port town at night · Police cruiser, lights on"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Dusk heist · Port town at night · Police cruiser, lights on</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="16">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/18_kenji_port_town_night.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/19_priya_refinery_smog-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/19_priya_refinery_smog.jpg" data-dl="/assets/dl/gta6-style/19_priya_refinery_smog.png" data-cap="Industrial heat haze · Refinery town · Smog orange + ember"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Industrial heat haze · Refinery town · Smog orange + ember</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="17">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/19_priya_refinery_smog.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/20_kate_forest_river-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/20_kate_forest_river.jpg" data-dl="/assets/dl/gta6-style/20_kate_forest_river.png" data-cap="Day on the water · Forest river · Swamp green + gold"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Day on the water · Forest river · Swamp green + gold</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="18">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/20_kate_forest_river.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/21_marco_bank_supercar-t.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/21_marco_bank_supercar.jpg" data-dl="/assets/dl/gta6-style/21_marco_bank_supercar.png" data-cap="Sunset key art · Bank exterior · Hazy lime + sand · Yellow supercar, scissor doors"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">One photo</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Sunset key art · Bank exterior · Hazy lime + sand · Yellow supercar, scissor doors</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="19">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/21_marco_bank_supercar.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/22_kate_marco_muscle_car-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/22_kate_marco_muscle_car.jpg" data-dl="/assets/dl/gta6-style/22_kate_marco_muscle_car.png" data-cap="Sunset key art · Black 70s muscle car"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Two photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Sunset key art · Black 70s muscle car</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="20">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/22_kate_marco_muscle_car.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/23_amara_kenji_rooftop-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/23_amara_kenji_rooftop.jpg" data-dl="/assets/dl/gta6-style/23_amara_kenji_rooftop.png" data-cap="Rooftop searchlight · Police helicopter + searchlight"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Two photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Rooftop searchlight · Police helicopter + searchlight</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="21">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/23_amara_kenji_rooftop.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/24_priya_marco_nightclub-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/24_priya_marco_nightclub.jpg" data-dl="/assets/dl/gta6-style/24_priya_marco_nightclub.png" data-cap="Nightclub"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Two photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Nightclub</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="22">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/24_priya_marco_nightclub.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/25_kate_kenji_neon_walk-t.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/25_kate_kenji_neon_walk.jpg" data-dl="/assets/dl/gta6-style/25_kate_kenji_neon_walk.png" data-cap="Neon night street · Pink sportbike"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Two photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Neon night street · Pink sportbike</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="23">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/25_kate_kenji_neon_walk.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/26_group4_dusk_heist-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/26_group4_dusk_heist.jpg" data-dl="/assets/dl/gta6-style/26_group4_dusk_heist.png" data-cap="Dusk heist"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Group from photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Dusk heist</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="24">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/26_group4_dusk_heist.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/27_group4_pool_party-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/27_group4_pool_party.jpg" data-dl="/assets/dl/gta6-style/27_group4_pool_party.png" data-cap="Pool party"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Group from photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Pool party</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="25">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/27_group4_pool_party.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/28_group3_muscle_car-t.jpg" alt="" width="832" height="1248" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/28_group3_muscle_car.jpg" data-dl="/assets/dl/gta6-style/28_group3_muscle_car.png" data-cap="Sunset key art · Black 70s muscle car"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Group from photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-kate.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-kenji.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Sunset key art · Black 70s muscle car</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="26">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/28_group3_muscle_car.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/29_group3_golden_heist-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/29_group3_golden_heist.jpg" data-dl="/assets/dl/gta6-style/29_group3_golden_heist.png" data-cap="Golden hour backlight · Roadside gas station"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Group from photos</span><span class="g6-src" title="Made from these photos"><img src="/assets/img/gta6-style/src-priya.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-marco.jpg" alt="" width="40" height="40" loading="lazy"><img src="/assets/img/gta6-style/src-amara.jpg" alt="" width="40" height="40" loading="lazy"></span></div>
+    <p>Golden hour backlight · Roadside gas station</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="27">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/29_group3_golden_heist.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/30_text_nightclub_owner-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/30_text_nightclub_owner.jpg" data-dl="/assets/dl/gta6-style/30_text_nightclub_owner.png" data-cap="Nightclub · Character loading screen (gritty)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Nightclub · Character loading screen (gritty)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="28">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/30_text_nightclub_owner.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/31_text_boatyard_veteran-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/31_text_boatyard_veteran.jpg" data-dl="/assets/dl/gta6-style/31_text_boatyard_veteran.png" data-cap="Boatyard · Character loading screen (gritty)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Boatyard · Character loading screen (gritty)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="29">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/31_text_boatyard_veteran.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/32_text_man_on_a_boat-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/32_text_man_on_a_boat.jpg" data-dl="/assets/dl/gta6-style/32_text_man_on_a_boat.png" data-cap="Day on the water · Small fishing boat"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Day on the water · Small fishing boat</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="30">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/32_text_man_on_a_boat.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/33_text_man_on_suv-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/33_text_man_on_suv.jpg" data-dl="/assets/dl/gta6-style/33_text_man_on_suv.png" data-cap="Neon night street · Black luxury box SUV"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Neon night street · Black luxury box SUV</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="31">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/33_text_man_on_suv.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/34_text_linen_suit_planner-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/34_text_linen_suit_planner.jpg" data-dl="/assets/dl/gta6-style/34_text_linen_suit_planner.png" data-cap="Industrial heat haze"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Industrial heat haze</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="32">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/34_text_linen_suit_planner.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/35_text_rap_duo-t.jpg" alt="" width="928" height="1152" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/35_text_rap_duo.jpg" data-dl="/assets/dl/gta6-style/35_text_rap_duo.png" data-cap="Neon night street · Neon street block · Glam (cover art)"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Neon night street · Neon street block · Glam (cover art)</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="33">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/35_text_rap_duo.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/36_text_couple_romance-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/36_text_couple_romance.jpg" data-dl="/assets/dl/gta6-style/36_text_couple_romance.png" data-cap="Romance close-up"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Romance close-up</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="34">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/36_text_couple_romance.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/37_text_crew4_rooftop_phone-t.jpg" alt="" width="768" height="1344" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/37_text_crew4_rooftop_phone.jpg" data-dl="/assets/dl/gta6-style/37_text_crew4_rooftop_phone.png" data-cap="Rooftop searchlight · Police helicopter + searchlight"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Rooftop searchlight · Police helicopter + searchlight</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="35">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/37_text_crew4_rooftop_phone.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure><figure class="g6-card">
+  <div class="g6-img"><img src="/assets/img/gta6-style/38_text_headscarf_coupe-t.jpg" alt="" width="1248" height="832" loading="lazy" decoding="async"
+    data-full="/assets/img/gta6-style/38_text_headscarf_coupe.jpg" data-dl="/assets/dl/gta6-style/38_text_headscarf_coupe.png" data-cap="Golden hour backlight · Red 70s sports coupe"></div>
+  <figcaption>
+    <div class="g6-meta"><span class="g6-kind">Text only</span><span class="g6-src g6-src-text">no photo</span></div>
+    <p>Golden hour backlight · Red 70s sports coupe</p>
+    <div class="g6-actions">
+      <button type="button" class="button g6-load" data-case="36">Load these settings</button>
+      <a class="g6-dl" href="/assets/dl/gta6-style/38_text_headscarf_coupe.png" download>PNG with workflow</a>
+    </div>
+  </figcaption>
+</figure></div>
+  </section>
+  <p class="g6-hint g6-legal">GTA VI is a trademark of Take-Two Interactive. This project is not affiliated with Rockstar Games.
+  The presets describe the style of the official artwork in words; no artwork is shipped or used as an input.</p>
+  <div style="height:88px"></div>
+</div>
+<script>window.GTA6_CASES = [{"mode":"one photo, one person","theme":{"theme":"Dusk heist","vehicle":"Black fastback, red tail lights","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"M","outfit":"Graphic tee + brown chinos","accessory":"Bandana mask"}],"builder":{"group_setup":"Walking toward viewer"}},{"mode":"one photo, one person","theme":{"theme":"Daytime marina","aspect":"Social portrait 4:5, Instagram (928x1152)"},"people":[{"t":"W","hair":"Long box braids","outfit":"Black cami + denim cut-offs"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Rooftop searchlight","vehicle":"Police helicopter + searchlight"},"people":[{"t":"M","outfit":"Army training tee + jeans","pose":"Pistol held low"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Golden hour backlight","vehicle":"Red 70s sports coupe","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"W","outfit":"Black tee + cut-offs + high-tops"}],"builder":{"group_setup":"Sitting on the car hood"}},{"mode":"one photo, one person","theme":{"theme":"Romance close-up","style_variant":"Sketchy ink","aspect":"Square 1:1 (1024x1024)"},"people":[{"t":"W","outfit":"Black cami + denim cut-offs","accessory":"Thin gold pendant necklace"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Motel hideout"},"people":[{"t":"W","outfit":"Palm-print shirt + white crop","pose":"Sitting"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Nightclub","style_variant":"Character loading screen (gritty)","aspect":"Portrait 2:3, poster (832x1248)"},"people":[{"t":"M","outfit":"Baroque bomber + black tee","accessory":"Cuban link chain + gold rings","pose":"Raising a drink"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Boatyard","style_variant":"Character loading screen (gritty)"},"people":[{"t":"M","outfit":"Faded Hawaiian shirt","accessory":"Sunglasses on head"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Day on the water","vehicle":"Small fishing boat","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"M","hair":"Messy under backwards cap","outfit":"Floral shirt + board shorts","accessory":"Aviators"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Neon night street","style_variant":"Glam (cover art)","aspect":"Phone 9:16, wallpaper / Shorts / Reels (768x1344)"},"people":[{"t":"W","outfit":"Fur jacket + leopard top","accessory":"Iced-out nameplate chains","pose":"Pointing at temple"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Industrial heat haze"},"people":[{"t":"M","outfit":"Cream linen suit","accessory":"Browline glasses + gloves","pose":"Checking watch"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Synthwave beach","style_variant":"Synthwave album (flat)","aspect":"Portrait 2:3, poster (832x1248)"},"people":[{"t":"W","outfit":"Bikini top + sarong"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Swamp run","vehicle":"Airboat","aspect":"Ultrawide 21:9 (1568x672)"},"people":[{"t":"W","outfit":"Denim jacket + mini skirt"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Pool party","style_variant":"Glam (cover art)","aspect":"Tablet portrait 3:4 (896x1184)"},"people":[{"t":"W","hair":"Long spiral curls","outfit":"Football jersey + bikini","accessory":"Layered gold body chains","pose":"Hand behind head"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Neon night street","background":"Neon street block","aspect":"Tablet 4:3 (1184x896)"},"people":[{"t":"M","outfit":"Red oversized tee + ripped jeans","accessory":"Gold chain + rings + iced watch"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Daytime marina","background":"Island keys shoreline","vehicle":"Seaplane","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"W"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Dusk heist","background":"Port town at night","vehicle":"Police cruiser, lights on"},"people":[{"t":"M","outfit":"Dark tank top"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Industrial heat haze","background":"Refinery town","hue":"Smog orange + ember"},"people":[{"t":"W","outfit":"Cropped hoodie + frayed shorts"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Day on the water","background":"Forest river","hue":"Swamp green + gold"},"people":[{"t":"W"}],"builder":{}},{"mode":"one photo, one person","theme":{"theme":"Sunset key art","background":"Bank exterior","hue":"Hazy lime + sand","vehicle":"Yellow supercar, scissor doors","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"M","outfit":"White tank + olive cargos"}],"builder":{}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Sunset key art","vehicle":"Black 70s muscle car"},"people":[{"t":"W"},{"t":"M","outfit":"White tank + olive cargos"}],"builder":{"group_setup":"Leaning on the car"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Rooftop searchlight","vehicle":"Police helicopter + searchlight"},"people":[{"t":"W","outfit":"Denim jacket + mini skirt"},{"t":"M","outfit":"Army training tee + jeans"}],"builder":{"group_setup":"Side by side"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Nightclub"},"people":[{"t":"W","outfit":"Shredded jeans + fishnets"},{"t":"M","outfit":"Baroque bomber + black tee","accessory":"Tinted sunglasses"}],"builder":{"group_setup":"Close together"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Neon night street","vehicle":"Pink sportbike","aspect":"Widescreen 16:9, YouTube / desktop (1344x768)"},"people":[{"t":"W","outfit":"Cropped hoodie + frayed shorts"},{"t":"M","outfit":"Palm shirt over tee + khakis"}],"builder":{"group_setup":"Walking toward viewer"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Dusk heist"},"people":[{"t":"W","outfit":"Fur jacket + leopard top","pose":"Hands in pockets"},{"t":"M","outfit":"Graphic tee + brown chinos","pose":"Pistol held low"},{"t":"W","outfit":"Denim jacket + mini skirt","pose":"Looking back over shoulder"},{"t":"M","outfit":"Cream linen suit","pose":"Checking watch"}],"builder":{"group_setup":"Key-art lineup"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Pool party"},"people":[{"t":"W","outfit":"Bikini top + sarong"},{"t":"M","outfit":"Floral shirt + board shorts"},{"t":"W","outfit":"Football jersey + bikini"},{"t":"M","outfit":"White tank + camo cargo shorts"}],"builder":{"group_setup":"Relaxed hangout"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Sunset key art","vehicle":"Black 70s muscle car","aspect":"Portrait 2:3, poster (832x1248)"},"people":[{"t":"W","outfit":"Magenta crop top + camo leggings"},{"t":"W","outfit":"Black tee + cut-offs + high-tops"},{"t":"M","outfit":"White tank + olive cargos"}],"builder":{"group_setup":"Leaning on the car"}},{"mode":"one photo per person (image 1, 2, ...)","theme":{"theme":"Golden hour backlight","background":"Roadside gas station"},"people":[{"t":"W","outfit":"Cropped hoodie + frayed shorts","accessory":"Bandana mask"},{"t":"M","outfit":"Dark tank top","accessory":"Bandana mask"},{"t":"W","outfit":"Denim jacket + mini skirt","accessory":"Bandana mask"}],"builder":{"group_setup":"Action, mid-heist"}},{"mode":"text only (no photo)","theme":{"theme":"Nightclub","style_variant":"Character loading screen (gritty)"},"people":[{"t":"M","hair":"Close buzz","facial_hair":"Full trimmed beard","outfit":"Baroque bomber + black tee","accessory":"Cuban link chain + gold rings","pose":"Raising a drink","details":"heavyset, in his forties, with a calm, unimpressed expression"}],"builder":{}},{"mode":"text only (no photo)","theme":{"theme":"Boatyard","style_variant":"Character loading screen (gritty)"},"people":[{"t":"M","hair":"Swept-back grey","facial_hair":"Grey goatee","outfit":"Faded Hawaiian shirt","accessory":"Gold chain + gold watch","details":"weathered and sun-tanned, in his sixties, leaning over a table with a spread-out map"}],"builder":{}},{"mode":"text only (no photo)","theme":{"theme":"Day on the water","vehicle":"Small fishing boat"},"people":[{"t":"M","hair":"Messy under backwards cap","facial_hair":"Scruffy moustache","outfit":"Floral shirt + board shorts","accessory":"Fish tattoo sleeves","pose":"Sitting","details":"sunburnt, in his thirties, holding a beer bottle and talking mid-sentence"}],"builder":{}},{"mode":"text only (no photo)","theme":{"theme":"Neon night street","vehicle":"Black luxury box SUV"},"people":[{"t":"M","hair":"Cornrow braids","facial_hair":"Light chin strap","outfit":"Red oversized tee + ripped jeans","accessory":"Gold chain + rings + iced watch","pose":"On the phone","details":"in his twenties with a confident half-smile"}],"builder":{"group_setup":"Sitting on the car hood"}},{"mode":"text only (no photo)","theme":{"theme":"Industrial heat haze"},"people":[{"t":"M","hair":"Long slicked back","facial_hair":"Thin goatee","outfit":"Cream linen suit","accessory":"Browline glasses + gloves","pose":"Checking watch","details":"lean and composed, in his fifties, a leather duffel bag over his shoulder"}],"builder":{}},{"mode":"text only (no photo)","theme":{"theme":"Neon night street","background":"Neon street block","style_variant":"Glam (cover art)","aspect":"Social portrait 4:5, Instagram (928x1152)"},"people":[{"t":"W","hair":"Big shoulder-length curls","outfit":"Fur jacket + leopard top","accessory":"Iced-out nameplate chains","details":"of Nigerian descent in her twenties, tongue out playfully"},{"t":"W","hair":"Braids + half-up buns","outfit":"Shredded jeans + fishnets","accessory":"Fingerless gloves","details":"of Korean descent in her twenties"}],"builder":{"group_setup":"Close together"}},{"mode":"text only (no photo)","theme":{"theme":"Romance close-up"},"people":[{"t":"W","hair":"High curly ponytail","outfit":"Black cami + denim cut-offs","accessory":"Large gold hoops","details":"of Puerto Rican descent in her late twenties"},{"t":"M","hair":"Short crop","facial_hair":"Short stubble","outfit":"White tank + olive cargos","details":"rugged, in his mid-thirties"}],"builder":{"group_setup":"Close together"}},{"mode":"text only (no photo)","theme":{"theme":"Rooftop searchlight","vehicle":"Police helicopter + searchlight","aspect":"Phone 9:16, wallpaper / Shorts / Reels (768x1344)"},"people":[{"t":"M","hair":"High-top fade","outfit":"Red oversized tee + ripped jeans","details":"of Ghanaian descent in his twenties"},{"t":"W","hair":"Long spiral curls","outfit":"Black tee + cut-offs + high-tops","details":"of Brazilian descent in her twenties"},{"t":"M","hair":"Slick undercut","outfit":"Cream linen suit","details":"of Chinese descent in his thirties"},{"t":"W","hair":"Messy beach waves","outfit":"Palm-print shirt + white crop","details":"of Irish descent in her thirties with freckles"}],"builder":{"group_setup":"Key-art lineup"}},{"mode":"text only (no photo)","theme":{"theme":"Golden hour backlight","vehicle":"Red 70s sports coupe"},"people":[{"t":"W","hair":"Silk headscarf","outfit":"Denim jacket + mini skirt","accessory":"Thin gold pendant necklace","details":"of Middle Eastern descent in her late twenties"}],"builder":{"group_setup":"Sitting on the car hood"}}];</script>
+<script src="/assets/gta6-style/gta6_prompt.js?v=3" defer></script>
+<script src="/assets/gta6-style/gta6.js?v=3" defer></script>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>Loop Forge. Prompts, ComfyUI workflows and findings from projects with AI models you can run.</span>
+    <nav aria-label="Elsewhere"><a href="/projects/">Projects</a><a href="/apps/">Apps</a><a href="https://www.youtube.com/@LoopForge0">YouTube</a><a href="https://github.com/loopforge0">GitHub</a></nav>
+  </div>
+</footer>
+<script src="/assets/site.js?v=21" defer></script>
+<!-- Cloudflare Web Analytics: cookieless, stores nothing on the visitor's device and does not fingerprint,
+     so no consent banner is required. The same token goes on every page under loopforge.cc. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1315e25973424cb396840b167fdcc1da"}'></script>
+</body>
+</html>

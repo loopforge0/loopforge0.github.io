@@ -47,6 +47,12 @@ EXTRA_PAGES = [
         "published": "2026-09-20",     # sorts into the timeline like any other project
         "thumb": "/assets/img/video-upscaler/card.jpg",
     },
+    {
+        "url": "/projects/gta6-style/",   # built by tools/build_gta6.py
+        "content": "gta6-style",
+        "published": "2026-11-24",
+        "thumb": "/assets/img/gta6-style/card.jpg",
+    },
 ]
 
 REPOS = [
@@ -419,12 +425,12 @@ def extra_meta(x):
     """Title, summary and count for a standalone page, taken from the page's own content
     file so a card can never advertise a different name from the page it links to."""
     d = json.loads((CONTENT / f"{x['content']}.json").read_text(encoding="utf-8"))
-    return {
-        "title": d["title"],
-        "summary": d["lede"],
-        "count": f'{plural(len(d["methods"]), "method")} on {len(d["sources"])} clips, '
-                 "with every workflow and measurement",
-    }
+    if "cases" in d:   # gta6-style: a prompt builder and its showcase
+        count = f'A prompt builder, {plural(len(d["cases"]), "test")} and {plural(len(d["workflows"]), "workflow")}'
+    else:
+        count = (f'{plural(len(d["methods"]), "method")} on {len(d["sources"])} clips, '
+                 "with every workflow and measurement")
+    return {"title": d["title"], "summary": d["lede"], "count": count}
 
 
 def timeline(cols):
@@ -1135,9 +1141,12 @@ def build_search_index(cols, findings, apps=()):
     for x in EXTRA_PAGES:
         d = json.loads((CONTENT / f"{x['content']}.json").read_text(encoding="utf-8"))
         body = " ".join([d["lede"], d.get("scope", "")]
-                        + [f["question"] + " " + " ".join(f["paras"]) for f in d["findings"]])
+                        + [f["question"] + " " + " ".join(f["paras"]) for f in d.get("findings", [])]
+                        + [c["theme"]["theme"] for c in d.get("cases", [])])
+        tags = (" ".join(m["name"] for m in d["methods"]) if "methods" in d
+                else "prompt builder ComfyUI Qwen-Image 2.1 workflow GTA VI")
         docs.append({"id": x["content"], "kind": "Project", "title": d["title"], "body": body,
-                     "tags": " ".join(m["name"] for m in d["methods"]), "video": "",
+                     "tags": tags, "video": "",
                      "url": x["url"], "thumb": x["thumb"]})
     for a in apps:
         docs.append({"id": f"app-{a['slug']}", "kind": "App", "title": a["name"],
@@ -1167,7 +1176,7 @@ def build_llms_txt(cols, site, findings, apps=()):
         d = json.loads((CONTENT / f"{x['content']}.json").read_text(encoding="utf-8"))
         lines += [f"### [{d['title']}]({SITE}{x['url']})", "",
                   f"Published {long_date(x['published'])}. {d['lede']} {d.get('scope', '')}", ""]
-        for f in d["findings"]:
+        for f in d.get("findings", []):
             lines += [f"**{f['question']}**", ""] + [f"- {para}" for para in f["paras"]] + [""]
     if apps:
         lines += ["## Apps", ""]

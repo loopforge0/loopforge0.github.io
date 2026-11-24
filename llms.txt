@@ -106,6 +106,10 @@ Published 20 September 2026. Eleven upscalers on the same five clips, every outp
 - That resampling is not neutral. Topaz is downscaled on every clip, which is a supersampling advantage over methods that rendered natively at 2x. Flux is upscaled on two clips, because at 1.88x it returned fewer pixels than the comparison size.
 - Neither can be reproduced from this page: there is no workflow to publish, no checkpoint to pin, and any denoise or sharpening they apply cannot be switched off. The vendor can also change the model behind the same product name, so this is a snapshot of one date.
 
+### [GTA VI art style from your photos](https://loopforge.cc/projects/gta6-style/)
+
+Published 24 November 2026. Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow. 
+
 ## Apps
 
 ### [comicgen](https://loopforge.cc/apps/comicgen/)

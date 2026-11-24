@@ -1,0 +1,1026 @@
+{
+ "title": "GTA VI art style from your photos",
+ "published": "2026-11-24",
+ "lede": "Turn your own photos, or just a description, into the look of the GTA VI key art with Qwen-Image 2.1 in ComfyUI. There is no LoRA and no reference image: the style comes entirely from the written prompt, so you can build that prompt right here, copy it, and use it in any Qwen-Image 2.1 workflow.",
+ "hero": "14_kate_swamp_ultrawide",
+ "video": null,
+ "github": "https://github.com/loopforge0/comfyui-gta6-style",
+ "photos": [
+  "amara",
+  "kate",
+  "kenji",
+  "marco",
+  "priya"
+ ],
+ "cases": [
+  {
+   "name": "02_marco_dusk_heist",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "marco"
+   ],
+   "theme": {
+    "theme": "Dusk heist",
+    "vehicle": "Black fastback, red tail lights",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Graphic tee + brown chinos",
+     "accessory": "Bandana mask"
+    }
+   ],
+   "builder": {
+    "group_setup": "Walking toward viewer"
+   }
+  },
+  {
+   "name": "03_amara_daytime_marina",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 928,
+   "h": 1152,
+   "photos": [
+    "amara"
+   ],
+   "theme": {
+    "theme": "Daytime marina",
+    "aspect": "Social portrait 4:5, Instagram (928x1152)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "hair": "Long box braids",
+     "outfit": "Black cami + denim cut-offs"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "04_kenji_rooftop_searchlight",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Rooftop searchlight",
+    "vehicle": "Police helicopter + searchlight"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Army training tee + jeans",
+     "pose": "Pistol held low"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "05_priya_golden_hour_coupe",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "priya"
+   ],
+   "theme": {
+    "theme": "Golden hour backlight",
+    "vehicle": "Red 70s sports coupe",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Black tee + cut-offs + high-tops"
+    }
+   ],
+   "builder": {
+    "group_setup": "Sitting on the car hood"
+   }
+  },
+  {
+   "name": "06_kate_romance_sketchy",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1024,
+   "h": 1024,
+   "photos": [
+    "kate"
+   ],
+   "theme": {
+    "theme": "Romance close-up",
+    "style_variant": "Sketchy ink",
+    "aspect": "Square 1:1 (1024x1024)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Black cami + denim cut-offs",
+     "accessory": "Thin gold pendant necklace"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "07_amara_motel",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "amara"
+   ],
+   "theme": {
+    "theme": "Motel hideout"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Palm-print shirt + white crop",
+     "pose": "Sitting"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "08_marco_nightclub_gritty",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 832,
+   "h": 1248,
+   "photos": [
+    "marco"
+   ],
+   "theme": {
+    "theme": "Nightclub",
+    "style_variant": "Character loading screen (gritty)",
+    "aspect": "Portrait 2:3, poster (832x1248)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Baroque bomber + black tee",
+     "accessory": "Cuban link chain + gold rings",
+     "pose": "Raising a drink"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "09_kenji_boatyard_gritty",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Boatyard",
+    "style_variant": "Character loading screen (gritty)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Faded Hawaiian shirt",
+     "accessory": "Sunglasses on head"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "10_marco_day_on_the_water",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "marco"
+   ],
+   "theme": {
+    "theme": "Day on the water",
+    "vehicle": "Small fishing boat",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Messy under backwards cap",
+     "outfit": "Floral shirt + board shorts",
+     "accessory": "Aviators"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "11_amara_neon_glam_phone",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 768,
+   "h": 1344,
+   "photos": [
+    "amara"
+   ],
+   "theme": {
+    "theme": "Neon night street",
+    "style_variant": "Glam (cover art)",
+    "aspect": "Phone 9:16, wallpaper / Shorts / Reels (768x1344)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Fur jacket + leopard top",
+     "accessory": "Iced-out nameplate chains",
+     "pose": "Pointing at temple"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "12_kenji_heat_haze_suit",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Industrial heat haze"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Cream linen suit",
+     "accessory": "Browline glasses + gloves",
+     "pose": "Checking watch"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "13_priya_synthwave_album",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 832,
+   "h": 1248,
+   "photos": [
+    "priya"
+   ],
+   "theme": {
+    "theme": "Synthwave beach",
+    "style_variant": "Synthwave album (flat)",
+    "aspect": "Portrait 2:3, poster (832x1248)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Bikini top + sarong"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "14_kate_swamp_ultrawide",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1568,
+   "h": 672,
+   "photos": [
+    "kate"
+   ],
+   "theme": {
+    "theme": "Swamp run",
+    "vehicle": "Airboat",
+    "aspect": "Ultrawide 21:9 (1568x672)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Denim jacket + mini skirt"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "15_priya_pool_party_glam",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 896,
+   "h": 1184,
+   "photos": [
+    "priya"
+   ],
+   "theme": {
+    "theme": "Pool party",
+    "style_variant": "Glam (cover art)",
+    "aspect": "Tablet portrait 3:4 (896x1184)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "hair": "Long spiral curls",
+     "outfit": "Football jersey + bikini",
+     "accessory": "Layered gold body chains",
+     "pose": "Hand behind head"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "16_marco_neon_street_block",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1184,
+   "h": 896,
+   "photos": [
+    "marco"
+   ],
+   "theme": {
+    "theme": "Neon night street",
+    "background": "Neon street block",
+    "aspect": "Tablet 4:3 (1184x896)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Red oversized tee + ripped jeans",
+     "accessory": "Gold chain + rings + iced watch"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "17_amara_island_keys",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "amara"
+   ],
+   "theme": {
+    "theme": "Daytime marina",
+    "background": "Island keys shoreline",
+    "vehicle": "Seaplane",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "W"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "18_kenji_port_town_night",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Dusk heist",
+    "background": "Port town at night",
+    "vehicle": "Police cruiser, lights on"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "Dark tank top"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "19_priya_refinery_smog",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "priya"
+   ],
+   "theme": {
+    "theme": "Industrial heat haze",
+    "background": "Refinery town",
+    "hue": "Smog orange + ember"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Cropped hoodie + frayed shorts"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "20_kate_forest_river",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kate"
+   ],
+   "theme": {
+    "theme": "Day on the water",
+    "background": "Forest river",
+    "hue": "Swamp green + gold"
+   },
+   "people": [
+    {
+     "t": "W"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "21_marco_bank_supercar",
+   "wf": "photo",
+   "mode": "one photo, one person",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "marco"
+   ],
+   "theme": {
+    "theme": "Sunset key art",
+    "background": "Bank exterior",
+    "hue": "Hazy lime + sand",
+    "vehicle": "Yellow supercar, scissor doors",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "outfit": "White tank + olive cargos"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "22_kate_marco_muscle_car",
+   "wf": "two",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kate",
+    "marco"
+   ],
+   "theme": {
+    "theme": "Sunset key art",
+    "vehicle": "Black 70s muscle car"
+   },
+   "people": [
+    {
+     "t": "W"
+    },
+    {
+     "t": "M",
+     "outfit": "White tank + olive cargos"
+    }
+   ],
+   "builder": {
+    "group_setup": "Leaning on the car"
+   }
+  },
+  {
+   "name": "23_amara_kenji_rooftop",
+   "wf": "two",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "amara",
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Rooftop searchlight",
+    "vehicle": "Police helicopter + searchlight"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Denim jacket + mini skirt"
+    },
+    {
+     "t": "M",
+     "outfit": "Army training tee + jeans"
+    }
+   ],
+   "builder": {
+    "group_setup": "Side by side"
+   }
+  },
+  {
+   "name": "24_priya_marco_nightclub",
+   "wf": "two",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "priya",
+    "marco"
+   ],
+   "theme": {
+    "theme": "Nightclub"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Shredded jeans + fishnets"
+    },
+    {
+     "t": "M",
+     "outfit": "Baroque bomber + black tee",
+     "accessory": "Tinted sunglasses"
+    }
+   ],
+   "builder": {
+    "group_setup": "Close together"
+   }
+  },
+  {
+   "name": "25_kate_kenji_neon_walk",
+   "wf": "two",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1344,
+   "h": 768,
+   "photos": [
+    "kate",
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Neon night street",
+    "vehicle": "Pink sportbike",
+    "aspect": "Widescreen 16:9, YouTube / desktop (1344x768)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Cropped hoodie + frayed shorts"
+    },
+    {
+     "t": "M",
+     "outfit": "Palm shirt over tee + khakis"
+    }
+   ],
+   "builder": {
+    "group_setup": "Walking toward viewer"
+   }
+  },
+  {
+   "name": "26_group4_dusk_heist",
+   "wf": "group",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "amara",
+    "kenji",
+    "priya",
+    "marco"
+   ],
+   "theme": {
+    "theme": "Dusk heist"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Fur jacket + leopard top",
+     "pose": "Hands in pockets"
+    },
+    {
+     "t": "M",
+     "outfit": "Graphic tee + brown chinos",
+     "pose": "Pistol held low"
+    },
+    {
+     "t": "W",
+     "outfit": "Denim jacket + mini skirt",
+     "pose": "Looking back over shoulder"
+    },
+    {
+     "t": "M",
+     "outfit": "Cream linen suit",
+     "pose": "Checking watch"
+    }
+   ],
+   "builder": {
+    "group_setup": "Key-art lineup"
+   }
+  },
+  {
+   "name": "27_group4_pool_party",
+   "wf": "group",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "kate",
+    "marco",
+    "amara",
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Pool party"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Bikini top + sarong"
+    },
+    {
+     "t": "M",
+     "outfit": "Floral shirt + board shorts"
+    },
+    {
+     "t": "W",
+     "outfit": "Football jersey + bikini"
+    },
+    {
+     "t": "M",
+     "outfit": "White tank + camo cargo shorts"
+    }
+   ],
+   "builder": {
+    "group_setup": "Relaxed hangout"
+   }
+  },
+  {
+   "name": "28_group3_muscle_car",
+   "wf": "group",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 832,
+   "h": 1248,
+   "photos": [
+    "kate",
+    "amara",
+    "kenji"
+   ],
+   "theme": {
+    "theme": "Sunset key art",
+    "vehicle": "Black 70s muscle car",
+    "aspect": "Portrait 2:3, poster (832x1248)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Magenta crop top + camo leggings"
+    },
+    {
+     "t": "W",
+     "outfit": "Black tee + cut-offs + high-tops"
+    },
+    {
+     "t": "M",
+     "outfit": "White tank + olive cargos"
+    }
+   ],
+   "builder": {
+    "group_setup": "Leaning on the car"
+   }
+  },
+  {
+   "name": "29_group3_golden_heist",
+   "wf": "group",
+   "mode": "one photo per person (image 1, 2, ...)",
+   "w": 1248,
+   "h": 832,
+   "photos": [
+    "priya",
+    "marco",
+    "amara"
+   ],
+   "theme": {
+    "theme": "Golden hour backlight",
+    "background": "Roadside gas station"
+   },
+   "people": [
+    {
+     "t": "W",
+     "outfit": "Cropped hoodie + frayed shorts",
+     "accessory": "Bandana mask"
+    },
+    {
+     "t": "M",
+     "outfit": "Dark tank top",
+     "accessory": "Bandana mask"
+    },
+    {
+     "t": "W",
+     "outfit": "Denim jacket + mini skirt",
+     "accessory": "Bandana mask"
+    }
+   ],
+   "builder": {
+    "group_setup": "Action, mid-heist"
+   }
+  },
+  {
+   "name": "30_text_nightclub_owner",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Nightclub",
+    "style_variant": "Character loading screen (gritty)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Close buzz",
+     "facial_hair": "Full trimmed beard",
+     "outfit": "Baroque bomber + black tee",
+     "accessory": "Cuban link chain + gold rings",
+     "pose": "Raising a drink",
+     "details": "heavyset, in his forties, with a calm, unimpressed expression"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "31_text_boatyard_veteran",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Boatyard",
+    "style_variant": "Character loading screen (gritty)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Swept-back grey",
+     "facial_hair": "Grey goatee",
+     "outfit": "Faded Hawaiian shirt",
+     "accessory": "Gold chain + gold watch",
+     "details": "weathered and sun-tanned, in his sixties, leaning over a table with a spread-out map"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "32_text_man_on_a_boat",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Day on the water",
+    "vehicle": "Small fishing boat"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Messy under backwards cap",
+     "facial_hair": "Scruffy moustache",
+     "outfit": "Floral shirt + board shorts",
+     "accessory": "Fish tattoo sleeves",
+     "pose": "Sitting",
+     "details": "sunburnt, in his thirties, holding a beer bottle and talking mid-sentence"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "33_text_man_on_suv",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Neon night street",
+    "vehicle": "Black luxury box SUV"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Cornrow braids",
+     "facial_hair": "Light chin strap",
+     "outfit": "Red oversized tee + ripped jeans",
+     "accessory": "Gold chain + rings + iced watch",
+     "pose": "On the phone",
+     "details": "in his twenties with a confident half-smile"
+    }
+   ],
+   "builder": {
+    "group_setup": "Sitting on the car hood"
+   }
+  },
+  {
+   "name": "34_text_linen_suit_planner",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Industrial heat haze"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "Long slicked back",
+     "facial_hair": "Thin goatee",
+     "outfit": "Cream linen suit",
+     "accessory": "Browline glasses + gloves",
+     "pose": "Checking watch",
+     "details": "lean and composed, in his fifties, a leather duffel bag over his shoulder"
+    }
+   ],
+   "builder": {}
+  },
+  {
+   "name": "35_text_rap_duo",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 928,
+   "h": 1152,
+   "photos": [],
+   "theme": {
+    "theme": "Neon night street",
+    "background": "Neon street block",
+    "style_variant": "Glam (cover art)",
+    "aspect": "Social portrait 4:5, Instagram (928x1152)"
+   },
+   "people": [
+    {
+     "t": "W",
+     "hair": "Big shoulder-length curls",
+     "outfit": "Fur jacket + leopard top",
+     "accessory": "Iced-out nameplate chains",
+     "details": "of Nigerian descent in her twenties, tongue out playfully"
+    },
+    {
+     "t": "W",
+     "hair": "Braids + half-up buns",
+     "outfit": "Shredded jeans + fishnets",
+     "accessory": "Fingerless gloves",
+     "details": "of Korean descent in her twenties"
+    }
+   ],
+   "builder": {
+    "group_setup": "Close together"
+   }
+  },
+  {
+   "name": "36_text_couple_romance",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Romance close-up"
+   },
+   "people": [
+    {
+     "t": "W",
+     "hair": "High curly ponytail",
+     "outfit": "Black cami + denim cut-offs",
+     "accessory": "Large gold hoops",
+     "details": "of Puerto Rican descent in her late twenties"
+    },
+    {
+     "t": "M",
+     "hair": "Short crop",
+     "facial_hair": "Short stubble",
+     "outfit": "White tank + olive cargos",
+     "details": "rugged, in his mid-thirties"
+    }
+   ],
+   "builder": {
+    "group_setup": "Close together"
+   }
+  },
+  {
+   "name": "37_text_crew4_rooftop_phone",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 768,
+   "h": 1344,
+   "photos": [],
+   "theme": {
+    "theme": "Rooftop searchlight",
+    "vehicle": "Police helicopter + searchlight",
+    "aspect": "Phone 9:16, wallpaper / Shorts / Reels (768x1344)"
+   },
+   "people": [
+    {
+     "t": "M",
+     "hair": "High-top fade",
+     "outfit": "Red oversized tee + ripped jeans",
+     "details": "of Ghanaian descent in his twenties"
+    },
+    {
+     "t": "W",
+     "hair": "Long spiral curls",
+     "outfit": "Black tee + cut-offs + high-tops",
+     "details": "of Brazilian descent in her twenties"
+    },
+    {
+     "t": "M",
+     "hair": "Slick undercut",
+     "outfit": "Cream linen suit",
+     "details": "of Chinese descent in his thirties"
+    },
+    {
+     "t": "W",
+     "hair": "Messy beach waves",
+     "outfit": "Palm-print shirt + white crop",
+     "details": "of Irish descent in her thirties with freckles"
+    }
+   ],
+   "builder": {
+    "group_setup": "Key-art lineup"
+   }
+  },
+  {
+   "name": "38_text_headscarf_coupe",
+   "wf": "text",
+   "mode": "text only (no photo)",
+   "w": 1248,
+   "h": 832,
+   "photos": [],
+   "theme": {
+    "theme": "Golden hour backlight",
+    "vehicle": "Red 70s sports coupe"
+   },
+   "people": [
+    {
+     "t": "W",
+     "hair": "Silk headscarf",
+     "outfit": "Denim jacket + mini skirt",
+     "accessory": "Thin gold pendant necklace",
+     "details": "of Middle Eastern descent in her late twenties"
+    }
+   ],
+   "builder": {
+    "group_setup": "Sitting on the car hood"
+   }
+  }
+ ],
+ "workflows": [
+  {
+   "file": "GTA6_style_photo.json",
+   "label": "One photo",
+   "text": "One person from one photo."
+  },
+  {
+   "file": "GTA6_style_two_photos.json",
+   "label": "Two photos",
+   "text": "Two people, one photo each, in one scene."
+  },
+  {
+   "file": "GTA6_style_group_from_photos.json",
+   "label": "Group from photos",
+   "text": "Up to four people, one photo each. For three, delete photo 4 and its nodes."
+  },
+  {
+   "file": "GTA6_style_text_only.json",
+   "label": "Text only",
+   "text": "No photo. Describe each person in their details field."
+  }
+ ],
+ "timings": [
+  [
+   "Text only",
+   "about 50 s"
+  ],
+  [
+   "One photo",
+   "95 to 145 s, including the clean-up pass and model swaps"
+  ],
+  [
+   "Two photos",
+   "about 185 s"
+  ],
+  [
+   "Three photos",
+   "about 205 s"
+  ],
+  [
+   "Four photos",
+   "450 to 490 s"
+  ]
+ ]
+}
